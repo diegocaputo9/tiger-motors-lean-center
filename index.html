@@ -172,7 +172,7 @@ p{margin:0}
 .cat li a small{font:500 10.5px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);white-space:nowrap}
 .cat li a svg{width:14px;height:14px;flex:none;opacity:.7}
 .cat .hint{font-size:13px;color:var(--text-3)}
-.runs{margin-top:18px;padding:24px;display:grid;grid-template-columns:auto 1fr;gap:18px 32px;align-items:center}
+.runs{margin-top:28px;padding:24px;display:grid;grid-template-columns:auto 1fr;gap:18px 32px;align-items:center}
 .runs h3{font-size:18px;font-weight:650}
 .runs .rsub{font-size:13px;color:var(--text-3);margin-top:4px}
 .run-track{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;position:relative}
@@ -972,42 +972,6 @@ html[data-mode="light"]{--bg-rgb:244,246,249}
       </div>
     </a>
 
-    <div class="cats">
-      <article class="cat glass">
-        <span class="cat-ico"><svg><use href="#i-immersive"/></svg></span>
-        <h3>Explore the Facility</h3>
-        <ul>
-          <li><a class="launch" href="https://cloud.3dvista.com/hosting/8253122/2/index.htm" target="_blank" rel="noopener">Mass Tour <small>360°</small></a></li>
-          <li><a class="launch" href="https://cloud.3dvista.com/hosting/8253122/3/index.htm" target="_blank" rel="noopener">Lean Tour <small>360°</small></a></li>
-        </ul>
-      </article>
-      <article class="cat glass">
-        <span class="cat-ico"><svg><use href="#i-flow"/></svg></span>
-        <h3>Follow the Production System</h3>
-        <ul>
-          <li><a class="launch" href="https://storage.net-fs.com/hosting/8253122/2/" target="_blank" rel="noopener">Mass System <small>Lab</small></a></li>
-          <li><a class="launch" href="https://storage.net-fs.com/hosting/8253122/3/" target="_blank" rel="noopener">Lean System <small>Lab</small></a></li>
-        </ul>
-      </article>
-      <article class="cat glass">
-        <span class="cat-ico"><svg><use href="#i-eye"/></svg></span>
-        <h3>Observe Lean Practices</h3>
-        <ul>
-          <li><a class="launch" href="https://cloud.3dvista.com/hosting/8253122/4/index.htm" target="_blank" rel="noopener">5S Activity <small>360°</small></a></li>
-          <!-- PLACEHOLDER: C.I. Activity uses the 5S link until its own 3DVista link is ready -->
-          <li><a class="launch" href="https://cloud.3dvista.com/hosting/8253122/4/index.htm" target="_blank" rel="noopener">C.I. Activity <small>360°</small></a></li>
-        </ul>
-      </article>
-      <article class="cat glass">
-        <span class="cat-ico"><svg><use href="#i-bulb"/></svg></span>
-        <h3>Discover Improvement Opportunities</h3>
-        <ul>
-          <li><a class="launch" href="https://cloud.3dvista.com/hosting/8253122/5/index.htm" target="_blank" rel="noopener">Current State VSM <small>360°</small></a></li>
-          <li><a class="launch" href="https://cloud.3dvista.com/hosting/8253122/6/index.htm" target="_blank" rel="noopener">Future State VSM <small>360°</small></a></li>
-        </ul>
-      </article>
-    </div>
-
     <div class="runs glass">
       <div>
         <h3 class="yt-h"><img src="data:image/png;base64,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" alt="YouTube" width="34" height="24">360° production runs with students</h3>
@@ -1280,7 +1244,7 @@ html[data-mode="light"]{--bg-rgb:244,246,249}
   <div class="wrap foot">
     <div>
       <p><b style="color:var(--text)">Tiger Motors Lean Education Center</b> · Department of Industrial and Systems Engineering, Auburn University.</p>
-      <p style="margin-top:8px">This material is based upon work supported by the National Science Foundation under Grant No. <span class="placeholder">to be added</span>. Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.</p>
+      <p style="margin-top:8px">This material is based upon work supported by the National Science Foundation under Grant No. NSF-DUE-2417082. Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.</p>
     </div>
     <div class="fl">
       <a href="#lab">Explore the Lab</a><a href="#lean-house">Lean House</a><a href="#modules">Modules</a><a href="#project">Project</a><a href="#contact">Contact</a>
