@@ -739,6 +739,18 @@ html[data-mode="light"] .pdlg::backdrop{background:rgba(220,228,238,.5)}
 .bdlg-body{display:grid;gap:14px;font-size:16px;line-height:1.6;color:var(--ink-2);border-top:1px solid var(--paper-line);padding-top:18px}
 .bdlg-soon{font:500 13px var(--f-mono);letter-spacing:.06em;color:var(--ink-3)}
 .bdlg-x{flex:none;background:var(--paper-2,#EDF0F3);color:var(--ink);border:0;width:38px;height:38px;border-radius:50%;cursor:pointer;display:grid;place-items:center}
+
+/* ---- balance wide screens: art/photo fade out on the right like the left side ---- */
+:root{--gut:max(24px,calc((100vw - 1240px)/2))}
+@media (min-width:1100px){
+  .hero::after{background:linear-gradient(270deg,rgb(var(--bg-rgb)) 0,rgba(var(--bg-rgb),.88) calc(var(--gut)*.55),rgba(var(--bg-rgb),.4) calc(var(--gut)*1.05),rgba(var(--bg-rgb),0) calc(var(--gut)*1.6)),linear-gradient(90deg,rgba(7,18,31,.95) 0%,rgba(7,18,31,.78) 38%,rgba(7,18,31,.15) 62%,rgba(7,18,31,0) 75%),linear-gradient(0deg,var(--bg) 0%,transparent 22%)}
+  .intro-photo::after{background:linear-gradient(270deg,rgb(var(--bg-rgb)) 0,rgba(var(--bg-rgb),.88) calc(var(--gut)*.55),rgba(var(--bg-rgb),.4) calc(var(--gut)*1.05),rgba(var(--bg-rgb),0) calc(var(--gut)*1.6)),linear-gradient(90deg,rgb(var(--bg-rgb)) 0%,rgba(var(--bg-rgb),.9) 22%,rgba(var(--bg-rgb),.45) 45%,rgba(var(--bg-rgb),.12) 72%,rgba(var(--bg-rgb),.2) 100%),linear-gradient(180deg,rgb(var(--bg-rgb)) 0%,rgba(var(--bg-rgb),0) 16%,rgba(var(--bg-rgb),0) 72%,rgb(var(--bg-rgb)) 100%)}
+}
+/* ---- team cards: bio / profile buttons share one baseline ---- */
+@media (min-width:1061px){
+  .team-grid .pc{grid-template-rows:auto auto 1fr auto}
+  .team-grid .pc .dept{align-self:start}
+}
 </style>
 
 </head>
