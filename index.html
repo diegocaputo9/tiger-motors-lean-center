@@ -690,8 +690,7 @@ html[data-mode="light"] .we-title{fill:#C2560F!important}
   -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 9%,#000 91%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 9%,#000 91%,transparent 100%)}
 .marquee:focus-visible{outline-offset:-2px}
 .mq-track{display:flex;width:max-content;gap:18px;animation:mq 72s linear infinite;will-change:transform}
-.marquee:hover .mq-track,.marquee:focus-visible .mq-track{animation-play-state:paused}
-@keyframes mq{from{transform:translate3d(-50%,0,0)}to{transform:translate3d(0,0,0)}}
+@keyframes mq{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
 .mq-set{display:flex;gap:18px;padding-right:0}
 .mq-item{flex:none;display:grid;place-items:center;height:calc(92px*var(--k));min-width:calc(200px*var(--k));padding:0 calc(30px*var(--k));border-radius:16px;background:rgba(255,255,255,.96);border:1px solid rgba(255,255,255,.18);box-shadow:0 14px 30px -18px rgba(0,0,0,.55);transition:transform .35s var(--ease),box-shadow .35s}
 .mq-item img{height:calc(46px*var(--k));width:auto;max-width:calc(190px*var(--k));object-fit:contain}
@@ -1810,15 +1809,18 @@ function onScroll(){ nav.classList.toggle('scrolled', window.scrollY>20); }
 window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
 var links = document.querySelectorAll('.nav-links a');
 var ids = ['home','lab','lean-house','modules','project','news','team','contact'];
-if('IntersectionObserver' in window){
-  var vis = {};
-  var io = new IntersectionObserver(function(es){
-    es.forEach(function(e){ vis[e.target.id]=e.isIntersecting?e.intersectionRatio:0; });
-    var best=null, bv=0; ids.forEach(function(id){ if((vis[id]||0)>bv){bv=vis[id];best=id;} });
-    if(best) links.forEach(function(a){a.classList.toggle('active', a.getAttribute('href')==='#'+best);});
-  }, {rootMargin:'-40% 0px -50% 0px', threshold:[0,0.01,0.2,0.5,1]});
-  ids.forEach(function(id){ var el=document.getElementById(id); if(el) io.observe(el); });
+var spyEls = ids.map(function(id){ return document.getElementById(id); });
+var spyTick = false, spyCur = null;
+function spy(){
+  spyTick = false;
+  var line = window.innerHeight*0.4, best = ids[0];
+  for(var i=0;i<spyEls.length;i++){ if(spyEls[i] && spyEls[i].getBoundingClientRect().top <= line) best = ids[i]; }
+  if(window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) best = ids[ids.length-1];
+  if(best === spyCur) return; spyCur = best;
+  links.forEach(function(a){ a.classList.toggle('active', a.getAttribute('href')==='#'+best); });
 }
+function spyReq(){ if(!spyTick){ spyTick = true; requestAnimationFrame(spy); } }
+window.addEventListener('scroll', spyReq, {passive:true}); window.addEventListener('resize', spyReq); spy();
 var burger = document.getElementById('burger'), mnav = document.getElementById('mnav');
 function setMenu(open){ mnav.hidden=!open; burger.setAttribute('aria-expanded', open?'true':'false'); burger.innerHTML=icon(open?'close':'menu'); document.body.style.overflow=open?'hidden':''; nav.classList.toggle('scrolled', open||window.scrollY>20); }
 burger.addEventListener('click', function(){ setMenu(mnav.hidden); });
@@ -1894,6 +1896,26 @@ if('IntersectionObserver' in window && !reduce){
   dlg.querySelector('[data-close-bio]').addEventListener('click',close);
   dlg.addEventListener('click',function(e){ if(e.target===dlg) close(); });
   dlg.addEventListener('close',function(){ if(opener) opener.focus(); });
+})();
+
+/* ---- marquee: ease to a stop / ease back up on hover ---- */
+(function(){
+  var track=document.getElementById('mqTrack'), mq=track&&track.closest('.marquee'); if(!mq||!track.getAnimations) return;
+  var anim=null, rate=1, target=1, raf=0, last=0, DUR=350;
+  function get(){ if(!anim){ var a=track.getAnimations(); anim=a&&a[0]; } return anim; }
+  function step(t){
+    var an=get(); if(!an){ raf=0; return; }
+    var dt=Math.min(64,t-last); last=t;
+    var k=dt/DUR; rate += (target-rate)*Math.min(1,k*3.2);
+    if(Math.abs(target-rate)<0.01) rate=target;
+    an.updatePlaybackRate(rate);
+    raf = rate===target ? 0 : requestAnimationFrame(step);
+  }
+  function go(v){ target=v; if(!raf){ last=performance.now(); raf=requestAnimationFrame(step); } }
+  mq.addEventListener('mouseenter',function(){go(0);});
+  mq.addEventListener('mouseleave',function(){go(1);});
+  mq.addEventListener('focus',function(){go(0);});
+  mq.addEventListener('blur',function(){go(1);});
 })();
 </script>
 
