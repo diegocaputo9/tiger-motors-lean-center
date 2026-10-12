@@ -843,6 +843,8 @@ html[data-mode="light"] .pdlg::backdrop{background:rgba(220,228,238,.5)}
 .kb-lab{font:600 7px var(--f-mono);fill:#A9B8C9;letter-spacing:.06em}
 .kb-fg rect{fill:rgba(63,182,139,.18);stroke:#3FB68B;stroke-width:1.4}
 .kb-fg text:first-of-type{font:700 9px var(--f-mono);fill:#6FD6AE}
+.kb-paths path{transition:stroke .25s,stroke-width .25s}
+.kb-paths path.on{stroke:#fff;stroke-width:2.6}
 .kb-card{stroke:#fff;stroke-width:.8;filter:drop-shadow(0 1px 2px rgba(0,0,0,.5))}
 .kb-legend{display:flex;flex-wrap:wrap;align-items:center;gap:8px 22px;margin-top:14px;padding-top:14px;border-top:1px solid var(--line);font:500 12px var(--f-mono);letter-spacing:.06em;color:var(--text-2)}
 .kb-legend[hidden]{display:none}
@@ -1145,7 +1147,7 @@ html[data-mode="light"] .pdlg::backdrop{background:rgba(220,228,238,.5)}
         <!-- information flow: kanban layer (shown in the Information flow view) -->
         <g class="kb" id="kb">
           <g class="kb-paths" fill="none" stroke="rgba(233,238,244,.55)" stroke-width="1.5" stroke-dasharray="4 5" stroke-linecap="round">
-            <path d="M435 318L519 394"/><path d="M519 394L585 417"/><path d="M585 417L609 318"/><path d="M609 318L517 318"/>
+            <path id="kbl1" d="M435 318L519 394"/><path id="kbl2" d="M519 394L585 417"/><path id="kbl3" d="M585 417L609 318"/><path id="kbl4" d="M609 318L517 318"/>
           </g>
           <g class="kb-st"><g id="kbn-s1" class="kb-n"><circle cx="517" cy="318" r="7.5"/><text x="517" y="321" text-anchor="middle">1</text></g><g id="kbn-s2" class="kb-n"><circle cx="517" cy="283" r="7.5"/><text x="517" y="286" text-anchor="middle">2</text></g><g id="kbn-s3" class="kb-n"><circle cx="552" cy="258" r="7.5"/><text x="552" y="261" text-anchor="middle">3</text></g><g id="kbn-s4" class="kb-n"><circle cx="583" cy="283" r="7.5"/><text x="583" y="286" text-anchor="middle">4</text></g><g id="kbn-s5" class="kb-n"><circle cx="583" cy="318" r="7.5"/><text x="583" y="321" text-anchor="middle">5</text></g><g id="kbn-s6" class="kb-n"><circle cx="585" cy="417" r="7.5"/><text x="585" y="420" text-anchor="middle">6</text></g><g id="kbn-s7" class="kb-n"><circle cx="585" cy="452" r="7.5"/><text x="585" y="455" text-anchor="middle">7</text></g><g id="kbn-s8" class="kb-n"><circle cx="550" cy="474" r="7.5"/><text x="550" y="477" text-anchor="middle">8</text></g><g id="kbn-s9" class="kb-n"><circle cx="519" cy="452" r="7.5"/><text x="519" y="455" text-anchor="middle">9</text></g><g id="kbn-s10" class="kb-n"><circle cx="519" cy="417" r="7.5"/><text x="519" y="420" text-anchor="middle">10</text></g><g id="kbn-s11" class="kb-n"><circle cx="435" cy="318" r="7.5"/><text x="435" y="321" text-anchor="middle">11</text></g><g id="kbn-s12" class="kb-n"><circle cx="402" cy="318" r="7.5"/><text x="402" y="321" text-anchor="middle">12</text></g><g id="kbn-s13" class="kb-n"><circle cx="369" cy="318" r="7.5"/><text x="369" y="321" text-anchor="middle">13</text></g><g id="kbn-s14" class="kb-n"><circle cx="336" cy="318" r="7.5"/><text x="336" y="321" text-anchor="middle">14</text></g><g id="kbn-s15" class="kb-n"><circle cx="303" cy="318" r="7.5"/><text x="303" y="321" text-anchor="middle">15</text></g></g>
           <g id="kbn-sm10" class="kb-sm"><rect x="506" y="388" width="26" height="11" rx="2"/><text x="519" y="396.5" text-anchor="middle">SUPERMKT</text></g>
@@ -2195,13 +2197,13 @@ if('IntersectionObserver' in window && !reduce){
     11:[435,318],12:[402,318],13:[369,318],14:[336,318],15:[303,318]};
   // pack: 2 blue, 1 red, 1 white (special order), 2 blue, 1 red
   var PACK=['b','b','r','w','b','b','r'], FILL={b:'#3B82F6',r:'#EF4444',w:'#FFFFFF'};
-  var W=9,H=14,STAG=900,FIRST=1100;
-  var WE_T=8000, Q=WE_T/4;           // everything on the line moves at the white card's pace: one station per Q ms (11 to finished goods = 5 x Q = 10 s)
+  var W=9,H=14;
+  var TICK=2000, MOVE=750, PITCH=2;   // every card hops one station per tick; one card per station; an empty station between cards
+  var WE_T=4*TICK+MOVE;               // War Eagle round trip ends exactly when the conveyor white card reaches station 15
   var rm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
   function slot(i){return [398+5+i*10,383];}
-  // smooth curve through control points (Catmull-Rom), sampled densely
   function smooth(ctrl,n){
-    var out=[],p=ctrl.map(function(c){return c;});
+    var out=[],p=ctrl;
     for(var i=0;i<p.length-1;i++){
       var p0=p[Math.max(0,i-1)],p1=p[i],p2=p[i+1],p3=p[Math.min(p.length-1,i+2)];
       for(var k=0;k<n;k++){ var t=k/n,t2=t*t,t3=t2*t;
@@ -2211,72 +2213,85 @@ if('IntersectionObserver' in window && !reduce){
     }
     out.push(p[p.length-1]); return out;
   }
-  // War Eagle Inc.: out of station 11, in through the door, around the U of stations, and back to station 15
   var WE=smooth([P[11],[470,352],[560,366],[660,366],[708,384],[719,408],[721,426],[721,456],[748,483],[782,488],[836,488],[880,478],[897,456],[897,426],[870,414],[800,416],[740,412],[716,394],[690,366],[600,366],[500,366],[410,360],[340,342],[P[15][0]+4,P[15][1]+4],P[15]],14);
   var WE_LEN=[0]; for(var q=1;q<WE.length;q++){ WE_LEN.push(WE_LEN[q-1]+Math.hypot(WE[q][0]-WE[q-1][0],WE[q][1]-WE[q-1][1])); }
   var WE_L=WE_LEN[WE_LEN.length-1];
-  function tok(o){ o.total=o.dur.reduce(function(a,b){return a+b;},0); o.end=o.start+o.total; return o; }
-  var tokens=[];
+  var tokens=[], links=[];
+  function steps(n){ var a=[]; for(var k=0;k<n;k++) a.push(TICK); return a; }
+  function tok(o){ o.total=o.dur.reduce(function(a,b){return a+b;},0); o.end=o.start+o.total; tokens.push(o); return o; }
+  function lit(id,a,b){ links.push({el:null,id:id,a:a,b:b}); }
   PACK.forEach(function(k,i){
-    var st=i*STAG, s0=slot(i), s2=st+FIRST;
+    var S=i*PITCH*TICK, s0=slot(i);
     if(k==='w'){
-      tokens.push(tok({kind:'w0',fill:FILL.w,pts:[s0,P[11]],ids:[null,'11'],dur:[FIRST],start:st,linger:'fade',fade:150}));
+      // pack card reaches station 11, waits one tick, then leaves for War Eagle Inc.
+      tok({fill:FILL.w,step:true,pts:[s0,P[11]],ids:[null,'11'],dur:steps(1),start:S,appear:0,fade:1});
       var dur=[]; for(var z=1;z<WE.length;z++) dur.push(WE_T*(WE_LEN[z]-WE_LEN[z-1])/WE_L);
-      tokens.push(tok({kind:'w',fill:FILL.w,lin:true,warp:true,pts:WE,ids:WE.map(function(p,n){return n===WE.length-1?'15':null;}),dur:dur,start:s2,linger:'fade',fade:300}));
-      // the white card on the conveyor moves at the same pace as every other card on the line
-      tokens.push(tok({kind:'w',fill:FILL.w,lin:true,pts:[P[11],P[12],P[13],P[14],P[15],P.FG],ids:[null,'12','13','14','15',null],dur:[Q,Q,Q,Q,Q],start:s2,linger:'keep',idx:i}));
+      tok({fill:FILL.w,lin:true,warp:true,pts:WE,ids:WE.map(function(p,n){return n===WE.length-1?'15':null;}),dur:dur,start:S+TICK,appear:S+TICK,fade:300});
+      // the white card on the conveyor leaves station 11 one tick later and hops station to station
+      tok({fill:FILL.w,step:true,pts:[P[11],P[12],P[13],P[14],P[15],P.FG],ids:[null,'12','13','14','15',null],dur:steps(5),start:S+2*TICK,appear:S+TICK,keep:true,idx:i});
       return;
     }
     var fill=FILL[k];
-    tokens.push(tok({kind:'a',fill:fill,lin:true,pts:[s0,P[11],P[12],P[13],P[14],P[15],P.FG],ids:[null,'11','12','13','14','15',null],dur:[FIRST,Q,Q,Q,Q,Q],start:st,linger:'keep',idx:i}));
-    // cell 2: station 11 -> supermarket at station 10 -> posted at station 6 -> moves 6..10
-    var LK=1500;
-    tokens.push(tok({kind:'b',fill:fill,lin:true,pts:[P[11],P.SM10,P[6],P[7],P[8],P[9],P[10]],ids:[null,'sm10','6','7','8','9','10'],dur:[LK,LK,Q,Q,Q,Q],start:s2,linger:'fade',fade:350}));
-    // cell 1: station 6 -> supermarket at station 5 -> posted at station 1 -> moves 1..5
-    tokens.push(tok({kind:'c',fill:fill,lin:true,pts:[P[6],P.SM5,P[1],P[2],P[3],P[4],P[5]],ids:[null,'sm5','1','2','3','4','5'],dur:[LK,LK,Q,Q,Q,Q],start:s2+2*LK,linger:'fade',fade:350}));
+    tok({fill:fill,step:true,pts:[s0,P[11],P[12],P[13],P[14],P[15],P.FG],ids:[null,'11','12','13','14','15',null],dur:steps(6),start:S,appear:0,keep:true,idx:i});
+    // station 11 -> supermarket at station 10 pulls a card, posted at station 6, moves 6..10
+    var SB=S+TICK;
+    tok({fill:fill,step:true,pts:[P.SM10,P[6],P[7],P[8],P[9],P[10]],ids:['sm10','6','7','8','9','10'],dur:steps(5),start:SB,appear:S+MOVE,fade:350});
+    // station 6 pulls from the supermarket at station 5, posted at station 1, moves 1..5
+    var SC=SB+TICK;
+    tok({fill:fill,step:true,pts:[P.SM5,P[1],P[2],P[3],P[4],P[5]],ids:['sm5','1','2','3','4','5'],dur:steps(5),start:SC,appear:SB+MOVE,fade:350});
+    lit('kbl1',S+MOVE,S+TICK+MOVE); lit('kbl2',SB,SB+MOVE+250); lit('kbl3',SB+MOVE,SC+MOVE); lit('kbl4',SC,SC+MOVE+250);
   });
-  var TOTAL=Math.max.apply(null,tokens.map(function(t){return t.end;}))+1500;
+  var TOTAL=Math.max.apply(null,tokens.map(function(t){return t.end;}))+1800;
   tokens.forEach(function(t){
     var r=document.createElementNS(NS,'rect'); r.setAttribute('class','kb-card'); r.setAttribute('width',W); r.setAttribute('height',H); r.setAttribute('rx',2); r.setAttribute('fill',t.fill);
     if(t.fill==='#FFFFFF') r.setAttribute('stroke','#9FB4CC');
     cardsG.appendChild(r); t.el=r;
   });
+  links.forEach(function(l){ l.el=document.getElementById(l.id); });
   var hitEls={}; function elFor(id){ if(id==='h') return document.getElementById('kbn-h'); if(!(id in hitEls)) hitEls[id]=document.getElementById(/^sm/.test(id)?'kbn-'+id:'kbn-s'+id); return hitEls[id]; }
+  function ease(u){ u=Math.min(1,Math.max(0,u)); return u<.5?4*u*u*u:1-Math.pow(-2*u+2,3)/2; }
   function wave(u){return .5-.5*Math.cos(Math.PI*Math.min(1,Math.max(0,u)));}
   var raf=0,t0=0,active=false,visible=true;
   function place(t,x,y,o){ t.el.setAttribute('x',(x-W/2).toFixed(1)); t.el.setAttribute('y',(y-H/2).toFixed(1)); t.el.setAttribute('opacity',o.toFixed(2)); }
-  function atHome(t){ return t.kind==='a'||t.kind==='w0'; }
-  function restView(){ tokens.forEach(function(t){ if(atHome(t)){ var s=t.pts[0]; place(t,s[0],s[1],1);} else place(t,0,0,0); }); }
+  function restView(){ tokens.forEach(function(t){ if(t.appear===0){ var s=t.pts[0]; place(t,s[0],s[1],1);} else place(t,0,0,0); }); }
   function frame(now){
     raf=0; if(!active||!visible||document.hidden) return;
     var g=(now-t0)%TOTAL, hits={};
     tokens.forEach(function(t){
       var local=g-t.start;
-      if(local<0){ if(atHome(t)){ var s=t.pts[0]; place(t,s[0],s[1],Math.min(1,g/350)); } else place(t,0,0,0); return; }
+      if(local<0){
+        if(g>=t.appear){ var s=t.pts[0]; place(t,s[0],s[1],t.appear===0?Math.min(1,g/350):1); if(t.appear>0&&g-t.appear<260&&t.ids[0]) hits[t.ids[0]]=1; }
+        else place(t,0,0,0);
+        return;
+      }
+      var raw=local;
       if(t.warp&&local<t.total) local=t.total*wave(local/t.total);
       var acc=0,seg=-1;
       for(var k=0;k<t.dur.length;k++){ if(local<acc+t.dur[k]){seg=k;break;} acc+=t.dur[k]; }
       var o=1,x,y;
       if(seg<0){
-        var last=t.pts[t.pts.length-1]; x=last[0]; y=last[1]; var after=(g-t.start)-t.total;
-        if(t.linger==='fade') o=Math.max(0,1-after/(t.fade||350));
-        else { if(t.kind!=='b') x+=((t.idx||0)-3)*3.2; if(g>TOTAL-600) o=Math.max(0,(TOTAL-g)/600); }
+        var last=t.pts[t.pts.length-1]; x=last[0]; y=last[1]; var after=raw-t.total;
+        if(t.keep){ x+=((t.idx||0)-3)*3.2; if(g>TOTAL-700) o=Math.max(0,(TOTAL-g)/700); }
+        else o=Math.max(0,1-after/(t.fade||350));
         var lid=t.ids[t.ids.length-1]; if(after<260&&lid) hits[lid]=1;
       } else {
-        var u=(local-acc)/t.dur[seg], p=t.lin?u:wave(u), a=t.pts[seg], b=t.pts[seg+1];
+        var w=local-acc, a=t.pts[seg], b=t.pts[seg+1], p;
+        if(t.step) p=w<MOVE?ease(w/MOVE):1; else p=w/t.dur[seg];
         x=a[0]+(b[0]-a[0])*p; y=a[1]+(b[1]-a[1])*p;
-        if(u>.8&&t.ids[seg+1]) hits[t.ids[seg+1]]=1;
-        if(seg===0&&t.kind==='a'&&u<.2) hits.h=1;
+        if((t.step?w>=MOVE*.8:w/t.dur[seg]>.8)&&t.ids[seg+1]) hits[t.ids[seg+1]]=1;
+        if(seg===0&&t.pts[0][1]===383&&w<MOVE) hits.h=1;
       }
       place(t,x,y,o);
     });
     Object.keys(hitEls).forEach(function(k){ var e=hitEls[k]; if(e&&!hits[k]) e.classList.remove('hit'); });
     Object.keys(hits).forEach(function(k){ var e=elFor(k); if(e) e.classList.add('hit'); });
     var hb=document.getElementById('kbn-h'); if(hb&&!hits.h) hb.classList.remove('hit');
+    var on={}; links.forEach(function(l){ if(g>=l.a&&g<l.b) on[l.id]=1; });
+    links.forEach(function(l){ if(l.el) l.el.classList.toggle('on',!!on[l.id]); });
     raf=requestAnimationFrame(frame);
   }
   function start(){ if(raf||rm) return; t0=performance.now(); raf=requestAnimationFrame(frame); }
-  function clearHits(){ plan.querySelectorAll('.kb .hit').forEach(function(e){e.classList.remove('hit');}); }
+  function clearHits(){ plan.querySelectorAll('.kb .hit').forEach(function(e){e.classList.remove('hit');}); plan.querySelectorAll('.kb-paths .on').forEach(function(e){e.classList.remove('on');}); }
   restView();
   function setMode(m){
     var info=m==='info'; active=info;
