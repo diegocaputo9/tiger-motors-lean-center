@@ -830,6 +830,7 @@ html[data-mode="light"] .pdlg::backdrop{background:rgba(220,228,238,.5)}
 .pmode[aria-pressed="true"]{color:#fff;background:rgba(232,119,34,.16);border-color:rgba(232,119,34,.65)}
 .plan .kb{display:none}
 .plan.is-info .kb{display:block}
+.plan.is-info .pc-badge,.plan.is-info .pc-num{display:none}
 .plan .flow,.plan .feed,.plan .u-path,.plan .belt-line,.plan .mc-flow{transition:opacity .35s ease}
 .plan.is-info .flow,.plan.is-info .feed{opacity:0}
 .plan .u-path,.plan .belt-line,.plan .mc-flow{display:none}
@@ -850,7 +851,7 @@ html[data-mode="light"] .pdlg::backdrop{background:rgba(220,228,238,.5)}
 .kb-legend[hidden]{display:none}
 .kb-legend span{display:inline-flex;align-items:center;gap:8px}
 .kb-legend i{width:12px;height:16px;border-radius:2px;border:1px solid #fff}
-.kb-legend i.c-blue{background:#3B82F6}.kb-legend i.c-orange{background:#F59E0B}.kb-legend i.c-white{background:#fff}
+.kb-legend i.c-blue{background:#3B82F6}.kb-legend i.c-orange{background:#E87722}.kb-legend i.c-green{background:#2FBF71}.kb-legend i.c-white{background:#fff}
 .kb-legend small{flex-basis:100%;font:500 12px var(--f-body);letter-spacing:0;color:var(--text-3)}
 
 .kb-link{fill:none;stroke:rgba(233,238,244,.55);stroke-width:1.5;stroke-dasharray:4 5;stroke-linecap:round;transition:stroke .25s,stroke-width .25s}
@@ -1187,7 +1188,7 @@ html[data-mode="light"] .pdlg::backdrop{background:rgba(220,228,238,.5)}
       </div>
       <figcaption class="plan-cap"><span class="plan-note"><sup>*</sup>AS/RS: Automated Storage and Retrieval System</span><span id="planCapR">AS/RS feeds raw stock · Cell 1 → Cell 2 → Cell 3</span></figcaption>
       <div class="kb-legend" id="kbLegend" hidden>
-        <span><i class="c-blue"></i>Blue card</span><span><i class="c-orange"></i>Orange card</span><span><i class="c-white"></i>White card · special order from War Eagle Inc.</span>
+        <span><i class="c-blue"></i>Blue card</span><span><i class="c-orange"></i>Orange card</span><span><i class="c-white"></i>White card · special order from War Eagle Inc.</span><span><i class="c-green"></i>Green card · material delivered back to Cell 1</span>
         <small>Pattern: 2 blue, 1 orange, 1 white, 2 blue, 1 orange. Cards leave the Heijunka box for station 11. A card then goes to the supermarket at station 10 and is posted at station 6, moves 6 to 10, and pulls from the supermarket at station 5, which posts at station 1 and moves 1 to 5. A second white card leaves station 11 for War Eagle Inc., circles it, and is delivered to station 15 together with the white card on the line.</small>
       </div>
     </figure>
@@ -2205,13 +2206,13 @@ if('IntersectionObserver' in window && !reduce){
   var NS='http://www.w3.org/2000/svg';
   var title=document.getElementById('planTitle'), capR=document.getElementById('planCapR'), legend=document.getElementById('kbLegend'), cardsG=document.getElementById('kbCards');
   var T={material:'Material flows from Cell 1 to Cell 2 to Cell 3', info:'Kanban cards flow with the product, pulled from the Heijunka box'};
-  var C={material:'AS/RS feeds raw stock · Cell 1 → Cell 2 → Cell 3', info:'Heijunka box → Cell 3 → Cell 2 → Cell 1 · white card = special order from War Eagle Inc.'};
+  var C={material:'AS/RS feeds raw stock · Cell 1 → Cell 2 → Cell 3', info:'Heijunka box → Cell 3 → Cell 2 → Cell 1 · white = special order · green = material delivered'};
   var P={FG:[273,318],SM10:[519,394],SM5:[609,318],
     1:[517,318],2:[517,283],3:[552,258],4:[583,283],5:[583,318],
     6:[585,417],7:[585,452],8:[550,474],9:[519,452],10:[519,417],
     11:[435,318],12:[402,318],13:[369,318],14:[336,318],15:[303,318]};
   // pack: 2 blue, 1 orange, 1 white (special order), 2 blue, 1 orange
-  var PACK=['b','b','r','w','b','b','r'], FILL={b:'#3B82F6',r:'#F59E0B',w:'#FFFFFF'};
+  var PACK=['b','b','r','w','b','b','r'], FILL={b:'#3B82F6',r:'#E87722',w:'#FFFFFF',g:'#2FBF71'};
   var W=9,H=14;
   var TICK=2000, MOVE=750, PITCH=1;   // every card hops one station per tick; one card per station; stations stay filled
   var WE_T=3*TICK+MOVE;               // War Eagle round trip ends exactly when the white card on the line reaches station 15
@@ -2266,6 +2267,10 @@ if('IntersectionObserver' in window && !reduce){
     var SD=SC+5*TICK;
     tok({fill:fill,step:true,pts:[[604,300],[749,300],[822,290]],ids:[null,null,null],dur:steps(2),start:SD,appear:SC+4*TICK+MOVE,fade:350});
     lit('kbl5',SD,SD+MOVE+250); lit('kbl6',SD+TICK,SD+TICK+MOVE+250);
+    // material delivery signal comes back: AS/RS -> Raw Stock -> Cell 1 (green card)
+    var SE=SD+2*TICK;
+    tok({fill:FILL.g,step:true,pts:[[822,298],[749,310],[604,308]],ids:[null,null,null],dur:steps(2),start:SE,appear:SE,fade:350});
+    lit('kbl6',SE,SE+MOVE+250); lit('kbl5',SE+TICK,SE+TICK+MOVE+250);
   });
   var TOTAL=Math.max.apply(null,tokens.map(function(t){return t.end;}))+1800;
   tokens.forEach(function(t){
