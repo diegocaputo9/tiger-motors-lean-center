@@ -831,7 +831,8 @@ html[data-mode="light"] .pdlg::backdrop{background:rgba(220,228,238,.5)}
 .plan .kb{display:none}
 .plan.is-info .kb{display:block}
 .plan .flow,.plan .feed,.plan .u-path,.plan .belt-line,.plan .mc-flow{transition:opacity .35s ease}
-.plan.is-info .flow,.plan.is-info .feed,.plan.is-info .u-path,.plan.is-info .belt-line,.plan.is-info .mc-flow{opacity:0}
+.plan.is-info .flow,.plan.is-info .feed{opacity:0}
+.plan .u-path,.plan .belt-line,.plan .mc-flow{display:none}
 .kb-n circle{fill:#0A1B30;stroke:rgba(160,185,212,.7);stroke-width:1;transition:stroke .2s,fill .2s}
 .kb-n text{font:600 8.5px var(--f-mono);fill:#E9EEF4}
 .kb-n.hit circle,.kb-sm.hit rect,.kb-box.hit rect{stroke:#FF9B4D;stroke-width:2;fill:rgba(232,119,34,.35)}
@@ -1028,10 +1029,6 @@ html[data-mode="light"] .pdlg::backdrop{background:rgba(220,228,238,.5)}
         <rect x="0" y="120" width="1000" height="405" fill="url(#pgrid)"/>
         <!-- floor -->
         <path d="M95 145H860V355H972V508H18V408H95Z" fill="rgba(12,35,64,.45)"/>
-        <!-- aisles -->
-        <g stroke="rgba(242,178,51,.22)" stroke-dasharray="8 7" fill="none" stroke-width="1.5">
-          <path d="M218 215H622M218 372H622M218 215V372M676 188V372"/>
-        </g>
         <!-- rooms fill -->
         <g fill="rgba(7,18,31,.55)">
           <path d="M95 145H165V508H18V408H95Z"/>
@@ -1151,7 +1148,7 @@ html[data-mode="light"] .pdlg::backdrop{background:rgba(220,228,238,.5)}
           <g id="kbn-sm10" class="kb-sm"><rect x="506" y="388" width="26" height="11" rx="2"/><text x="519" y="396.5" text-anchor="middle">SUPERMKT</text></g>
           <g id="kbn-sm5" class="kb-sm"><rect x="596" y="328" width="26" height="11" rx="2"/><text x="609" y="336.5" text-anchor="middle">SUPERMKT</text></g>
           <text x="519" y="383" class="kb-lab" text-anchor="middle">Station 10</text>
-          <g id="kbn-h" class="kb-box"><rect x="402" y="372" width="62" height="22" rx="3"/><line x1="415.5" y1="372" x2="415.5" y2="394"/><line x1="425.0" y1="372" x2="425.0" y2="394"/><line x1="434.5" y1="372" x2="434.5" y2="394"/><line x1="444.0" y1="372" x2="444.0" y2="394"/><line x1="453.5" y1="372" x2="453.5" y2="394"/></g>
+          <g id="kbn-h" class="kb-box"><rect x="398" y="372" width="70" height="22" rx="3"/><line x1="408.0" y1="372" x2="408.0" y2="394"/><line x1="418.0" y1="372" x2="418.0" y2="394"/><line x1="428.0" y1="372" x2="428.0" y2="394"/><line x1="438.0" y1="372" x2="438.0" y2="394"/><line x1="448.0" y1="372" x2="448.0" y2="394"/><line x1="458.0" y1="372" x2="458.0" y2="394"/></g>
           <text x="433" y="366" class="kb-lab" text-anchor="middle">HEIJUNKA BOX</text>
           <g class="kb-fg"><rect x="258" y="306" width="30" height="24" rx="3"/><text x="273" y="321" text-anchor="middle">FG</text><text x="273" y="344" class="kb-lab" text-anchor="middle">Finished goods</text></g>
           <g id="kbCards"></g>
@@ -1170,8 +1167,8 @@ html[data-mode="light"] .pdlg::backdrop{background:rgba(220,228,238,.5)}
       </div>
       <figcaption class="plan-cap"><span class="plan-note"><sup>*</sup>AS/RS: Automated Storage and Retrieval System</span><span id="planCapR">AS/RS feeds raw stock · Cell 1 → Cell 2 → Cell 3</span></figcaption>
       <div class="kb-legend" id="kbLegend" hidden>
-        <span><i class="c-blue"></i>Blue card</span><span><i class="c-red"></i>Red card</span><span><i class="c-white"></i>White card · special order (coming soon)</span>
-        <small>Pattern: 2 blue, 1 red. Each card leaves the Heijunka box and travels Cell 3 (stations 11 to 15) to finished goods. The supermarket at station 10 posts a card at station 6, which moves 6 to 10; the supermarket at station 5 posts a card at station 1, which moves 1 to 5.</small>
+        <span><i class="c-blue"></i>Blue card</span><span><i class="c-red"></i>Red card</span><span><i class="c-white"></i>White card · special order from War Eagle Inc.</span>
+        <small>Pattern: 2 blue, 1 red, 1 white, 2 blue, 1 red. Cards leave the Heijunka box for station 11. A card then goes to the supermarket at station 10 and is posted at station 6, moves 6 to 10, and pulls from the supermarket at station 5, which posts at station 1 and moves 1 to 5. The white card travels around War Eagle Inc. and is delivered to station 15 together with the white card on the conveyor.</small>
       </div>
     </figure>
 
@@ -2188,42 +2185,54 @@ if('IntersectionObserver' in window && !reduce){
   var NS='http://www.w3.org/2000/svg';
   var title=document.getElementById('planTitle'), capR=document.getElementById('planCapR'), legend=document.getElementById('kbLegend'), cardsG=document.getElementById('kbCards');
   var T={material:'Material flows from Cell 1 to Cell 2 to Cell 3', info:'Kanban cards flow with the product, pulled from the Heijunka box'};
-  var C={material:'AS/RS feeds raw stock · Cell 1 → Cell 2 → Cell 3', info:'Heijunka box → Cell 3 → finished goods · supermarkets post cards at stations 6 and 1'};
-  var P={H:[433,383],FG:[273,318],SM10:[519,394],SM5:[609,318],
+  var C={material:'AS/RS feeds raw stock · Cell 1 → Cell 2 → Cell 3', info:'Heijunka box → Cell 3 → Cell 2 → Cell 1 · white card = special order from War Eagle Inc.'};
+  var P={FG:[273,318],SM10:[519,394],SM5:[609,318],
     1:[517,318],2:[517,283],3:[552,258],4:[583,283],5:[583,318],
     6:[585,417],7:[585,452],8:[550,474],9:[519,452],10:[519,417],
     11:[435,318],12:[402,318],13:[369,318],14:[336,318],15:[303,318]};
-  var COL=['#3B82F6','#3B82F6','#EF4444','#3B82F6','#3B82F6','#EF4444'];
-  var W=9,H=14,STAG=600,LEGMS=650,FIRST=1100,POST=900,TOTAL=5*STAG+FIRST+4*LEGMS+LEGMS+POST+4*LEGMS+850+4*LEGMS+700+900;
+  // card order in the pack: 2 blue, 1 red, 1 white (special order), 2 blue, 1 red
+  var PACK=['b','b','r','w','b','b','r'], FILL={b:'#3B82F6',r:'#EF4444',w:'#FFFFFF'};
+  var W=9,H=14,STAG=620,LEG=650,FIRST=1100,POST=850;
   var rm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function slot(i){return [406+4.75+i*9.5,383];}
-  // tokens per card: A = product line (Cell 3), B = cell 2 post/move, C = cell 1 post/move
-  function build(i){
-    var st=i*STAG, A=[],B=[],C=[], t=st;
-    var a=[slot(i)].concat([P[11],P[12],P[13],P[14],P[15],P.FG]), aid=[null,'11','12','13','14','15',null];
-    var ad=[FIRST,LEGMS,LEGMS,LEGMS,LEGMS,LEGMS];
-    var tok=[{pts:a,ids:aid,dur:ad,start:st,end:'keep'}];
-    var bStart=st+FIRST;
-    var b=[P.SM10,P[6],P[7],P[8],P[9],P[10]], bid=['sm10','6','7','8','9','10'], bd=[POST,LEGMS,LEGMS,LEGMS,LEGMS];
-    tok.push({pts:b,ids:bid,dur:bd,start:bStart,end:'fade'});
-    var bEnd=bStart+POST+4*LEGMS;
-    var c=[P.SM5,P[1],P[2],P[3],P[4],P[5]], cid=['sm5','1','2','3','4','5'], cd=[POST-100,LEGMS,LEGMS,LEGMS,LEGMS];
-    tok.push({pts:c,ids:cid,dur:cd,start:bEnd+150,end:'fade'});
-    return tok;
-  }
-  var tokens=[], rects=[];
-  COL.forEach(function(col,i){ build(i).forEach(function(t,k){ t.color=col; t.card=i; t.kind=k;
-    t.total=t.dur.reduce(function(a,b){return a+b;},0);
-    var r=document.createElementNS(NS,'rect'); r.setAttribute('class','kb-card'); r.setAttribute('width',W); r.setAttribute('height',H); r.setAttribute('rx',2); r.setAttribute('fill',col);
-    cardsG.appendChild(r); t.el=r; tokens.push(t); }); });
-  function idEl(id){ return id==null?null:document.getElementById(/^sm/.test(id)?'kbn-'+id:'kbn-s'+id); }
-  var hitEls={}; function hitFor(id){ if(!(id in hitEls)) hitEls[id]=idEl(id); return hitEls[id]; }
-  var hBox=document.getElementById('kbn-h');
+  function slot(i){return [398+5+i*10,383];}
+  // War Eagle Inc.: out through the door, around the U of stations, and back to station 15
+  var WE=[[P[11][0],P[11][1],0],[470,364,700],[640,364,1000],[719,364,700],[719,416,400],[721,424,300],[721,456,450],[782,487,650],[836,487,450],[897,456,650],[897,424,450],[790,418,800],[719,416,500],[719,364,400],[470,364,1100],[330,352,800],[P[15][0],P[15][1],500]];
+  var WE_TOTAL=WE.slice(1).reduce(function(a,p){return a+p[2];},0);
+  function tok(o){ o.total=o.dur.reduce(function(a,b){return a+b;},0); o.end=o.start+o.total; return o; }
+  var tokens=[];
+  PACK.forEach(function(k,i){
+    var st=i*STAG, s0=slot(i);
+    if(k==='w'){
+      tokens.push(tok({kind:'w',fill:FILL.w,pts:[s0,P[11]],ids:[null,'11'],dur:[FIRST],start:st,linger:'fade',fade:200}));
+      var s2=st+FIRST;
+      tokens.push(tok({kind:'w',fill:FILL.w,pts:WE.map(function(p){return [p[0],p[1]];}),ids:WE.map(function(p,n){return n===WE.length-1?'15':null;}),dur:WE.slice(1).map(function(p){return p[2];}),start:s2,linger:'fade',fade:300}));
+      // the white card on the conveyor: slow and steady, arrives at station 15 together with the supplier card
+      var q=WE_TOTAL/4;
+      tokens.push(tok({kind:'w',fill:FILL.w,lin:true,pts:[P[11],P[12],P[13],P[14],P[15],P.FG],ids:[null,'12','13','14','15',null],dur:[q,q,q,q,LEG],start:s2,linger:'keep',idx:i}));
+      return;
+    }
+    var fill=FILL[k];
+    tokens.push(tok({kind:'a',fill:fill,pts:[s0,P[11],P[12],P[13],P[14],P[15],P.FG],ids:[null,'11','12','13','14','15',null],dur:[FIRST,LEG,LEG,LEG,LEG,LEG],start:st,linger:'keep',idx:i}));
+    // cell 2: station 11 -> supermarket at station 10 -> posted at station 6 -> moves 6..10
+    var b0=st+FIRST;
+    var b=tok({kind:'b',fill:fill,pts:[P[11],P.SM10,P[6],P[7],P[8],P[9],P[10]],ids:[null,'sm10','6','7','8','9','10'],dur:[900,800,LEG,LEG,LEG,LEG],start:b0,linger:'fade',fade:350});
+    tokens.push(b);
+    // cell 1: station 6 -> supermarket at station 5 -> posted at station 1 -> moves 1..5
+    var c0=b0+900+800;
+    tokens.push(tok({kind:'c',fill:fill,pts:[P[6],P.SM5,P[1],P[2],P[3],P[4],P[5]],ids:[null,'sm5','1','2','3','4','5'],dur:[900,800,LEG,LEG,LEG,LEG],start:c0,linger:'fade',fade:350}));
+  });
+  var TOTAL=Math.max.apply(null,tokens.map(function(t){return t.end;}))+1500;
+  tokens.forEach(function(t){
+    var r=document.createElementNS(NS,'rect'); r.setAttribute('class','kb-card'); r.setAttribute('width',W); r.setAttribute('height',H); r.setAttribute('rx',2); r.setAttribute('fill',t.fill);
+    if(t.fill==='#FFFFFF') r.setAttribute('stroke','#9FB4CC');
+    cardsG.appendChild(r); t.el=r;
+  });
+  var hitEls={}; function elFor(id){ if(id==='h') return document.getElementById('kbn-h'); if(!(id in hitEls)) hitEls[id]=document.getElementById(/^sm/.test(id)?'kbn-'+id:'kbn-s'+id); return hitEls[id]; }
   function ease(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;}
   var raf=0,t0=0,active=false,visible=true;
   function place(t,x,y,o){ t.el.setAttribute('x',(x-W/2).toFixed(1)); t.el.setAttribute('y',(y-H/2).toFixed(1)); t.el.setAttribute('opacity',o.toFixed(2)); }
   function restView(){
-    tokens.forEach(function(t){ if(t.kind===0){ var s=t.pts[0]; place(t,s[0],s[1],1);} else place(t,0,0,0); });
+    tokens.forEach(function(t){ var first=t.start===0||t.kind==='a'&&t.pts[0]; if(t.kind==='a'||(t.kind==='w'&&t.pts.length===2)){ var s=t.pts[0]; place(t,s[0],s[1],1);} else place(t,0,0,0); });
   }
   function frame(now){
     raf=0; if(!active||!visible||document.hidden) return;
@@ -2231,28 +2240,28 @@ if('IntersectionObserver' in window && !reduce){
     tokens.forEach(function(t){
       var local=g-t.start;
       if(local<0){
-        if(t.kind===0){ var s=t.pts[0]; place(t,s[0],s[1],Math.min(1,g/350)); } else place(t,0,0,0);
+        if(t.kind==='a'||(t.kind==='w'&&t.pts.length===2)){ var s=t.pts[0]; place(t,s[0],s[1],Math.min(1,g/350)); } else place(t,0,0,0);
         return;
       }
       var acc=0,seg=-1;
       for(var k=0;k<t.dur.length;k++){ if(local<acc+t.dur[k]){seg=k;break;} acc+=t.dur[k]; }
       var o=1,x,y;
       if(seg<0){
-        var last=t.pts[t.pts.length-1]; x=last[0]; y=last[1];
-        var after=local-t.total;
-        if(t.end==='fade') o=Math.max(0,1-after/350);
-        else { x+=(t.card-2.5)*3.2; if(g>TOTAL-500) o=Math.max(0,(TOTAL-g)/500); }
+        var last=t.pts[t.pts.length-1]; x=last[0]; y=last[1]; var after=local-t.total;
+        if(t.linger==='fade') o=Math.max(0,1-after/(t.fade||350));
+        else { if(t.kind!=='b') x+=(t.idx-3)*3.2; if(g>TOTAL-600) o=Math.max(0,(TOTAL-g)/600); }
         var lid=t.ids[t.ids.length-1]; if(after<260&&lid) hits[lid]=1;
       } else {
-        var p=ease((local-acc)/t.dur[seg]), a=t.pts[seg], b=t.pts[seg+1];
+        var u=(local-acc)/t.dur[seg], p=t.lin?u:ease(u), a=t.pts[seg], b=t.pts[seg+1];
         x=a[0]+(b[0]-a[0])*p; y=a[1]+(b[1]-a[1])*p;
-        if(p>.8&&t.ids[seg+1]) hits[t.ids[seg+1]]=1;
-        if(seg===0&&t.kind===0&&p<.2) hits.h=1;
+        if(u>.8&&t.ids[seg+1]) hits[t.ids[seg+1]]=1;
+        if(seg===0&&t.kind==='a'&&u<.2) hits.h=1;
       }
       place(t,x,y,o);
     });
     Object.keys(hitEls).forEach(function(k){ var e=hitEls[k]; if(e&&!hits[k]) e.classList.remove('hit'); });
-    Object.keys(hits).forEach(function(k){ var e=k==='h'?hBox:hitFor(k); if(e) e.classList.add('hit'); });
+    Object.keys(hits).forEach(function(k){ var e=elFor(k); if(e) e.classList.add('hit'); });
+    var hb=document.getElementById('kbn-h'); if(hb&&!hits.h) hb.classList.remove('hit');
     raf=requestAnimationFrame(frame);
   }
   function start(){ if(raf||rm) return; t0=performance.now(); raf=requestAnimationFrame(frame); }
