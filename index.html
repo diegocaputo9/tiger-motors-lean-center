@@ -758,9 +758,9 @@ html[data-mode="light"] .pdlg::backdrop{background:rgba(220,228,238,.5)}
 .tour-cta p{font-size:14.5px;line-height:1.5;color:var(--text-2)}
 .tour-layer{position:fixed;inset:0;z-index:8990}
 .tour-spot{position:absolute;left:0;top:0;z-index:8995;border-radius:16px;pointer-events:none;
-  box-shadow:0 0 0 200vmax rgba(3,9,18,.76),0 0 0 2px #FF9B4D,0 0 36px rgba(232,119,34,.4);
+  box-shadow:0 0 0 200vmax rgba(3,9,18,.5),0 0 0 2px #FF9B4D,0 0 36px rgba(232,119,34,.4);
   transition:transform .45s cubic-bezier(.77,0,.175,1),width .45s cubic-bezier(.77,0,.175,1),height .45s cubic-bezier(.77,0,.175,1),opacity .25s ease}
-.tour-spot.empty{box-shadow:0 0 0 200vmax rgba(3,9,18,.76)}
+.tour-spot.empty{box-shadow:0 0 0 200vmax rgba(3,9,18,.5)}
 .tour-spot.click{pointer-events:auto;cursor:pointer}
 .tour-spot.click::after{content:"";position:absolute;inset:-2px;border-radius:inherit;border:2px solid #FF9B4D;animation:tourPulse 1.6s cubic-bezier(.23,1,.32,1) infinite}
 @keyframes tourPulse{0%{opacity:.9;transform:scale(1)}70%,100%{opacity:0;transform:scale(1.07)}}
@@ -878,11 +878,6 @@ html[data-mode="light"] .pdlg::backdrop{background:rgba(220,228,238,.5)}
   <div class="hero-meta">
     <div class="wrap">
       <p class="hero-cap rise d5"><i></i>Illustrative digital model of a production loop</p>
-      <a class="tour-chip glass rise d5 launch" href="https://cloud.3dvista.com/hosting/8253122/3/index.htm" target="_blank" rel="noopener">
-        <span class="ring">360°</span>
-        <span><small>Immersive</small><b>Lab Tour</b></span>
-        <svg width="16" height="16" style="color:var(--text-3)"><use href="#i-out"/></svg>
-      </a>
     </div>
   </div>
 </section>
@@ -1502,7 +1497,7 @@ var M = [
     {step:1, verb:'learn',   type:'lecture', title:'Jidoka', src:'Video lecture · YouTube', url:'https://youtu.be/3QxSfRsfVeM?si=gDBQsAAIxs1qQs_6'},
     {step:2, verb:'explore', type:'article', title:'Jidoka', src:'Article · kaizen.com', url:'https://kaizen.com/insights/jidoka-automation-human-touch/'}
   ], empty:{apply:'Coming in Spring 2027'}},
-  {k:'jit', n:'04', name:'Just in Time', role:'Pillar', items:[
+  {k:'jit', n:'04', name:'Just in Time', role:'Pillar', seq:true, items:[
     {step:1, verb:'learn',   type:'lecture', title:'Current State VSM', short:'Current State VSM', src:'Video lecture · YouTube', url:'https://youtu.be/j6aTC0uZgWg'},
     {step:2, verb:'apply',   type:'lab',     title:'Current State VSM', short:'Current State VSM', src:'Lab activity · 360° environment', url:'https://storage.net-fs.com/hosting/8253122/5/'},
     {step:3, verb:'learn',   type:'lecture', title:'SMED', short:'SMED', src:'Video lecture · YouTube', url:'https://youtu.be/tHWlLqAcs90'},
@@ -1547,9 +1542,10 @@ sqg.innerHTML = sqh;
 
 var stepsEl = document.getElementById('steps');
 stepsEl.innerHTML = SEQ.map(function(k,i){
-  var m = BYK[k];
+  var CHIP = {jit:'JIT', ci:'C.I.'};
+var m = BYK[k];
   return (i?'<span class="step-arrow" aria-hidden="true">→</span>':'')+
-    '<button class="step-chip" data-k="'+k+'" aria-pressed="false"><b>'+m.n+'</b>'+m.name+'</button>';
+    '<button class="step-chip" data-k="'+k+'" aria-pressed="false" aria-label="Step '+m.n+': '+m.name+'" title="'+m.name+'"><b>'+m.n+'</b>'+(CHIP[k]||m.name)+'</button>';
 }).join('') + '<span class="step-arrow" aria-hidden="true">·</span>'+
   '<button class="step-chip" data-k="sqdcm" aria-pressed="false"><b>S</b>SQDCM</button>'+
   '<button class="step-chip" data-k="cs" aria-pressed="false"><b>★</b>Customer Satisfaction</button>';
@@ -1572,6 +1568,10 @@ function renderPanel(k){
   var idx = SEQ.indexOf(k);
   var kicker = idx>=0 ? 'Step '+m.n+' of 05 · '+m.role : m.role;
   var h = '<div class="p-head"><span class="p-kicker">'+esc(kicker)+'</span><h3>'+esc(m.name)+'</h3><p>'+esc(countsText(m))+'</p></div><div class="p-groups">';
+  if(m.seq){
+    var ord = m.items.filter(function(it){return it.step;}).sort(function(a,b){return a.step-b.step;}).concat(m.items.filter(function(it){return !it.step;}));
+    h += '<div class="p-group"><div class="p-verb"><b>SEQUENCE</b><small>Follow the steps in order, from 1 to '+m.items.filter(function(it){return it.step;}).length+'</small></div><div class="p-list">'+ord.map(mini).join('')+'</div></div>';
+  } else
   Object.keys(VERBS).forEach(function(v){
     if(m.hide && m.hide.indexOf(v)>-1) return;
     var list = m.items.filter(function(it){return it.verb===v;}).sort(function(a,b){return (a.step||99)-(b.step||99);});
