@@ -1173,7 +1173,7 @@ html[data-mode="light"] .pdlg::backdrop{background:rgba(220,228,238,.5)}
       <figcaption class="plan-cap"><span class="plan-note"><sup>*</sup>AS/RS: Automated Storage and Retrieval System</span><span id="planCapR">AS/RS feeds raw stock · Cell 1 → Cell 2 → Cell 3</span></figcaption>
       <div class="kb-legend" id="kbLegend" hidden>
         <span><i class="c-blue"></i>Blue card</span><span><i class="c-red"></i>Red card</span><span><i class="c-white"></i>White card · special order from War Eagle Inc.</span>
-        <small>Pattern: 2 blue, 1 red, 1 white, 2 blue, 1 red. Cards leave the Heijunka box for station 11. A card then goes to the supermarket at station 10 and is posted at station 6, moves 6 to 10, and pulls from the supermarket at station 5, which posts at station 1 and moves 1 to 5. The white card travels around War Eagle Inc. and is delivered to station 15 together with the white card on the conveyor.</small>
+        <small>Pattern: 2 blue, 1 red, 1 white, 2 blue, 1 red. Cards leave the Heijunka box for station 11. A card then goes to the supermarket at station 10 and is posted at station 6, moves 6 to 10, and pulls from the supermarket at station 5, which posts at station 1 and moves 1 to 5. A second white card leaves station 11 for War Eagle Inc., circles it, and is delivered to station 15 together with the white card on the line.</small>
       </div>
     </figure>
 
@@ -2198,8 +2198,8 @@ if('IntersectionObserver' in window && !reduce){
   // pack: 2 blue, 1 red, 1 white (special order), 2 blue, 1 red
   var PACK=['b','b','r','w','b','b','r'], FILL={b:'#3B82F6',r:'#EF4444',w:'#FFFFFF'};
   var W=9,H=14;
-  var TICK=2000, MOVE=750, PITCH=2;   // every card hops one station per tick; one card per station; an empty station between cards
-  var WE_T=4*TICK+MOVE;               // War Eagle round trip ends exactly when the conveyor white card reaches station 15
+  var TICK=2000, MOVE=750, PITCH=1;   // every card hops one station per tick; one card per station; stations stay filled
+  var WE_T=3*TICK+MOVE;               // War Eagle round trip ends exactly when the white card on the line reaches station 15
   var rm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
   function slot(i){return [398+5+i*10,383];}
   function smooth(ctrl,n){
@@ -2223,12 +2223,10 @@ if('IntersectionObserver' in window && !reduce){
   PACK.forEach(function(k,i){
     var S=i*PITCH*TICK, s0=slot(i);
     if(k==='w'){
-      // pack card reaches station 11, waits one tick, then leaves for War Eagle Inc.
-      tok({fill:FILL.w,step:true,pts:[s0,P[11]],ids:[null,'11'],dur:steps(1),start:S,appear:0,fade:1});
+      // the white card hops down the line with the pack; a second white card leaves station 11 for War Eagle Inc.
+      tok({fill:FILL.w,step:true,pts:[s0,P[11],P[12],P[13],P[14],P[15],P.FG],ids:[null,'11','12','13','14','15',null],dur:steps(6),start:S,appear:0,keep:true,idx:i});
       var dur=[]; for(var z=1;z<WE.length;z++) dur.push(WE_T*(WE_LEN[z]-WE_LEN[z-1])/WE_L);
       tok({fill:FILL.w,lin:true,warp:true,pts:WE,ids:WE.map(function(p,n){return n===WE.length-1?'15':null;}),dur:dur,start:S+TICK,appear:S+TICK,fade:300});
-      // the white card on the conveyor leaves station 11 one tick later and hops station to station
-      tok({fill:FILL.w,step:true,pts:[P[11],P[12],P[13],P[14],P[15],P.FG],ids:[null,'12','13','14','15',null],dur:steps(5),start:S+2*TICK,appear:S+TICK,keep:true,idx:i});
       return;
     }
     var fill=FILL[k];
@@ -2298,6 +2296,8 @@ if('IntersectionObserver' in window && !reduce){
     plan.classList.toggle('is-info',info);
     plan.querySelectorAll('[data-pmode]').forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-pmode')===m?'true':'false');});
     title.textContent=T[m]; capR.textContent=C[m]; legend.hidden=!info;
+    var sv=plan.querySelector('.plan-svg');
+    if(sv&&sv.pauseAnimations){ if(info){ try{sv.setCurrentTime(0);}catch(e){} sv.pauseAnimations(); } else { sv.unpauseAnimations(); } }
     restView(); clearHits(); if(info) start();
   }
   plan.querySelectorAll('[data-pmode]').forEach(function(b){b.addEventListener('click',function(){setMode(b.getAttribute('data-pmode'));});});
