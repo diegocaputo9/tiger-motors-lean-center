@@ -2196,7 +2196,7 @@ if('IntersectionObserver' in window && !reduce){
   // pack: 2 blue, 1 red, 1 white (special order), 2 blue, 1 red
   var PACK=['b','b','r','w','b','b','r'], FILL={b:'#3B82F6',r:'#EF4444',w:'#FFFFFF'};
   var W=9,H=14,STAG=900,FIRST=1100;
-  var WE_T=6400, Q=WE_T/4;           // everything on the line moves at the white card's pace: one station per Q ms
+  var WE_T=8000, Q=WE_T/4;           // everything on the line moves at the white card's pace: one station per Q ms (11 to finished goods = 5 x Q = 10 s)
   var rm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
   function slot(i){return [398+5+i*10,383];}
   // smooth curve through control points (Catmull-Rom), sampled densely
