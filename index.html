@@ -830,8 +830,8 @@ html[data-mode="light"] .pdlg::backdrop{background:rgba(220,228,238,.5)}
 .pmode[aria-pressed="true"]{color:#fff;background:rgba(232,119,34,.16);border-color:rgba(232,119,34,.65)}
 .plan .kb{display:none}
 .plan.is-info .kb{display:block}
-.plan .flow,.plan .feed{transition:opacity .35s ease}
-.plan.is-info .flow,.plan.is-info .feed{opacity:.18}
+.plan .flow,.plan .feed,.plan .u-path,.plan .belt-line,.plan .mc-flow{transition:opacity .35s ease}
+.plan.is-info .flow,.plan.is-info .feed,.plan.is-info .u-path,.plan.is-info .belt-line,.plan.is-info .mc-flow{opacity:0}
 .kb-n circle{fill:#0A1B30;stroke:rgba(160,185,212,.7);stroke-width:1;transition:stroke .2s,fill .2s}
 .kb-n text{font:600 8.5px var(--f-mono);fill:#E9EEF4}
 .kb-n.hit circle,.kb-sm.hit rect,.kb-box.hit rect{stroke:#FF9B4D;stroke-width:2;fill:rgba(232,119,34,.35)}
@@ -1147,9 +1147,6 @@ html[data-mode="light"] .pdlg::backdrop{background:rgba(220,228,238,.5)}
         </g>
         <!-- information flow: kanban layer (shown in the Information flow view) -->
         <g class="kb" id="kb">
-          <g class="kb-paths" fill="none" stroke="rgba(233,238,244,.5)" stroke-width="1.5" stroke-dasharray="3 4" stroke-linecap="round">
-            <path d="M440 372L519 391"/><path d="M519 399L585 410"/><path d="M590 410L604 326"/><path d="M600 318H524"/>
-          </g>
           <g class="kb-st"><g id="kbn-s1" class="kb-n"><circle cx="517" cy="318" r="7.5"/><text x="517" y="321" text-anchor="middle">1</text></g><g id="kbn-s2" class="kb-n"><circle cx="517" cy="283" r="7.5"/><text x="517" y="286" text-anchor="middle">2</text></g><g id="kbn-s3" class="kb-n"><circle cx="552" cy="258" r="7.5"/><text x="552" y="261" text-anchor="middle">3</text></g><g id="kbn-s4" class="kb-n"><circle cx="583" cy="283" r="7.5"/><text x="583" y="286" text-anchor="middle">4</text></g><g id="kbn-s5" class="kb-n"><circle cx="583" cy="318" r="7.5"/><text x="583" y="321" text-anchor="middle">5</text></g><g id="kbn-s6" class="kb-n"><circle cx="585" cy="417" r="7.5"/><text x="585" y="420" text-anchor="middle">6</text></g><g id="kbn-s7" class="kb-n"><circle cx="585" cy="452" r="7.5"/><text x="585" y="455" text-anchor="middle">7</text></g><g id="kbn-s8" class="kb-n"><circle cx="550" cy="474" r="7.5"/><text x="550" y="477" text-anchor="middle">8</text></g><g id="kbn-s9" class="kb-n"><circle cx="519" cy="452" r="7.5"/><text x="519" y="455" text-anchor="middle">9</text></g><g id="kbn-s10" class="kb-n"><circle cx="519" cy="417" r="7.5"/><text x="519" y="420" text-anchor="middle">10</text></g><g id="kbn-s11" class="kb-n"><circle cx="435" cy="318" r="7.5"/><text x="435" y="321" text-anchor="middle">11</text></g><g id="kbn-s12" class="kb-n"><circle cx="402" cy="318" r="7.5"/><text x="402" y="321" text-anchor="middle">12</text></g><g id="kbn-s13" class="kb-n"><circle cx="369" cy="318" r="7.5"/><text x="369" y="321" text-anchor="middle">13</text></g><g id="kbn-s14" class="kb-n"><circle cx="336" cy="318" r="7.5"/><text x="336" y="321" text-anchor="middle">14</text></g><g id="kbn-s15" class="kb-n"><circle cx="303" cy="318" r="7.5"/><text x="303" y="321" text-anchor="middle">15</text></g></g>
           <g id="kbn-sm10" class="kb-sm"><rect x="506" y="388" width="26" height="11" rx="2"/><text x="519" y="396.5" text-anchor="middle">SUPERMKT</text></g>
           <g id="kbn-sm5" class="kb-sm"><rect x="596" y="328" width="26" height="11" rx="2"/><text x="609" y="336.5" text-anchor="middle">SUPERMKT</text></g>
@@ -1174,7 +1171,7 @@ html[data-mode="light"] .pdlg::backdrop{background:rgba(220,228,238,.5)}
       <figcaption class="plan-cap"><span class="plan-note"><sup>*</sup>AS/RS: Automated Storage and Retrieval System</span><span id="planCapR">AS/RS feeds raw stock · Cell 1 → Cell 2 → Cell 3</span></figcaption>
       <div class="kb-legend" id="kbLegend" hidden>
         <span><i class="c-blue"></i>Blue card</span><span><i class="c-red"></i>Red card</span><span><i class="c-white"></i>White card · special order (coming soon)</span>
-        <small>Pattern: 2 blue, 1 red · Heijunka box → supermarket at station 10 → station 6 → supermarket at station 5 → station 1</small>
+        <small>Pattern: 2 blue, 1 red. Each card leaves the Heijunka box and travels Cell 3 (stations 11 to 15) to finished goods. The supermarket at station 10 posts a card at station 6, which moves 6 to 10; the supermarket at station 5 posts a card at station 1, which moves 1 to 5.</small>
       </div>
     </figure>
 
@@ -2190,48 +2187,83 @@ if('IntersectionObserver' in window && !reduce){
   var plan=document.getElementById('plan'); if(!plan) return;
   var NS='http://www.w3.org/2000/svg';
   var title=document.getElementById('planTitle'), capR=document.getElementById('planCapR'), legend=document.getElementById('kbLegend'), cardsG=document.getElementById('kbCards');
-  var T={material:'Material flows from Cell 1 to Cell 2 to Cell 3', info:'Information flows by kanban card, pulled from the Heijunka box'};
-  var C={material:'AS/RS feeds raw stock · Cell 1 → Cell 2 → Cell 3', info:'Cards pull production backward: station 10 → 6 → 5 → 1'};
-  var NODES=[{x:433,y:383,id:'kbn-h'},{x:519,y:394,id:'kbn-sm10'},{x:585,y:417,id:'kbn-s6'},{x:609,y:318,id:'kbn-sm5'},{x:517,y:318,id:'kbn-s1'}];
+  var T={material:'Material flows from Cell 1 to Cell 2 to Cell 3', info:'Kanban cards flow with the product, pulled from the Heijunka box'};
+  var C={material:'AS/RS feeds raw stock · Cell 1 → Cell 2 → Cell 3', info:'Heijunka box → Cell 3 → finished goods · supermarkets post cards at stations 6 and 1'};
+  var P={H:[433,383],FG:[273,318],SM10:[519,394],SM5:[609,318],
+    1:[517,318],2:[517,283],3:[552,258],4:[583,283],5:[583,318],
+    6:[585,417],7:[585,452],8:[550,474],9:[519,452],10:[519,417],
+    11:[435,318],12:[402,318],13:[369,318],14:[336,318],15:[303,318]};
   var COL=['#3B82F6','#3B82F6','#EF4444','#3B82F6','#3B82F6','#EF4444'];
-  var W=9,H=14,LEG=1300,HOLD=420,STAG=560,SEG=LEG+HOLD,TOTAL=5*STAG+4*SEG+900;
+  var W=9,H=14,STAG=600,LEGMS=650,FIRST=1100,POST=900,TOTAL=5*STAG+FIRST+4*LEGMS+LEGMS+POST+4*LEGMS+850+4*LEGMS+700+900;
   var rm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var cards=COL.map(function(c){var r=document.createElementNS(NS,'rect');r.setAttribute('class','kb-card');r.setAttribute('width',W);r.setAttribute('height',H);r.setAttribute('rx',2);r.setAttribute('fill',c);cardsG.appendChild(r);return r;});
-  var nodeEls=NODES.map(function(n){return document.getElementById(n.id);});
-  function slot(i){return {x:406+4.75+i*9.5,y:383};}
+  function slot(i){return [406+4.75+i*9.5,383];}
+  // tokens per card: A = product line (Cell 3), B = cell 2 post/move, C = cell 1 post/move
+  function build(i){
+    var st=i*STAG, A=[],B=[],C=[], t=st;
+    var a=[slot(i)].concat([P[11],P[12],P[13],P[14],P[15],P.FG]), aid=[null,'11','12','13','14','15',null];
+    var ad=[FIRST,LEGMS,LEGMS,LEGMS,LEGMS,LEGMS];
+    var tok=[{pts:a,ids:aid,dur:ad,start:st,end:'keep'}];
+    var bStart=st+FIRST;
+    var b=[P.SM10,P[6],P[7],P[8],P[9],P[10]], bid=['sm10','6','7','8','9','10'], bd=[POST,LEGMS,LEGMS,LEGMS,LEGMS];
+    tok.push({pts:b,ids:bid,dur:bd,start:bStart,end:'fade'});
+    var bEnd=bStart+POST+4*LEGMS;
+    var c=[P.SM5,P[1],P[2],P[3],P[4],P[5]], cid=['sm5','1','2','3','4','5'], cd=[POST-100,LEGMS,LEGMS,LEGMS,LEGMS];
+    tok.push({pts:c,ids:cid,dur:cd,start:bEnd+150,end:'fade'});
+    return tok;
+  }
+  var tokens=[], rects=[];
+  COL.forEach(function(col,i){ build(i).forEach(function(t,k){ t.color=col; t.card=i; t.kind=k;
+    t.total=t.dur.reduce(function(a,b){return a+b;},0);
+    var r=document.createElementNS(NS,'rect'); r.setAttribute('class','kb-card'); r.setAttribute('width',W); r.setAttribute('height',H); r.setAttribute('rx',2); r.setAttribute('fill',col);
+    cardsG.appendChild(r); t.el=r; tokens.push(t); }); });
+  function idEl(id){ return id==null?null:document.getElementById(/^sm/.test(id)?'kbn-'+id:'kbn-s'+id); }
+  var hitEls={}; function hitFor(id){ if(!(id in hitEls)) hitEls[id]=idEl(id); return hitEls[id]; }
+  var hBox=document.getElementById('kbn-h');
   function ease(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;}
   var raf=0,t0=0,active=false,visible=true;
+  function place(t,x,y,o){ t.el.setAttribute('x',(x-W/2).toFixed(1)); t.el.setAttribute('y',(y-H/2).toFixed(1)); t.el.setAttribute('opacity',o.toFixed(2)); }
+  function restView(){
+    tokens.forEach(function(t){ if(t.kind===0){ var s=t.pts[0]; place(t,s[0],s[1],1);} else place(t,0,0,0); });
+  }
   function frame(now){
     raf=0; if(!active||!visible||document.hidden) return;
-    var t=(now-t0)%TOTAL, hit={};
-    cards.forEach(function(r,i){
-      var local=t-i*STAG, x,y,o=1, sl=slot(i);
-      if(local<0){ x=sl.x;y=sl.y; o=Math.min(1,t/350); }
-      else {
-        var seg=Math.floor(local/SEG);
-        if(seg>=4){ x=NODES[4].x;y=NODES[4].y; var f=(local-4*SEG)/500; o=Math.max(0,1-f); hit[4]=1; }
-        else {
-          var w=local-seg*SEG, a=seg===0?sl:NODES[seg], b=NODES[seg+1];
-          if(w<LEG){ var p=ease(w/LEG); x=a.x+(b.x-a.x)*p; y=a.y+(b.y-a.y)*p; }
-          else { x=b.x;y=b.y; hit[seg+1]=1; }
-        }
+    var g=(now-t0)%TOTAL, hits={};
+    tokens.forEach(function(t){
+      var local=g-t.start;
+      if(local<0){
+        if(t.kind===0){ var s=t.pts[0]; place(t,s[0],s[1],Math.min(1,g/350)); } else place(t,0,0,0);
+        return;
       }
-      r.setAttribute('x',(x-W/2).toFixed(1)); r.setAttribute('y',(y-H/2).toFixed(1)); r.setAttribute('opacity',o.toFixed(2));
+      var acc=0,seg=-1;
+      for(var k=0;k<t.dur.length;k++){ if(local<acc+t.dur[k]){seg=k;break;} acc+=t.dur[k]; }
+      var o=1,x,y;
+      if(seg<0){
+        var last=t.pts[t.pts.length-1]; x=last[0]; y=last[1];
+        var after=local-t.total;
+        if(t.end==='fade') o=Math.max(0,1-after/350);
+        else { x+=(t.card-2.5)*3.2; if(g>TOTAL-500) o=Math.max(0,(TOTAL-g)/500); }
+        var lid=t.ids[t.ids.length-1]; if(after<260&&lid) hits[lid]=1;
+      } else {
+        var p=ease((local-acc)/t.dur[seg]), a=t.pts[seg], b=t.pts[seg+1];
+        x=a[0]+(b[0]-a[0])*p; y=a[1]+(b[1]-a[1])*p;
+        if(p>.8&&t.ids[seg+1]) hits[t.ids[seg+1]]=1;
+        if(seg===0&&t.kind===0&&p<.2) hits.h=1;
+      }
+      place(t,x,y,o);
     });
-    nodeEls.forEach(function(e,k){ if(e) e.classList.toggle('hit',!!hit[k]); });
+    Object.keys(hitEls).forEach(function(k){ var e=hitEls[k]; if(e&&!hits[k]) e.classList.remove('hit'); });
+    Object.keys(hits).forEach(function(k){ var e=k==='h'?hBox:hitFor(k); if(e) e.classList.add('hit'); });
     raf=requestAnimationFrame(frame);
   }
   function start(){ if(raf||rm) return; t0=performance.now(); raf=requestAnimationFrame(frame); }
-  function staticView(){
-    cards.forEach(function(r,i){var s=slot(i);r.setAttribute('x',s.x-W/2);r.setAttribute('y',s.y-H/2);r.setAttribute('opacity',1);});
-  }
-  staticView();
+  function clearHits(){ plan.querySelectorAll('.kb .hit').forEach(function(e){e.classList.remove('hit');}); }
+  restView();
   function setMode(m){
     var info=m==='info'; active=info;
     plan.classList.toggle('is-info',info);
     plan.querySelectorAll('[data-pmode]').forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-pmode')===m?'true':'false');});
     title.textContent=T[m]; capR.textContent=C[m]; legend.hidden=!info;
-    if(info){ staticView(); start(); } else { staticView(); nodeEls.forEach(function(e){e&&e.classList.remove('hit');}); }
+    restView(); clearHits(); if(info) start();
   }
   plan.querySelectorAll('[data-pmode]').forEach(function(b){b.addEventListener('click',function(){setMode(b.getAttribute('data-pmode'));});});
   if('IntersectionObserver' in window){
