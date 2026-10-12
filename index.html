@@ -850,8 +850,17 @@ html[data-mode="light"] .pdlg::backdrop{background:rgba(220,228,238,.5)}
 .kb-legend[hidden]{display:none}
 .kb-legend span{display:inline-flex;align-items:center;gap:8px}
 .kb-legend i{width:12px;height:16px;border-radius:2px;border:1px solid #fff}
-.kb-legend i.c-blue{background:#3B82F6}.kb-legend i.c-red{background:#EF4444}.kb-legend i.c-white{background:#fff}
+.kb-legend i.c-blue{background:#3B82F6}.kb-legend i.c-orange{background:#F59E0B}.kb-legend i.c-white{background:#fff}
 .kb-legend small{flex-basis:100%;font:500 12px var(--f-body);letter-spacing:0;color:var(--text-3)}
+
+.kb-link{fill:none;stroke:rgba(233,238,244,.55);stroke-width:1.5;stroke-dasharray:4 5;stroke-linecap:round;transition:stroke .25s,stroke-width .25s}
+.kb-link.on{stroke:#fff;stroke-width:2.6}
+.kb-note{fill:#FFB877;font-size:7.5px}
+.kb-sup text{fill:#FFB877;font-size:8px}
+.kb-pop{opacity:0;transition:opacity .3s ease;pointer-events:none}
+.kb-pop.on{opacity:1}
+.kb-pop rect{fill:rgba(232,119,34,.95);stroke:#fff;stroke-width:1}
+.kb-pop text{font:700 8px var(--f-mono);fill:#1A0C02;letter-spacing:.04em}
 </style>
 
 </head>
@@ -1141,7 +1150,7 @@ html[data-mode="light"] .pdlg::backdrop{background:rgba(220,228,238,.5)}
 
           <text x="809" y="430" class="pl-cell we-title" text-anchor="middle">War Eagle Inc.</text>
           <text x="809" y="444" class="pl-cell" text-anchor="middle" style="font-size:9.5px">Manufacturing Cell</text>
-          <text x="809" y="456" class="pl-lab" text-anchor="middle" style="font-size:7.2px">Tier 1 supplier</text>
+          <text x="809" y="456" class="pl-lab" text-anchor="middle" style="font-size:7.2px">Tier 1 JIT Supplier</text>
           <text x="809" y="467" class="pl-lab" text-anchor="middle" style="font-size:7px">5 desktop CNC · 1 3D printer</text>
         </g>
         <!-- information flow: kanban layer (shown in the Information flow view) -->
@@ -1156,6 +1165,11 @@ html[data-mode="light"] .pdlg::backdrop{background:rgba(220,228,238,.5)}
           <g id="kbn-h" class="kb-box"><rect x="398" y="372" width="70" height="22" rx="3"/><line x1="408.0" y1="372" x2="408.0" y2="394"/><line x1="418.0" y1="372" x2="418.0" y2="394"/><line x1="428.0" y1="372" x2="428.0" y2="394"/><line x1="438.0" y1="372" x2="438.0" y2="394"/><line x1="448.0" y1="372" x2="448.0" y2="394"/><line x1="458.0" y1="372" x2="458.0" y2="394"/></g>
           <text x="433" y="366" class="kb-lab" text-anchor="middle">HEIJUNKA BOX</text>
           <g class="kb-fg"><rect x="258" y="306" width="30" height="24" rx="3"/><text x="273" y="321" text-anchor="middle">FG</text><text x="273" y="344" class="kb-lab" text-anchor="middle">Finished goods</text></g>
+          <path id="kbl5" class="kb-link" d="M604 300L716 300"/><path id="kbl6" class="kb-link" d="M782 290L824 290"/>
+          <text x="660" y="293" class="kb-lab" text-anchor="middle">2-bin replenishment</text>
+          <text x="435" y="303" class="kb-lab kb-note" text-anchor="middle">Pacemaker process</text>
+          <g class="kb-lab kb-sup"><text x="878" y="205">Tier 1 Raw</text><text x="878" y="217">Material Supplier</text></g>
+          <g id="kbpop" class="kb-pop"><rect x="206" y="268" width="96" height="18" rx="4"/><text x="254" y="280.5" text-anchor="middle">JIT delivery point</text></g>
           <g id="kbCards"></g>
         </g>
         <!-- labels -->
@@ -1168,12 +1182,13 @@ html[data-mode="light"] .pdlg::backdrop{background:rgba(220,228,238,.5)}
         </g>
         <!-- scale-free north / tag -->
         <text x="18" y="136" class="pl-tag">TIGER MOTORS · INTEGRATED MANUFACTURING FACILITY</text>
+        <text x="392" y="218" class="pl-cell we-title" text-anchor="middle" style="font-size:15px">Tiger Motors · Assembly Plant</text>
       </svg>
       </div>
       <figcaption class="plan-cap"><span class="plan-note"><sup>*</sup>AS/RS: Automated Storage and Retrieval System</span><span id="planCapR">AS/RS feeds raw stock · Cell 1 → Cell 2 → Cell 3</span></figcaption>
       <div class="kb-legend" id="kbLegend" hidden>
-        <span><i class="c-blue"></i>Blue card</span><span><i class="c-red"></i>Red card</span><span><i class="c-white"></i>White card · special order from War Eagle Inc.</span>
-        <small>Pattern: 2 blue, 1 red, 1 white, 2 blue, 1 red. Cards leave the Heijunka box for station 11. A card then goes to the supermarket at station 10 and is posted at station 6, moves 6 to 10, and pulls from the supermarket at station 5, which posts at station 1 and moves 1 to 5. A second white card leaves station 11 for War Eagle Inc., circles it, and is delivered to station 15 together with the white card on the line.</small>
+        <span><i class="c-blue"></i>Blue card</span><span><i class="c-orange"></i>Orange card</span><span><i class="c-white"></i>White card · special order from War Eagle Inc.</span>
+        <small>Pattern: 2 blue, 1 orange, 1 white, 2 blue, 1 orange. Cards leave the Heijunka box for station 11. A card then goes to the supermarket at station 10 and is posted at station 6, moves 6 to 10, and pulls from the supermarket at station 5, which posts at station 1 and moves 1 to 5. A second white card leaves station 11 for War Eagle Inc., circles it, and is delivered to station 15 together with the white card on the line.</small>
       </div>
     </figure>
 
@@ -2195,8 +2210,8 @@ if('IntersectionObserver' in window && !reduce){
     1:[517,318],2:[517,283],3:[552,258],4:[583,283],5:[583,318],
     6:[585,417],7:[585,452],8:[550,474],9:[519,452],10:[519,417],
     11:[435,318],12:[402,318],13:[369,318],14:[336,318],15:[303,318]};
-  // pack: 2 blue, 1 red, 1 white (special order), 2 blue, 1 red
-  var PACK=['b','b','r','w','b','b','r'], FILL={b:'#3B82F6',r:'#EF4444',w:'#FFFFFF'};
+  // pack: 2 blue, 1 orange, 1 white (special order), 2 blue, 1 orange
+  var PACK=['b','b','r','w','b','b','r'], FILL={b:'#3B82F6',r:'#F59E0B',w:'#FFFFFF'};
   var W=9,H=14;
   var TICK=2000, MOVE=750, PITCH=1;   // every card hops one station per tick; one card per station; stations stay filled
   var WE_T=3*TICK+MOVE;               // War Eagle round trip ends exactly when the white card on the line reaches station 15
@@ -2213,9 +2228,12 @@ if('IntersectionObserver' in window && !reduce){
     }
     out.push(p[p.length-1]); return out;
   }
-  var WE=smooth([P[11],[470,352],[560,366],[660,366],[708,384],[719,408],[721,426],[721,456],[748,483],[782,488],[836,488],[880,478],[897,456],[897,426],[870,414],[800,416],[740,412],[716,394],[690,366],[600,366],[500,366],[410,360],[340,342],[P[15][0]+4,P[15][1]+4],P[15]],14);
-  var WE_LEN=[0]; for(var q=1;q<WE.length;q++){ WE_LEN.push(WE_LEN[q-1]+Math.hypot(WE[q][0]-WE[q-1][0],WE[q][1]-WE[q-1][1])); }
-  var WE_L=WE_LEN[WE_LEN.length-1];
+  // War Eagle Inc.: smooth approach from station 11, hop CNC 1 -> 5 -> 3D like the other cells, smooth return to station 15
+  var CNC=[[721,424],[721,456],[782,487],[836,487],[897,456],[897,424]];
+  var IN=smooth([P[11],[470,352],[560,366],[660,366],[708,384],[719,408],CNC[0]],14);
+  var OUT=smooth([CNC[5],[870,414],[800,416],[740,412],[716,394],[690,366],[600,366],[500,366],[410,360],[340,342],[307,322],P[15]],14);
+  function plen(a){ var L=[0]; for(var q=1;q<a.length;q++) L.push(L[q-1]+Math.hypot(a[q][0]-a[q-1][0],a[q][1]-a[q-1][1])); return L; }
+  var HOP=800, HOPMOVE=400, IN_T=1000, HOPS=5*HOP, OUT_T=WE_T-IN_T-HOPS;
   var tokens=[], links=[];
   function steps(n){ var a=[]; for(var k=0;k<n;k++) a.push(TICK); return a; }
   function tok(o){ o.total=o.dur.reduce(function(a,b){return a+b;},0); o.end=o.start+o.total; tokens.push(o); return o; }
@@ -2225,8 +2243,14 @@ if('IntersectionObserver' in window && !reduce){
     if(k==='w'){
       // the white card hops down the line with the pack; a second white card leaves station 11 for War Eagle Inc.
       tok({fill:FILL.w,step:true,pts:[s0,P[11],P[12],P[13],P[14],P[15],P.FG],ids:[null,'11','12','13','14','15',null],dur:steps(6),start:S,appear:0,keep:true,idx:i});
-      var dur=[]; for(var z=1;z<WE.length;z++) dur.push(WE_T*(WE_LEN[z]-WE_LEN[z-1])/WE_L);
-      tok({fill:FILL.w,lin:true,warp:true,pts:WE,ids:WE.map(function(p,n){return n===WE.length-1?'15':null;}),dur:dur,start:S+TICK,appear:S+TICK,fade:300});
+      var li=plen(IN), lo=plen(OUT), pts=[], dur=[], modes=[], mv=[], ids=[];
+      for(var z=0;z<IN.length;z++) pts.push(IN[z]);
+      for(z=1;z<IN.length;z++){ dur.push(IN_T*(li[z]-li[z-1])/li[li.length-1]); modes.push('c'); mv.push(0); }
+      for(var h=1;h<CNC.length;h++){ pts.push(CNC[h]); dur.push(HOP); modes.push('s'); mv.push(HOPMOVE); }
+      for(z=1;z<OUT.length;z++){ pts.push(OUT[z]); dur.push(OUT_T*(lo[z]-lo[z-1])/lo[lo.length-1]); modes.push('c'); mv.push(0); }
+      for(z=0;z<pts.length;z++) ids.push(z===pts.length-1?'15':null);
+      tok({fill:FILL.w,pts:pts,ids:ids,dur:dur,modes:modes,mv:mv,start:S+TICK,appear:S+TICK,fade:300});
+      lit('kbpop',S+4*TICK+MOVE-150,S+4*TICK+MOVE+2400);
       return;
     }
     var fill=FILL[k];
@@ -2238,6 +2262,10 @@ if('IntersectionObserver' in window && !reduce){
     var SC=SB+TICK;
     tok({fill:fill,step:true,pts:[P.SM5,P[1],P[2],P[3],P[4],P[5]],ids:['sm5','1','2','3','4','5'],dur:steps(5),start:SC,appear:SB+MOVE,fade:350});
     lit('kbl1',S+MOVE,S+TICK+MOVE); lit('kbl2',SB,SB+MOVE+250); lit('kbl3',SB+MOVE,SC+MOVE); lit('kbl4',SC,SC+MOVE+250);
+    // two-bin replenishment: Cell 1 signals Raw Stock, Raw Stock signals the AS/RS
+    var SD=SC+5*TICK;
+    tok({fill:fill,step:true,pts:[[604,300],[749,300],[822,290]],ids:[null,null,null],dur:steps(2),start:SD,appear:SC+4*TICK+MOVE,fade:350});
+    lit('kbl5',SD,SD+MOVE+250); lit('kbl6',SD+TICK,SD+TICK+MOVE+250);
   });
   var TOTAL=Math.max.apply(null,tokens.map(function(t){return t.end;}))+1800;
   tokens.forEach(function(t){
@@ -2273,10 +2301,10 @@ if('IntersectionObserver' in window && !reduce){
         else o=Math.max(0,1-after/(t.fade||350));
         var lid=t.ids[t.ids.length-1]; if(after<260&&lid) hits[lid]=1;
       } else {
-        var w=local-acc, a=t.pts[seg], b=t.pts[seg+1], p;
-        if(t.step) p=w<MOVE?ease(w/MOVE):1; else p=w/t.dur[seg];
+        var w=local-acc, a=t.pts[seg], b=t.pts[seg+1], p, md=t.modes?t.modes[seg]:(t.step?'s':'c'), mvv=(t.mv&&t.mv[seg])||MOVE;
+        if(md==='s') p=w<mvv?ease(w/mvv):1; else p=w/t.dur[seg];
         x=a[0]+(b[0]-a[0])*p; y=a[1]+(b[1]-a[1])*p;
-        if((t.step?w>=MOVE*.8:w/t.dur[seg]>.8)&&t.ids[seg+1]) hits[t.ids[seg+1]]=1;
+        if((md==='s'?w>=mvv*.8:w/t.dur[seg]>.8)&&t.ids[seg+1]) hits[t.ids[seg+1]]=1;
         if(seg===0&&t.pts[0][1]===383&&w<MOVE) hits.h=1;
       }
       place(t,x,y,o);
