@@ -1933,19 +1933,19 @@ document.addEventListener('click', function(e){
       ctx.fillStyle = amb?'#F2B233':'#3FB68B'; ctx.shadowColor=ctx.fillStyle; ctx.shadowBlur=amb?16:10;
       ctx.beginPath(); ctx.arc(up[0],up[1],Math.max(2.2,S*.09),0,Math.PI*2); ctx.fill(); ctx.shadowBlur=0;
     }}); });
-    var speed = (reduce||LITE)?0:0.0011;
+    var speed = reduce?0:0.0011;
     for(var p=0;p<NP;p++){ (function(p){ var q=at(p*(L/NP)+t*speed); objs.push({z:q[0]+q[1]+0.01, f:function(){
       ctx.shadowColor='rgba(232,119,34,.8)'; ctx.shadowBlur=8; box(q[0]-.22,q[1]-.22,.44,.44,.72,PART); ctx.shadowBlur=0; }}); })(p); }
     objs.sort(function(a,b){return a.z-b.z;}); objs.forEach(function(o){o.f();});
     // labels
     ctx.font='500 10px "IBM Plex Mono", monospace'; ctx.fillStyle=PAL.label;
     var lab=P(8,-1.2,0); ctx.fillText('CELL 01 · ONE-PIECE FLOW', lab[0]-70, lab[1]);
-    if(!reduce&&!LITE){
+    if(!reduce){
       if(t>nextAmber){ amberIdx=Math.floor(Math.random()*stations.length); amberUntil=t+1800; nextAmber=t+6500; }
       requestAnimationFrame(draw);
     }
   }
-  resize(); window.addEventListener('resize', function(){ resize(); if(reduce||LITE) draw(0); });
+  resize(); window.addEventListener('resize', function(){ resize(); if(reduce) draw(0); });
   requestAnimationFrame(draw);
 })();
 
@@ -2290,10 +2290,9 @@ if('IntersectionObserver' in window && !reduce){
       for(z=0;z<pts.length;z++) ids.push(z===pts.length-1?'15':null);
       tok({fill:FILL.w,pts:pts,ids:ids,dur:dur,modes:modes,mv:mv,start:S+TICK,appear:S+TICK,fade:300});
       lit('kbpop',S+4*TICK+MOVE-150,S+4*TICK+MOVE+2400);
-      return;
     }
     var fill=FILL[k];
-    tok({fill:fill,step:true,pts:[s0,P[11],P[12],P[13],P[14],P[15],P.FG],ids:[null,'11','12','13','14','15',null],dur:steps(6),start:S,appear:0,keep:true,idx:i});
+    if(k!=='w') tok({fill:fill,step:true,pts:[s0,P[11],P[12],P[13],P[14],P[15],P.FG],ids:[null,'11','12','13','14','15',null],dur:steps(6),start:S,appear:0,keep:true,idx:i});
     // station 11 -> supermarket at station 10 pulls a card, posted at station 6, moves 6..10
     var SB=S+TICK;
     tok({fill:fill,step:true,pts:[P.SM10,P[6],P[7],P[8],P[9],P[10]],ids:['sm10','6','7','8','9','10'],dur:steps(5),start:SB,appear:S+MOVE,fade:350});
