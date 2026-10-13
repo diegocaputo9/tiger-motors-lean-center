@@ -842,9 +842,7 @@ html[data-mode="light"] .pdlg::backdrop{background:rgba(220,228,238,.5)}
 .plan .flow,.plan .feed,.plan .u-path,.plan .belt-line,.plan .mc-flow{transition:opacity .35s ease}
 .plan.is-info .flow,.plan.is-info .feed{opacity:0}
 .plan .u-path,.plan .belt-line{display:none}
-.plan .feed{display:none}
-.plan .mc-flow{stroke:#EF4444;stroke-dasharray:none;stroke-width:2;marker-end:url(#ahr)}
-.plan.is-info .rflow,.plan.is-info .mc-flow{display:none}
+.plan.is-info .mc-flow,.plan.is-info .mdl{display:none}
 .kb-n circle{fill:#0A1B30;stroke:rgba(160,185,212,.7);stroke-width:1;transition:stroke .2s,fill .2s}
 .kb-n text{font:600 8.5px var(--f-mono);fill:#E9EEF4}
 .kb-n.hit circle,.kb-sm.hit rect,.kb-box.hit rect{stroke:#FF9B4D;stroke-width:2;fill:rgba(232,119,34,.35)}
@@ -1140,7 +1138,7 @@ html{-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
           <rect x="760" y="298" width="14" height="36" rx="2" class="pc-body"/>
           <text x="749" y="354" class="pl-lab" text-anchor="middle">Raw Stock</text>
         </g>
-        <path class="feed" d="M791 262H776" fill="none" stroke="#FF9B4D" stroke-width="2" marker-end="url(#ah)"/>
+        <path class="feed" d="M812 292H738" fill="none" stroke="#FF9B4D" stroke-width="2" marker-end="url(#ah)"/>
         <!-- Cell 3: conveyor -->
         <g class="pcell" data-c="c3">
           <rect class="pc-hit" x="270" y="290" width="200" height="72" rx="8"/>
@@ -1180,13 +1178,17 @@ html{-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
           <path d="M536 410Q498 404 490 372Q484 334 468 322" marker-end="url(#ah)"/>
           <path d="M452 318H300" marker-end="url(#ah)"/>
         </g>
-        <!-- raw material flow (red): AS/RS -> Raw Stock -> Cells 1, 2 and 3 -->
-        <g class="rflow" fill="none" stroke="#EF4444" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M800 300H738" marker-end="url(#ahr)"/>
-          <path d="M716 312H664"/>
-          <path d="M664 312V285H612" marker-end="url(#ahr)"/>
-          <path d="M664 312V430H612" marker-end="url(#ahr)"/>
-          <path d="M664 372H440V334" marker-end="url(#ahr)"/>
+        <!-- raw material delivery: Raw Stock -> Cells 1, 2, 3 (same orange moving-dash style as the other flows) -->
+        <g class="flow" fill="none" stroke="#FF9B4D" stroke-width="2.2" stroke-linecap="round">
+          <path d="M712 278H678" marker-end="url(#ah)"/>
+          <path d="M712 308H678" marker-end="url(#ah)"/>
+          <path d="M712 338H678" marker-end="url(#ah)"/>
+        </g>
+        <g class="mdl pl-lab" style="font-size:7px" text-anchor="end">
+          <text x="712" y="268">MATERIAL DELIVERY</text>
+          <text x="674" y="281">to Cell 1</text>
+          <text x="674" y="311">to Cell 2</text>
+          <text x="674" y="341">to Cell 3</text>
         </g>
         <!-- other equipment -->
         <g fill="rgba(34,62,94,.55)" stroke="rgba(160,185,212,.35)">
@@ -1252,7 +1254,7 @@ html{-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
         <text x="392" y="218" class="pl-cell we-title" text-anchor="middle" style="font-size:15px">Tiger Motors · Assembly Plant</text>
       </svg>
       </div>
-      <figcaption class="plan-cap"><span class="plan-note"><sup>*</sup>AS/RS: Automated Storage and Retrieval System</span><span id="planCapR">Orange: product flow Cell 1 → 2 → 3 · Red: raw material from the AS/RS through Raw Stock to each cell and inside War Eagle Inc.</span></figcaption>
+      <figcaption class="plan-cap"><span class="plan-note"><sup>*</sup>AS/RS: Automated Storage and Retrieval System</span><span id="planCapR">AS/RS feeds raw stock · Raw Stock delivers material to Cells 1, 2 and 3 · product flows Cell 1 → Cell 2 → Cell 3</span></figcaption>
       <div class="kb-legend" id="kbLegend" hidden>
         <span><i class="c-blue"></i>Blue card</span><span><i class="c-orange"></i>Orange card</span><span><i class="c-white"></i>White card · special order from War Eagle Inc.</span><span><i class="c-green"></i>Green card · material delivered back to Cell 1</span>
         <small>Each card color is a different product built in the lab. Pattern: 2 blue, 1 orange, 1 white, 2 blue, 1 orange. Cards leave the Heijunka box for station 11. A card then goes to the supermarket at station 10 and is posted at station 6, moves 6 to 10, and pulls from the supermarket at station 5, which posts at station 1 and moves 1 to 5. A second white card leaves station 11 for War Eagle Inc., circles it, and is delivered to station 15 together with the white card on the line.</small>
@@ -2256,7 +2258,7 @@ if('IntersectionObserver' in window && !reduce){
   var NS='http://www.w3.org/2000/svg';
   var title=document.getElementById('planTitle'), capR=document.getElementById('planCapR'), legend=document.getElementById('kbLegend'), cardsG=document.getElementById('kbCards');
   var T={material:'Material flows from Cell 1 to Cell 2 to Cell 3', info:'Kanban cards flow with the product, pulled from the Heijunka box'};
-  var C={material:'Orange: product flow Cell 1 → 2 → 3 · Red: raw material from the AS/RS through Raw Stock to each cell and inside War Eagle Inc.', info:'Heijunka box → Cell 3 → Cell 2 → Cell 1 · white = special order · green = material delivered'};
+  var C={material:'AS/RS feeds raw stock · Raw Stock delivers material to Cells 1, 2 and 3 · product flows Cell 1 → Cell 2 → Cell 3', info:'Heijunka box → Cell 3 → Cell 2 → Cell 1 · white = special order · green = material delivered'};
   var P={FG:[273,318],SM10:[519,394],SM5:[609,318],
     1:[517,318],2:[517,283],3:[552,258],4:[583,283],5:[583,318],
     6:[585,417],7:[585,452],8:[550,474],9:[519,452],10:[519,417],
