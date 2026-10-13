@@ -824,10 +824,18 @@ html[data-mode="light"] .pdlg::backdrop{background:rgba(220,228,238,.5)}
 @media (max-width:900px){.lab-video{grid-template-columns:1fr}}
 
 /* ---- plan: flow modes + kanban ---- */
-.plan-modes{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
-.pmode{padding:10px 16px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--text-2);font:600 13.5px var(--f-body);cursor:pointer;transition:color .2s,background .2s,border-color .2s}
-.pmode:hover{color:var(--text);border-color:var(--line-2)}
-.pmode[aria-pressed="true"]{color:#fff;background:rgba(232,119,34,.16);border-color:rgba(232,119,34,.65)}
+.plan-switch{margin-bottom:18px}
+.plan-switch-label{display:flex;align-items:center;gap:8px;font:600 12px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--text-2);margin-bottom:10px}
+.plan-switch-label svg{color:var(--orange-2);flex:none}
+.plan-modes{display:inline-grid;grid-template-columns:1fr 1fr;border:1px solid var(--line-2);border-radius:16px;overflow:hidden;background:rgba(255,255,255,.03);max-width:100%}
+.pmode{display:grid;gap:3px;text-align:left;padding:12px 20px;border:0;background:transparent;color:var(--text-2);cursor:pointer;transition:color .2s,background .2s}
+.pmode+.pmode{border-left:1px solid var(--line-2)}
+.pmode b{font:700 15px var(--f-body);color:inherit}
+.pmode small{font:400 12.5px var(--f-body);color:var(--text-3)}
+.pmode:hover{background:rgba(255,255,255,.05);color:var(--text)}
+.pmode[aria-pressed="true"]{background:rgba(232,119,34,.18);color:#fff;box-shadow:inset 0 -3px 0 var(--orange)}
+.pmode[aria-pressed="true"] small{color:#E3C9B0}
+@media (max-width:640px){.plan-modes{display:grid;grid-template-columns:1fr}.pmode+.pmode{border-left:0;border-top:1px solid var(--line-2)}}
 .plan .kb{display:none}
 .plan.is-info .kb{display:block}
 .plan.is-info .pc-badge,.plan.is-info .pc-num{display:none}
@@ -860,8 +868,31 @@ html[data-mode="light"] .pdlg::backdrop{background:rgba(220,228,238,.5)}
 .kb-sup text{fill:#FFB877;font-size:8px}
 .kb-pop{opacity:0;transition:opacity .3s ease;pointer-events:none}
 .kb-pop.on{opacity:1}
-.kb-pop rect{fill:rgba(232,119,34,.95);stroke:#fff;stroke-width:1}
+.kb-pop rect,.kb-pop polygon{fill:rgba(232,119,34,.97);stroke:#fff;stroke-width:1}
 .kb-pop text{font:700 8px var(--f-mono);fill:#1A0C02;letter-spacing:.04em}
+
+.plan-hint{display:none;margin:0 0 8px;font:500 12px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--text-3)}
+#lab .plan{margin:0 0 28px}
+html{-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
+/* ---- tablets and phones: lighter, smoother ---- */
+@media (max-width:1100px),(pointer:coarse){
+  *,*::before,*::after,::backdrop{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+  .glass{background:rgba(16,34,56,.82)}
+  .nav.scrolled{background:rgba(7,18,31,.94)}
+  .pdlg-in{background:rgba(14,30,50,.97)}
+  .intro-top .facts{background:rgba(var(--bg-rgb),.78)}
+  .spin,.spin-r{animation:none!important}
+  .portal{transition:none}
+  .plan-svg{min-width:880px}
+  .plan-hint{display:block}
+  .hero{min-height:0}
+  .hero-in{padding-block:calc(var(--nav-h) + 40px) 96px}
+  .hero canvas{opacity:.55}
+}
+@media (max-width:480px){
+  .brand-txt span{display:none}
+  .brand-txt b{white-space:nowrap}
+}
 </style>
 
 </head>
@@ -1009,11 +1040,33 @@ html[data-mode="light"] .pdlg::backdrop{background:rgba(220,228,238,.5)}
     </div>
   </div>
   <div class="wrap">
+
+    <div class="ideas">
+      <article class="idea glass"><span class="n">LEARN</span><h3>Learn Lean Manufacturing concepts</h3><p>Lectures and supplemental material organized around the Lean House, from People to Continuous Improvement.</p></article>
+      <article class="idea glass"><span class="n">EXPLORE</span><h3>Explore a realistic manufacturing system</h3><p>360° experiences of the Tiger Motors laboratory and 360° videos of students running the production system.</p></article>
+      <article class="idea glass"><span class="n">CONNECT</span><h3>Connect concepts with hands-on activities</h3><p>Laboratory activities that apply each Lean concept inside the same manufacturing environment.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LAB ================= -->
+<section class="sec lab" id="lab">
+  <div class="gridbg"></div>
+  <div class="wrap" style="position:relative">
+    <div class="sec-head">
+      <p class="eyebrow">Immersive lab experience</p>
+      <h2 class="h2">Enter the Tiger Motors Lab</h2>
+      <p class="lede">Explore the manufacturing system from anywhere. The platform connects interactive 360° experiences to the physical laboratory, so you can walk the facility, watch the production system run and complete lab activities inside the same environment.</p>
+    </div>
+
     <!-- Facility layout schematic, redrawn from the lab's floor plan -->
     <figure class="plan glass" id="plan">
-      <div class="plan-modes" role="group" aria-label="Choose a flow to view">
-        <button type="button" class="pmode" data-pmode="material" aria-pressed="true">Product / Material flow</button>
-        <button type="button" class="pmode" data-pmode="info" aria-pressed="false">Information flow · Kanban</button>
+      <div class="plan-switch">
+        <p class="plan-switch-label"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h13M12 6l6 6-6 6M21 5v14"/></svg>Change the view of the diagram: pick what you want to see</p>
+        <div class="plan-modes" role="group" aria-label="Choose a view of the facility diagram">
+          <button type="button" class="pmode" data-pmode="material" aria-pressed="true"><b>Product / Material flow</b><small>How product moves from cell to cell</small></button>
+          <button type="button" class="pmode" data-pmode="info" aria-pressed="false"><b>Information flow · Kanban</b><small>How kanban cards signal what to build</small></button>
+        </div>
       </div>
       <div class="plan-head">
         <div>
@@ -1032,6 +1085,7 @@ html[data-mode="light"] .pdlg::backdrop{background:rgba(220,228,238,.5)}
           <button class="pchip" data-c="mc" role="listitem"><b>MC</b>War Eagle Inc. · Manufacturing Cell</button>
         </div>
       </div>
+      <p class="plan-hint">Swipe sideways to see the whole plan <span aria-hidden="true">→</span></p>
       <div class="plan-scroll">
       <svg class="plan-svg" viewBox="0 120 1000 405" role="img" aria-label="Schematic floor plan of the Integrated Manufacturing Facility. Cell 1, a U-shaped cell, feeds Cell 2, a U-shaped cell, which feeds Cell 3, a conveyor line.">
         <defs>
@@ -1170,7 +1224,7 @@ html[data-mode="light"] .pdlg::backdrop{background:rgba(220,228,238,.5)}
           <text x="660" y="293" class="kb-lab" text-anchor="middle">2-bin replenishment</text>
           <text x="435" y="303" class="kb-lab kb-note" text-anchor="middle">Pacemaker process</text>
           <g class="kb-lab kb-sup"><text x="878" y="205">Tier 1 Raw</text><text x="878" y="217">Material Supplier</text></g>
-          <g id="kbpop" class="kb-pop"><rect x="206" y="268" width="96" height="18" rx="4"/><text x="254" y="280.5" text-anchor="middle">JIT delivery point</text></g>
+          <g id="kbpop" class="kb-pop"><rect x="255" y="262" width="96" height="18" rx="4"/><polygon points="297,279.5 309,279.5 303,290"/><text x="303" y="274.5" text-anchor="middle">JIT delivery point</text></g>
           <g id="kbCards"></g>
         </g>
         <!-- labels -->
@@ -1192,24 +1246,6 @@ html[data-mode="light"] .pdlg::backdrop{background:rgba(220,228,238,.5)}
         <small>Pattern: 2 blue, 1 orange, 1 white, 2 blue, 1 orange. Cards leave the Heijunka box for station 11. A card then goes to the supermarket at station 10 and is posted at station 6, moves 6 to 10, and pulls from the supermarket at station 5, which posts at station 1 and moves 1 to 5. A second white card leaves station 11 for War Eagle Inc., circles it, and is delivered to station 15 together with the white card on the line.</small>
       </div>
     </figure>
-
-    <div class="ideas">
-      <article class="idea glass"><span class="n">LEARN</span><h3>Learn Lean Manufacturing concepts</h3><p>Lectures and supplemental material organized around the Lean House, from People to Continuous Improvement.</p></article>
-      <article class="idea glass"><span class="n">EXPLORE</span><h3>Explore a realistic manufacturing system</h3><p>360° experiences of the Tiger Motors laboratory and 360° videos of students running the production system.</p></article>
-      <article class="idea glass"><span class="n">CONNECT</span><h3>Connect concepts with hands-on activities</h3><p>Laboratory activities that apply each Lean concept inside the same manufacturing environment.</p></article>
-    </div>
-  </div>
-</section>
-
-<!-- ================= LAB ================= -->
-<section class="sec lab" id="lab">
-  <div class="gridbg"></div>
-  <div class="wrap" style="position:relative">
-    <div class="sec-head">
-      <p class="eyebrow">Immersive lab experience</p>
-      <h2 class="h2">Enter the Tiger Motors Lab</h2>
-      <p class="lede">Explore the manufacturing system from anywhere. The platform connects interactive 360° experiences to the physical laboratory, so you can walk the facility, watch the production system run and complete lab activities inside the same environment.</p>
-    </div>
 
     <a class="portal launch fx-dark" href="https://cloud.3dvista.com/hosting/8253122/3/index.htm" target="_blank" rel="noopener">
       <div class="portal-vis" aria-hidden="true">
@@ -1552,6 +1588,8 @@ html[data-mode="light"] .pdlg::backdrop{background:rgba(220,228,238,.5)}
 (function(){
 "use strict";
 var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+var LITE = !!(window.matchMedia && (matchMedia('(max-width:1100px)').matches || matchMedia('(pointer:coarse)').matches));
+if(LITE) document.documentElement.classList.add('lite');
 
 /* =========================================================
    CONTENT — sourced from the original Canva site and the
@@ -1895,24 +1933,24 @@ document.addEventListener('click', function(e){
       ctx.fillStyle = amb?'#F2B233':'#3FB68B'; ctx.shadowColor=ctx.fillStyle; ctx.shadowBlur=amb?16:10;
       ctx.beginPath(); ctx.arc(up[0],up[1],Math.max(2.2,S*.09),0,Math.PI*2); ctx.fill(); ctx.shadowBlur=0;
     }}); });
-    var speed = reduce?0:0.0011;
+    var speed = (reduce||LITE)?0:0.0011;
     for(var p=0;p<NP;p++){ (function(p){ var q=at(p*(L/NP)+t*speed); objs.push({z:q[0]+q[1]+0.01, f:function(){
       ctx.shadowColor='rgba(232,119,34,.8)'; ctx.shadowBlur=8; box(q[0]-.22,q[1]-.22,.44,.44,.72,PART); ctx.shadowBlur=0; }}); })(p); }
     objs.sort(function(a,b){return a.z-b.z;}); objs.forEach(function(o){o.f();});
     // labels
     ctx.font='500 10px "IBM Plex Mono", monospace'; ctx.fillStyle=PAL.label;
     var lab=P(8,-1.2,0); ctx.fillText('CELL 01 · ONE-PIECE FLOW', lab[0]-70, lab[1]);
-    if(!reduce){
+    if(!reduce&&!LITE){
       if(t>nextAmber){ amberIdx=Math.floor(Math.random()*stations.length); amberUntil=t+1800; nextAmber=t+6500; }
       requestAnimationFrame(draw);
     }
   }
-  resize(); window.addEventListener('resize', function(){ resize(); if(reduce) draw(0); });
+  resize(); window.addEventListener('resize', function(){ resize(); if(reduce||LITE) draw(0); });
   requestAnimationFrame(draw);
 })();
 
 
-if(reduce){var ps=document.querySelector('.plan-svg'); if(ps&&ps.pauseAnimations) ps.pauseAnimations();}
+if(reduce||LITE){var ps=document.querySelector('.plan-svg'); if(ps&&ps.pauseAnimations){ try{ps.setCurrentTime(0);}catch(e){} ps.pauseAnimations(); }}
 /* ---------------- Facility plan: legend <-> cell highlight ---------------- */
 (function(){
   var plan=document.getElementById('plan'); if(!plan) return;
@@ -2330,7 +2368,7 @@ if('IntersectionObserver' in window && !reduce){
     plan.querySelectorAll('[data-pmode]').forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-pmode')===m?'true':'false');});
     title.textContent=T[m]; capR.textContent=C[m]; legend.hidden=!info;
     var sv=plan.querySelector('.plan-svg');
-    if(sv&&sv.pauseAnimations){ if(info){ try{sv.setCurrentTime(0);}catch(e){} sv.pauseAnimations(); } else { sv.unpauseAnimations(); } }
+    if(sv&&sv.pauseAnimations){ if(info||LITE){ try{sv.setCurrentTime(0);}catch(e){} sv.pauseAnimations(); } else { sv.unpauseAnimations(); } }
     restView(); clearHits(); if(info) start();
   }
   plan.querySelectorAll('[data-pmode]').forEach(function(b){b.addEventListener('click',function(){setMode(b.getAttribute('data-pmode'));});});
