@@ -841,7 +841,10 @@ html[data-mode="light"] .pdlg::backdrop{background:rgba(220,228,238,.5)}
 .plan.is-info .pc-badge,.plan.is-info .pc-num{display:none}
 .plan .flow,.plan .feed,.plan .u-path,.plan .belt-line,.plan .mc-flow{transition:opacity .35s ease}
 .plan.is-info .flow,.plan.is-info .feed{opacity:0}
-.plan .u-path,.plan .belt-line,.plan .mc-flow{display:none}
+.plan .u-path,.plan .belt-line{display:none}
+.plan .feed{display:none}
+.plan .mc-flow{stroke:#EF4444;stroke-dasharray:none;stroke-width:2;marker-end:url(#ahr)}
+.plan.is-info .rflow,.plan.is-info .mc-flow{display:none}
 .kb-n circle{fill:#0A1B30;stroke:rgba(160,185,212,.7);stroke-width:1;transition:stroke .2s,fill .2s}
 .kb-n text{font:600 8.5px var(--f-mono);fill:#E9EEF4}
 .kb-n.hit circle,.kb-sm.hit rect,.kb-box.hit rect{stroke:#FF9B4D;stroke-width:2;fill:rgba(232,119,34,.35)}
@@ -1091,6 +1094,7 @@ html{-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
         <defs>
           <pattern id="pgrid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="rgba(160,185,212,.07)"/></pattern>
           <marker id="ah" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#FF9B4D"/></marker>
+          <marker id="ahr" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#EF4444"/></marker>
         </defs>
         <rect x="0" y="120" width="1000" height="405" fill="url(#pgrid)"/>
         <!-- floor -->
@@ -1176,6 +1180,14 @@ html{-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
           <path d="M536 410Q498 404 490 372Q484 334 468 322" marker-end="url(#ah)"/>
           <path d="M452 318H300" marker-end="url(#ah)"/>
         </g>
+        <!-- raw material flow (red): AS/RS -> Raw Stock -> Cells 1, 2 and 3 -->
+        <g class="rflow" fill="none" stroke="#EF4444" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M800 300H738" marker-end="url(#ahr)"/>
+          <path d="M716 312H664"/>
+          <path d="M664 312V285H612" marker-end="url(#ahr)"/>
+          <path d="M664 312V430H612" marker-end="url(#ahr)"/>
+          <path d="M664 372H440V334" marker-end="url(#ahr)"/>
+        </g>
         <!-- other equipment -->
         <g fill="rgba(34,62,94,.55)" stroke="rgba(160,185,212,.35)">
           <rect x="609" y="476" width="45" height="22" rx="2"/>
@@ -1240,10 +1252,10 @@ html{-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
         <text x="392" y="218" class="pl-cell we-title" text-anchor="middle" style="font-size:15px">Tiger Motors · Assembly Plant</text>
       </svg>
       </div>
-      <figcaption class="plan-cap"><span class="plan-note"><sup>*</sup>AS/RS: Automated Storage and Retrieval System</span><span id="planCapR">AS/RS feeds raw stock · Cell 1 → Cell 2 → Cell 3</span></figcaption>
+      <figcaption class="plan-cap"><span class="plan-note"><sup>*</sup>AS/RS: Automated Storage and Retrieval System</span><span id="planCapR">Orange: product flow Cell 1 → 2 → 3 · Red: raw material from the AS/RS through Raw Stock to each cell and inside War Eagle Inc.</span></figcaption>
       <div class="kb-legend" id="kbLegend" hidden>
         <span><i class="c-blue"></i>Blue card</span><span><i class="c-orange"></i>Orange card</span><span><i class="c-white"></i>White card · special order from War Eagle Inc.</span><span><i class="c-green"></i>Green card · material delivered back to Cell 1</span>
-        <small>Pattern: 2 blue, 1 orange, 1 white, 2 blue, 1 orange. Cards leave the Heijunka box for station 11. A card then goes to the supermarket at station 10 and is posted at station 6, moves 6 to 10, and pulls from the supermarket at station 5, which posts at station 1 and moves 1 to 5. A second white card leaves station 11 for War Eagle Inc., circles it, and is delivered to station 15 together with the white card on the line.</small>
+        <small>Each card color is a different product built in the lab. Pattern: 2 blue, 1 orange, 1 white, 2 blue, 1 orange. Cards leave the Heijunka box for station 11. A card then goes to the supermarket at station 10 and is posted at station 6, moves 6 to 10, and pulls from the supermarket at station 5, which posts at station 1 and moves 1 to 5. A second white card leaves station 11 for War Eagle Inc., circles it, and is delivered to station 15 together with the white card on the line.</small>
       </div>
     </figure>
 
@@ -2244,7 +2256,7 @@ if('IntersectionObserver' in window && !reduce){
   var NS='http://www.w3.org/2000/svg';
   var title=document.getElementById('planTitle'), capR=document.getElementById('planCapR'), legend=document.getElementById('kbLegend'), cardsG=document.getElementById('kbCards');
   var T={material:'Material flows from Cell 1 to Cell 2 to Cell 3', info:'Kanban cards flow with the product, pulled from the Heijunka box'};
-  var C={material:'AS/RS feeds raw stock · Cell 1 → Cell 2 → Cell 3', info:'Heijunka box → Cell 3 → Cell 2 → Cell 1 · white = special order · green = material delivered'};
+  var C={material:'Orange: product flow Cell 1 → 2 → 3 · Red: raw material from the AS/RS through Raw Stock to each cell and inside War Eagle Inc.', info:'Heijunka box → Cell 3 → Cell 2 → Cell 1 · white = special order · green = material delivered'};
   var P={FG:[273,318],SM10:[519,394],SM5:[609,318],
     1:[517,318],2:[517,283],3:[552,258],4:[583,283],5:[583,318],
     6:[585,417],7:[585,452],8:[550,474],9:[519,452],10:[519,417],
@@ -2273,7 +2285,7 @@ if('IntersectionObserver' in window && !reduce){
   var OUT=smooth([CNC[5],[870,414],[800,416],[740,412],[716,394],[690,366],[600,366],[500,366],[410,360],[340,342],[307,322],P[15]],14);
   function plen(a){ var L=[0]; for(var q=1;q<a.length;q++) L.push(L[q-1]+Math.hypot(a[q][0]-a[q-1][0],a[q][1]-a[q-1][1])); return L; }
   var HOP=800, HOPMOVE=400, IN_T=1000, HOPS=5*HOP, OUT_T=WE_T-IN_T-HOPS;
-  var tokens=[], links=[];
+  var tokens=[], links=[], arrivals=[];
   function steps(n){ var a=[]; for(var k=0;k<n;k++) a.push(TICK); return a; }
   function tok(o){ o.total=o.dur.reduce(function(a,b){return a+b;},0); o.end=o.start+o.total; tokens.push(o); return o; }
   function lit(id,a,b){ links.push({el:null,id:id,a:a,b:b}); }
@@ -2304,12 +2316,19 @@ if('IntersectionObserver' in window && !reduce){
     var SD=SC+5*TICK;
     tok({fill:fill,step:true,pts:[[604,300],[749,300],[822,290]],ids:[null,null,null],dur:steps(2),start:SD,appear:SC+4*TICK+MOVE,fade:350});
     lit('kbl5',SD,SD+MOVE+250); lit('kbl6',SD+TICK,SD+TICK+MOVE+250);
+    arrivals.push(SD+TICK+MOVE);
     // material delivery signal comes back: AS/RS -> Raw Stock -> Cell 1 (green card)
     var SE=SD+2*TICK;
     tok({fill:FILL.g,step:true,pts:[[822,298],[749,310],[604,308]],ids:[null,null,null],dur:steps(2),start:SE,appear:SE,fade:350});
     lit('kbl6',SE,SE+MOVE+250); lit('kbl5',SE+TICK,SE+TICK+MOVE+250);
   });
   var TOTAL=Math.max.apply(null,tokens.map(function(t){return t.end;}))+1800;
+  // AS/RS shuttle: hops to the next bay every second time a card arrives, then returns to rest
+  var shuttle=plan.querySelector('.asrs-shuttle'), shAnim=shuttle&&shuttle.querySelector('animate');
+  var BAYS=[181,227,273,319,204,250,296,168,312], REST=235;
+  arrivals.sort(function(a,b){return a-b;});
+  var hops=[]; arrivals.forEach(function(t,i){ if(i%2===0) hops.push({t:t,y:BAYS[(hops.length)%BAYS.length]}); });
+  hops.push({t:TOTAL-1500,y:REST});
   tokens.forEach(function(t){
     var r=document.createElementNS(NS,'rect'); r.setAttribute('class','kb-card'); r.setAttribute('width',W); r.setAttribute('height',H); r.setAttribute('rx',2); r.setAttribute('fill',t.fill);
     if(t.fill==='#FFFFFF') r.setAttribute('stroke','#9FB4CC');
@@ -2354,6 +2373,7 @@ if('IntersectionObserver' in window && !reduce){
     Object.keys(hitEls).forEach(function(k){ var e=hitEls[k]; if(e&&!hits[k]) e.classList.remove('hit'); });
     Object.keys(hits).forEach(function(k){ var e=elFor(k); if(e) e.classList.add('hit'); });
     var hb=document.getElementById('kbn-h'); if(hb&&!hits.h) hb.classList.remove('hit');
+    if(shuttle){ var sy=REST; for(var h=0;h<hops.length;h++){ if(g>=hops[h].t){ var py=h?hops[h-1].y:REST; sy=g<hops[h].t+MOVE?py+(hops[h].y-py)*ease((g-hops[h].t)/MOVE):hops[h].y; } } shuttle.setAttribute('y',sy.toFixed(1)); }
     var on={}; links.forEach(function(l){ if(g>=l.a&&g<l.b) on[l.id]=1; });
     links.forEach(function(l){ if(l.el) l.el.classList.toggle('on',!!on[l.id]); });
     raf=requestAnimationFrame(frame);
@@ -2366,6 +2386,7 @@ if('IntersectionObserver' in window && !reduce){
     plan.classList.toggle('is-info',info);
     plan.querySelectorAll('[data-pmode]').forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-pmode')===m?'true':'false');});
     title.textContent=T[m]; capR.textContent=C[m]; legend.hidden=!info;
+    if(shuttle&&shAnim){ if(info){ if(shAnim.parentNode) shAnim.parentNode.removeChild(shAnim); shuttle.setAttribute('y',REST); } else if(!shAnim.parentNode){ shuttle.appendChild(shAnim); } }
     var sv=plan.querySelector('.plan-svg');
     if(sv&&sv.pauseAnimations){ if(info||LITE){ try{sv.setCurrentTime(0);}catch(e){} sv.pauseAnimations(); } else { sv.unpauseAnimations(); } }
     restView(); clearHits(); if(info) start();
