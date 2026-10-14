@@ -900,6 +900,24 @@ html{-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
 .bdlg-links li{font-size:15px;line-height:1.45;color:var(--ink-2)}
 .bdlg-links a{color:#0A4C8C;font-weight:600;text-decoration:underline;text-underline-offset:3px}
 .bdlg-links a:hover{color:#9A460C}
+
+/* ---- more news (data driven: add items to the NEWS list in the script) ---- */
+.news-more{margin-top:28px}
+.news-more-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px;margin-bottom:14px}
+.news-more-head h3{font:700 13px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:#9A460C}
+.news-more-head p{font-size:14px;color:var(--ink-3)}
+.news-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+.nw{display:grid;gap:10px;align-content:space-between;padding:18px 18px 14px;border-radius:16px;background:#fff;border:1px solid var(--paper-line);text-decoration:none;color:var(--ink);transition:transform .3s cubic-bezier(.23,1,.32,1),box-shadow .3s,border-color .2s}
+.nw:hover,.nw:focus-visible{transform:translateY(-3px);box-shadow:0 18px 36px -22px rgba(12,35,64,.45);border-color:rgba(232,119,34,.5)}
+.nw-meta{display:flex;flex-wrap:wrap;gap:4px 10px;font:500 10.5px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.nw-meta b{font-weight:600;color:#9A460C}
+.nw h4{font:650 16.5px/1.28 var(--f-display);color:var(--ink)}
+.nw-go{display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid var(--paper-line);font:600 11.5px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--navy)}
+.nw:hover .nw-go{color:#9A460C}
+.nw-go svg{width:14px;height:14px}
+.news-all{margin-top:16px;padding:11px 18px;border-radius:999px;border:1px solid var(--paper-line);background:#fff;color:var(--navy);font:600 12px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:border-color .2s,color .2s}
+.news-all:hover{border-color:rgba(232,119,34,.6);color:#9A460C}
+.news-all[hidden]{display:none}
 </style>
 
 </head>
@@ -1483,6 +1501,12 @@ html{-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
         <span class="rc-act">Read the article <svg><use href="#i-out"/></svg></span>
       </div>
     </a>
+
+    <div class="news-more" id="newsMore">
+      <div class="news-more-head"><h3>More news</h3><p>Stories about the Lean team and the project</p></div>
+      <div class="news-grid" id="newsGrid"></div>
+      <button type="button" class="news-all" id="newsAll" hidden></button>
+    </div>
 
     <div class="sec-head team-head" id="team">
       <p class="eyebrow">About the team</p>
@@ -2412,6 +2436,29 @@ if('IntersectionObserver' in window && !reduce){
     new IntersectionObserver(function(es){ visible=es[0].isIntersecting; if(visible&&active) start(); },{threshold:.05}).observe(plan);
   }
   document.addEventListener('visibilitychange',function(){ if(!document.hidden&&active) start(); });
+})();
+
+/* ---- More news: edit this list to add stories (newest are shown first; the first 6 show, the rest expand) ---- */
+(function(){
+  var NEWS = [
+    {title:'ISE Grad Student Wins Systems Showdown Competition', url:'https://eng.auburn.edu/news/2026/04/ise-grad-student-wins-systems-showdown-competition', source:'Auburn Engineering', date:'2026-04', tag:'Diego Caputo'},
+    {title:'Auburn Engineering Hosts Continuous Improvement Industry Roundtable', url:'https://eng.auburn.edu/news/2024/06/auburn-engineering-hosts-continuous-improvement-industry-roundtable.html', source:'Auburn Engineering', date:'2024-06', tag:'Industry'},
+    {title:'ISE Graduate Student Presented Lean Engineering Award', url:'https://eng.auburn.edu/news/2023/02/ise-graduate-student-presented-lean-engineering-award', source:'Auburn Engineering', date:'2023-02', tag:'Diego Caputo'}
+  ];
+  var grid=document.getElementById('newsGrid'), btn=document.getElementById('newsAll'); if(!grid) return;
+  var MON=['Jan.','Feb.','Mar.','Apr.','May','June','July','Aug.','Sept.','Oct.','Nov.','Dec.'], SHOW=6, open=false;
+  function fmt(d){ var p=String(d||'').split('-'); var m=parseInt(p[1],10); return (m?MON[m-1]+' ':'')+p[0]; }
+  function esc(t){ return String(t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  NEWS.sort(function(a,b){ return String(b.date).localeCompare(String(a.date)); });
+  function render(){
+    var list=open?NEWS:NEWS.slice(0,SHOW);
+    grid.innerHTML=list.map(function(n){
+      return '<a class="nw" href="'+esc(n.url)+'" target="_blank" rel="noopener"><div class="nw-meta"><span>'+esc(n.source||'News')+'</span><span>'+esc(fmt(n.date))+'</span>'+(n.tag?'<b>'+esc(n.tag)+'</b>':'')+'</div><h4>'+esc(n.title)+'</h4><span class="nw-go">Read the article <svg><use href="#i-out"/></svg></span></a>';
+    }).join('');
+    if(NEWS.length>SHOW){ btn.hidden=false; btn.textContent=open?'Show fewer':'Show all '+NEWS.length+' stories'; } else btn.hidden=true;
+  }
+  btn.addEventListener('click',function(){ open=!open; render(); });
+  render();
 })();
 </script>
 
