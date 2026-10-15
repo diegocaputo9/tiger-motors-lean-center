@@ -918,6 +918,23 @@ html{-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
 .news-all{margin-top:16px;padding:11px 18px;border-radius:999px;border:1px solid var(--paper-line);background:#fff;color:var(--navy);font:600 12px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:border-color .2s,color .2s}
 .news-all:hover{border-color:rgba(232,119,34,.6);color:#9A460C}
 .news-all[hidden]{display:none}
+
+.news-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px 32px;flex-wrap:wrap;margin-bottom:clamp(28px,3vw,40px)}
+.news-head .sec-head{margin-bottom:0}
+.news-switch{display:flex;align-items:center;gap:14px;padding-bottom:6px}
+.news-switch[hidden]{display:none}
+.news-cycle{flex:none;width:58px;height:58px;border-radius:50%;border:1px solid var(--paper-line);background:#fff;color:var(--navy);display:grid;place-items:center;cursor:pointer;box-shadow:0 10px 24px -14px rgba(12,35,64,.4);transition:transform .35s cubic-bezier(.23,1,.32,1),border-color .2s,color .2s,background .2s}
+.news-cycle svg{width:26px;height:26px;transition:transform .5s cubic-bezier(.23,1,.32,1)}
+.news-cycle:hover,.news-cycle:focus-visible{border-color:rgba(232,119,34,.7);color:#9A460C}
+.news-cycle:hover svg{transform:rotate(180deg)}
+.news-cycle:active{transform:scale(.95)}
+.news-switch-t{display:grid;gap:2px}
+.news-switch-t b{font:700 13px var(--f-mono);letter-spacing:.12em;color:var(--ink)}
+.news-switch-t span{font-size:13px;color:var(--ink-3)}
+.news-card{position:relative}
+.news-feature .news-card{animation:newsIn .4s cubic-bezier(.23,1,.32,1)}
+@keyframes newsIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.news-feature .news-card{animation:none}.news-cycle svg{transition:none}}
 </style>
 
 </head>
@@ -1483,24 +1500,19 @@ html{-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
 <!-- ================= NEWS + TEAM ================= -->
 <section class="sec light" id="news">
   <div class="wrap">
-    <div class="sec-head">
-      <p class="eyebrow">News</p>
-      <h2 class="h2">In the news</h2>
+    <div class="news-head">
+      <div class="sec-head">
+        <p class="eyebrow">News</p>
+        <h2 class="h2">In the news</h2>
+      </div>
+      <div class="news-switch" id="newsSwitch" hidden>
+        <button type="button" class="news-cycle" id="newsCycle" aria-label="Show the next featured story">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14.3-4.2M4 13a8 8 0 0 0 14.3 4.2"/><path d="M18.5 3v4h-4M5.5 21v-4h4"/></svg>
+        </button>
+        <div class="news-switch-t"><b id="newsCount">1 / 2</b><span>Tap to see the next featured story</span></div>
+      </div>
     </div>
-    <a class="news-card" href="https://eng.auburn.edu/news/2024/09/professors-receive-400k-nsf-grant-for-lean-manufacturing-education" target="_blank" rel="noopener">
-      <div class="news-vis fx-dark">
-        <small>NSF grant</small>
-        <span class="big"><em>$</em>400K</span>
-        <small>Lean Manufacturing education</small>
-        <svg viewBox="0 0 100 100" aria-hidden="true"><path d="M10 50L50 16l40 34" fill="none" stroke="#E87722" stroke-width="6" stroke-linejoin="round"/><rect x="22" y="56" width="10" height="30" fill="#fff"/><rect x="68" y="56" width="10" height="30" fill="#fff"/><rect x="10" y="90" width="80" height="6" fill="#fff"/></svg>
-      </div>
-      <div class="news-body">
-        <div class="news-meta"><span>Auburn Engineering News</span><span>September 2024</span></div>
-        <h3>Professors receive $400K NSF grant for Lean Manufacturing education</h3>
-        <p>Tom Devall, Tiger Motors Lab director, Jorge Valenzuela, Philpott-WestPoint Stevens Professor of Industrial and Systems Engineering, and Chih-hsuan Wang, professor in the Department of Educational Foundations, Leadership and Technology, will lead this project.</p>
-        <span class="rc-act">Read the article <svg><use href="#i-out"/></svg></span>
-      </div>
-    </a>
+    <div class="news-feature" id="newsFeature" aria-live="polite"></div>
 
     <div class="news-more" id="newsMore">
       <div class="news-more-head"><h3>More news</h3><p>Stories about the Lean team and the project</p></div>
@@ -2459,6 +2471,34 @@ if('IntersectionObserver' in window && !reduce){
   }
   btn.addEventListener('click',function(){ open=!open; render(); });
   render();
+})();
+
+/* ---- Featured news: edit this list to add big stories; the circle button cycles through them ---- */
+(function(){
+  var host=document.getElementById('newsFeature'); if(!host) return;
+  var FEATURED=[
+    {kicker:'NSF grant', big:'<em>$</em>400K', sub:'Lean Manufacturing education', source:'Auburn Engineering News', date:'September 2024',
+     title:'Professors receive $400K NSF grant for Lean Manufacturing education',
+     text:'Tom Devall, Tiger Motors Lab director, Jorge Valenzuela, Philpott-WestPoint Stevens Professor of Industrial and Systems Engineering, and Chih-hsuan Wang, professor in the Department of Educational Foundations, Leadership and Technology, will lead this project.',
+     url:'https://eng.auburn.edu/news/2024/09/professors-receive-400k-nsf-grant-for-lean-manufacturing-education'},
+    {kicker:'NSF grant', big:'<em>$</em>500K', sub:'AI for assembly line production', source:'Auburn Engineering News', date:'October 2026',
+     title:'Collaborative research using artificial intelligence to optimize assembly line production',
+     text:'Sathya Aakur, associate professor of computer science and software engineering, and Konstantinos Mykoniatis, associate professor of industrial and systems engineering, are developing AI systems that monitor assembly-line tasks, flag potential problems, and predict whether small errors could grow into larger ones. The system will be tested at the Tiger Motors Lab.',
+     url:'https://eng.auburn.edu/news/2026/10/collaborative-research-using-ai-to-optimize-assembly-line-production'}
+  ];
+  var sw=document.getElementById('newsSwitch'), cyc=document.getElementById('newsCycle'), cnt=document.getElementById('newsCount'), i=0;
+  function esc(t){ return String(t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  var ICON='<svg><use href="#i-out"/></svg>';
+  function show(){
+    var n=FEATURED[i];
+    host.innerHTML='<a class="news-card" href="'+esc(n.url)+'" target="_blank" rel="noopener"><div class="news-vis fx-dark"><small>'+esc(n.kicker)+'</small><span class="big">'+n.big+'</span><small>'+esc(n.sub)+'</small>'+
+      '<svg viewBox="0 0 100 100" aria-hidden="true"><path d="M10 50L50 16l40 34" fill="none" stroke="#E87722" stroke-width="6" stroke-linejoin="round"/><rect x="22" y="56" width="10" height="30" fill="#fff"/><rect x="68" y="56" width="10" height="30" fill="#fff"/><rect x="10" y="90" width="80" height="6" fill="#fff"/></svg></div>'+
+      '<div class="news-body"><div class="news-meta"><span>'+esc(n.source)+'</span><span>'+esc(n.date)+'</span></div><h3>'+esc(n.title)+'</h3><p>'+esc(n.text)+'</p><span class="rc-act">Read the article '+ICON+'</span></div></a>';
+    cnt.textContent=(i+1)+' / '+FEATURED.length;
+    cyc.setAttribute('aria-label','Show the next featured story (now showing '+(i+1)+' of '+FEATURED.length+')');
+  }
+  if(FEATURED.length>1){ sw.hidden=false; cyc.addEventListener('click',function(){ i=(i+1)%FEATURED.length; show(); }); }
+  show();
 })();
 </script>
 
