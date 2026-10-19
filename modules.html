@@ -53,8 +53,13 @@
     <nav class="nav-links" aria-label="Primary">
       <a href="index.html#home">Home</a>
       <a href="index.html#lab">Explore the Lab</a>
-      <a href="index.html#lean-house">Lean House</a>
-      <a href="modules.html" class="active">Learning Modules</a>
+      <div class="nav-dd">
+        <a href="index.html#lean-house" class="active" aria-haspopup="true" aria-expanded="false">Lean House</a>
+        <div class="nav-menu" role="menu" aria-label="Lean House">
+          <a role="menuitem" href="index.html#lean-house"><b>Go to the Lean House</b><small>Scroll to the interactive house</small></a>
+          <a role="menuitem" href="modules.html"><b>Learning Modules</b><small>Every resource, in sequence</small></a>
+        </div>
+      </div>
       <a href="index.html#project">About</a>
       <a href="index.html#news">News</a>
       <a href="index.html#team">Team</a>
@@ -254,6 +259,15 @@ document.addEventListener('click', function(e){
 /* ---------------- Nav: scroll state, mobile menu ---------------- */
 var nav = document.getElementById('nav');
 nav.classList.add('scrolled');   /* light page: keep the solid bar at all times */
+(function(){
+  var dd=document.querySelector('.nav-dd'); if(!dd) return;
+  var top=dd.querySelector(':scope > a');
+  top.addEventListener('click',function(e){
+    if(window.matchMedia('(hover: none)').matches && !dd.classList.contains('open')){ e.preventDefault(); dd.classList.add('open'); top.setAttribute('aria-expanded','true'); }
+  });
+  document.addEventListener('click',function(e){ if(!dd.contains(e.target)){ dd.classList.remove('open'); top.setAttribute('aria-expanded','false'); } });
+  dd.addEventListener('keydown',function(e){ if(e.key==='Escape'){ dd.classList.remove('open'); top.focus(); } });
+})();
 var burger = document.getElementById('burger'), mnav = document.getElementById('mnav');
 function setMenu(open){ mnav.hidden=!open; burger.setAttribute('aria-expanded', open?'true':'false'); burger.innerHTML=icon(open?'close':'menu'); document.body.style.overflow=open?'hidden':''; }
 burger.addEventListener('click', function(){ setMenu(mnav.hidden); });

@@ -57,8 +57,13 @@
     <nav class="nav-links" aria-label="Primary">
       <a href="#home">Home</a>
       <a href="#lab">Explore the Lab</a>
-      <a href="#lean-house">Lean House</a>
-      <a href="modules.html">Learning Modules</a>
+      <div class="nav-dd">
+        <a href="#lean-house" aria-haspopup="true" aria-expanded="false">Lean House</a>
+        <div class="nav-menu" role="menu" aria-label="Lean House">
+          <a role="menuitem" href="#lean-house"><b>Go to the Lean House</b><small>Scroll to the interactive house</small></a>
+          <a role="menuitem" href="modules.html"><b>Learning Modules</b><small>Every resource, in sequence</small></a>
+        </div>
+      </div>
       <a href="#project">About</a>
       <a href="#news">News</a>
       <a href="#team">Team</a>
@@ -519,32 +524,28 @@
 
       <div class="panel glass" id="panel" aria-live="polite"></div>
     </div>
-  </div>
-</section>
-
-<!-- ================= MODULES ================= -->
-<section class="sec modules light" id="modules-teaser">
-  <div class="dotbg"></div>
-  <div class="wrap" style="position:relative">
-    <div class="sec-head">
-      <p class="eyebrow">Learning modules</p>
-      <h2 class="h2">Every resource, in sequence</h2>
-      <p class="lede">Lectures, readings, podcasts, 360° videos and laboratory activities for each element of the Lean House. Pick a module to open it on its own page.</p>
-    </div>
-    <div class="mod-teaser">
-      <a class="btn btn-primary" href="modules.html">Open the Learning Modules <svg><use href="#i-arrow"/></svg></a>
-      <div class="mt-chips" aria-label="Jump to a module">
-        <a href="modules.html#mod-people"><b>1</b>People</a>
-        <a href="modules.html#mod-std"><b>2</b>Standardization</a>
-        <a href="modules.html#mod-jidoka"><b>3</b>Jidoka</a>
-        <a href="modules.html#mod-jit"><b>4</b>JIT</a>
-        <a href="modules.html#mod-ci"><b>5</b>C.I.</a>
-        <a href="modules.html#mod-sqdcm"><b>S</b>SQDCM</a>
+    <div class="house-mods">
+      <div class="hm-text">
+        <p class="eyebrow">Learning modules</p>
+        <h3>Every resource, in sequence</h3>
+        <p>Lectures, readings, podcasts, 360° videos and laboratory activities for each element of the Lean House. Pick a module to open it on its own page.</p>
+      </div>
+      <div class="mod-teaser">
+        <a class="btn btn-primary" href="modules.html">Open the Learning Modules <svg><use href="#i-arrow"/></svg></a>
+        <div class="mt-chips" aria-label="Jump to a module">
+          <a href="modules.html#mod-people"><b>1</b>People</a>
+          <a href="modules.html#mod-std"><b>2</b>Standardization</a>
+          <a href="modules.html#mod-jidoka"><b>3</b>Jidoka</a>
+          <a href="modules.html#mod-jit"><b>4</b>JIT</a>
+          <a href="modules.html#mod-ci"><b>5</b>C.I.</a>
+          <a href="modules.html#mod-sqdcm"><b>S</b>SQDCM</a>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- ================= MODULES ================= -->
 <!-- ================= PROJECT ================= -->
 <section class="sec project" id="project">
   <div class="wrap">
@@ -976,7 +977,7 @@ if(reduce||LITE){var ps=document.querySelector('.plan-svg'); if(ps&&ps.pauseAnim
 var nav = document.getElementById('nav');
 function onScroll(){ nav.classList.toggle('scrolled', window.scrollY>20); }
 window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
-var links = document.querySelectorAll('.nav-links a');
+var links = document.querySelectorAll('.nav-links > a, .nav-links > .nav-dd > a');
 var ids = ['home','lab','lean-house','project','news','team','contact'];
 var spyEls = ids.map(function(id){ return document.getElementById(id); });
 var spyTick = false, spyCur = null;
@@ -990,6 +991,17 @@ function spy(){
 }
 function spyReq(){ if(!spyTick){ spyTick = true; requestAnimationFrame(spy); } }
 window.addEventListener('scroll', spyReq, {passive:true}); window.addEventListener('resize', spyReq); spy();
+/* Lean House dropdown: hover/focus on desktop, first tap opens it on touch screens */
+(function(){
+  var dd=document.querySelector('.nav-dd'); if(!dd) return;
+  var top=dd.querySelector(':scope > a');
+  top.addEventListener('click',function(e){
+    if(window.matchMedia('(hover: none)').matches && !dd.classList.contains('open')){ e.preventDefault(); dd.classList.add('open'); top.setAttribute('aria-expanded','true'); }
+  });
+  document.addEventListener('click',function(e){ if(!dd.contains(e.target)){ dd.classList.remove('open'); top.setAttribute('aria-expanded','false'); } });
+  dd.addEventListener('keydown',function(e){ if(e.key==='Escape'){ dd.classList.remove('open'); top.focus(); } });
+  dd.querySelectorAll('.nav-menu a').forEach(function(a){ a.addEventListener('click',function(){ dd.classList.remove('open'); }); });
+})();
 var burger = document.getElementById('burger'), mnav = document.getElementById('mnav');
 function setMenu(open){ mnav.hidden=!open; burger.setAttribute('aria-expanded', open?'true':'false'); burger.innerHTML=icon(open?'close':'menu'); document.body.style.overflow=open?'hidden':''; nav.classList.toggle('scrolled', open||window.scrollY>20); }
 burger.addEventListener('click', function(){ setMenu(mnav.hidden); });
