@@ -8,7 +8,7 @@ var CFG = {
   url: 'https://txmcwrwxqbribdhyprqu.supabase.co',
   key: 'sb_publishable_rv7klDuiZhvrve5O8wsqmg_1rctcFoo',   // public key: safe to ship in the page
   certificates: true,                                     // false hides the free certificate of completion everywhere
-  enabled: false                                          // false: accounts stay hidden until ?preview=accounts (set true at launch)
+  enabled: true                                           // true: accounts are live for everyone (false hides them; ?preview=accounts still shows them)
 };
 var PREVIEW = false;
 try {
