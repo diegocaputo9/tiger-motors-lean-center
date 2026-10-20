@@ -184,10 +184,12 @@ function bannerHTML(){
     '<div class="ab-txt"><p class="ab-k">Your progress</p><h3>' + (name ? 'Hi ' + esc(name) + ', ' : '') + 'you have completed ' + s.done + ' of ' + s.total + ' resources</h3><ul class="ab-mods">' + mods + '</ul></div>' +
     '<div class="ab-act">' + cert + '</div>';
 }
+function promoDismissed(){ try { return localStorage.getItem('tm-promo-closed') === '1'; } catch(e){ return false; } }
 function paintBanners(){
   $$('[data-acct-banner]').forEach(function(el){
-    if(!state.ready){ el.hidden = true; return; }
-    el.hidden = false; el.classList.toggle('in', !!state.user); el.innerHTML = bannerHTML();
+    if(!state.ready || (!state.user && promoDismissed())){ el.hidden = true; return; }
+    el.hidden = false; el.classList.toggle('in', !!state.user);
+    el.innerHTML = (state.user ? '' : '<button type="button" class="ab-x" data-acct="close-promo" aria-label="Close" title="Close. You can still sign in with the button at the top">×</button>') + bannerHTML();
   });
 }
 
@@ -230,6 +232,7 @@ document.addEventListener('click', function(e){
     else if(act === 'menu'){ var nav = $('#acctNav'); var open = !nav.classList.contains('open'); nav.classList.toggle('open', open); b.setAttribute('aria-expanded', open ? 'true' : 'false'); }
     else if(act === 'signout'){ signOut(); }
     else if(act === 'cert'){ getCertificate(); }
+    else if(act === 'close-promo'){ try { localStorage.setItem('tm-promo-closed', '1'); } catch(err){} paintBanners(); toast('No problem. You can create an account or sign in any time with the Sign in button at the top.'); }
     return;
   }
   var nav2 = $('#acctNav'); if(nav2 && !nav2.contains(e.target)) nav2.classList.remove('open');
@@ -258,6 +261,7 @@ function openDialog(view, opts){
       field('organization', 'Organization or school', 'text', 'organization', true) +
       '<label class="ac"><input type="checkbox" name="cert_updates"><span>Email me about the official certification when it becomes available.</span></label>' +
       '<p class="ad-err" role="alert" hidden></p>' +
+      '<p class="ad-spam"><b>Heads up:</b> the sign-in email sometimes lands in <b>Spam</b> or <b>Junk</b>. If you do not see it in your inbox within a minute, please check there.</p>' +
       '<button type="submit" class="btn btn-primary ad-go">Email me my sign-in link</button>' +
       '<p class="ad-fine">We only use your details for your account and, if you tick the box, certification news. <a href="privacy.html" target="_blank" rel="noopener">Privacy</a></p></form>' +
       '<p class="ad-sw">Already have an account? <button type="button" data-view="signin">Sign in</button></p>';
@@ -265,13 +269,14 @@ function openDialog(view, opts){
     html += '<p class="ad-k">Welcome back</p><h3 id="authH">Sign in</h3>' +
       '<p class="ad-p">' + (opts.message ? esc(opts.message) + ' ' : '') + 'Enter the email you signed up with. We will email you a new one-time link; click it to sign in on this device.</p>' +
       '<form class="ad-f" data-form="signin" novalidate>' + field('email', 'Email', 'email', 'email', true) +
-      '<p class="ad-err" role="alert" hidden></p><button type="submit" class="btn btn-primary ad-go">Email me a sign-in link</button></form>' +
+      '<p class="ad-err" role="alert" hidden></p><p class="ad-spam">The email can take a minute and sometimes lands in <b>Spam</b> or <b>Junk</b>.</p><button type="submit" class="btn btn-primary ad-go">Email me a sign-in link</button></form>' +
       '<p class="ad-sw">New here? <button type="button" data-view="signup">Create a free account</button></p>';
   } else if(view === 'sent'){
     html += '<div class="ad-mail" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5l8.5 7 8.5-7"/></svg></div>' +
       '<p class="ad-k">Check your email</p><h3 id="authH">Your sign-in link is on its way</h3>' +
       '<p class="ad-p">We sent a link to <b>' + esc(lastEmail) + '</b>. Open the email <b>on this device</b> and click <b>Sign in</b>. You will come back here signed in, with your progress saved.</p>' +
-      '<ul class="ad-tips"><li>The link works once and expires after about an hour.</li><li>Not there after a minute? Check your spam or promotions folder.</li><li>If you already had an account, this link simply signs you in.</li></ul>' +
+      '<p class="ad-spam"><b>Do not see it?</b> Please check your <b>Spam</b> or <b>Junk</b> folder (and Promotions in Gmail). If it is there, mark it as “Not spam” so future emails reach your inbox.</p>' +
+      '<ul class="ad-tips"><li>The link works once and expires after about an hour.</li><li>If you already had an account, this link simply signs you in.</li></ul>' +
       '<div class="ad-row"><button type="button" class="btn btn-primary" data-resend disabled>Resend link</button><button type="button" class="ab-link" data-view="' + (lastCreate ? 'signup' : 'signin') + '">Use a different email</button></div>';
   } else if(view === 'expired'){
     html += '<p class="ad-k">Link expired</p><h3 id="authH">That sign-in link no longer works</h3>' +
