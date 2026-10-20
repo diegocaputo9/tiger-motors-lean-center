@@ -1,0 +1,16 @@
+# Pings the free Supabase project every 3 days so it is not paused for inactivity.
+# The key below is the project's public (publishable) key, the same one used by the website.
+name: Supabase keep-alive
+on:
+  schedule:
+    - cron: "17 13 */3 * *"
+  workflow_dispatch:
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase
+        run: |
+          curl -fsS -X POST "https://txmcwrwxqbribdhyprqu.supabase.co/rest/v1/rpc/ping" \
+            -H "apikey: sb_publishable_rv7klDuiZhvrve5O8wsqmg_1rctcFoo" \
+            -H "Content-Type: application/json" -d '{}'

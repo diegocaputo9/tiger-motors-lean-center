@@ -95,6 +95,7 @@
       <h2 class="h2">Every resource, in sequence</h2>
       <p class="lede">Lectures, supplemental material, 360° experiences and laboratory activities for each element of the Lean House. Step numbers follow the order used in the course materials.</p>
     </div>
+    <div class="acct-banner" data-acct-banner hidden></div>
     <div class="filters" id="filters" role="toolbar" aria-label="Filter by resource type"></div>
     <div id="library"></div>
   </div>
@@ -135,8 +136,8 @@ function card(it, total){
             (it.step?'<span class="rc-step">'+String(it.step).padStart(2,'0')+' / '+String(total).padStart(2,'0')+'</span>':'<span class="verb">'+VERBS[it.verb].t+'</span>')+'</div>';
   var mid = '<div><h4>'+esc(it.title)+'</h4><p>'+esc(it.src)+'</p></div>';
   if(!it.url) return '<article class="rc none" data-type="'+it.type+'">'+top+mid+'<span class="placeholder" style="justify-self:start;font-size:11px;color:var(--ink-3)">'+esc(it.pending)+'</span></article>';
-  return '<article class="rc" data-type="'+it.type+'">'+top+mid+
-         '<a class="rc-act'+(isLaunch(it.type)?' launch':'')+'" '+ext(it.url)+' aria-label="'+esc(t.act+': '+it.title)+'">'+esc(t.act)+icon('out')+'</a></article>';
+  return '<article class="rc" data-type="'+it.type+'" data-item="'+esc(it.id)+'">'+top+mid+
+         '<a class="rc-act'+(isLaunch(it.type)?' launch':'')+'" data-item="'+esc(it.id)+'" '+ext(it.url)+' aria-label="'+esc(t.act+': '+it.title)+'">'+esc(t.act)+icon('out')+'</a></article>';
 }
 function noneCard(text, verb){
   return '<article class="rc none" data-type="none"><div class="rc-top"><span class="verb">'+VERBS[verb].t+'</span></div><div><h4 class="soon">'+esc(text)+'</h4></div></article>';
@@ -146,7 +147,7 @@ function jitVsm(m){
   var row = steps.map(function(it,i){
     var cls = it.type==='lab'?'lab':(it.type==='reading'?'art':'');
     return (i?'<span class="varrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 12h15M13 7l5 5-5 5"/></svg></span>':'')+
-      '<a class="vbox '+cls+(isLaunch(it.type)?' launch':'')+'" '+ext(it.url)+'><small>'+String(it.step).padStart(2,'0')+'</small><b>'+esc(it.short||it.title)+'</b><em>'+esc(TYPES[it.type].label)+'</em></a>';
+      '<a class="vbox '+cls+(isLaunch(it.type)?' launch':'')+'" data-item="'+esc(it.id)+'" '+ext(it.url)+'><small>'+String(it.step).padStart(2,'0')+'</small><b>'+esc(it.short||it.title)+'</b><em>'+esc(TYPES[it.type].label)+'</em></a>';
   }).join('');
   return '<div class="vsm"><div class="vsm-head"><b>JIT value stream · 8 steps</b><div class="vsm-leg"><span><i></i>Lecture</span><span><i class="lab"></i>Lab activity</span><span><i class="art"></i>Reading</span></div></div>'+
          '<div class="vsm-row">'+row+'</div><div class="vsm-foot"><span>Flow</span><span class="belt"></span><span>Scroll →</span></div></div>';
@@ -288,5 +289,7 @@ if(location.hash && /^#mod-/.test(location.hash)){
 }
 })();
 </script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="auth.js"></script>
 </body>
 </html>

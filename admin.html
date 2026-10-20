@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en" data-mode="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Learner Dashboard · Tiger Motors Lean</title>
+<link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+<style>
+body{background:#EDF0F3;color:#0C1B2E}
+.ad-top{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid #E2E7EC}
+.ad-top .nav-in{max-width:1240px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:14px}
+.ad-top .home{display:flex;align-items:center;gap:10px;text-decoration:none;color:#0C1B2E;font:700 15px var(--f-display);margin-right:auto}
+.ad-top .home img{width:38px;height:38px;border-radius:50%}
+.ad-top .home small{display:block;font:500 11px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:#66778C}
+.mode-btn{display:none}
+.dash{max-width:1240px;margin:0 auto;padding:28px 24px 80px;display:grid;gap:18px}
+.dash h1{font:800 clamp(28px,3.4vw,40px)/1.05 var(--f-display);font-stretch:108%}
+.dash .sub{color:#43536A;font-size:15px}
+.card{background:#fff;border:1px solid #E2E7EC;border-radius:18px;padding:20px 22px}
+.card h2{font:700 13px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:#9A460C;margin-bottom:14px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+.kpi{background:#fff;border:1px solid #E2E7EC;border-radius:16px;padding:16px 18px;display:grid;gap:4px}
+.kpi b{font:800 30px/1 var(--f-display);color:#0C1B2E}
+.kpi span{font-size:13px;color:#43536A}
+.kpi small{font-size:12px;color:#66778C}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:18px}
+.bars{display:grid;gap:8px}
+.bar{display:grid;grid-template-columns:150px 1fr 54px;gap:10px;align-items:center;font-size:13.5px;color:#43536A}
+.bar i{height:12px;border-radius:9px;background:#EDF0F3;overflow:hidden}
+.bar i em{display:block;height:100%;border-radius:9px;background:#E87722}
+.bar.g i em{background:#3FB68B}
+.bar b{font:600 12.5px var(--f-mono);color:#0C1B2E;text-align:right}
+.cols{display:flex;align-items:flex-end;gap:6px;height:150px;padding-top:10px}
+.cols div{flex:1;display:grid;justify-items:center;gap:6px;font:500 10.5px var(--f-mono);color:#66778C}
+.cols em{display:block;width:100%;max-width:38px;background:#0C2340;border-radius:6px 6px 0 0;min-height:2px}
+.cols b{font:600 11px var(--f-mono);color:#0C1B2E}
+.tbl-top{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:12px}
+.tbl-top input{height:40px;min-width:260px;padding:0 14px;border-radius:12px;border:1px solid #CBD5E1;font:500 14px var(--f-body)}
+.dl{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;border:1px solid #0C2340;background:#0C2340;color:#fff;font:600 12px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+.tw{overflow:auto;border:1px solid #E2E7EC;border-radius:12px}
+table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:960px}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid #EEF1F4;white-space:nowrap}
+th{position:sticky;top:0;background:#F7F9FB;font:600 11px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:#43536A;cursor:pointer}
+td.p{min-width:140px}
+td.p i{display:inline-block;vertical-align:middle;width:80px;height:8px;border-radius:9px;background:#EDF0F3;overflow:hidden;margin-right:8px}
+td.p i em{display:block;height:100%;background:#E87722}
+.pill{display:inline-block;padding:3px 8px;border-radius:999px;font:600 11px var(--f-mono);background:#EDF0F3;color:#43536A}
+.pill.y{background:#E8F7F0;color:#1C7C55}
+.gate{max-width:560px;margin:80px auto;text-align:center;display:grid;gap:14px;justify-items:center}
+.gate h1{font:800 34px var(--f-display)}
+.gate p{color:#43536A}
+.muted{color:#66778C;font-size:13px}
+</style>
+</head>
+<body>
+<header class="ad-top"><div class="nav-in"><a class="home" href="index.html"><img src="logo-circle.png" alt=""><span>Learner dashboard<small>Tiger Motors Lean</small></span></a></div></header>
+<main id="app"><div class="gate"><p class="muted">Loading…</p></div></main>
+<script src="modules-data.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script>window.TM_ACCOUNTS_FORCE=true;</script>
+<script src="auth.js"></script>
+<script>
+(function(){
+  var app=document.getElementById('app'), TM=window.TM, A=window.TMAuth, rows=[], meta=null, sortKey='created_at', sortDir=-1, q='';
+  var REQ=TM.REQUIRED, SEQ=TM.SEQ, BYK=TM.BYK;
+  function esc(t){return String(t==null?'':t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function fmt(d){ return d?new Date(d).toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'}):'—'; }
+  function pct(items){ var s={}; (items||[]).forEach(function(i){s[i]=1;}); var n=REQ.filter(function(r){return s[r];}).length; return REQ.length?Math.round(n*100/REQ.length):0; }
+  function modPct(items,k){ var s={}; (items||[]).forEach(function(i){s[i]=1;}); var ids=BYK[k].items.filter(function(it){return it.url&&it.id&&!it.optional;}).map(function(it){return it.id;}); return ids.length?ids.filter(function(i){return s[i];}).length/ids.length:0; }
+  var shown=false;
+  A.onChange(function(st){
+    if(!st.ready) return;
+    if(!st.user){ shown=false; app.innerHTML='<div class="gate"><h1>Learner dashboard</h1><p>Sign in with an admin email to see sign-ups and progress. We will email you a one-time sign-in link.</p><button class="btn btn-primary" type="button" data-acct="signin">Sign in</button></div>'; return; }
+    if(shown) return; shown=true; load();
+  });
+  async function load(){
+    app.innerHTML='<div class="gate"><p class="muted">Loading learners…</p></div>';
+    var r=await A.client.rpc('admin_users'), m=await A.client.rpc('admin_meta');
+    if(r.error){ app.innerHTML='<div class="gate"><h1>Not authorized</h1><p>'+esc(A.state.user.email)+' is not on the admin list. Ask an existing admin to add your email.</p><button class="btn" type="button" data-acct="signout">Sign out</button></div>'; return; }
+    rows=r.data.map(function(u){ u.pct=pct(u.items); u.name=((u.first_name||'')+' '+(u.last_name||'')).trim(); return u; });
+    meta=m.data||null; render();
+  }
+  function render(){
+    var n=rows.length, conf=rows.filter(function(u){return u.confirmed;}).length, opt=rows.filter(function(u){return u.cert_updates;}).length;
+    var certs=rows.filter(function(u){return u.certificate_id;}).length, started=rows.filter(function(u){return (u.items||[]).length;}).length;
+    var avg=n?Math.round(rows.reduce(function(a,u){return a+u.pct;},0)/n):0;
+    var wk=Date.now()-7*864e5, active=rows.filter(function(u){return u.last_sign_in_at&&new Date(u.last_sign_in_at)>wk;}).length;
+    // weekly sign-ups (last 12 weeks)
+    var weeks=[]; for(var i=11;i>=0;i--){ var end=new Date(); end.setHours(23,59,59,999); end.setDate(end.getDate()-i*7); var start=new Date(end); start.setDate(end.getDate()-6); start.setHours(0,0,0,0); weeks.push({s:start,e:end,c:0}); }
+    rows.forEach(function(u){ var d=new Date(u.created_at); weeks.forEach(function(w){ if(d>=w.s&&d<=w.e) w.c++; }); });
+    var mx=Math.max(1,Math.max.apply(null,weeks.map(function(w){return w.c;})));
+    var cols=weeks.map(function(w){ return '<div><b>'+w.c+'</b><em style="height:'+Math.round(w.c/mx*110)+'px"></em><span>'+(w.s.getMonth()+1)+'/'+w.s.getDate()+'</span></div>'; }).join('');
+    // progress buckets
+    var B=[['Not started',function(p){return p===0;}],['1–24%',function(p){return p>0&&p<25;}],['25–49%',function(p){return p>=25&&p<50;}],['50–74%',function(p){return p>=50&&p<75;}],['75–99%',function(p){return p>=75&&p<100;}],['100% complete',function(p){return p===100;}]];
+    var buckets=B.map(function(b){ var c=rows.filter(function(u){return b[1](u.pct);}).length; return '<div class="bar'+(b[0]==='100% complete'?' g':'')+'"><span>'+b[0]+'</span><i><em style="width:'+(n?c/n*100:0)+'%"></em></i><b>'+c+'</b></div>'; }).join('');
+    // per Lean House element
+    var els=SEQ.map(function(k){ var done=rows.filter(function(u){return modPct(u.items,k)===1;}).length, st=rows.filter(function(u){return modPct(u.items,k)>0;}).length;
+      return '<div class="bar g"><span>'+esc(BYK[k].name)+'</span><i><em style="width:'+(n?done/n*100:0)+'%"></em></i><b>'+done+'</b></div><div class="muted" style="margin:-4px 0 4px 160px">'+st+' started · '+done+' completed</div>'; }).join('');
+    // most opened
+    var cnt={}; rows.forEach(function(u){ (u.items||[]).forEach(function(i){ cnt[i]=(cnt[i]||0)+1; }); });
+    var titles={}; TM.M.forEach(function(m){ m.items.forEach(function(it){ if(it.id) titles[it.id]=m.name+' · '+it.title; }); });
+    var top=Object.keys(cnt).sort(function(a,b){return cnt[b]-cnt[a];}).slice(0,10), tmx=top.length?cnt[top[0]]:1;
+    var tops=top.length?top.map(function(i){ return '<div class="bar"><span title="'+esc(titles[i]||i)+'" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(titles[i]||i)+'</span><i><em style="width:'+cnt[i]/tmx*100+'%"></em></i><b>'+cnt[i]+'</b></div>'; }).join(''):'<p class="muted">No activity yet.</p>';
+    var ping=meta&&meta.last_ping?new Date(meta.last_ping):null, pingAge=ping?Math.round((Date.now()-ping)/864e5*10)/10:null;
+    app.innerHTML='<div class="dash">'+
+      '<div><h1>Learner dashboard</h1><p class="sub">Free accounts, progress through the Lean House ('+REQ.length+' required resources) and certificates. Signed in as '+esc(A.state.user.email)+' · <button class="ab-link" style="color:#9A460C" type="button" data-acct="signout">Sign out</button></p></div>'+
+      '<div class="kpis">'+
+        k(n,'Accounts created','Submitted the sign-up form')+k(conf,'Confirmed emails','Clicked their magic link')+k(started,'Started learning','Opened at least one resource')+
+        k(avg+'%','Average progress','Across all accounts')+k(certs,'Certificates issued','Completed every resource')+k(opt,'Want certification news','Opted in to updates')+k(active,'Signed in last 7 days','New sign-in links used')+
+        k(ping?(pingAge<1?'Today':pingAge+' d ago'):'—','Keep-alive ping',ping?'Last: '+ping.toLocaleString():'Not pinged yet')+
+      '</div>'+
+      '<div class="grid2"><div class="card"><h2>Sign-ups per week</h2><div class="cols">'+cols+'</div></div><div class="card"><h2>How far learners are in the house</h2><div class="bars">'+buckets+'</div></div></div>'+
+      '<div class="grid2"><div class="card"><h2>Completed per Lean House element</h2><div class="bars">'+els+'</div></div><div class="card"><h2>Most opened resources</h2><div class="bars">'+tops+'</div></div></div>'+
+      '<div class="card"><div class="tbl-top"><h2 style="margin:0">Learners ('+n+')</h2><div style="display:flex;gap:10px;flex-wrap:wrap"><input id="q" type="search" placeholder="Search name, email or organization" value="'+esc(q)+'"><button class="dl" type="button" id="csv">Download CSV</button></div></div><div class="tw"><table><thead><tr>'+
+        th('name','Name')+th('email','Email')+th('organization','Organization')+th('created_at','Signed up')+th('last_sign_in_at','Last sign-in')+th('confirmed','Confirmed')+th('pct','Progress')+th('certificate_id','Certificate')+th('cert_updates','Cert. news')+
+      '</tr></thead><tbody id="tb"></tbody></table></div></div>'+
+      '</div>';
+    table();
+    document.getElementById('q').addEventListener('input',function(e){ q=e.target.value; table(); });
+    document.getElementById('csv').addEventListener('click',csv);
+    Array.prototype.forEach.call(app.querySelectorAll('th[data-k]'),function(h){ h.addEventListener('click',function(){ var key=h.getAttribute('data-k'); if(sortKey===key) sortDir*=-1; else { sortKey=key; sortDir=1; } table(); }); });
+  }
+  function k(v,l,s){ return '<div class="kpi"><b>'+esc(v)+'</b><span>'+esc(l)+'</span><small>'+esc(s)+'</small></div>'; }
+  function th(key,l){ return '<th data-k="'+key+'">'+l+(sortKey===key?(sortDir>0?' ▲':' ▼'):'')+'</th>'; }
+  function filtered(){
+    var t=q.trim().toLowerCase();
+    return rows.filter(function(u){ return !t||[u.name,u.email,u.organization].join(' ').toLowerCase().indexOf(t)>-1; })
+      .sort(function(a,b){ var x=a[sortKey],y=b[sortKey]; if(x==null) x=''; if(y==null) y=''; return (x>y?1:x<y?-1:0)*sortDir; });
+  }
+  function table(){
+    var tb=document.getElementById('tb'); if(!tb) return;
+    var list=filtered();
+    tb.innerHTML=list.length?list.map(function(u){
+      return '<tr><td>'+esc(u.name||'—')+'</td><td>'+esc(u.email)+'</td><td>'+esc(u.organization||'—')+'</td><td>'+fmt(u.created_at)+'</td><td>'+fmt(u.last_sign_in_at)+'</td>'+
+        '<td><span class="pill'+(u.confirmed?' y':'')+'">'+(u.confirmed?'Yes':'Pending')+'</span></td>'+
+        '<td class="p"><i><em style="width:'+u.pct+'%"></em></i>'+u.pct+'%</td>'+
+        '<td>'+(u.certificate_id?'<a href="certificate.html?id='+encodeURIComponent(u.certificate_id)+'" target="_blank" rel="noopener">'+esc(u.certificate_id)+'</a>':'—')+'</td>'+
+        '<td>'+(u.cert_updates?'<span class="pill y">Yes</span>':'No')+'</td></tr>';
+    }).join(''):'<tr><td colspan="9" class="muted">No learners match.</td></tr>';
+  }
+  function csv(){
+    var head=['first_name','last_name','email','organization','signed_up','last_sign_in','confirmed','progress_pct','resources_done','certificate_id','certificate_issued','wants_certification_news'].concat(SEQ.map(function(k){return k+'_pct';}));
+    var lines=[head.join(',')].concat(filtered().map(function(u){
+      var v=[u.first_name,u.last_name,u.email,u.organization,u.created_at,u.last_sign_in_at||'',u.confirmed,u.pct,(u.items||[]).length,u.certificate_id||'',u.certificate_issued_at||'',u.cert_updates].concat(SEQ.map(function(k){return Math.round(modPct(u.items,k)*100);}));
+      return v.map(function(x){ x=String(x==null?'':x); return /[",\n]/.test(x)?'"'+x.replace(/"/g,'""')+'"':x; }).join(',');
+    }));
+    var blob=new Blob([lines.join('\n')],{type:'text/csv'}), a=document.createElement('a');
+    a.href=URL.createObjectURL(blob); a.download='tiger-motors-learners-'+new Date().toISOString().slice(0,10)+'.csv'; a.click(); setTimeout(function(){URL.revokeObjectURL(a.href);},2000);
+  }
+})();
+</script>
+</body>
+</html>

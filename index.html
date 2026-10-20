@@ -460,6 +460,7 @@
       </div>
     </div>
 
+    <div class="acct-banner" data-acct-banner hidden></div>
     <div class="steps" id="steps" role="toolbar" aria-label="Lean House sequence"></div>
 
     <div class="house-grid">
@@ -782,7 +783,7 @@ function mini(it){
   var t = TYPES[it.type];
   var inner = '<span class="ic">'+icon(it.type)+'</span><span><b>'+esc(it.title)+'</b><small>'+esc(t.label)+(it.step?' · Step '+it.step:'')+'</small></span>';
   if(!it.url) return '<div class="mini">'+inner+'<small class="placeholder" style="font-size:10px">'+esc(it.pending||'')+'</small></div>';
-  return '<a class="mini'+(isLaunch(it.type)?' launch':'')+'" '+ext(it.url)+'>'+inner+icon('out','go')+'</a>';
+  return '<a class="mini'+(isLaunch(it.type)?' launch':'')+'" data-item="'+esc(it.id)+'" '+ext(it.url)+'>'+inner+icon('out','go')+'</a>';
 }
 function renderPanel(k){
   var m = BYK[k];
@@ -1444,5 +1445,7 @@ if('IntersectionObserver' in window && !reduce){
 })();
 </script>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="auth.js"></script>
 </body>
 </html>

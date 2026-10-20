@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Certificate of Completion · Tiger Motors Lean Education Center</title>
+<meta name="description" content="Verify a certificate of completion issued by the Tiger Motors Lean Education Center.">
+<link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<style>
+:root{--navy:#0C2340;--ink:#0C1B2E;--ink2:#43536A;--orange:#E87722;--paper:#EDF0F3;--line:#D8DFE7}
+*{box-sizing:border-box;margin:0}
+body{font-family:"IBM Plex Sans",system-ui,sans-serif;background:var(--paper);color:var(--ink);min-height:100vh;padding:28px 16px 60px}
+a{color:#9A460C}
+.top{max-width:1000px;margin:0 auto 18px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.top a.home{display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font:700 15px "Archivo",sans-serif}
+.top a.home img{width:36px;height:36px;border-radius:50%}
+.status{max-width:1000px;margin:0 auto 16px;display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:14px;font-size:14.5px}
+.status.ok{background:#E8F7F0;border:1px solid #9ED9BF;color:#1C5E43}
+.status.bad{background:#FEF3F2;border:1px solid #FECDCA;color:#B42318}
+.status b{font-weight:700}
+.cert{max-width:1000px;margin:0 auto;aspect-ratio:1.414/1;background:#fff;border-radius:6px;box-shadow:0 30px 60px -30px rgba(12,35,64,.45);position:relative;overflow:hidden;display:grid;place-items:center;padding:5% 7%;text-align:center}
+.cert::before{content:"";position:absolute;inset:18px;border:2px solid var(--navy);border-radius:3px;pointer-events:none}
+.cert::after{content:"";position:absolute;inset:26px;border:1px solid rgba(232,119,34,.7);border-radius:2px;pointer-events:none}
+.c-in{position:relative;display:grid;justify-items:center;gap:1.4vw}
+.c-logo{width:clamp(56px,9vw,96px);height:auto;border-radius:50%}
+.c-k{font:600 clamp(10px,1.2vw,13px) "IBM Plex Mono",monospace;letter-spacing:.32em;text-transform:uppercase;color:var(--orange)}
+.c-title{font:800 clamp(26px,4.6vw,52px)/1 "Archivo",sans-serif;font-stretch:112%;color:var(--navy);letter-spacing:.01em}
+.c-sub{font-size:clamp(12px,1.5vw,16px);color:var(--ink2)}
+.c-name{font:700 clamp(26px,4.4vw,50px)/1.1 "Archivo",sans-serif;color:var(--ink);padding:0 4% .4vw;border-bottom:2px solid var(--orange);min-width:50%}
+.c-what{font-size:clamp(12px,1.55vw,17px);line-height:1.5;color:var(--ink2);max-width:60ch}
+.c-what b{color:var(--ink)}
+.c-els{font:600 clamp(9px,1.1vw,12px) "IBM Plex Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--navy)}
+.c-foot{display:flex;justify-content:space-between;gap:20px;width:100%;margin-top:1vw;font-size:clamp(10px,1.1vw,12.5px);color:var(--ink2);text-align:left}
+.c-foot b{display:block;font:600 clamp(10px,1.1vw,12.5px) "IBM Plex Mono",monospace;color:var(--ink);letter-spacing:.06em}
+.c-foot div:last-child{text-align:right}
+.acts{max-width:1000px;margin:20px auto 0;display:flex;flex-wrap:wrap;gap:10px}
+.b{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--ink);font:600 13px "IBM Plex Mono",monospace;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;text-decoration:none}
+.b.pri{background:var(--orange);border-color:var(--orange);color:#1A0C02}
+.b:hover{border-color:var(--orange)}
+.note{max-width:1000px;margin:14px auto 0;font-size:13px;color:#66778C}
+.empty{max-width:640px;margin:60px auto;text-align:center;display:grid;gap:12px}
+.empty h1{font:800 32px "Archivo",sans-serif;color:var(--navy)}
+@media print{
+  @page{size:landscape;margin:0}
+  body{background:#fff;padding:0}
+  .top,.status,.acts,.note{display:none!important}
+  .cert{max-width:none;width:100vw;height:100vh;aspect-ratio:auto;box-shadow:none;border-radius:0}
+}
+</style>
+</head>
+<body>
+<div class="top"><a class="home" href="index.html"><img src="logo-circle.png" alt="">Tiger Motors Lean Education Center</a><a href="modules.html">Learning Modules →</a></div>
+<div id="out"><p class="note">Checking certificate…</p></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script>window.TM_ACCOUNTS_FORCE=true;</script>
+<script src="auth.js"></script>
+<script>
+(function(){
+  var out=document.getElementById('out');
+  var id=(new URLSearchParams(location.search).get('id')||'').trim().toUpperCase();
+  function esc(t){return String(t||'').replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function notFound(msg){ out.innerHTML='<div class="empty"><h1>Certificate not found</h1><p>'+esc(msg)+'</p><p><a href="index.html">Go to the Tiger Motors Lean Education Center</a></p></div>'; }
+  if(!id){ notFound('This link does not include a certificate ID.'); return; }
+  var sb=window.TMAuth&&window.TMAuth.client; if(!sb){ notFound('Verification is temporarily unavailable. Please try again later.'); return; }
+  sb.rpc('verify_certificate',{p_id:id}).then(function(r){
+    var c=r.data&&r.data[0];
+    if(r.error||!c){ notFound('No certificate exists with the ID '+id+'. Check the ID and try again.'); return; }
+    var d=new Date(c.issued_at), date=d.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+    var url=location.origin+location.pathname+'?id='+encodeURIComponent(c.id);
+    var li='https://www.linkedin.com/profile/add?startTask=CERTIFICATION_NAME&name='+encodeURIComponent('Lean House Fundamentals: Certificate of Completion')+
+      '&organizationName='+encodeURIComponent('Tiger Motors Lean Education Center')+'&issueYear='+d.getFullYear()+'&issueMonth='+(d.getMonth()+1)+
+      '&certUrl='+encodeURIComponent(url)+'&certId='+encodeURIComponent(c.id);
+    out.innerHTML=
+      '<div class="status ok">✓ <span><b>Verified certificate.</b> Issued by the Tiger Motors Lean Education Center to '+esc(c.full_name)+' on '+esc(date)+'.</span></div>'+
+      '<section class="cert" aria-label="Certificate of completion"><div class="c-in">'+
+        '<img class="c-logo" src="logo-circle.png" alt="Tiger Motors Lean Education Center">'+
+        '<p class="c-k">Tiger Motors Lean Education Center</p>'+
+        '<h1 class="c-title">Certificate of Completion</h1>'+
+        '<p class="c-sub">This certifies that</p>'+
+        '<p class="c-name">'+esc(c.full_name)+'</p>'+
+        '<p class="c-what">has completed every learning resource of <b>Lean House Fundamentals</b>: the lectures, readings, podcasts, 360° experiences and laboratory activities of the Lean House.</p>'+
+        '<p class="c-els">People · Standardization · Jidoka · Just in Time · Continuous Improvement</p>'+
+        '<div class="c-foot"><div><b>Issued</b>'+esc(date)+'</div><div><b>Certificate ID</b>'+esc(c.id)+'</div><div><b>Verify at</b>tigermotorslean.com/certificate.html</div></div>'+
+      '</div></section>'+
+      '<div class="acts"><button class="b pri" type="button" id="pdf">Download PDF</button><button class="b" type="button" id="copy">Copy verification link</button><a class="b" href="'+esc(li)+'" target="_blank" rel="noopener">Add to LinkedIn</a></div>'+
+      '<p class="note">To save as PDF, choose “Save as PDF” in the print window. Anyone with the verification link can confirm this certificate is real.</p>';
+    document.title=c.full_name+' · Certificate of Completion · Tiger Motors Lean Education Center';
+    document.getElementById('pdf').addEventListener('click',function(){ window.print(); });
+    document.getElementById('copy').addEventListener('click',function(e){ var b=e.currentTarget; (navigator.clipboard?navigator.clipboard.writeText(url):Promise.reject()).then(function(){ b.textContent='Link copied'; },function(){ prompt('Copy this link',url); }); });
+  });
+})();
+</script>
+</body>
+</html>
