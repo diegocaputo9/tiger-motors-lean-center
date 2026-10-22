@@ -12,22 +12,22 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..600&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <style>
 :root{
-  --paper:#F3EDE2; --paper-2:#EAE2D3; --card:#FBF8F2; --ink:#1E1A16; --ink-2:#4A4239; --ink-3:#7A6F62;
-  --line:#D9CFBE; --orange:#C8611A; --orange-2:#E87722; --navy:#0C2340;
+  --paper:#07121F; --paper-2:#10263F; --card:#0C1D33; --ink:#E9EEF4; --ink-2:#A9B8C9; --ink-3:#7D8FA3;
+  --line:rgba(160,185,212,.18); --line-2:rgba(160,185,212,.32); --orange:#FF9B4D; --orange-2:#E87722; --navy:#0C2340;
   --f-display:"Fraunces",Georgia,serif; --f-body:"IBM Plex Sans",system-ui,sans-serif; --f-mono:"IBM Plex Mono",ui-monospace,monospace;
 }
 *{box-sizing:border-box;margin:0}
 html{scroll-behavior:smooth}
-body{font-family:var(--f-body);background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
-body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.35;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .28 0 0 0 0 .2 0 0 0 .12 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+body{font-family:var(--f-body);background:radial-gradient(1200px 700px at 85% -10%,rgba(232,119,34,.10),transparent 60%),radial-gradient(1000px 800px at 0% 30%,rgba(12,35,64,.9),transparent 70%),var(--paper);background-attachment:fixed;color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .75 0 0 0 0 .82 0 0 0 0 .9 0 0 0 .06 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
 main,header,footer{position:relative;z-index:1}
 a{color:inherit}
 .wrap{width:min(1180px,100% - 32px);margin:0 auto}
 .mono{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase}
 
 /* top bar */
-.top{position:sticky;top:0;z-index:20;background:rgba(243,237,226,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top{position:sticky;top:0;z-index:20;background:rgba(7,18,31,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;height:62px}
 .home{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font:600 15px var(--f-body)}
 .home img{width:34px;height:34px;border-radius:50%}
@@ -44,9 +44,10 @@ a{color:inherit}
 .hero-row{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(24px,5vw,72px);align-items:end;margin-top:clamp(28px,4vw,44px)}
 .hero p.lede{font:400 clamp(18px,1.7vw,21px)/1.55 var(--f-body);color:var(--ink-2);max-width:56ch}
 .hero-jump{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end}
-.pill{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:999px;border:1px solid var(--ink);font:500 12.5px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:background .2s,color .2s}
-.pill:hover,.pill.solid{background:var(--ink);color:var(--paper)}
-.pill.solid:hover{background:var(--orange);border-color:var(--orange)}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:999px;border:1px solid var(--line-2);font:500 12.5px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:background .2s,color .2s}
+.pill:hover{border-color:var(--orange);color:var(--orange)}
+.pill.solid{background:var(--orange-2);border-color:var(--orange-2);color:#1A0C02;box-shadow:0 10px 30px -10px rgba(232,119,34,.6)}
+.pill.solid:hover{background:var(--orange);border-color:var(--orange);color:#1A0C02}
 @media (max-width:820px){.hero-row{grid-template-columns:1fr}.hero-jump{justify-content:flex-start}}
 
 /* section heads */
@@ -63,25 +64,27 @@ a{color:inherit}
 .tl-view{perspective:1400px;perspective-origin:50% 45%}
 .tl-track{display:flex;gap:clamp(28px,4vw,56px);padding:0 calc(50vw - 190px);will-change:transform;transform-style:preserve-3d}
 .tl-card{flex:0 0 380px;transform-style:preserve-3d;will-change:transform,opacity;transition:filter .3s}
-.tl-frame{position:relative;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:14px 14px 22px;box-shadow:0 28px 50px -30px rgba(40,28,14,.45),0 2px 0 rgba(255,255,255,.6) inset}
+.tl-frame{position:relative;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:14px 14px 22px;box-shadow:0 30px 60px -30px rgba(0,0,0,.8),0 1px 0 rgba(255,255,255,.06) inset}
 .tl-ph{aspect-ratio:4/3;border-radius:3px;overflow:hidden;background:var(--paper-2);display:grid;place-items:center;position:relative}
-.tl-ph img{width:100%;height:100%;object-fit:cover;filter:sepia(.18) saturate(.92)}
+.tl-ph img{width:100%;height:100%;object-fit:cover;filter:saturate(.9) contrast(1.02)}
 .tl-ph svg{width:62%;height:auto;color:var(--ink-3)}
-.tl-ph .soon{position:absolute;left:10px;bottom:10px;font:500 10px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);background:rgba(251,248,242,.85);padding:5px 8px;border-radius:999px;border:1px dashed var(--ink-3)}
+.tl-ph .soon{position:absolute;left:10px;bottom:10px;font:500 10px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);background:rgba(7,18,31,.8);padding:5px 8px;border-radius:999px;border:1px dashed var(--ink-3)}
 .tl-meta{display:flex;justify-content:space-between;align-items:baseline;margin-top:16px;gap:10px}
 .tl-n{font:400 44px/1 var(--f-display);color:var(--orange);font-style:italic}
-.tl-date{font:500 11px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.tl-date{font:600 15px var(--f-mono);letter-spacing:.08em;color:var(--ink)}
 .tl-card h3{font:500 25px/1.15 var(--f-display);margin-top:8px}
 .tl-card p{font-size:15px;line-height:1.55;color:var(--ink-2);margin-top:8px}
 .tl-rail{position:relative;margin:clamp(28px,4vh,44px) auto 0;width:min(1180px,100% - 32px);height:30px}
 .tl-rail::before{content:"";position:absolute;left:0;right:0;top:14px;height:2px;background:var(--line)}
-.tl-fill{position:absolute;left:0;top:14px;height:2px;background:var(--orange);width:0}
+.tl-fill{position:absolute;left:0;top:14px;height:2px;background:var(--orange-2);box-shadow:0 0 12px rgba(232,119,34,.7);width:0}
 .tl-dots{position:absolute;inset:0;display:flex;justify-content:space-between}
-.tl-dots button{all:unset;cursor:pointer;width:30px;height:30px;display:grid;place-items:center}
+.tl-dots button{all:unset;cursor:pointer;width:30px;height:30px;display:grid;place-items:center;position:relative}
+.tl-dots button b{position:absolute;top:30px;left:50%;transform:translateX(-50%);font:500 10.5px var(--f-mono);letter-spacing:.06em;color:var(--ink-3);transition:color .25s}
+.tl-dots button.on b{color:var(--orange)}
 .tl-dots button i{width:10px;height:10px;border-radius:50%;background:var(--paper);border:2px solid var(--ink-3);transition:all .25s}
 .tl-dots button.on i{background:var(--orange);border-color:var(--orange);transform:scale(1.35)}
 .tl-dots button:focus-visible i{outline:2px solid var(--ink);outline-offset:3px}
-.tl-hint{text-align:center;margin-top:10px;color:var(--ink-3)}
+.tl-hint{text-align:center;margin-top:28px;color:var(--ink-3)}
 /* stacked fallback: phones and reduced motion */
 .tl.stacked .tl-stage{position:static;height:auto;overflow:visible;padding:32px 0}
 .tl.stacked .tl-track{flex-direction:column;align-items:center;padding:0 16px;transform:none!important}
@@ -90,16 +93,16 @@ a{color:inherit}
 
 /* ---------- voices ---------- */
 .voices{padding:clamp(72px,9vw,120px) 0 clamp(60px,8vw,100px)}
-.feature{margin-top:clamp(36px,5vw,56px);display:grid;grid-template-columns:auto 1fr;gap:clamp(16px,3vw,36px);align-items:start;padding:clamp(28px,4vw,48px) 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--line)}
+.feature{margin-top:clamp(36px,5vw,56px);display:grid;grid-template-columns:auto 1fr;gap:clamp(16px,3vw,36px);align-items:start;padding:clamp(28px,4vw,48px) 0;border-top:1px solid var(--line-2);border-bottom:1px solid var(--line)}
 .feature .qm{font:400 clamp(90px,12vw,160px)/.7 var(--f-display);color:var(--orange)}
 .feature blockquote{font:400 clamp(24px,3vw,38px)/1.25 var(--f-display);letter-spacing:-.01em}
 .feature cite{display:block;margin-top:20px;font-style:normal;color:var(--ink-3)}
 .filters{display:flex;flex-wrap:wrap;gap:8px;margin:clamp(36px,5vw,52px) 0 28px}
 .filters button{font:500 12.5px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;padding:10px 15px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink-2);cursor:pointer;transition:all .2s}
 .filters button span{color:var(--ink-3);margin-left:6px}
-.filters button:hover{border-color:var(--ink)}
-.filters button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
-.filters button[aria-pressed="true"] span{color:rgba(243,237,226,.6)}
+.filters button:hover{border-color:var(--orange)}
+.filters button[aria-pressed="true"]{background:var(--orange-2);border-color:var(--orange-2);color:#1A0C02}
+.filters button[aria-pressed="true"] span{color:rgba(26,12,2,.6)}
 .f-sub{margin:-12px 0 24px;color:var(--ink-2);font-size:15px}
 .grid{columns:3 320px;column-gap:20px}
 .q{break-inside:avoid;margin-bottom:20px;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:24px 24px 20px;position:relative;opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s}
@@ -111,12 +114,8 @@ a{color:inherit}
 .q cite{display:block;margin-top:16px;padding-top:12px;border-top:1px dashed var(--line);font:600 13.5px/1.4 var(--f-body);font-style:normal;color:var(--ink)}
 .q cite small{display:block;font:500 11px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-top:3px}
 .q.long blockquote{font-size:16px}
-.q.hl{background:var(--ink);border-color:var(--ink)}
-.q.hl blockquote,.q.hl cite{color:var(--paper)}
-.q.hl::before{color:rgba(243,237,226,.12)}
-.q.hl cite{border-top-color:rgba(243,237,226,.2)}
-.q.hl cite small{color:rgba(243,237,226,.6)}
-.q.hl .tag{color:#FFB877}
+.q.hl{background:linear-gradient(160deg,#16365A,#0C2340);border-color:rgba(232,119,34,.45)}
+.q.hl::before{color:rgba(232,119,34,.25)}
 
 /* contribute + footer */
 .more{padding:clamp(56px,8vw,96px) 0;border-top:1px solid var(--line);text-align:center}
@@ -160,7 +159,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
     <div class="wrap tl-intro">
       <p class="sec-k mono">The story · from gravel to a Lean lab</p>
       <h2 class="sec-h" id="story-h">How the lab <em>was built</em></h2>
-      <p class="sec-p">The milestones below are a first outline. Dates, photos, videos and the full story are being gathered and will be added here.</p>
+      <p class="sec-p">The milestones below are a first outline, and the years shown are placeholders. The exact dates, photos, videos and the full story are being gathered and will be added here.</p>
     </div>
     <div class="tl" id="tl">
       <div class="tl-stage">
@@ -215,15 +214,15 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 'use strict';
 /* ---- The story: edit this list to add dates, photos and text. img is a path in this repo (optional). ---- */
 var TIMELINE = [
-  {t:'An empty space', d:'The space that would become Tiger Motors was an empty room with a gravel floor.', date:'About 15 years ago', icon:'gravel'},
-  {t:'Pouring the floor', d:'Cement was poured over the gravel, giving the lab its first real foundation.', icon:'pour'},
-  {t:'Table tops become a line', d:'Donated table tops were set up as the first production line.', icon:'tables'},
-  {t:'Desks for the stations', d:'Desks were brought in to build out the workstations.', icon:'desk'},
-  {t:'An AS/RS from Chrysler', d:'An automated storage and retrieval system came to the lab from a Chrysler plant.', icon:'asrs'},
-  {t:'Racks from UNEX', d:'Racks from UNEX organized material at the point of use.', icon:'rack'},
-  {t:'Grants from Honda and GE', d:'Support from Honda and GE helped the lab keep growing.', icon:'grant'},
-  {t:'National Science Foundation support', d:'An NSF IUSE: EDU grant funds hands-on Lean education in the lab and takes it online.', img:'memories/nsf-team.jpg', alt:'Jorge Valenzuela, Tom Devall and Chih-hsuan Wang in the Tiger Motors lab'},
-  {t:'Tiger Motors today', d:'A full Integrated Manufacturing Facility, and now the Tiger Motors Lean Education Center online.', date:'Today', img:'memories/lab-today.jpg', alt:'Inside the Tiger Motors lab'}
+  {t:'An empty space', d:'The space that would become Tiger Motors was an empty room with a gravel floor.', date:'2011', icon:'gravel'},
+  {t:'Pouring the floor', d:'Cement was poured over the gravel, giving the lab its first real foundation.', date:'2012', icon:'pour'},
+  {t:'Table tops become a line', d:'Donated table tops were set up as the first production line.', date:'2013', icon:'tables'},
+  {t:'Desks for the stations', d:'Desks were brought in to build out the workstations.', date:'2014', icon:'desk'},
+  {t:'An AS/RS from Chrysler', d:'An automated storage and retrieval system came to the lab from a Chrysler plant.', date:'2016', icon:'asrs'},
+  {t:'Racks from UNEX', d:'Racks from UNEX organized material at the point of use.', date:'2018', icon:'rack'},
+  {t:'Grants from Honda and GE', d:'Support from Honda and GE helped the lab keep growing.', date:'2020', icon:'grant'},
+  {t:'National Science Foundation support', d:'An NSF IUSE: EDU grant funds hands-on Lean education in the lab and takes it online.', date:'2024', img:'memories/nsf-team.jpg', alt:'Jorge Valenzuela, Tom Devall and Chih-hsuan Wang in the Tiger Motors lab'},
+  {t:'Tiger Motors today', d:'A full Integrated Manufacturing Facility, and now the Tiger Motors Lean Education Center online.', date:'2026', img:'memories/lab-today.jpg', alt:'Inside the Tiger Motors lab'}
 ];
 /* ---- Testimonials: add new ones to this list. g = students | pros | academia | industry ---- */
 var GROUPS = {
@@ -280,7 +279,7 @@ track.innerHTML = TIMELINE.map(function(m,i){
     '<div class="tl-meta"><span class="tl-n">'+String(i+1).padStart(2,'0')+'</span><span class="tl-date">'+esc(m.date||'Date to come')+'</span></div>'+
     '<h3>'+esc(m.t)+'</h3><p>'+esc(m.d)+'</p></div></article>';
 }).join('');
-dots.innerHTML = TIMELINE.map(function(m,i){return '<button type="button" aria-label="'+esc((i+1)+'. '+m.t)+'"><i></i></button>';}).join('');
+dots.innerHTML = TIMELINE.map(function(m,i){return '<button type="button" aria-label="'+esc((m.date?m.date+': ':'')+m.t)+'"><i></i>'+(m.date?'<b aria-hidden="true">'+esc(m.date)+'</b>':'')+'</button>';}).join('');
 var cards=[].slice.call(track.children), dotEls=[].slice.call(dots.children);
 var reduce=window.matchMedia('(prefers-reduced-motion: reduce)'), narrow=window.matchMedia('(max-width: 760px)');
 var maxX=0, raf=0;
