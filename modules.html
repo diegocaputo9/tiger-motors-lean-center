@@ -145,11 +145,11 @@ function noneCard(text, verb){
 function jitVsm(m){
   var steps = m.items.filter(function(it){return it.step;});
   var row = steps.map(function(it,i){
-    var cls = it.type==='lab'?'lab':(it.type==='reading'?'art':'');
+    var cls = it.type==='lab'?'lab':(it.type==='reading'?'art':(it.type==='video360'?'v360':''));
     return (i?'<span class="varrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 12h15M13 7l5 5-5 5"/></svg></span>':'')+
       '<a class="vbox '+cls+(isLaunch(it.type)?' launch':'')+'" data-item="'+esc(it.id)+'" '+ext(it.url)+'><small>'+String(it.step).padStart(2,'0')+'</small><b>'+esc(it.short||it.title)+'</b><em>'+esc(TYPES[it.type].label)+'</em></a>';
   }).join('');
-  return '<div class="vsm"><div class="vsm-head"><b>JIT value stream · 8 steps</b><div class="vsm-leg"><span><i></i>Lecture</span><span><i class="lab"></i>Lab activity</span><span><i class="art"></i>Reading</span></div></div>'+
+  return '<div class="vsm"><div class="vsm-head"><b>JIT value stream · '+steps.length+' steps</b><div class="vsm-leg"><span><i></i>Lecture</span><span><i class="lab"></i>Lab activity</span><span><i class="art"></i>Reading</span><span><i class="v360"></i>360° video</span></div></div>'+
          '<div class="vsm-row">'+row+'</div><div class="vsm-foot"><span>Flow</span><span class="belt"></span><span>Scroll →</span></div></div>';
 }
 function jidokaLoop(){

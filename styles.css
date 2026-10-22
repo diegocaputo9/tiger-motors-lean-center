@@ -283,11 +283,13 @@ a.mini:hover{border-color:rgba(232,119,34,.5);background:rgba(232,119,34,.07);tr
 .vsm-leg i{width:12px;height:12px;border-radius:3px;border:1px solid #A9B8C9}
 .vsm-leg i.lab{border-color:var(--orange);background:rgba(232,119,34,.25)}
 .vsm-leg i.art{border-style:dashed}
+.vsm-leg i.v360{border-color:#5AB0E8;background:rgba(90,176,232,.2)}
 .vsm-row{display:flex;align-items:stretch;min-width:880px}
 .vbox{flex:1;display:grid;gap:8px;align-content:start;padding:14px 12px;border:1px solid rgba(160,185,212,.35);border-radius:8px;text-decoration:none;color:inherit;background:rgba(255,255,255,.03);transition:background .25s,border-color .25s,transform .3s var(--ease);position:relative}
 .vbox:hover{background:rgba(255,255,255,.08);transform:translateY(-3px)}
 .vbox.lab{border-color:var(--orange);background:rgba(232,119,34,.12)}
 .vbox.art{border-style:dashed}
+.vbox.v360{border-color:#5AB0E8;background:rgba(90,176,232,.1)}
 .vbox small{font:500 10.5px var(--f-mono);letter-spacing:.12em;color:#FF9B4D}
 .vbox b{font:600 14px/1.2 var(--f-display)}
 .vbox em{font:normal 500 10px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:#7D8FA3}
