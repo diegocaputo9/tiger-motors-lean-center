@@ -198,11 +198,14 @@ var types = {}; M.forEach(function(m){m.items.forEach(function(it){ if(it.url) t
 var fEl = document.getElementById('filters');
 var total = Object.keys(types).reduce(function(a,k){return a+types[k];},0);
 fEl.innerHTML = '<button class="fchip" data-f="all" aria-pressed="true">All <span>'+total+'</span></button>'+
-  Object.keys(TYPES).filter(function(t){return types[t];}).map(function(t){return '<button class="fchip" data-f="'+t+'" aria-pressed="false">'+TYPES[t].label+' <span>'+types[t]+'</span></button>';}).join('');
+  Object.keys(TYPES).filter(function(t){return types[t];}).map(function(t){return '<button class="fchip" data-f="'+t+'" aria-pressed="false">'+TYPES[t].label+' <span>'+types[t]+'</span></button>';}).join('')+
+  '<p class="f-sub" id="fSub" aria-live="polite" hidden></p>';
+var fSub = document.getElementById('fSub');
 fEl.addEventListener('click', function(e){
   var b = e.target.closest('.fchip'); if(!b) return;
   var f = b.getAttribute('data-f');
   fEl.querySelectorAll('.fchip').forEach(function(x){x.setAttribute('aria-pressed', x===b?'true':'false');});
+  fSub.textContent = TYPES[f] ? TYPES[f].d : ''; fSub.hidden = !TYPES[f];
   document.querySelectorAll('#library .mod').forEach(function(mod){
     var any = false;
     mod.querySelectorAll('.rc').forEach(function(c){

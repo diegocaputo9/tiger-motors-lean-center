@@ -104,7 +104,6 @@
   </div>
   <div class="hero-meta">
     <div class="wrap">
-      <p class="hero-cap rise d5"><i></i>Illustrative digital model of a production loop</p>
     </div>
   </div>
 </section>
@@ -358,16 +357,17 @@
           <text x="809" y="467" class="pl-lab" text-anchor="middle" style="font-size:7px">5 desktop CNC · 1 3D printer</text>
         </g>
         <!-- shown in both views -->
+        <g class="kb-sm smed-tag"><rect x="570" y="336" width="26" height="11" rx="2"/><text x="583" y="344.5" text-anchor="middle">SMED</text></g>
         <g class="kb-lab kb-sup"><text x="878" y="205">Tier 1 Raw</text><text x="878" y="217">Material Supplier</text></g>
         <g class="kb-fg"><rect x="258" y="306" width="30" height="24" rx="3"/><text x="273" y="321" text-anchor="middle">FG</text><text x="273" y="344" class="kb-lab" text-anchor="middle">Finished goods</text></g>
         <!-- information flow: kanban layer (shown in the Information flow view) -->
         <g class="kb" id="kb">
           <g class="kb-paths" fill="none" stroke="rgba(233,238,244,.55)" stroke-width="1.5" stroke-dasharray="4 5" stroke-linecap="round">
-            <path id="kbl1" d="M435 318L519 394"/><path id="kbl2" d="M519 394L585 417"/><path id="kbl3" d="M585 417L609 318"/><path id="kbl4" d="M609 318L517 318"/>
+            <path id="kbl1" d="M443 318H480V393.5H506"/><path id="kbl2" d="M532 393.5H550V417H577.5"/><path id="kbl3" d="M585 409.5V399"/><path id="kbl4" d="M585 388V362H517V325.5"/>
           </g>
           <g class="kb-st"><g id="kbn-s1" class="kb-n"><circle cx="517" cy="318" r="7.5"/><text x="517" y="321" text-anchor="middle">1</text></g><g id="kbn-s2" class="kb-n"><circle cx="517" cy="283" r="7.5"/><text x="517" y="286" text-anchor="middle">2</text></g><g id="kbn-s3" class="kb-n"><circle cx="552" cy="258" r="7.5"/><text x="552" y="261" text-anchor="middle">3</text></g><g id="kbn-s4" class="kb-n"><circle cx="583" cy="283" r="7.5"/><text x="583" y="286" text-anchor="middle">4</text></g><g id="kbn-s5" class="kb-n"><circle cx="583" cy="318" r="7.5"/><text x="583" y="321" text-anchor="middle">5</text></g><g id="kbn-s6" class="kb-n"><circle cx="585" cy="417" r="7.5"/><text x="585" y="420" text-anchor="middle">6</text></g><g id="kbn-s7" class="kb-n"><circle cx="585" cy="452" r="7.5"/><text x="585" y="455" text-anchor="middle">7</text></g><g id="kbn-s8" class="kb-n"><circle cx="550" cy="474" r="7.5"/><text x="550" y="477" text-anchor="middle">8</text></g><g id="kbn-s9" class="kb-n"><circle cx="519" cy="452" r="7.5"/><text x="519" y="455" text-anchor="middle">9</text></g><g id="kbn-s10" class="kb-n"><circle cx="519" cy="417" r="7.5"/><text x="519" y="420" text-anchor="middle">10</text></g><g id="kbn-s11" class="kb-n"><circle cx="435" cy="318" r="7.5"/><text x="435" y="321" text-anchor="middle">11</text></g><g id="kbn-s12" class="kb-n"><circle cx="402" cy="318" r="7.5"/><text x="402" y="321" text-anchor="middle">12</text></g><g id="kbn-s13" class="kb-n"><circle cx="369" cy="318" r="7.5"/><text x="369" y="321" text-anchor="middle">13</text></g><g id="kbn-s14" class="kb-n"><circle cx="336" cy="318" r="7.5"/><text x="336" y="321" text-anchor="middle">14</text></g><g id="kbn-s15" class="kb-n"><circle cx="303" cy="318" r="7.5"/><text x="303" y="321" text-anchor="middle">15</text></g></g>
           <g id="kbn-sm10" class="kb-sm"><rect x="506" y="388" width="26" height="11" rx="2"/><text x="519" y="396.5" text-anchor="middle">SUPERMKT</text></g>
-          <g id="kbn-sm5" class="kb-sm"><rect x="596" y="328" width="26" height="11" rx="2"/><text x="609" y="336.5" text-anchor="middle">SUPERMKT</text></g>
+          <g id="kbn-sm6" class="kb-sm"><rect x="572" y="388" width="26" height="11" rx="2"/><text x="585" y="396.5" text-anchor="middle">SUPERMKT</text></g>
           <text x="519" y="383" class="kb-lab" text-anchor="middle">Station 10</text>
           <g id="kbn-h" class="kb-box"><rect x="398" y="372" width="70" height="22" rx="3"/><line x1="408.0" y1="372" x2="408.0" y2="394"/><line x1="418.0" y1="372" x2="418.0" y2="394"/><line x1="428.0" y1="372" x2="428.0" y2="394"/><line x1="438.0" y1="372" x2="438.0" y2="394"/><line x1="448.0" y1="372" x2="448.0" y2="394"/><line x1="458.0" y1="372" x2="458.0" y2="394"/></g>
           <text x="433" y="366" class="kb-lab" text-anchor="middle">HEIJUNKA BOX</text>
@@ -390,10 +390,10 @@
         <text x="392" y="218" class="pl-cell we-title" text-anchor="middle" style="font-size:15px">Tiger Motors · Assembly Plant</text>
       </svg>
       </div>
-      <figcaption class="plan-cap"><span class="plan-note"><sup>*</sup>AS/RS: Automated Storage and Retrieval System</span><span id="planCapR">AS/RS feeds raw stock · Raw Stock delivers material to Cells 1, 2 and 3 · product flows Cell 1 → Cell 2 → Cell 3</span></figcaption>
+      <figcaption class="plan-cap"><span class="plan-note"><span><sup>*</sup>AS/RS: Automated Storage and Retrieval System</span><span>SMED: Single-Minute Exchange of Die</span></span><span id="planCapR">AS/RS feeds raw stock · Raw Stock delivers material to Cells 1, 2 and 3 · product flows Cell 1 → Cell 2 → Cell 3</span></figcaption>
       <div class="kb-legend" id="kbLegend" hidden>
-        <span><i class="c-blue"></i>Blue card</span><span><i class="c-orange"></i>Orange card</span><span><i class="c-white"></i>White card · special order from War Eagle Inc.</span><span><i class="c-green"></i>Green card · material delivered back to Cell 1</span>
-        <small>Each card color is a different product built in the lab. Pattern: 2 blue, 1 orange, 1 white, 2 blue, 1 orange. Cards leave the Heijunka box for station 11. A card then goes to the supermarket at station 10 and is posted at station 6, moves 6 to 10, and pulls from the supermarket at station 5, which posts at station 1 and moves 1 to 5. A second white card leaves station 11 for War Eagle Inc., circles it, and is delivered to station 15 together with the white card on the line.</small>
+        <span><i class="c-blue"></i>Blue card</span><span><i class="c-orange"></i>Orange card</span><span><i class="c-white"></i>White card · special order to War Eagle Inc.</span><span><i class="c-green"></i>Green card · material delivered back to Cell 1</span>
+        <small>Each card color is a different product built in the lab. Pattern: 2 blue, 1 orange, 1 white, 2 blue, 1 orange. Cards leave the Heijunka box for station 11. A card then goes to the supermarket at station 10 and is posted at station 6, moves 6 to 10, and pulls from the supermarket at station 6, which posts at station 1 and moves 1 to 5. A second white card leaves station 11 for War Eagle Inc., circles it, and is delivered to station 15 together with the white card on the line.</small>
       </div>
     </figure>
 
@@ -440,7 +440,7 @@
         </a>
       </div>
       <div class="lv-text">
-        <p class="lv-opt"><i></i>Optional · not part of the training</p>
+        <span class="tag"><i></i>360° · YouTube</span>
         <h3 class="yt-h"><img src="data:image/png;base64,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" alt="YouTube" width="34" height="24">Watch our students work in the lab</h3>
         <p class="rsub">A 360° video of students running the production system. This is only for people who want to get to know the lab better. You do not need to watch it to complete the training.</p>
         <div class="runs-cta">
@@ -456,11 +456,11 @@
   <div class="wrap">
     <div class="house-head">
       <div class="sec-head">
-        <p class="eyebrow">Interactive system</p>
+        <p class="eyebrow">Lean Training</p>
         <h2 class="h2">The Lean House</h2>
         <p class="lede">Follow the system from people to continuous improvement. Select an element of the house, in sequence, to open its learning materials.</p>
         <div class="tour-cta">
-          <button type="button" class="btn btn-primary" id="tourBtn" aria-haspopup="dialog">Take the quick tour <svg><use href="#i-arrow"/></svg></button>
+          <button type="button" class="btn btn-primary" id="tourBtn" aria-haspopup="dialog">Understand the Lean House <svg><use href="#i-arrow"/></svg></button>
           <p>First time here? A one-minute guide to following the elements through the house, step by step.</p>
         </div>
       </div>
@@ -587,13 +587,6 @@
       <figcaption class="glass"><small>NSF grant · Tiger Motors lab</small><span>Jorge Valenzuela, Tom Devall and Chih-hsuan Wang</span></figcaption>
     </figure>
 
-    <div class="pillars">
-      <div class="pl"><small>The need</small><p>Skilled professionals to support industrial competitiveness in a resurging U.S. manufacturing sector, amid increasing reshoring efforts.</p></div>
-      <div class="pl"><small>The setting</small><p>A 4,000-square-foot Integrated Manufacturing Facility that simulates real-world automotive production environments.</p></div>
-      <div class="pl"><small>The approach</small><p>Hands-on, evidence-based teaching that leverages reflective, practical experience, recognized as a highly effective educational approach.</p></div>
-      <div class="pl"><small>The emphasis</small><p>Improving student mindset and persistence while preparing students for manufacturing careers.</p></div>
-      <div class="pl"><small>The reach</small><p>An online platform that expands access to experiential training beyond campus.</p></div>
-    </div>
   </div>
 </section>
 
@@ -798,12 +791,12 @@ function renderPanel(k){
   var h = '<div class="p-head"><span class="p-kicker">'+esc(kicker)+'</span><h3>'+esc(m.name)+'</h3><p>'+esc(countsText(m))+'</p></div><div class="p-groups">';
   if(m.seq){
     var ord = m.items.filter(function(it){return it.step;}).sort(function(a,b){return a.step-b.step;}).concat(m.items.filter(function(it){return !it.step;}));
-    h += '<div class="p-group"><div class="p-verb"><b>SEQUENCE</b><small>Follow the steps in order, from 1 to '+m.items.filter(function(it){return it.step;}).length+'</small></div><div class="p-list">'+ord.map(mini).join('')+'</div></div>';
+    h += '<div class="p-group"><div class="p-verb"><b>SEQUENCE</b></div><div class="p-list">'+ord.map(mini).join('')+'</div></div>';
   } else
   Object.keys(VERBS).forEach(function(v){
     if(m.hide && m.hide.indexOf(v)>-1) return;
     var list = m.items.filter(function(it){return it.verb===v;}).sort(function(a,b){return (a.step||99)-(b.step||99);});
-    h += '<div class="p-group"><div class="p-verb"><b>'+VERBS[v].t+'</b><small>'+VERBS[v].d+'</small></div><div class="p-list">';
+    h += '<div class="p-group"><div class="p-verb"><b>'+VERBS[v].t+'</b></div><div class="p-list">';
     if(list.length) h += list.map(mini).join('');
     else h += '<div class="mini none"><b class="soon">'+esc((m.empty&&m.empty[v])||'Coming in Spring 2027')+'</b></div>';
     h += '</div></div>';
@@ -933,8 +926,6 @@ document.addEventListener('click', function(e){
       ctx.shadowColor='rgba(232,119,34,.8)'; ctx.shadowBlur=8; box(q[0]-.22,q[1]-.22,.44,.44,.72,PART); ctx.shadowBlur=0; }}); })(p); }
     objs.sort(function(a,b){return a.z-b.z;}); objs.forEach(function(o){o.f();});
     // labels
-    ctx.font='500 10px "IBM Plex Mono", monospace'; ctx.fillStyle=PAL.label;
-    var lab=P(8,-1.2,0); ctx.fillText('CELL 01 · ONE-PIECE FLOW', lab[0]-70, lab[1]);
     if(!reduce){
       if(t>nextAmber){ amberIdx=Math.floor(Math.random()*stations.length); amberUntil=t+1800; nextAmber=t+6500; }
       requestAnimationFrame(draw);
@@ -1119,7 +1110,7 @@ if('IntersectionObserver' in window && !reduce){
   var RM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
   function Z(k){return '#house .hz[data-k="'+k+'"]';}
   var STEPS=[
-    {k:'Welcome', t:'Welcome to the Lean House', p:'This short tour shows you how to follow the learning sequence, from the foundation up. It takes about a minute, and you can leave at any time.', first:true, next:'Start the tour', exit:'Not now'},
+    {k:'Welcome', t:'Welcome to the Lean House', p:'This short guide shows you how to follow the learning sequence, from the foundation up. It takes about a minute, and you can leave at any time.', first:true, next:'Start', exit:'Not now'},
     {k:'Step 1 · The foundation', t:'Start with People', sel:'people', tg:[Z('people')], click:true, p:'Every house needs a foundation before anything else goes up, and the Lean House is no different. People are that foundation: every tool, standard and improvement depends on the people who use it.', next:'Open People'},
     {k:'Learning materials', t:'Everything for People, in order', tg:['#panel .p-groups'], p:'The box beside the house lists every resource for the element you picked, sequenced by step: Learn it, Explore it, then Apply it. Work through it from top to bottom.'},
     {k:'Moving on', t:'Go to the next element', tg:['#panel .p-nav'], p:'When you finish an element, use these arrows, or click the next element in the house, to keep climbing the structure.'},
@@ -1138,7 +1129,7 @@ if('IntersectionObserver' in window && !reduce){
     layer=document.createElement('div'); layer.className='tour-layer';
     spot=document.createElement('div'); spot.className='tour-spot empty';
     card=document.createElement('div'); card.className='tour-card jump'; card.setAttribute('role','dialog'); card.setAttribute('aria-modal','false'); card.setAttribute('aria-labelledby','tour-h'); card.setAttribute('aria-live','polite');
-    card.innerHTML='<div class="tour-bar"><i></i></div><div class="tour-body"><div class="tour-top"><span class="tour-kicker"></span><button type="button" class="tour-x" aria-label="Exit tour"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><h3 id="tour-h"></h3><p class="tour-p"></p><blockquote class="tour-q" hidden><p></p><cite></cite></blockquote></div><div class="tour-foot"><span class="tour-count"></span><div class="tour-btns"><button type="button" class="tour-exit">Exit tour</button><button type="button" class="tour-back">Back</button><button type="button" class="tour-next">Next</button></div></div>';
+    card.innerHTML='<div class="tour-bar"><i></i></div><div class="tour-body"><div class="tour-top"><span class="tour-kicker"></span><button type="button" class="tour-x" aria-label="Exit"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><h3 id="tour-h"></h3><p class="tour-p"></p><blockquote class="tour-q" hidden><p></p><cite></cite></blockquote></div><div class="tour-foot"><span class="tour-count"></span><div class="tour-btns"><button type="button" class="tour-exit">Exit tour</button><button type="button" class="tour-back">Back</button><button type="button" class="tour-next">Next</button></div></div>';
     document.body.appendChild(layer); document.body.appendChild(spot); document.body.appendChild(card);
     els={q:card.querySelector('.tour-q'),body:card.querySelector('.tour-body'),kicker:card.querySelector('.tour-kicker'),h:card.querySelector('h3'),p:card.querySelector('.tour-p'),count:card.querySelector('.tour-count'),bar:card.querySelector('.tour-bar i'),back:card.querySelector('.tour-back'),next:card.querySelector('.tour-next'),exit:card.querySelector('.tour-exit'),x:card.querySelector('.tour-x')};
     els.next.addEventListener('click',next); els.back.addEventListener('click',back);
@@ -1188,7 +1179,7 @@ if('IntersectionObserver' in window && !reduce){
     els.count.textContent=(idx+1)+' / '+STEPS.length;
     els.bar.style.transform='scaleX('+((idx+1)/STEPS.length)+')';
     els.back.hidden=!!s.first;
-    els.exit.textContent=s.exit||'Exit tour';
+    els.exit.textContent=s.exit||'Exit';
     els.next.textContent=s.next||'Next';
     els.body.classList.remove('swap'); void els.body.offsetWidth; els.body.classList.add('swap');
     if(s.sel){ var g=document.querySelector(Z(s.sel)); if(g) g.dispatchEvent(new MouseEvent('click',{bubbles:true})); }
@@ -1257,8 +1248,8 @@ if('IntersectionObserver' in window && !reduce){
   var NS='http://www.w3.org/2000/svg';
   var title=document.getElementById('planTitle'), capR=document.getElementById('planCapR'), legend=document.getElementById('kbLegend'), cardsG=document.getElementById('kbCards');
   var T={material:'Material flows from Cell 1 to Cell 2 to Cell 3', info:'Kanban cards flow with the product, pulled from the Heijunka box'};
-  var C={material:'AS/RS feeds raw stock · Raw Stock delivers material to Cells 1, 2 and 3 · product flows Cell 1 → Cell 2 → Cell 3', info:'Heijunka box → Cell 3 → Cell 2 → Cell 1 · white = special order · green = material delivered'};
-  var P={FG:[273,318],SM10:[519,394],SM5:[609,318],
+  var C={material:'AS/RS feeds raw stock · Raw Stock delivers material to Cells 1, 2 and 3 · product flows Cell 1 → Cell 2 → Cell 3', info:''};
+  var P={FG:[273,318],SM10:[519,393.5],SM6:[585,393.5],
     1:[517,318],2:[517,283],3:[552,258],4:[583,283],5:[583,318],
     6:[585,417],7:[585,452],8:[550,474],9:[519,452],10:[519,417],
     11:[435,318],12:[402,318],13:[369,318],14:[336,318],15:[303,318]};
@@ -1308,10 +1299,10 @@ if('IntersectionObserver' in window && !reduce){
     if(k!=='w') tok({fill:fill,step:true,pts:[s0,P[11],P[12],P[13],P[14],P[15],P.FG],ids:[null,'11','12','13','14','15',null],dur:steps(6),start:S,appear:0,keep:true,idx:i});
     // station 11 -> supermarket at station 10 pulls a card, posted at station 6, moves 6..10
     var SB=S+TICK;
-    tok({fill:fill,step:true,pts:[P.SM10,P[6],P[7],P[8],P[9],P[10]],ids:['sm10','6','7','8','9','10'],dur:steps(5),start:SB,appear:S+MOVE,fade:350});
-    // station 6 pulls from the supermarket at station 5, posted at station 1, moves 1..5
+    tok({fill:fill,step:true,pts:[P.SM10,P[6],P[7],P[8],P[9],P[10]],ids:['sm10','6','7','8','9','10'],dur:steps(5),start:SB,appear:S+MOVE,fade:350,via:{0:[[550,393.5],[550,417]]}});
+    // station 6 pulls from the supermarket at station 6, posted at station 1, moves 1..5
     var SC=SB+TICK;
-    tok({fill:fill,step:true,pts:[P.SM5,P[1],P[2],P[3],P[4],P[5]],ids:['sm5','1','2','3','4','5'],dur:steps(5),start:SC,appear:SB+MOVE,fade:350});
+    tok({fill:fill,step:true,pts:[P.SM6,P[1],P[2],P[3],P[4],P[5]],ids:['sm6','1','2','3','4','5'],dur:steps(5),start:SC,appear:SB+MOVE,fade:350,via:{0:[[585,362],[517,362]]}});
     lit('kbl1',S+MOVE,S+TICK+MOVE); lit('kbl2',SB,SB+MOVE+250); lit('kbl3',SB+MOVE,SC+MOVE); lit('kbl4',SC,SC+MOVE+250);
     // two-bin replenishment: Cell 1 signals Raw Stock, Raw Stock signals the AS/RS
     var SD=SC+5*TICK;
@@ -1339,6 +1330,8 @@ if('IntersectionObserver' in window && !reduce){
   var hitEls={}; function elFor(id){ if(id==='h') return document.getElementById('kbn-h'); if(!(id in hitEls)) hitEls[id]=document.getElementById(/^sm/.test(id)?'kbn-'+id:'kbn-s'+id); return hitEls[id]; }
   function ease(u){ u=Math.min(1,Math.max(0,u)); return u<.5?4*u*u*u:1-Math.pow(-2*u+2,3)/2; }
   function wave(u){return .5-.5*Math.cos(Math.PI*Math.min(1,Math.max(0,u)));}
+  // position at fraction u along a right-angled route, so cards follow the straight kanban lines
+  function along(r,u){ var L=plen(r), d=L[L.length-1]*u; for(var i=1;i<r.length;i++){ if(d<=L[i]||i===r.length-1){ var s=L[i]-L[i-1], f=s?(d-L[i-1])/s:1; return [r[i-1][0]+(r[i][0]-r[i-1][0])*f, r[i-1][1]+(r[i][1]-r[i-1][1])*f]; } } return r[r.length-1]; }
   var raf=0,t0=0,active=false,visible=true;
   function place(t,x,y,o){ t.el.setAttribute('x',(x-W/2).toFixed(1)); t.el.setAttribute('y',(y-H/2).toFixed(1)); t.el.setAttribute('opacity',o.toFixed(2)); }
   function restView(){ tokens.forEach(function(t){ if(t.appear===0){ var s=t.pts[0]; place(t,s[0],s[1],1);} else place(t,0,0,0); }); }
@@ -1365,7 +1358,7 @@ if('IntersectionObserver' in window && !reduce){
       } else {
         var w=local-acc, a=t.pts[seg], b=t.pts[seg+1], p, md=t.modes?t.modes[seg]:(t.step?'s':'c'), mvv=(t.mv&&t.mv[seg])||MOVE;
         if(md==='s') p=w<mvv?ease(w/mvv):1; else p=w/t.dur[seg];
-        x=a[0]+(b[0]-a[0])*p; y=a[1]+(b[1]-a[1])*p;
+        if(t.via&&t.via[seg]){ var q=along([a].concat(t.via[seg],[b]),p); x=q[0]; y=q[1]; } else { x=a[0]+(b[0]-a[0])*p; y=a[1]+(b[1]-a[1])*p; }
         if((md==='s'?w>=mvv*.8:w/t.dur[seg]>.8)&&t.ids[seg+1]) hits[t.ids[seg+1]]=1;
         if(seg===0&&t.pts[0][1]===383&&w<MOVE) hits.h=1;
       }

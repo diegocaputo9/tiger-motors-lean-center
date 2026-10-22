@@ -3,12 +3,12 @@
 window.TM = (function(){
 'use strict';
 var TYPES = {
-  lecture:   {label:'Lecture',        act:'Watch lecture'},
-  podcast:   {label:'Podcast',        act:'Listen'},
-  reading:   {label:'Reading',        act:'Open reading'},
-  lab:       {label:'Lab activity',   act:'Launch activity'},
-  video360:  {label:'360° video',     act:'Watch in 360°'},
-  immersive: {label:'Immersive',      act:'Enter experience'}
+  lecture:   {label:'Lecture',        act:'Watch lecture',    d:'Lectures and instructional material'},
+  podcast:   {label:'Podcast',        act:'Listen',           d:'Podcasts and supplemental resources'},
+  reading:   {label:'Reading',        act:'Open reading',     d:'Readings and supplemental resources'},
+  lab:       {label:'Lab activity',   act:'Launch activity',  d:'Laboratory activities and exercises'},
+  video360:  {label:'360° video',     act:'Watch in 360°',    d:'Interactive and 360° experiences'},
+  immersive: {label:'Immersive',      act:'Enter experience', d:'Interactive and 360° experiences'}
 };
 var VERBS = {
   learn:      {t:'LEARN',      d:'Lectures and instructional material'},
@@ -21,7 +21,7 @@ var M = [
     {id:'people.lecture.people', step:1, verb:'learn',   type:'lecture', title:'People', src:'Video lecture · YouTube', url:'https://youtu.be/u3-yG2JBuJo'},
     {id:'people.podcast.nummi', step:2, verb:'explore', type:'podcast', title:'NUMMI', src:'Podcast · This American Life', url:'https://www.thisamericanlife.org/561/nummi-2015'},
     {id:'people.lab.mass-system-no-lean-tools', step:3, verb:'apply',   type:'lab',     title:'Mass System (No Lean Tools)', src:'Lab activity · 360° environment', url:'https://storage.net-fs.com/hosting/8253122/2/'},
-    {id:'people.video360.mass-production-run', verb:'experience', type:'video360', title:'Mass Production Run', src:'360° video with students · YouTube', url:'https://www.youtube.com/watch?v=21cAO-YCuek'}
+    {id:'people.video360.mass-production-run', step:4, verb:'experience', type:'video360', title:'Mass Production Run', src:'360° video with students · YouTube', url:'https://www.youtube.com/watch?v=21cAO-YCuek'}
   ]},
   {k:'std', n:'02', name:'Standardization', role:'Foundation', hide:['experience'], items:[
     {id:'std.lecture.standardization', step:1, verb:'learn',   type:'lecture', title:'Standardization', src:'Video lecture · YouTube', url:'https://youtu.be/n2_illFaVDQ'},
