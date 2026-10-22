@@ -125,6 +125,29 @@ a{color:inherit}
 footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--ink-3);font-size:13.5px}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 
+/* share your story dialog */
+button.pill{cursor:pointer;background:transparent;color:inherit}
+button.pill.solid{background:var(--orange-2);color:#1A0C02}
+.share [hidden]{display:none!important}
+.share{margin:auto;border:1px solid var(--line-2);border-radius:14px;padding:0;width:min(560px,calc(100% - 32px));max-height:calc(100dvh - 32px);background:var(--card);color:var(--ink);box-shadow:0 40px 80px -30px rgba(0,0,0,.9)}
+.share::backdrop{background:rgba(3,9,16,.72);backdrop-filter:blur(4px)}
+.share form,.share .done{padding:clamp(22px,4vw,32px);display:grid;gap:16px}
+.share h2{font:400 32px/1.1 var(--f-display)}
+.share p.sub{color:var(--ink-2);line-height:1.55;font-size:15px}
+.share .x{position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--ink-2);cursor:pointer;font-size:18px}
+.share .x:hover{color:var(--ink);border-color:var(--ink-3)}
+.share .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.share label{display:grid;gap:6px;font:500 11px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.share input,.share textarea{font:400 16px/1.5 var(--f-body);color:var(--ink);background:rgba(7,18,31,.6);border:1px solid var(--line-2);border-radius:8px;padding:11px 12px;text-transform:none;letter-spacing:0;width:100%}
+.share textarea{min-height:150px;resize:vertical}
+.share input:focus,.share textarea:focus{outline:none;border-color:var(--orange-2);box-shadow:0 0 0 3px rgba(232,119,34,.2)}
+.share .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.share .err{color:#FF8A80;font-size:14px;min-height:1em}
+.share .acts{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap}
+.share .count{justify-self:end;font:500 11px var(--f-mono);color:var(--ink-3);margin-top:-10px}
+.share .done{text-align:center;justify-items:center}
+.share .done .ok{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:rgba(63,182,139,.15);color:#6FD6AE;font-size:26px}
+@media (max-width:520px){.share .two{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){.q{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
 </style>
 </head>
@@ -195,12 +218,39 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
       <h2>More memories are on the way</h2>
       <p>New testimonials, photos and videos from the lab's history will be added over time. Learned Lean at Tiger Motors? We'd like to hear from you.</p>
       <div class="row">
-        <a class="pill solid" href="mailto:leanmanufacturingteam@eng.auburn.edu?subject=Tiger%20Motors%20testimonial">Share your story</a>
+        <button type="button" class="pill solid" id="shareBtn" aria-haspopup="dialog">Share your story</button>
         <a class="pill" href="index.html#lean-house">Start the Lean training</a>
       </div>
     </div>
   </section>
 </main>
+
+<dialog class="share" id="share" aria-labelledby="share-h">
+  <button type="button" class="x" data-close aria-label="Close">×</button>
+  <form id="shareForm" novalidate>
+    <h2 id="share-h">Share your story</h2>
+    <p class="sub">Tell us how the Lean course or the Tiger Motors lab shaped your studies or career. Your story goes to Dr. Tom Devall, who may reach out before adding it to this page.</p>
+    <div class="two">
+      <label>First name<input name="first" autocomplete="given-name" required maxlength="80"></label>
+      <label>Last name<input name="last" autocomplete="family-name" required maxlength="80"></label>
+    </div>
+    <label>Email<input name="email" type="email" autocomplete="email" required maxlength="200"></label>
+    <label>Your story<textarea name="story" required minlength="20" maxlength="6000" placeholder="What did you learn, and how have you used it since?"></textarea></label>
+    <span class="count" id="storyCount">0 / 6000</span>
+    <label class="hp" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"></label>
+    <p class="err" id="shareErr" role="alert"></p>
+    <div class="acts">
+      <button type="button" class="pill" data-close>Cancel</button>
+      <button type="submit" class="pill solid" id="shareSend">Send my story</button>
+    </div>
+  </form>
+  <div class="done" id="shareDone" hidden>
+    <span class="ok" aria-hidden="true">✓</span>
+    <h2>Thank you!</h2>
+    <p class="sub">Your story was sent to Dr. Devall. He may reply to the email you gave us.</p>
+    <button type="button" class="pill" data-close>Close</button>
+  </div>
+</dialog>
 
 <footer>
   <div class="wrap">
@@ -350,6 +400,29 @@ fEl.addEventListener('click',function(e){
   render(b.getAttribute('data-f'));
 });
 render('all');
+
+/* ---- share your story: saved and emailed to Dr. Devall through the site's Supabase project ---- */
+var SB_URL='https://txmcwrwxqbribdhyprqu.supabase.co', SB_KEY='sb_publishable_rv7klDuiZhvrve5O8wsqmg_1rctcFoo';
+var dlg=document.getElementById('share'), form=document.getElementById('shareForm'), done=document.getElementById('shareDone'), err=document.getElementById('shareErr'), send=document.getElementById('shareSend'), cnt=document.getElementById('storyCount');
+function openShare(){ form.hidden=false; done.hidden=true; err.textContent=''; if(dlg.showModal) dlg.showModal(); else dlg.setAttribute('open',''); form.first.focus(); }
+function closeShare(){ if(dlg.close) dlg.close(); else dlg.removeAttribute('open'); }
+document.getElementById('shareBtn').addEventListener('click',openShare);
+dlg.addEventListener('click',function(e){ if(e.target.closest('[data-close]')||e.target===dlg) closeShare(); });
+form.story.addEventListener('input',function(){ cnt.textContent=form.story.value.length+' / 6000'; });
+form.addEventListener('input',function(){ err.textContent=''; });
+form.addEventListener('submit',function(e){
+  e.preventDefault(); err.textContent='';
+  var v={p_first:form.first.value.trim(),p_last:form.last.value.trim(),p_email:form.email.value.trim(),p_story:form.story.value.trim(),p_website:form.website.value};
+  if(!v.p_first||!v.p_last){ err.textContent='Please enter your first and last name.'; return; }
+  if(!form.email.checkValidity()||!v.p_email){ err.textContent='Please enter a valid email address.'; form.email.focus(); return; }
+  if(v.p_story.length<20){ err.textContent='Please write a little more about your story.'; form.story.focus(); return; }
+  send.disabled=true; send.textContent='Sending…';
+  fetch(SB_URL+'/rest/v1/rpc/submit_story',{method:'POST',headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':'application/json'},body:JSON.stringify(v)})
+    .then(function(r){ return r.json().then(function(j){ if(!r.ok) throw new Error(j&&j.message||'Something went wrong.'); }); })
+    .then(function(){ form.reset(); cnt.textContent='0 / 6000'; form.hidden=true; done.hidden=false; })
+    .catch(function(x){ err.textContent=(x&&x.message&&!/fetch/i.test(x.message))?x.message:'We could not send your story. Please check your connection and try again.'; })
+    .then(function(){ send.disabled=false; send.textContent='Send my story'; });
+});
 })();
 </script>
 </body>
