@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Voices from the Lab · Tiger Motors Lean Education Center</title>
+<meta name="description" content="How the Tiger Motors lab was built, and what students, engineers, professors and industry partners say about learning Lean in it.">
+<link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..600&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#F3EDE2; --paper-2:#EAE2D3; --card:#FBF8F2; --ink:#1E1A16; --ink-2:#4A4239; --ink-3:#7A6F62;
+  --line:#D9CFBE; --orange:#C8611A; --orange-2:#E87722; --navy:#0C2340;
+  --f-display:"Fraunces",Georgia,serif; --f-body:"IBM Plex Sans",system-ui,sans-serif; --f-mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--f-body);background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.35;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .28 0 0 0 0 .2 0 0 0 .12 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+main,header,footer{position:relative;z-index:1}
+a{color:inherit}
+.wrap{width:min(1180px,100% - 32px);margin:0 auto}
+.mono{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+
+/* top bar */
+.top{position:sticky;top:0;z-index:20;background:rgba(243,237,226,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;height:62px}
+.home{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font:600 15px var(--f-body)}
+.home img{width:34px;height:34px;border-radius:50%}
+.top nav{display:flex;gap:6px}
+.top nav a{font:500 12px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;text-decoration:none;padding:8px 12px;border-radius:999px;color:var(--ink-2)}
+.top nav a:hover{background:var(--paper-2);color:var(--ink)}
+@media (max-width:640px){.top nav a.hide-sm{display:none}.home span{display:none}}
+
+/* hero */
+.hero{padding:clamp(56px,10vw,120px) 0 clamp(40px,6vw,72px)}
+.hero .mono{color:var(--orange)}
+.hero h1{font:400 clamp(48px,9vw,128px)/.92 var(--f-display);letter-spacing:-.02em;margin-top:18px;font-variation-settings:"opsz" 144}
+.hero h1 em{font-style:italic;color:var(--orange)}
+.hero-row{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(24px,5vw,72px);align-items:end;margin-top:clamp(28px,4vw,44px)}
+.hero p.lede{font:400 clamp(18px,1.7vw,21px)/1.55 var(--f-body);color:var(--ink-2);max-width:56ch}
+.hero-jump{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:999px;border:1px solid var(--ink);font:500 12.5px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:background .2s,color .2s}
+.pill:hover,.pill.solid{background:var(--ink);color:var(--paper)}
+.pill.solid:hover{background:var(--orange);border-color:var(--orange)}
+@media (max-width:820px){.hero-row{grid-template-columns:1fr}.hero-jump{justify-content:flex-start}}
+
+/* section heads */
+.sec-k{display:flex;align-items:center;gap:14px;color:var(--orange)}
+.sec-k::after{content:"";flex:1;height:1px;background:var(--line)}
+.sec-h{font:400 clamp(34px,5vw,64px)/1 var(--f-display);letter-spacing:-.015em;margin-top:16px}
+.sec-h em{font-style:italic}
+.sec-p{margin-top:16px;font-size:17px;line-height:1.6;color:var(--ink-2);max-width:62ch}
+
+/* ---------- timeline (scroll-driven, 3D) ---------- */
+.tl-intro{padding-top:clamp(40px,6vw,80px)}
+.tl{position:relative}
+.tl-stage{position:sticky;top:62px;height:calc(100vh - 62px);overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+.tl-view{perspective:1400px;perspective-origin:50% 45%}
+.tl-track{display:flex;gap:clamp(28px,4vw,56px);padding:0 calc(50vw - 190px);will-change:transform;transform-style:preserve-3d}
+.tl-card{flex:0 0 380px;transform-style:preserve-3d;will-change:transform,opacity;transition:filter .3s}
+.tl-frame{position:relative;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:14px 14px 22px;box-shadow:0 28px 50px -30px rgba(40,28,14,.45),0 2px 0 rgba(255,255,255,.6) inset}
+.tl-ph{aspect-ratio:4/3;border-radius:3px;overflow:hidden;background:var(--paper-2);display:grid;place-items:center;position:relative}
+.tl-ph img{width:100%;height:100%;object-fit:cover;filter:sepia(.18) saturate(.92)}
+.tl-ph svg{width:62%;height:auto;color:var(--ink-3)}
+.tl-ph .soon{position:absolute;left:10px;bottom:10px;font:500 10px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);background:rgba(251,248,242,.85);padding:5px 8px;border-radius:999px;border:1px dashed var(--ink-3)}
+.tl-meta{display:flex;justify-content:space-between;align-items:baseline;margin-top:16px;gap:10px}
+.tl-n{font:400 44px/1 var(--f-display);color:var(--orange);font-style:italic}
+.tl-date{font:500 11px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.tl-card h3{font:500 25px/1.15 var(--f-display);margin-top:8px}
+.tl-card p{font-size:15px;line-height:1.55;color:var(--ink-2);margin-top:8px}
+.tl-rail{position:relative;margin:clamp(28px,4vh,44px) auto 0;width:min(1180px,100% - 32px);height:30px}
+.tl-rail::before{content:"";position:absolute;left:0;right:0;top:14px;height:2px;background:var(--line)}
+.tl-fill{position:absolute;left:0;top:14px;height:2px;background:var(--orange);width:0}
+.tl-dots{position:absolute;inset:0;display:flex;justify-content:space-between}
+.tl-dots button{all:unset;cursor:pointer;width:30px;height:30px;display:grid;place-items:center}
+.tl-dots button i{width:10px;height:10px;border-radius:50%;background:var(--paper);border:2px solid var(--ink-3);transition:all .25s}
+.tl-dots button.on i{background:var(--orange);border-color:var(--orange);transform:scale(1.35)}
+.tl-dots button:focus-visible i{outline:2px solid var(--ink);outline-offset:3px}
+.tl-hint{text-align:center;margin-top:10px;color:var(--ink-3)}
+/* stacked fallback: phones and reduced motion */
+.tl.stacked .tl-stage{position:static;height:auto;overflow:visible;padding:32px 0}
+.tl.stacked .tl-track{flex-direction:column;align-items:center;padding:0 16px;transform:none!important}
+.tl.stacked .tl-card{flex:none;width:min(520px,100%);transform:none!important;opacity:1!important}
+.tl.stacked .tl-rail,.tl.stacked .tl-hint{display:none}
+
+/* ---------- voices ---------- */
+.voices{padding:clamp(72px,9vw,120px) 0 clamp(60px,8vw,100px)}
+.feature{margin-top:clamp(36px,5vw,56px);display:grid;grid-template-columns:auto 1fr;gap:clamp(16px,3vw,36px);align-items:start;padding:clamp(28px,4vw,48px) 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--line)}
+.feature .qm{font:400 clamp(90px,12vw,160px)/.7 var(--f-display);color:var(--orange)}
+.feature blockquote{font:400 clamp(24px,3vw,38px)/1.25 var(--f-display);letter-spacing:-.01em}
+.feature cite{display:block;margin-top:20px;font-style:normal;color:var(--ink-3)}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:clamp(36px,5vw,52px) 0 28px}
+.filters button{font:500 12.5px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;padding:10px 15px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink-2);cursor:pointer;transition:all .2s}
+.filters button span{color:var(--ink-3);margin-left:6px}
+.filters button:hover{border-color:var(--ink)}
+.filters button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.filters button[aria-pressed="true"] span{color:rgba(243,237,226,.6)}
+.f-sub{margin:-12px 0 24px;color:var(--ink-2);font-size:15px}
+.grid{columns:3 320px;column-gap:20px}
+.q{break-inside:avoid;margin-bottom:20px;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:24px 24px 20px;position:relative;opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s}
+.q.in{opacity:1;transform:none}
+.q::before{content:"\201C";position:absolute;top:6px;right:16px;font:400 64px/1 var(--f-display);color:var(--paper-2)}
+.q .tag{font:500 10.5px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--orange)}
+.q blockquote{margin-top:12px;font:400 17px/1.55 var(--f-display);color:var(--ink);position:relative}
+.q blockquote p+p{margin-top:10px}
+.q cite{display:block;margin-top:16px;padding-top:12px;border-top:1px dashed var(--line);font:600 13.5px/1.4 var(--f-body);font-style:normal;color:var(--ink)}
+.q cite small{display:block;font:500 11px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-top:3px}
+.q.long blockquote{font-size:16px}
+.q.hl{background:var(--ink);border-color:var(--ink)}
+.q.hl blockquote,.q.hl cite{color:var(--paper)}
+.q.hl::before{color:rgba(243,237,226,.12)}
+.q.hl cite{border-top-color:rgba(243,237,226,.2)}
+.q.hl cite small{color:rgba(243,237,226,.6)}
+.q.hl .tag{color:#FFB877}
+
+/* contribute + footer */
+.more{padding:clamp(56px,8vw,96px) 0;border-top:1px solid var(--line);text-align:center}
+.more h2{font:400 clamp(30px,4vw,48px)/1.1 var(--f-display)}
+.more p{margin:14px auto 26px;max-width:58ch;color:var(--ink-2);line-height:1.6}
+.more .row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--ink-3);font-size:13.5px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+
+@media (prefers-reduced-motion:reduce){.q{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="home" href="index.html"><img src="logo-circle.png" alt=""><span>Tiger Motors Lean Education Center</span></a>
+    <nav aria-label="Page sections">
+      <a href="#story" class="hide-sm">The story</a>
+      <a href="#voices" class="hide-sm">Voices</a>
+      <a href="index.html#project">← Back</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <p class="mono">Tiger Motors · Memories &amp; testimonials</p>
+      <h1>Voices from <em>the Lab</em></h1>
+      <div class="hero-row">
+        <p class="lede">About fifteen years ago, Tiger Motors was an empty space with a gravel floor. Piece by piece, through donations, grants and a lot of student work, it became a full Lean manufacturing lab. This page collects its story and what the people who learned in it have said since.</p>
+        <div class="hero-jump">
+          <a class="pill" href="#story">How the lab was built</a>
+          <a class="pill solid" href="#voices">Read the testimonials</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="story" aria-labelledby="story-h">
+    <div class="wrap tl-intro">
+      <p class="sec-k mono">The story · from gravel to a Lean lab</p>
+      <h2 class="sec-h" id="story-h">How the lab <em>was built</em></h2>
+      <p class="sec-p">The milestones below are a first outline. Dates, photos, videos and the full story are being gathered and will be added here.</p>
+    </div>
+    <div class="tl" id="tl">
+      <div class="tl-stage">
+        <div class="tl-view"><div class="tl-track" id="tlTrack"></div></div>
+        <div class="tl-rail" aria-hidden="false"><span class="tl-fill" id="tlFill"></span><div class="tl-dots" id="tlDots" role="group" aria-label="Jump to a milestone"></div></div>
+        <p class="tl-hint mono">Scroll or swipe sideways to move through time</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="voices" id="voices" aria-labelledby="voices-h">
+    <div class="wrap">
+      <p class="sec-k mono">Testimonials</p>
+      <h2 class="sec-h" id="voices-h">What people <em>say</em></h2>
+      <p class="sec-p">Notes from students, working engineers taking the Lean course, faculty from other universities and industry partners, collected over the years by Dr. Tom Devall.</p>
+
+      <figure class="feature">
+        <span class="qm" aria-hidden="true">“</span>
+        <div>
+          <blockquote>None of us could recall an experience or approach as thoughtfully designed, engaging, and effective as your simulation lab. Congratulations on creating what we believe to be a world-class learning environment.</blockquote>
+          <cite class="mono">Lean Strategist · Chick-fil-A</cite>
+        </div>
+      </figure>
+
+      <div class="filters" id="filters" role="toolbar" aria-label="Filter testimonials"></div>
+      <p class="f-sub" id="fSub" aria-live="polite"></p>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <section class="more">
+    <div class="wrap">
+      <h2>More memories are on the way</h2>
+      <p>New testimonials, photos and videos from the lab's history will be added over time. Learned Lean at Tiger Motors? We'd like to hear from you.</p>
+      <div class="row">
+        <a class="pill solid" href="mailto:leanmanufacturingteam@eng.auburn.edu?subject=Tiger%20Motors%20testimonial">Share your story</a>
+        <a class="pill" href="index.html#lean-house">Start the Lean training</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Tiger Motors Lean Education Center · Department of Industrial and Systems Engineering, Auburn University</span>
+    <a href="index.html">tigermotorslean.com</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+'use strict';
+/* ---- The story: edit this list to add dates, photos and text. img is a path in this repo (optional). ---- */
+var TIMELINE = [
+  {t:'An empty space', d:'The space that would become Tiger Motors was an empty room with a gravel floor.', date:'About 15 years ago', icon:'gravel'},
+  {t:'Pouring the floor', d:'Cement was poured over the gravel, giving the lab its first real foundation.', icon:'pour'},
+  {t:'Table tops become a line', d:'Donated table tops were set up as the first production line.', icon:'tables'},
+  {t:'Desks for the stations', d:'Desks were brought in to build out the workstations.', icon:'desk'},
+  {t:'An AS/RS from Chrysler', d:'An automated storage and retrieval system came to the lab from a Chrysler plant.', icon:'asrs'},
+  {t:'Racks from UNEX', d:'Racks from UNEX organized material at the point of use.', icon:'rack'},
+  {t:'Grants from Honda and GE', d:'Support from Honda and GE helped the lab keep growing.', icon:'grant'},
+  {t:'National Science Foundation support', d:'An NSF IUSE: EDU grant funds hands-on Lean education in the lab and takes it online.', img:'memories/nsf-team.jpg', alt:'Jorge Valenzuela, Tom Devall and Chih-hsuan Wang in the Tiger Motors lab'},
+  {t:'Tiger Motors today', d:'A full Integrated Manufacturing Facility, and now the Tiger Motors Lean Education Center online.', date:'Today', img:'memories/lab-today.jpg', alt:'Inside the Tiger Motors lab'}
+];
+/* ---- Testimonials: add new ones to this list. g = students | pros | academia | industry ---- */
+var GROUPS = {
+  students:{l:'Students', d:'Auburn students who took the Lean course or worked in the lab.'},
+  pros:{l:'Professionals in the course', d:'Working engineers and managers who took the Lean course, many as distance graduate students.'},
+  academia:{l:'Academia', d:'Faculty and leaders from other universities and programs who visited or heard Dr. Devall teach.'},
+  industry:{l:'Industry', d:'Companies that visited the lab or partnered with its students.'}
+};
+var VOICES = [
+  {g:'students', who:'Auburn student', q:['I learned so many valuable lessons and principles in your Lean class that I may have the opportunity to apply soon. Your class was one of my most enjoyable courses and it\'s because you as a professor made the content fun to learn, and because of that I got the most out of it. I credit your teachings and support with giving my senior design team the foundation to produce a good project and take 3rd in the presentations this spring!']},
+  {g:'students', who:'Auburn student', q:['Having taken your Lean class, I can confidently say it has been my favorite course during my time at Auburn. My group and I have gained knowledge and practical insights, and we all deeply admire your teaching style and expertise. Your class has been instrumental in shaping our understanding of lean principles, and we are eager to apply those skills to a senior design project.']},
+  {g:'students', who:'Auburn student and teaching assistant', q:['I truly am thankful and blessed that you trusted and inspired me to assist with teaching the class. I learned more in 6 months with you than most of my college career combined.'], hl:true},
+  {g:'pros', who:'Operations Director', org:'Mayo Operations Components', q:['As I approach the end of my time in your class and have had such an impressive learning experience, I would like to thank you for your time and for sparking our minds with your incredible experiences and stories.','It has been an excellent opportunity for me to change the way I do my own work by going back to basics and rethinking how I try to sail this boat.']},
+  {g:'pros', who:'Production Manager', org:'Boeing', q:['My name is Katie and I am one of your distance grad students for Lean. I am a production manager at the Boeing Company. I lead several departments that manufacture with glass like canopies, windshields, and sensor assemblies. I know that your question at the end of the lecture was rhetorical but to me, you proved it. I wanted to give you the feedback, as someone in the industry, it was a powerful lecture, and I appreciated you presenting the method and then your proof it works. Because drilling and manufacturing with glass is pretty specialized, my team has our own support functions. This gives me some perspective on how to pitch to my boss that the glass team wants to try something different.']},
+  {g:'pros', who:'Engineer', org:'Graduate program alumnus', q:['Thank you again for meeting with me back in 2023 after taking your Lean Manufacturing course. That was my favorite course during my graduate program, and I learned/implemented more methods from that one course than anything else I have taken.']},
+  {g:'pros', who:'Army Lieutenant', q:['Dr. Devall, just wanted to reach out and see how you are doing? I wanted to say your class has been helpful in my actual career and I\'ve actually been using a lot of what I was taught during your course in industry. Thank you! I was actually in the field discussing takt time and the client was impressed by the concept (he never heard of it before).']},
+  {g:'pros', who:'Industrial Engineer', org:'Faurecia', hl:true, q:['In as little as 4 months, I have completely transcended my career, and I owe this to one person from Auburn: Tom Devall. The foundation he gave me in his Lean manufacturing class has helped me move 3 positions up since I began my career in July! I have been able to completely turn around critical areas in my plant and save my company millions of dollars by implementing ideas and methodologies that Mr. Devall taught in the Lean class. His teachings have helped me adapt quickly to the industrial environment and immediately improve manufacturing lines. I work for the 6th largest parts manufacturer worldwide, and because of his class I have the edge on colleagues.']},
+  {g:'pros', who:'Process Engineer', org:'Johnson Controls', q:['I wanted to let you know that I got the position of an Industrial Engineer at Johnson Controls in Grand Rapids, Michigan. Thank you so much for all the tips you gave me for the Gemba Walk; it helped in getting this position.']},
+  {g:'pros', who:'Process Engineer', org:'Faurecia', q:['Just had my interview with Faurecia. I enjoyed the conversation thoroughly and actually used your lean class to answer some questions! He spoke highly of your lego lab and stated "he should patent it and sell it to other universities because we need more lean leaders". So you should be happy with that comment!']},
+  {g:'pros', who:'Industrial Engineer', org:'Intel Corp.', q:['I am settled in Phoenix and in my fifth week of work at Intel. It\'s going well. I was given my first project which is developing a lean pull dashboard to forecast orders that should be fulfilled across Intel\'s internal supply chain. Seems like I will get to use a lot of the things I\'ve used in the past on projects I did with you.']},
+  {g:'pros', who:'Industrial Engineer', org:'Garware-Bestretch', q:['I currently work as an Industrial Engineer at Garware-Bestretch. I wanted to let you know that your Lean Manufacturing course and the manufacturing lab set up in the basement of the Shelby Center helped me learn manufacturing process concepts. As a result, I\'m able to carry out process improvements at my current organization, and my bosses are quite happy with it.']},
+  {g:'pros', who:'Engineer', org:'Alabama Power', q:['I thought you would be interested to know that my Senior Design project played a key role in me getting a job with Alabama Power. I found out today that one of the things I\'ll be doing is helping to implement 6S (5S plus safety) in the Gaston Plant. They were very impressed that I already had experience with the 5S process. I will actually be the only IE at the plant. You said it would get us a job and you were right! I owe you a big thank you for the opportunity!']},
+  {g:'pros', who:'Industrial Engineer', org:'Peterbilt', q:['Thank you for the opportunity to spend my senior design semester working with great people in a great lab. The efforts I have made in the past few months have allowed me to land an exciting Lean Six Sigma / Statistical Quality internship with Peterbilt Motors in Denton, TX. I have Tiger Motors to thank for that!']},
+  {g:'pros', who:'Engineer', org:'THAAD', q:['That was the best 5S lecture that I have ever seen as it was obviously from the heart, mind and tempered with much experience. I am going through all of the above in THAAD on 5S and everything else that you could imagine.']},
+  {g:'pros', who:'ACS Manager', org:'Lockheed Martin Space', q:['I work at Lockheed Martin Space in Denver, CO. I met one of your former students while taking a Black Belt class in NJ. She crushed the entire class by her knowledge of Lean Six Sigma. The class joke was why should we be taking this class when we could just hire an industrial engineer from Auburn. Long story short… that\'s how I came to be in your class right now.']},
+  {g:'academia', who:'Air Force Major', org:'Air University', q:['We greatly appreciate your talk with us yesterday… simply life-changing. I talked with some students, and it is so refreshing to hear a talk about leadership from someone who is humble and is not in the military. It\'s a great perspective for us to have.']},
+  {g:'academia', who:'Professor, Innovation Development', org:'Air University', q:['Always a great lesson and highly rated by our students…']},
+  {g:'academia', who:'Department Chair', org:'Industrial and Systems Engineering, Auburn University', hl:true, q:['The ABET Accreditation team raved about the LEGO lab and the work from Tom (lean, green belt, etc.). In the student meeting, students noted his efforts.']},
+  {g:'academia', who:'Karl Haapala', org:'Oregon State University', q:['Thank you for organizing such a wonderful visit. It was extremely valuable, and I truly learned a boatload (I can\'t say this for every such trip I\'ve made, so I really appreciate your efforts and willingness to share!).']},
+  {g:'academia', who:'Catherine Maware', org:'University of Kentucky', q:['Thank you so much for hosting me in May. I truly appreciate your hospitality, generosity, and the time you took to share your knowledge and experiences with me. The visit was extremely valuable, and I am grateful for the opportunity.']},
+  {g:'academia', who:'Diana Schwerha', org:'Chair, Industrial Engineering · Liberty University', q:['I\'m all in for getting a consortium together. Let me know how I can help. Thanks for sending the website link! This is great, and I know that we will be able to use some of the materials.']},
+  {g:'academia', who:'Maruf Rahman', org:'University of Texas at Arlington', q:['I want to express my sincere appreciation for your kindness and hospitality toward me and our team from UTA. Our visit to Tiger Motor was truly memorable. Your leadership and the remarkable Lean training environment you have built at Tiger Motor deeply impressed me. Having lived, breathed, and practiced Lean manufacturing since 1996, I found your implementation and the culture you\'ve fostered to be exceptional examples of continuous improvement in action. It was awesome to see Lean principles translated into such an effective and engaging learning setting.']},
+  {g:'industry', who:'Lean Strategist', org:'Chick-fil-A', q:['I want to extend our sincere thanks to you and your students for the engaging and insightful tour of the Industrial and Systems Engineering LEGO Lab Simulator at Auburn University. We reflected on the experience with great enthusiasm during our drive back to Atlanta. Collectively, the three of us have been exposed to a wide range of continuous improvement theories across dozens of organizations. Yet, none of us could recall an experience or approach as thoughtfully designed, engaging, and effective as your simulation lab. Congratulations on creating what we believe to be a world-class learning environment.']},
+  {g:'industry', who:'Senior Strategy Consultant', org:'Accenture', q:['Tom Devall is one of my favorite professors from undergrad and brings a wealth of industry experience to the classroom. I think you two have a lot in common and will have plenty to talk about.']},
+  {g:'industry', who:'Chief Operating Officer', org:'Borbet Alabama', hl:true, q:['The Borbet Team has been extremely pleased with the Auburn University partnership. Over the past 2 years, we\'ve been able to implement lean manufacturing from ground zero and reduce waste throughout our value stream by applying techniques that the students have learned in Professor Devall\'s class. The students are true professionals and eager to learn and gain manufacturing experience on the shop floor. They are exposed to real-life issues and work with the entire workforce (hourly and salaried) to resolve problems and identify permanent corrective actions by working together as a cohesive team using a strategic and analytical approach. We look forward to our continued success working with the Industrial Engineering Department for future projects.']}
+];
+
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+var ICONS = {
+  gravel:'<svg viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 64h108"/><g fill="currentColor" stroke="none" opacity=".55"><circle cx="18" cy="58" r="3"/><circle cx="30" cy="60" r="2"/><circle cx="41" cy="57" r="3.5"/><circle cx="55" cy="60" r="2.4"/><circle cx="66" cy="57" r="3"/><circle cx="79" cy="60" r="2"/><circle cx="90" cy="58" r="3.2"/><circle cx="102" cy="60" r="2.2"/></g><path d="M14 52V18h92v34" stroke-dasharray="4 5"/></svg>',
+  pour:'<svg viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 64h108"/><rect x="10" y="54" width="100" height="10" fill="currentColor" opacity=".18"/><path d="M70 14h28l-8 14H78z"/><path d="M80 28c0 8-4 12-4 20s4 6 4 6" /><path d="M30 54c6-4 14-4 20 0s14 4 20 0"/></svg>',
+  tables:'<svg viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 64h108"/><path d="M10 38h30M10 38v26M40 38v26M45 38h30M45 38v26M75 38v26M80 38h30M80 38v26M110 38v26"/><path d="M14 30h22M49 30h22M84 30h22" stroke-dasharray="3 4"/></svg>',
+  desk:'<svg viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 64h108"/><path d="M20 36h80v6H20zM26 42v22M94 42v22"/><rect x="70" y="42" width="22" height="18"/><path d="M76 51h10"/><path d="M40 36V22h22v14"/></svg>',
+  asrs:'<svg viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 64h108"/><path d="M28 10v54M50 10v54M70 10v54M92 10v54"/><path d="M28 22h22M28 34h22M28 46h22M70 22h22M70 34h22M70 46h22"/><rect x="54" y="28" width="12" height="12" fill="currentColor" opacity=".25"/><path d="M60 10v54" stroke-dasharray="2 3"/></svg>',
+  rack:'<svg viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 64h108"/><path d="M24 16v48M96 16v48M24 24l72 8M24 40l72 8M24 56l72 6"/><rect x="34" y="20" width="14" height="9" transform="rotate(6 41 24)"/><rect x="60" y="23" width="14" height="9" transform="rotate(6 67 27)"/><rect x="44" y="38" width="14" height="9" transform="rotate(6 51 42)"/></svg>',
+  grant:'<svg viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 64h108"/><rect x="30" y="14" width="60" height="42" rx="2"/><path d="M38 26h44M38 34h44M38 42h26"/><circle cx="78" cy="48" r="8"/><path d="M74 55l-2 9 6-3 6 3-2-9"/></svg>'
+};
+
+/* ---- timeline ---- */
+var track=document.getElementById('tlTrack'), dots=document.getElementById('tlDots'), fill=document.getElementById('tlFill'), tl=document.getElementById('tl');
+track.innerHTML = TIMELINE.map(function(m,i){
+  var ph = m.img ? '<img src="'+esc(m.img)+'" alt="'+esc(m.alt||m.t)+'" loading="lazy">' : (ICONS[m.icon]||'')+'<span class="soon">Photo coming</span>';
+  return '<article class="tl-card" data-i="'+i+'"><div class="tl-frame"><div class="tl-ph">'+ph+'</div>'+
+    '<div class="tl-meta"><span class="tl-n">'+String(i+1).padStart(2,'0')+'</span><span class="tl-date">'+esc(m.date||'Date to come')+'</span></div>'+
+    '<h3>'+esc(m.t)+'</h3><p>'+esc(m.d)+'</p></div></article>';
+}).join('');
+dots.innerHTML = TIMELINE.map(function(m,i){return '<button type="button" aria-label="'+esc((i+1)+'. '+m.t)+'"><i></i></button>';}).join('');
+var cards=[].slice.call(track.children), dotEls=[].slice.call(dots.children);
+var reduce=window.matchMedia('(prefers-reduced-motion: reduce)'), narrow=window.matchMedia('(max-width: 760px)');
+var maxX=0, raf=0;
+function stacked(){ return reduce.matches||narrow.matches; }
+function layout(){
+  tl.classList.toggle('stacked', stacked());
+  if(stacked()){ tl.style.height=''; return; }
+  var last=cards[cards.length-1], first=cards[0];
+  maxX = Math.max(0, (last.offsetLeft+last.offsetWidth/2) - (first.offsetLeft+first.offsetWidth/2));
+  tl.style.height = (window.innerHeight + maxX) + 'px';
+  update();
+}
+function progress(){ var r=tl.getBoundingClientRect(), span=tl.offsetHeight-window.innerHeight; return span>0?Math.min(1,Math.max(0,-r.top/span)):0; }
+function update(){
+  raf=0; if(stacked()) return;
+  var p=progress(), x=-p*maxX, vw=window.innerWidth, mid=vw/2, near=0, best=1e9;
+  track.style.transform='translate3d('+x.toFixed(1)+'px,0,0)';
+  cards.forEach(function(c,i){
+    var r=c.offsetLeft+x+c.offsetWidth/2, d=(r-mid)/vw, a=Math.abs(d);
+    if(a<best){best=a;near=i;}
+    var rot=Math.max(-38,Math.min(38,-d*55)), z=-Math.min(420,a*620), y=Math.min(40,a*60);
+    c.style.transform='translate3d(0,'+y.toFixed(1)+'px,'+z.toFixed(1)+'px) rotateY('+rot.toFixed(2)+'deg)';
+    c.style.opacity=Math.max(.25,1-a*1.1).toFixed(2);
+  });
+  fill.style.width=(p*100)+'%';
+  dotEls.forEach(function(b,i){b.classList.toggle('on',i===near);});
+}
+function req(){ if(!raf) raf=requestAnimationFrame(update); }
+function goTo(i){
+  if(stacked()){ cards[i].scrollIntoView({behavior:'smooth',block:'center'}); return; }
+  var target=cards[i].offsetLeft+cards[i].offsetWidth/2-window.innerWidth/2, p=maxX?Math.min(1,Math.max(0,target/maxX)):0;
+  var top=tl.getBoundingClientRect().top+window.scrollY+p*(tl.offsetHeight-window.innerHeight);
+  window.scrollTo({top:top,behavior:reduce.matches?'auto':'smooth'});
+}
+dots.addEventListener('click',function(e){ var b=e.target.closest('button'); if(b) goTo(dotEls.indexOf(b)); });
+// sideways trackpad swipes move through time as well
+tl.addEventListener('wheel',function(e){
+  if(stacked()||Math.abs(e.deltaX)<=Math.abs(e.deltaY)) return;
+  var r=tl.getBoundingClientRect(); if(r.top>1||r.bottom<window.innerHeight-1) return;
+  e.preventDefault(); window.scrollBy(0,e.deltaX);
+},{passive:false});
+window.addEventListener('scroll',req,{passive:true});
+window.addEventListener('resize',layout);
+[reduce,narrow].forEach(function(m){ (m.addEventListener?m.addEventListener('change',layout):m.addListener(layout)); });
+layout();
+if(document.fonts&&document.fonts.ready) document.fonts.ready.then(layout);
+
+/* ---- testimonials ---- */
+var grid=document.getElementById('grid'), fEl=document.getElementById('filters'), fSub=document.getElementById('fSub');
+var counts={}; VOICES.forEach(function(v){counts[v.g]=(counts[v.g]||0)+1;});
+fEl.innerHTML='<button type="button" data-f="all" aria-pressed="true">All<span>'+VOICES.length+'</span></button>'+
+  Object.keys(GROUPS).map(function(g){return '<button type="button" data-f="'+g+'" aria-pressed="false">'+GROUPS[g].l+'<span>'+(counts[g]||0)+'</span></button>';}).join('');
+function render(f){
+  var list=VOICES.filter(function(v){return f==='all'||v.g===f;});
+  grid.innerHTML=list.map(function(v){
+    var len=v.q.join(' ').length;
+    return '<figure class="q'+(v.hl?' hl':'')+(len>520?' long':'')+'"><span class="tag">'+esc(GROUPS[v.g].l)+'</span><blockquote>'+v.q.map(function(p){return '<p>'+esc(p)+'</p>';}).join('')+'</blockquote>'+
+      '<cite>'+esc(v.who)+(v.org?'<small>'+esc(v.org)+'</small>':'')+'</cite></figure>';
+  }).join('');
+  fSub.textContent = GROUPS[f] ? GROUPS[f].d : '';
+  reveal();
+}
+var io = 'IntersectionObserver' in window ? new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }); },{rootMargin:'0px 0px -40px 0px'}) : null;
+function reveal(){ [].forEach.call(grid.children,function(c){ if(io) io.observe(c); else c.classList.add('in'); }); }
+fEl.addEventListener('click',function(e){
+  var b=e.target.closest('button'); if(!b) return;
+  [].forEach.call(fEl.children,function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});
+  render(b.getAttribute('data-f'));
+});
+render('all');
+})();
+</script>
+</body>
+</html>
