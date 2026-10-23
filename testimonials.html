@@ -45,21 +45,20 @@ html[data-mode="light"] .mode .i-moon{display:block}
 .top nav a:hover{background:var(--paper-2);color:var(--ink)}
 @media (max-width:640px){.top nav a.hide-sm{display:none}.home span{display:none}}
 /* the timeline stays hidden on phones until it has more content */
-@media (max-width:760px){#story,.story-link{display:none!important}}
+@media (max-width:760px){.story-btn{display:none!important}}
 
-/* hero */
-.hero{padding:clamp(56px,10vw,120px) 0 clamp(40px,6vw,72px)}
-.hero .mono{color:var(--orange)}
-.hero h1{font:400 clamp(48px,9vw,128px)/.92 var(--f-display);letter-spacing:-.02em;margin-top:18px;font-variation-settings:"opsz" 144}
-.hero h1 em{font-style:italic;color:var(--orange)}
-.hero-row{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(24px,5vw,72px);align-items:end;margin-top:clamp(28px,4vw,44px)}
-.hero p.lede{font:400 clamp(18px,1.7vw,21px)/1.55 var(--f-body);color:var(--ink-2);max-width:56ch}
-.hero-jump{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end}
+/* page head: short, so the testimonials start right away */
+.v-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px 32px;padding:clamp(32px,5vw,56px) 0 0}
+.kick{color:var(--orange)}
+.v-head h1{font:400 clamp(38px,5.4vw,68px)/1 var(--f-display);letter-spacing:-.02em;margin-top:12px}
+.v-head h1 em{font-style:italic;color:var(--orange)}
+.v-sub{margin-top:12px;font-size:clamp(16px,1.4vw,18px);line-height:1.55;color:var(--ink-2);max-width:60ch}
+.v-acts{display:flex;flex-wrap:wrap;gap:10px}
 .pill{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:999px;border:1px solid var(--line-2);font:500 12.5px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:background .2s,color .2s}
 .pill:hover{border-color:var(--orange);color:var(--orange)}
 .pill.solid{background:var(--orange-2);border-color:var(--orange-2);color:#1A0C02;box-shadow:0 10px 30px -10px rgba(232,119,34,.6)}
 .pill.solid:hover{background:var(--orange);border-color:var(--orange);color:#1A0C02}
-@media (max-width:820px){.hero-row{grid-template-columns:1fr}.hero-jump{justify-content:flex-start}}
+.pill svg{width:16px;height:16px}
 
 /* section heads */
 .sec-k{display:flex;align-items:center;gap:14px;color:var(--orange)}
@@ -68,15 +67,22 @@ html[data-mode="light"] .mode .i-moon{display:block}
 .sec-h em{font-style:italic}
 .sec-p{margin-top:16px;font-size:17px;line-height:1.6;color:var(--ink-2);max-width:62ch}
 
-/* ---------- timeline (scroll-driven, 3D) ---------- */
-.tl-intro{padding-top:clamp(40px,6vw,80px)}
-.tl{position:relative}
-.tl-stage{position:sticky;top:62px;height:calc(100vh - 62px);overflow:hidden;display:flex;flex-direction:column;justify-content:center}
-.tl-view{perspective:1400px;perspective-origin:50% 45%}
+/* ---------- timeline: full-screen view opened from the button, moves sideways in 3D ---------- */
+.tl-dlg{margin:0;padding:0;border:0;width:100vw;height:100dvh;max-width:none;max-height:none;background:var(--paper);color:var(--ink);overflow:hidden}
+.tl-dlg[open]{display:flex;flex-direction:column}
+.tl-dlg::backdrop{background:var(--paper)}
+.tl-head{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;padding-top:clamp(20px,3vw,36px)}
+.tl-head h2{font:400 clamp(30px,3.6vw,48px)/1.05 var(--f-display);letter-spacing:-.015em;margin-top:10px}
+.tl-head h2 em{font-style:italic;color:var(--orange)}
+.tl-note{margin-top:8px;color:var(--ink-3);font-size:14.5px}
+.tl-x{flex:none;width:44px;height:44px;border-radius:50%;border:1px solid var(--line-2);background:transparent;color:var(--ink);font-size:22px;cursor:pointer}
+.tl-x:hover{border-color:var(--orange);color:var(--orange)}
+.tl-view{flex:1;min-height:0;display:flex;align-items:center;overflow:hidden;perspective:1400px;perspective-origin:50% 45%;cursor:grab;touch-action:pan-y}
+.tl-view.drag{cursor:grabbing}
 .tl-track{display:flex;gap:clamp(28px,4vw,56px);padding:0 calc(50vw - 190px);will-change:transform;transform-style:preserve-3d}
 .tl-card{flex:0 0 380px;transform-style:preserve-3d;will-change:transform,opacity;transition:filter .3s}
 .tl-frame{position:relative;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:14px 14px 22px;box-shadow:0 30px 60px -30px rgba(0,0,0,.8),0 1px 0 rgba(255,255,255,.06) inset}
-.tl-ph{aspect-ratio:4/3;border-radius:3px;overflow:hidden;background:var(--paper-2);display:grid;place-items:center;position:relative}
+.tl-ph{aspect-ratio:16/10;border-radius:3px;overflow:hidden;background:var(--paper-2);display:grid;place-items:center;position:relative}
 .tl-ph img{width:100%;height:100%;object-fit:cover;filter:saturate(.9) contrast(1.02)}
 .tl-ph svg{width:62%;height:auto;color:var(--ink-3)}
 .tl-ph .soon{position:absolute;left:10px;bottom:10px;font:500 10px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);background:rgba(7,18,31,.8);padding:5px 8px;border-radius:999px;border:1px dashed var(--ink-3)}
@@ -95,16 +101,18 @@ html[data-mode="light"] .mode .i-moon{display:block}
 .tl-dots button i{width:10px;height:10px;border-radius:50%;background:var(--paper);border:2px solid var(--ink-3);transition:all .25s}
 .tl-dots button.on i{background:var(--orange);border-color:var(--orange);transform:scale(1.35)}
 .tl-dots button:focus-visible i{outline:2px solid var(--ink);outline-offset:3px}
-.tl-hint{text-align:center;margin-top:28px;color:var(--ink-3)}
-/* stacked fallback: phones and reduced motion */
-.tl.stacked .tl-stage{position:static;height:auto;overflow:visible;padding:32px 0}
-.tl.stacked .tl-track{flex-direction:column;align-items:center;padding:0 16px;transform:none!important}
-.tl.stacked .tl-card{flex:none;width:min(520px,100%);transform:none!important;opacity:1!important}
-.tl.stacked .tl-rail,.tl.stacked .tl-hint{display:none}
+.tl-hint{text-align:center;margin:26px 0 clamp(18px,3vh,30px);color:var(--ink-3)}
+.tl-ph img{pointer-events:none}
+/* reduced motion: a plain vertical list */
+.tl-dlg.stacked{overflow-y:auto}
+.tl-dlg.stacked .tl-view{display:block;flex:none;overflow:visible;cursor:auto;padding:24px 0}
+.tl-dlg.stacked .tl-track{flex-direction:column;align-items:center;padding:0 16px;transform:none!important}
+.tl-dlg.stacked .tl-card{flex:none;width:min(520px,100%);transform:none!important;opacity:1!important}
+.tl-dlg.stacked .tl-rail,.tl-dlg.stacked .tl-hint{display:none}
 
 /* ---------- voices ---------- */
-.voices{padding:clamp(72px,9vw,120px) 0 clamp(60px,8vw,100px)}
-.filters{display:flex;flex-wrap:wrap;gap:8px;margin:clamp(36px,5vw,52px) 0 28px}
+.voices{padding:0 0 clamp(56px,7vw,90px)}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:clamp(24px,3vw,32px) 0 24px}
 .filters button{font:500 12.5px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;padding:10px 15px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink-2);cursor:pointer;transition:all .2s}
 .filters button span{color:var(--ink-3);margin-left:6px}
 .filters button:hover{border-color:var(--orange)}
@@ -155,35 +163,9 @@ button.pill.solid{background:var(--orange-2);color:#1A0C02}
 .share .done{text-align:center;justify-items:center}
 .share .done .ok{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:rgba(63,182,139,.15);color:#6FD6AE;font-size:26px}
 @media (max-width:520px){.share .two{grid-template-columns:1fr}}
-/* highlights: one quote at a time while scrolling */
-.spot{position:relative;margin-top:clamp(24px,4vw,48px)}
-.spot-stage{position:sticky;top:62px;height:calc(100vh - 62px);display:flex;align-items:center;overflow:hidden}
-.spot-in{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.6fr);gap:clamp(28px,5vw,72px);align-items:center}
-.spot-side{display:grid;gap:18px;align-content:center;justify-items:start}
-.spot-side .sec-k{width:100%}
-.spot-h{font:400 clamp(28px,3.4vw,44px)/1.08 var(--f-display);letter-spacing:-.01em}
-.spot-h em{font-style:italic;color:var(--orange)}
-.spot-count{color:var(--ink-3)}.spot-count b{color:var(--orange);font-weight:600}
-.spot-ticks{display:flex;gap:6px}
-.spot-ticks i{width:26px;height:3px;border-radius:2px;background:var(--line-2);transition:background .3s}
-.spot-ticks i.on{background:var(--orange-2)}
-.spot-quotes{position:relative;min-height:min(64vh,520px)}
-.sq{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;opacity:0;transform:translateY(28px) scale(.98);transition:opacity .6s,transform .7s cubic-bezier(.2,.7,.2,1);pointer-events:none}
-.sq.on{opacity:1;transform:none;pointer-events:auto}
-.sq.past{transform:translateY(-28px) scale(.98)}
-.sq .qm{font:400 clamp(70px,8vw,120px)/.6 var(--f-display);color:var(--orange);height:.5em}
-.sq blockquote{font:400 clamp(22px,2.7vw,36px)/1.3 var(--f-display);letter-spacing:-.01em;margin-top:18px}
-.sq cite{display:block;margin-top:24px;font-style:normal}
-.sq cite b{display:block;font:600 16px var(--f-body);color:var(--ink)}
-.sq cite span{display:block;margin-top:4px;color:var(--ink-3)}
 mark{color:inherit;background:linear-gradient(transparent 58%,rgba(232,119,34,.42) 58%,rgba(232,119,34,.42) 92%,transparent 92%) no-repeat 0 0/0% 100%;transition:background-size 1.1s cubic-bezier(.3,.7,.2,1) .35s;padding:0 .04em}
-.sq.on mark,.q.in mark{background-size:100% 100%}
+.q.in mark{background-size:100% 100%}
 .q mark{transition-delay:.5s}
-.spot.stacked .spot-stage{position:static;height:auto;padding:40px 0}
-.spot.stacked .spot-quotes{min-height:0;display:grid;gap:44px}
-.spot.stacked .sq{position:static;opacity:1;transform:none}
-.spot.stacked .spot-count,.spot.stacked .spot-ticks{display:none}
-@media (max-width:820px){.spot-in{grid-template-columns:1fr;gap:20px}.spot-side{gap:12px}.spot-side .pill,.spot-ticks{display:none}.spot-quotes{min-height:min(60vh,520px)}.spot-h{font-size:26px}}
 /* ---------- light mode (same switch and colors as the rest of the site) ---------- */
 html[data-mode="light"]{color-scheme:light;
   --paper:#EDF0F3; --paper-2:#E2E7EC; --card:#FFFFFF; --ink:#0C1B2E; --ink-2:#43536A; --ink-3:#66778C;
@@ -210,8 +192,6 @@ html[data-mode="light"] .share .done .ok{color:#1C7A55}
   <div class="wrap">
     <a class="home" href="index.html"><img class="logo-dark" src="logo-circle-dark.png" alt=""><img class="logo-light" src="logo-circle.png" alt=""><span>Tiger Motors Lean Education Center</span></a>
     <nav aria-label="Page sections">
-      <a href="#story" class="hide-sm">The story</a>
-      <a href="#voices" class="hide-sm">Voices</a>
       <a href="index.html">← Back</a>
       <button class="mode" id="modeBtn" type="button" aria-label="Switch to light mode" title="Switch to light mode">
         <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg>
@@ -222,58 +202,19 @@ html[data-mode="light"] .share .done .ok{color:#1C7A55}
 </header>
 
 <main>
-  <section class="hero">
-    <div class="wrap">
-      <p class="mono">Tiger Motors · Memories &amp; testimonials</p>
-      <h1>Voices from <em>the Lab</em></h1>
-      <div class="hero-row">
-        <p class="lede">About fifteen years ago, Tiger Motors was an empty space with a gravel floor. Piece by piece, through donations, grants and a lot of student work, it became a full Lean manufacturing lab. This page collects its story and what the people who learned in it have said since.</p>
-        <div class="hero-jump">
-          <a class="pill story-link" href="#story">How the lab was built</a>
-          <a class="pill solid" href="#voices">Read the testimonials</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="story" aria-labelledby="story-h">
-    <div class="wrap tl-intro">
-      <p class="sec-k mono">The story · from gravel to a Lean lab</p>
-      <h2 class="sec-h" id="story-h">How the lab <em>was built</em></h2>
-      <p class="sec-p">The milestones below are a first outline, and the years shown are placeholders. The exact dates, photos, videos and the full story are being gathered and will be added here.</p>
-    </div>
-    <div class="tl" id="tl">
-      <div class="tl-stage">
-        <div class="tl-view"><div class="tl-track" id="tlTrack"></div></div>
-        <div class="tl-rail" aria-hidden="false"><span class="tl-fill" id="tlFill"></span><div class="tl-dots" id="tlDots" role="group" aria-label="Jump to a milestone"></div></div>
-        <p class="tl-hint mono">Scroll or swipe sideways to move through time</p>
-      </div>
-    </div>
-  </section>
-
   <section class="voices" id="voices" aria-labelledby="voices-h">
     <div class="wrap">
-      <p class="sec-k mono">Testimonials</p>
-      <h2 class="sec-h" id="voices-h">What people <em>say</em></h2>
-      <p class="sec-p">Notes from students, working engineers taking the Lean course, faculty from other universities and industry partners, collected over the years by Dr. Tom Devall.</p>
-
-    </div>
-    <div class="spot" id="spot" aria-labelledby="spot-h">
-      <div class="spot-stage">
-        <div class="wrap spot-in">
-          <div class="spot-side">
-            <p class="sec-k mono">Highlights</p>
-            <h3 class="spot-h" id="spot-h">Why industry and universities <em>trust Tiger Motors</em></h3>
-            <p class="spot-count mono"><b id="spotN">01</b> / <span id="spotT">06</span></p>
-            <div class="spot-ticks" id="spotTicks" aria-hidden="true"></div>
-            <a class="pill solid" href="index.html#contact">Partner with us</a>
-          </div>
-          <div class="spot-quotes" id="spotQuotes"></div>
+      <div class="v-head">
+        <div>
+          <p class="mono kick">Tiger Motors · Testimonials</p>
+          <h1 id="voices-h">Voices from <em>the Lab</em></h1>
+          <p class="v-sub">What students, working engineers, universities and industry partners say about learning Lean at Tiger Motors.</p>
+        </div>
+        <div class="v-acts">
+          <button type="button" class="pill story-btn" id="storyBtn" aria-haspopup="dialog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 12h18"/><circle cx="6" cy="12" r="2.2"/><circle cx="12" cy="12" r="2.2"/><circle cx="18" cy="12" r="2.2"/></svg>How the lab was built</button>
+          <button type="button" class="pill solid" data-share aria-haspopup="dialog">Share your story</button>
         </div>
       </div>
-    </div>
-    <div class="wrap">
-
       <div class="filters" id="filters" role="toolbar" aria-label="Filter testimonials"></div>
       <p class="f-sub" id="fSub" aria-live="polite"></p>
       <div class="grid" id="grid"></div>
@@ -285,12 +226,26 @@ html[data-mode="light"] .share .done .ok{color:#1C7A55}
       <h2>More memories are on the way</h2>
       <p>New testimonials, photos and videos from the lab's history will be added over time. Learned Lean at Tiger Motors? We'd like to hear from you.</p>
       <div class="row">
-        <button type="button" class="pill solid" id="shareBtn" aria-haspopup="dialog">Share your story</button>
+        <button type="button" class="pill solid" data-share aria-haspopup="dialog">Share your story</button>
         <a class="pill" href="index.html#lean-house">Start the Lean training</a>
       </div>
     </div>
   </section>
 </main>
+
+<dialog class="tl-dlg" id="storyDlg" aria-labelledby="story-h">
+  <div class="wrap tl-head">
+    <div>
+      <p class="mono kick">The story · from gravel to a Lean lab</p>
+      <h2 id="story-h">How the lab <em>was built</em></h2>
+      <p class="tl-note">A first outline: the years are placeholders, and photos, videos and the full story are being gathered.</p>
+    </div>
+    <button type="button" class="tl-x" id="storyClose" aria-label="Close the timeline">×</button>
+  </div>
+  <div class="tl-view" id="tlView"><div class="tl-track" id="tlTrack"></div></div>
+  <div class="tl-rail"><span class="tl-fill" id="tlFill"></span><div class="tl-dots" id="tlDots" role="group" aria-label="Jump to a milestone"></div></div>
+  <p class="tl-hint mono">Scroll, drag or use the arrow keys to move through time</p>
+</dialog>
 
 <dialog class="share" id="share" aria-labelledby="share-h">
   <button type="button" class="x" data-close aria-label="Close">×</button>
@@ -403,92 +358,51 @@ var ICONS = {
   grant:'<svg viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 64h108"/><rect x="30" y="14" width="60" height="42" rx="2"/><path d="M38 26h44M38 34h44M38 42h26"/><circle cx="78" cy="48" r="8"/><path d="M74 55l-2 9 6-3 6 3-2-9"/></svg>'
 };
 
-/* ---- timeline ---- */
-var track=document.getElementById('tlTrack'), dots=document.getElementById('tlDots'), fill=document.getElementById('tlFill'), tl=document.getElementById('tl');
+/* ---- timeline (opened from the "How the lab was built" button) ---- */
+var track=document.getElementById('tlTrack'), dots=document.getElementById('tlDots'), fill=document.getElementById('tlFill'), view=document.getElementById('tlView'), sdlg=document.getElementById('storyDlg');
 track.innerHTML = TIMELINE.map(function(m,i){
-  var ph = m.img ? '<img src="'+esc(m.img)+'" alt="'+esc(m.alt||m.t)+'" loading="lazy">' : (ICONS[m.icon]||'')+'<span class="soon">Photo coming</span>';
+  var ph = m.img ? '<img src="'+esc(m.img)+'" alt="'+esc(m.alt||m.t)+'" loading="lazy" draggable="false">' : (ICONS[m.icon]||'')+'<span class="soon">Photo coming</span>';
   return '<article class="tl-card" data-i="'+i+'"><div class="tl-frame"><div class="tl-ph">'+ph+'</div>'+
     '<div class="tl-meta"><span class="tl-n">'+String(i+1).padStart(2,'0')+'</span><span class="tl-date">'+esc(m.date||'Date to come')+'</span></div>'+
     '<h3>'+esc(m.t)+'</h3><p>'+esc(m.d)+'</p></div></article>';
 }).join('');
 dots.innerHTML = TIMELINE.map(function(m,i){return '<button type="button" aria-label="'+esc((m.date?m.date+': ':'')+m.t)+'"><i></i>'+(m.date?'<b aria-hidden="true">'+esc(m.date)+'</b>':'')+'</button>';}).join('');
 var cards=[].slice.call(track.children), dotEls=[].slice.call(dots.children);
-var reduce=window.matchMedia('(prefers-reduced-motion: reduce)'), narrow=window.matchMedia('(max-width: 760px)');
-var maxX=0, raf=0;
-function stacked(){ return reduce.matches||narrow.matches; }
+var reduce=window.matchMedia('(prefers-reduced-motion: reduce)');
+var pos=0, target=0, maxX=0, near=0, raf=0;
+function centre(i){ return cards[i].offsetLeft+cards[i].offsetWidth/2-(cards[0].offsetLeft+cards[0].offsetWidth/2); }
 function layout(){
-  tl.classList.toggle('stacked', stacked());
-  if(stacked()){ tl.style.height=''; return; }
-  var last=cards[cards.length-1], first=cards[0];
-  maxX = Math.max(0, (last.offsetLeft+last.offsetWidth/2) - (first.offsetLeft+first.offsetWidth/2));
-  tl.style.height = (window.innerHeight + maxX) + 'px';
-  update();
+  sdlg.classList.toggle('stacked', reduce.matches);
+  if(reduce.matches) return;
+  maxX=Math.max(0,centre(cards.length-1)); target=Math.min(target,maxX); pos=target; draw();
 }
-function progress(){ var r=tl.getBoundingClientRect(), span=tl.offsetHeight-window.innerHeight; return span>0?Math.min(1,Math.max(0,-r.top/span)):0; }
-function update(){
-  raf=0; if(stacked()) return;
-  var p=progress(), x=-p*maxX, vw=window.innerWidth, mid=vw/2, near=0, best=1e9;
+function draw(){
+  var x=-pos, vw=view.clientWidth||window.innerWidth, mid=vw/2, best=1e9;
   track.style.transform='translate3d('+x.toFixed(1)+'px,0,0)';
   cards.forEach(function(c,i){
-    var r=c.offsetLeft+x+c.offsetWidth/2, d=(r-mid)/vw, a=Math.abs(d);
+    var d=(c.offsetLeft+x+c.offsetWidth/2-mid)/vw, a=Math.abs(d);
     if(a<best){best=a;near=i;}
     var rot=Math.max(-38,Math.min(38,-d*55)), z=-Math.min(420,a*620), y=Math.min(40,a*60);
     c.style.transform='translate3d(0,'+y.toFixed(1)+'px,'+z.toFixed(1)+'px) rotateY('+rot.toFixed(2)+'deg)';
     c.style.opacity=Math.max(.25,1-a*1.1).toFixed(2);
   });
-  fill.style.width=(p*100)+'%';
+  fill.style.width=(maxX?pos/maxX*100:0)+'%';
   dotEls.forEach(function(b,i){b.classList.toggle('on',i===near);});
 }
-function req(){ if(!raf) raf=requestAnimationFrame(update); }
-function goTo(i){
-  if(stacked()){ cards[i].scrollIntoView({behavior:'smooth',block:'center'}); return; }
-  var target=cards[i].offsetLeft+cards[i].offsetWidth/2-window.innerWidth/2, p=maxX?Math.min(1,Math.max(0,target/maxX)):0;
-  var top=tl.getBoundingClientRect().top+window.scrollY+p*(tl.offsetHeight-window.innerHeight);
-  window.scrollTo({top:top,behavior:reduce.matches?'auto':'smooth'});
-}
+function loop(){ raf=0; pos+=(target-pos)*.16; if(Math.abs(target-pos)<.5) pos=target; draw(); if(pos!==target) raf=requestAnimationFrame(loop); }
+function moveTo(v){ target=Math.max(0,Math.min(maxX,v)); if(reduce.matches){ return; } if(!raf) raf=requestAnimationFrame(loop); }
+function goTo(i){ i=Math.max(0,Math.min(cards.length-1,i)); if(reduce.matches){ cards[i].scrollIntoView({block:'center'}); return; } moveTo(centre(i)); }
 dots.addEventListener('click',function(e){ var b=e.target.closest('button'); if(b) goTo(dotEls.indexOf(b)); });
-// sideways trackpad swipes move through time as well
-tl.addEventListener('wheel',function(e){
-  if(stacked()||Math.abs(e.deltaX)<=Math.abs(e.deltaY)) return;
-  var r=tl.getBoundingClientRect(); if(r.top>1||r.bottom<window.innerHeight-1) return;
-  e.preventDefault(); window.scrollBy(0,e.deltaX);
-},{passive:false});
-window.addEventListener('scroll',req,{passive:true});
-window.addEventListener('resize',layout);
-[reduce,narrow].forEach(function(m){ (m.addEventListener?m.addEventListener('change',layout):m.addListener(layout)); });
-layout();
-if(document.fonts&&document.fonts.ready) document.fonts.ready.then(layout);
-
-/* ---- highlights shown one at a time while scrolling (q must contain mk) ---- */
-var HIGHLIGHTS = [
-  {who:'Lean Strategist', org:'Chick-fil-A', mk:'a world-class learning environment', q:'None of us could recall an experience or approach as thoughtfully designed, engaging, and effective as your simulation lab. Congratulations on creating what we believe to be a world-class learning environment.'},
-  {who:'Production Manager', org:'Magna International', mk:'I have learned more in your class than any of the corporate training I have received to date.', q:'While our corporate training and the Magna Factory Concept Standards (MAFACT) mirror many Lean aspects, I have learned more in your class than any of the corporate training I have received to date.'},
-  {who:'Maria S. Gutierrez', org:'Director, Corporate Responsibility and Sustainability · Bendix', mk:'invaluable for the development of our future engineers.', q:'The work that is being done there in teaching lean and production systems is invaluable for the development of our future engineers.'},
-  {who:'Maruf Rahman', org:'University of Texas at Arlington', mk:'exceptional examples of continuous improvement in action.', q:'Having lived, breathed, and practiced Lean manufacturing since 1996, I found your implementation and the culture you\'ve fostered to be exceptional examples of continuous improvement in action.'},
-  {who:'Chief Operating Officer', org:'Borbet Alabama', mk:'implement lean manufacturing from ground zero', q:'Over the past 2 years, we\'ve been able to implement lean manufacturing from ground zero and reduce waste throughout our value stream by applying techniques that the students have learned in Professor Devall\'s class. The students are true professionals…'},
-  {who:'Auburn University official', org:'After a NASA visit to the lab', mk:'Everyone was blown away at your presentation.', q:'Everyone was blown away at your presentation. From a 10 year automotive veteran it was spot on. The leader of the NASA group, Rick Burt, even invited you to Michoud to teach Boeing how to work the SLS core stage.'}
-];
-(function(){
-  var spot=document.getElementById('spot'), box=document.getElementById('spotQuotes'), ticks=document.getElementById('spotTicks'), nEl=document.getElementById('spotN');
-  document.getElementById('spotT').textContent=String(HIGHLIGHTS.length).padStart(2,'0');
-  box.innerHTML=HIGHLIGHTS.map(function(h){ return '<figure class="sq"><span class="qm" aria-hidden="true">\u201C</span><blockquote>'+markUp(h.q,h.mk)+'</blockquote><cite><b>'+esc(h.who)+'</b><span class="mono">'+esc(h.org)+'</span></cite></figure>'; }).join('');
-  ticks.innerHTML=HIGHLIGHTS.map(function(){return '<i></i>';}).join('');
-  var qs=[].slice.call(box.children), ts=[].slice.call(ticks.children), cur=-1, raf=0;
-  function stacked(){ return reduce.matches; }
-  function size(){ spot.classList.toggle('stacked',stacked()); spot.style.height=stacked()?'':(window.innerHeight*(0.75*HIGHLIGHTS.length+0.6))+'px'; tick(); }
-  function tick(){
-    raf=0; if(stacked()){ qs.forEach(function(q){q.classList.add('on');}); return; }
-    var r=spot.getBoundingClientRect(), span=spot.offsetHeight-window.innerHeight, p=span>0?Math.min(.9999,Math.max(0,-r.top/span)):0;
-    var i=Math.floor(p*HIGHLIGHTS.length); if(i===cur) return; cur=i;
-    qs.forEach(function(q,k){ q.classList.toggle('on',k===i); q.classList.toggle('past',k<i); q.setAttribute('aria-hidden',k===i?'false':'true'); });
-    ts.forEach(function(t,k){ t.classList.toggle('on',k<=i); });
-    nEl.textContent=String(i+1).padStart(2,'0');
-  }
-  window.addEventListener('scroll',function(){ if(!raf) raf=requestAnimationFrame(tick); },{passive:true});
-  window.addEventListener('resize',size);
-  (reduce.addEventListener?reduce.addEventListener('change',size):reduce.addListener(size));
-  size();
-})();
+sdlg.addEventListener('wheel',function(e){ if(reduce.matches) return; e.preventDefault(); moveTo(target+(Math.abs(e.deltaX)>Math.abs(e.deltaY)?e.deltaX:e.deltaY)); },{passive:false});
+sdlg.addEventListener('keydown',function(e){ if(e.key==='ArrowRight'){ e.preventDefault(); goTo(near+1); } else if(e.key==='ArrowLeft'){ e.preventDefault(); goTo(near-1); } });
+var dragX=null, dragT=0;
+view.addEventListener('pointerdown',function(e){ if(reduce.matches) return; dragX=e.clientX; dragT=target; view.classList.add('drag'); view.setPointerCapture(e.pointerId); });
+view.addEventListener('pointermove',function(e){ if(dragX!==null) moveTo(dragT-(e.clientX-dragX)*1.4); });
+['pointerup','pointercancel'].forEach(function(t){ view.addEventListener(t,function(){ dragX=null; view.classList.remove('drag'); }); });
+document.getElementById('storyBtn').addEventListener('click',function(){ if(sdlg.showModal) sdlg.showModal(); else sdlg.setAttribute('open',''); layout(); document.getElementById('storyClose').focus(); });
+document.getElementById('storyClose').addEventListener('click',function(){ if(sdlg.close) sdlg.close(); else sdlg.removeAttribute('open'); });
+window.addEventListener('resize',function(){ if(sdlg.open) layout(); });
+(reduce.addEventListener?reduce.addEventListener('change',layout):reduce.addListener(layout));
 
 /* ---- testimonials ---- */
 var grid=document.getElementById('grid'), fEl=document.getElementById('filters'), fSub=document.getElementById('fSub');
@@ -533,7 +447,7 @@ var SB_URL='https://txmcwrwxqbribdhyprqu.supabase.co', SB_KEY='sb_publishable_rv
 var dlg=document.getElementById('share'), form=document.getElementById('shareForm'), done=document.getElementById('shareDone'), err=document.getElementById('shareErr'), send=document.getElementById('shareSend'), cnt=document.getElementById('storyCount');
 function openShare(){ form.hidden=false; done.hidden=true; err.textContent=''; if(dlg.showModal) dlg.showModal(); else dlg.setAttribute('open',''); form.first.focus(); }
 function closeShare(){ if(dlg.close) dlg.close(); else dlg.removeAttribute('open'); }
-document.getElementById('shareBtn').addEventListener('click',openShare);
+[].forEach.call(document.querySelectorAll('[data-share]'),function(b){ b.addEventListener('click',openShare); });
 dlg.addEventListener('click',function(e){ if(e.target.closest('[data-close]')||e.target===dlg) closeShare(); });
 form.story.addEventListener('input',function(){ cnt.textContent=form.story.value.length+' / 6000'; });
 form.addEventListener('input',function(){ err.textContent=''; });
