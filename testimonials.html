@@ -93,10 +93,6 @@ a{color:inherit}
 
 /* ---------- voices ---------- */
 .voices{padding:clamp(72px,9vw,120px) 0 clamp(60px,8vw,100px)}
-.feature{margin-top:clamp(36px,5vw,56px);display:grid;grid-template-columns:auto 1fr;gap:clamp(16px,3vw,36px);align-items:start;padding:clamp(28px,4vw,48px) 0;border-top:1px solid var(--line-2);border-bottom:1px solid var(--line)}
-.feature .qm{font:400 clamp(90px,12vw,160px)/.7 var(--f-display);color:var(--orange)}
-.feature blockquote{font:400 clamp(24px,3vw,38px)/1.25 var(--f-display);letter-spacing:-.01em}
-.feature cite{display:block;margin-top:20px;font-style:normal;color:var(--ink-3)}
 .filters{display:flex;flex-wrap:wrap;gap:8px;margin:clamp(36px,5vw,52px) 0 28px}
 .filters button{font:500 12.5px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;padding:10px 15px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink-2);cursor:pointer;transition:all .2s}
 .filters button span{color:var(--ink-3);margin-left:6px}
@@ -148,7 +144,36 @@ button.pill.solid{background:var(--orange-2);color:#1A0C02}
 .share .done{text-align:center;justify-items:center}
 .share .done .ok{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:rgba(63,182,139,.15);color:#6FD6AE;font-size:26px}
 @media (max-width:520px){.share .two{grid-template-columns:1fr}}
-@media (prefers-reduced-motion:reduce){.q{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+/* highlights: one quote at a time while scrolling */
+.spot{position:relative;margin-top:clamp(24px,4vw,48px)}
+.spot-stage{position:sticky;top:62px;height:calc(100vh - 62px);display:flex;align-items:center;overflow:hidden}
+.spot-in{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.6fr);gap:clamp(28px,5vw,72px);align-items:center}
+.spot-side{display:grid;gap:18px;align-content:center;justify-items:start}
+.spot-side .sec-k{width:100%}
+.spot-h{font:400 clamp(28px,3.4vw,44px)/1.08 var(--f-display);letter-spacing:-.01em}
+.spot-h em{font-style:italic;color:var(--orange)}
+.spot-count{color:var(--ink-3)}.spot-count b{color:var(--orange);font-weight:600}
+.spot-ticks{display:flex;gap:6px}
+.spot-ticks i{width:26px;height:3px;border-radius:2px;background:var(--line-2);transition:background .3s}
+.spot-ticks i.on{background:var(--orange-2)}
+.spot-quotes{position:relative;min-height:min(64vh,520px)}
+.sq{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;opacity:0;transform:translateY(28px) scale(.98);transition:opacity .6s,transform .7s cubic-bezier(.2,.7,.2,1);pointer-events:none}
+.sq.on{opacity:1;transform:none;pointer-events:auto}
+.sq.past{transform:translateY(-28px) scale(.98)}
+.sq .qm{font:400 clamp(70px,8vw,120px)/.6 var(--f-display);color:var(--orange);height:.5em}
+.sq blockquote{font:400 clamp(22px,2.7vw,36px)/1.3 var(--f-display);letter-spacing:-.01em;margin-top:18px}
+.sq cite{display:block;margin-top:24px;font-style:normal}
+.sq cite b{display:block;font:600 16px var(--f-body);color:var(--ink)}
+.sq cite span{display:block;margin-top:4px;color:var(--ink-3)}
+mark{color:inherit;background:linear-gradient(transparent 58%,rgba(232,119,34,.42) 58%,rgba(232,119,34,.42) 92%,transparent 92%) no-repeat 0 0/0% 100%;transition:background-size 1.1s cubic-bezier(.3,.7,.2,1) .35s;padding:0 .04em}
+.sq.on mark,.q.in mark{background-size:100% 100%}
+.q mark{transition-delay:.5s}
+.spot.stacked .spot-stage{position:static;height:auto;padding:40px 0}
+.spot.stacked .spot-quotes{min-height:0;display:grid;gap:44px}
+.spot.stacked .sq{position:static;opacity:1;transform:none}
+.spot.stacked .spot-count,.spot.stacked .spot-ticks{display:none}
+@media (max-width:820px){.spot-in{grid-template-columns:1fr;gap:20px}.spot-side{gap:12px}.spot-side .pill,.spot-ticks{display:none}.spot-quotes{min-height:min(60vh,520px)}.spot-h{font-size:26px}}
+@media (prefers-reduced-motion:reduce){mark{transition:none;background-size:100% 100%}.q{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
@@ -199,13 +224,22 @@ button.pill.solid{background:var(--orange-2);color:#1A0C02}
       <h2 class="sec-h" id="voices-h">What people <em>say</em></h2>
       <p class="sec-p">Notes from students, working engineers taking the Lean course, faculty from other universities and industry partners, collected over the years by Dr. Tom Devall.</p>
 
-      <figure class="feature">
-        <span class="qm" aria-hidden="true">“</span>
-        <div>
-          <blockquote>None of us could recall an experience or approach as thoughtfully designed, engaging, and effective as your simulation lab. Congratulations on creating what we believe to be a world-class learning environment.</blockquote>
-          <cite class="mono">Lean Strategist · Chick-fil-A</cite>
+    </div>
+    <div class="spot" id="spot" aria-labelledby="spot-h">
+      <div class="spot-stage">
+        <div class="wrap spot-in">
+          <div class="spot-side">
+            <p class="sec-k mono">Highlights</p>
+            <h3 class="spot-h" id="spot-h">Why industry and universities <em>trust Tiger Motors</em></h3>
+            <p class="spot-count mono"><b id="spotN">01</b> / <span id="spotT">06</span></p>
+            <div class="spot-ticks" id="spotTicks" aria-hidden="true"></div>
+            <a class="pill solid" href="index.html#contact">Partner with us</a>
+          </div>
+          <div class="spot-quotes" id="spotQuotes"></div>
         </div>
-      </figure>
+      </div>
+    </div>
+    <div class="wrap">
 
       <div class="filters" id="filters" role="toolbar" aria-label="Filter testimonials"></div>
       <p class="f-sub" id="fSub" aria-live="polite"></p>
@@ -277,19 +311,19 @@ var TIMELINE = [
 /* ---- Testimonials: add new ones to this list. g = students | pros | academia | industry ---- */
 var GROUPS = {
   students:{l:'Students', d:'Auburn students who took the Lean course or worked in the lab.'},
-  pros:{l:'Professionals in the course', d:'Working engineers and managers who took the Lean course, many as distance graduate students.'},
+  pros:{l:'Professionals in the course', d:'Working engineers, managers and officers who took the Lean course, many online as distance graduate students.'},
   academia:{l:'Academia', d:'Faculty and leaders from other universities and programs who visited or heard Dr. Devall teach.'},
   industry:{l:'Industry', d:'Companies that visited the lab or partnered with its students.'}
 };
 var VOICES = [
   {g:'students', who:'Auburn student', q:['I learned so many valuable lessons and principles in your Lean class that I may have the opportunity to apply soon. Your class was one of my most enjoyable courses and it\'s because you as a professor made the content fun to learn, and because of that I got the most out of it. I credit your teachings and support with giving my senior design team the foundation to produce a good project and take 3rd in the presentations this spring!']},
   {g:'students', who:'Auburn student', q:['Having taken your Lean class, I can confidently say it has been my favorite course during my time at Auburn. My group and I have gained knowledge and practical insights, and we all deeply admire your teaching style and expertise. Your class has been instrumental in shaping our understanding of lean principles, and we are eager to apply those skills to a senior design project.']},
-  {g:'students', who:'Auburn student and teaching assistant', q:['I truly am thankful and blessed that you trusted and inspired me to assist with teaching the class. I learned more in 6 months with you than most of my college career combined.'], hl:true},
+  {g:'students', who:'Auburn student and teaching assistant', q:['I truly am thankful and blessed that you trusted and inspired me to assist with teaching the class. I learned more in 6 months with you than most of my college career combined.']},
   {g:'pros', who:'Operations Director', org:'Mayo Operations Components', q:['As I approach the end of my time in your class and have had such an impressive learning experience, I would like to thank you for your time and for sparking our minds with your incredible experiences and stories.','It has been an excellent opportunity for me to change the way I do my own work by going back to basics and rethinking how I try to sail this boat.']},
   {g:'pros', who:'Production Manager', org:'Boeing', q:['My name is Katie and I am one of your distance grad students for Lean. I am a production manager at the Boeing Company. I lead several departments that manufacture with glass like canopies, windshields, and sensor assemblies. I know that your question at the end of the lecture was rhetorical but to me, you proved it. I wanted to give you the feedback, as someone in the industry, it was a powerful lecture, and I appreciated you presenting the method and then your proof it works. Because drilling and manufacturing with glass is pretty specialized, my team has our own support functions. This gives me some perspective on how to pitch to my boss that the glass team wants to try something different.']},
   {g:'pros', who:'Engineer', org:'Graduate program alumnus', q:['Thank you again for meeting with me back in 2023 after taking your Lean Manufacturing course. That was my favorite course during my graduate program, and I learned/implemented more methods from that one course than anything else I have taken.']},
   {g:'pros', who:'Army Lieutenant', q:['Dr. Devall, just wanted to reach out and see how you are doing? I wanted to say your class has been helpful in my actual career and I\'ve actually been using a lot of what I was taught during your course in industry. Thank you! I was actually in the field discussing takt time and the client was impressed by the concept (he never heard of it before).']},
-  {g:'pros', who:'Industrial Engineer', org:'Faurecia', hl:true, q:['In as little as 4 months, I have completely transcended my career, and I owe this to one person from Auburn: Tom Devall. The foundation he gave me in his Lean manufacturing class has helped me move 3 positions up since I began my career in July! I have been able to completely turn around critical areas in my plant and save my company millions of dollars by implementing ideas and methodologies that Mr. Devall taught in the Lean class. His teachings have helped me adapt quickly to the industrial environment and immediately improve manufacturing lines. I work for the 6th largest parts manufacturer worldwide, and because of his class I have the edge on colleagues.']},
+  {g:'pros', who:'Industrial Engineer', org:'Faurecia', hl:true, mk:'save my company millions of dollars', q:['In as little as 4 months, I have completely transcended my career, and I owe this to one person from Auburn: Tom Devall. The foundation he gave me in his Lean manufacturing class has helped me move 3 positions up since I began my career in July! I have been able to completely turn around critical areas in my plant and save my company millions of dollars by implementing ideas and methodologies that Mr. Devall taught in the Lean class. His teachings have helped me adapt quickly to the industrial environment and immediately improve manufacturing lines. I work for the 6th largest parts manufacturer worldwide, and because of his class I have the edge on colleagues.']},
   {g:'pros', who:'Process Engineer', org:'Johnson Controls', q:['I wanted to let you know that I got the position of an Industrial Engineer at Johnson Controls in Grand Rapids, Michigan. Thank you so much for all the tips you gave me for the Gemba Walk; it helped in getting this position.']},
   {g:'pros', who:'Process Engineer', org:'Faurecia', q:['Just had my interview with Faurecia. I enjoyed the conversation thoroughly and actually used your lean class to answer some questions! He spoke highly of your lego lab and stated "he should patent it and sell it to other universities because we need more lean leaders". So you should be happy with that comment!']},
   {g:'pros', who:'Industrial Engineer', org:'Intel Corp.', q:['I am settled in Phoenix and in my fifth week of work at Intel. It\'s going well. I was given my first project which is developing a lean pull dashboard to forecast orders that should be fulfilled across Intel\'s internal supply chain. Seems like I will get to use a lot of the things I\'ve used in the past on projects I did with you.']},
@@ -298,16 +332,31 @@ var VOICES = [
   {g:'pros', who:'Industrial Engineer', org:'Peterbilt', q:['Thank you for the opportunity to spend my senior design semester working with great people in a great lab. The efforts I have made in the past few months have allowed me to land an exciting Lean Six Sigma / Statistical Quality internship with Peterbilt Motors in Denton, TX. I have Tiger Motors to thank for that!']},
   {g:'pros', who:'Engineer', org:'THAAD', q:['That was the best 5S lecture that I have ever seen as it was obviously from the heart, mind and tempered with much experience. I am going through all of the above in THAAD on 5S and everything else that you could imagine.']},
   {g:'pros', who:'ACS Manager', org:'Lockheed Martin Space', q:['I work at Lockheed Martin Space in Denver, CO. I met one of your former students while taking a Black Belt class in NJ. She crushed the entire class by her knowledge of Lean Six Sigma. The class joke was why should we be taking this class when we could just hire an industrial engineer from Auburn. Long story short… that\'s how I came to be in your class right now.']},
+  {g:'pros', who:"Senior Master Scheduler", org:"Intuitive Research and Technology", hl:true, mk:"you set a ridiculously high bar", q:["I am so grateful to have started my Master's program at Auburn with your class! But gracious - you set a ridiculously high bar. If only all professors could emulate your style of TEACHing, not just reading slides that come directly from the textbook. I learned so much last semester from your anecdotes, examples from your WEALTH of experience, analogies… As a former educator, I always appreciated any and all feedback from my students, past and present. So please know that you have a big fan in Huntsville! If you offer any other classes, I will be the first to register!"]},
+  {g:'pros', who:"Naval Officer", org:"U.S. Navy", q:["I just had an incredible lesson (and after-class discussion) with Mr. Devall about Hoshin planning - especially for those with 10+ years of work experience. This is my first year at a graduate-level course at a civilian university, but with my time in the Navy, the skills mentioned in this class could easily fill an entire graduate-level course with vision statements specifically tied to thoughtful, applicable metrics."]},
+  {g:'pros', who:"Process Engineer", org:"Citadel · MIT graduate", q:["It's hard to believe how awesome it has been to learn and study with some of the smartest people I have ever met here at MIT. I focused on operations and manufacturing throughout my program and regularly thought back to your class on Lean Engineering. A friend of mine did his thesis work on developing a student-run manufacturing lab to teach lean principles here, not unlike your useful Lego Lab at Auburn. My thesis work was with a medium sized US distributor on supply chain network optimization. Thanks for your teaching, advising my senior design project in 2019, and your letter of recommendation to this awesome program."]},
+  {g:'pros', who:"Production Manager", org:"Magna International", hl:true, mk:"I have learned more in your class than any of the corporate training I have received to date", q:["I wanted to express my appreciation for the Lean Manufacturing Online class. I have been in automotive manufacturing for 4 years with my current company that falls under the Magna Corporate umbrella. While our corporate training and the Magna Factory Concept Standards (MAFACT) mirror many Lean aspects, I have learned more in your class than any of the corporate training I have received to date. The CI and leadership classes will be information I will take with me and use practically for the rest of my manufacturing career. I recently proposed the CI strategy outline in your class to our management to replace our current CI program (which is one of the many aspects you spoke about in your lectures and correctly identified what our facility has in place and why it does not work). As you probably know, it is a tough sell for management to buy into. I am in place to take over the engineering department after I receive my Masters degree, so I will have more authority to push for the CI program at that time. Again, thank you for an informative class. Do you teach any other online classes in the Industrial systems program?"]},
+  {g:'pros', who:"Program Manager", org:"Leidos", q:["I want to honestly let you know that I really enjoyed the course. I have a deeper understanding now of Lean than I thought was possible. Even though I wasn't part of the Labs, the videos still provided a good look at its implementation."]},
+  {g:'pros', who:"QC Improvement Specialist", org:"Honda", q:["I am enjoying how relatable your lectures are, as it appears that many automotive plants deal with the same systemic issues. However, I've already been able to use your suggestions and implement them in my department."]},
+  {g:'pros', who:"Online student", org:"Manufacturing plant", q:["I would say that the Lean Systems class has been one of the most influential classes that I have taken. It has very much changed how I look at processes in my manufacturing plant, and I am currently pursuing a \"lean transformation\" there. I would like to discuss that a little with you if you would like to and have time for that."]},
+  {g:'pros', who:"Online student", q:["I just wanted to let you know that I am implementing your issue board for my team at work. I thought it was brilliant!"]},
+  {g:'pros', who:"Officer", org:"U.S. Air Force", hl:true, mk:"Our efficiency exploded.", q:["I'm now an officer in the Air Force getting ready to start pilot training; however, I was very recently sent out to help with Operation Allies Welcome. I was attached to the construction team and we were tasked with building shelters for the incoming Afghans primarily. Towards the end of my time there I was helping lead a worksite in charge of pre-fabricating panels for walls and decks for installation in the servicemembers Life Support Area. We would prefab the parts, send them to the LSA, the deck team would install the deck under a tent, and the wall team would install the walls inside the tent. Without our decks and walls being done, the whole thing would grind to a halt. We had a huge daily quota to achieve to stay on the timeline, 98 wall panels of one type, 42 wall panels of another type, and 64 deck panels of 4 different sizes all to be done with less than 20 people in a 12 hour day. A huge ask.","We started slow, but because of the lessons I learned in your class I was able to see the inefficiencies and the waste and I knew how we could mitigate it all. I wanted to make big sweeping changes and leave it all up to “trust me”, but you were right about the resistance people have to anything other than the traditional manufacturing principles, especially when it comes to inventory. The “squirrel hoarding nuts for the winter” mentality runs very deep and that was the biggest hurdle. However, over time I was able to point out the wastes, institute changes, and prove processes to the people on my team, and institute a (more or less) lean system to our worksite.","Our efficiency exploded. We went from taking a full 12 hours to pump out our quota to, usually, less than 8 hours. Because of your lessons and the insane work ethic of my team we were lauded as “the elite construction team” of the task force with the most consistent quality work being done. No corners cut, only waste cut out. All this to say, thanks for making me and my team look good, 10/10 would take your class again."]},
+  {g:'pros', who:"Online student", org:"Process Engineer", q:["I have been working as a Process Engineer for a plastics company for the past 5, almost 6, years. This is a fun, challenging job and I'm really proud of my accomplishments here. Auburn set me up for success. But I am ready for a new challenge and I want to build on my career by completing a graduate degree. I'm reaching out to you specifically because I liked your class a lot, and I remember you the best of all my professors at Auburn."]},
+  {g:'pros', who:"Online student", org:"INSY 6806 Lean Manufacturing", q:["I've almost finished my first class INSY 6806 Lean Manufacturing. Tom Devall is an Auburn treasure!!!"]},
   {g:'academia', who:'Air Force Major', org:'Air University', q:['We greatly appreciate your talk with us yesterday… simply life-changing. I talked with some students, and it is so refreshing to hear a talk about leadership from someone who is humble and is not in the military. It\'s a great perspective for us to have.']},
   {g:'academia', who:'Professor, Innovation Development', org:'Air University', q:['Always a great lesson and highly rated by our students…']},
-  {g:'academia', who:'Department Chair', org:'Industrial and Systems Engineering, Auburn University', hl:true, q:['The ABET Accreditation team raved about the LEGO lab and the work from Tom (lean, green belt, etc.). In the student meeting, students noted his efforts.']},
+  {g:'academia', who:'Department Chair', org:'Industrial and Systems Engineering, Auburn University', hl:true, mk:'raved about the LEGO lab', q:['The ABET Accreditation team raved about the LEGO lab and the work from Tom (lean, green belt, etc.). In the student meeting, students noted his efforts.']},
   {g:'academia', who:'Karl Haapala', org:'Oregon State University', q:['Thank you for organizing such a wonderful visit. It was extremely valuable, and I truly learned a boatload (I can\'t say this for every such trip I\'ve made, so I really appreciate your efforts and willingness to share!).']},
   {g:'academia', who:'Catherine Maware', org:'University of Kentucky', q:['Thank you so much for hosting me in May. I truly appreciate your hospitality, generosity, and the time you took to share your knowledge and experiences with me. The visit was extremely valuable, and I am grateful for the opportunity.']},
-  {g:'academia', who:'Diana Schwerha', org:'Chair, Industrial Engineering · Liberty University', q:['I\'m all in for getting a consortium together. Let me know how I can help. Thanks for sending the website link! This is great, and I know that we will be able to use some of the materials.']},
-  {g:'academia', who:'Maruf Rahman', org:'University of Texas at Arlington', q:['I want to express my sincere appreciation for your kindness and hospitality toward me and our team from UTA. Our visit to Tiger Motor was truly memorable. Your leadership and the remarkable Lean training environment you have built at Tiger Motor deeply impressed me. Having lived, breathed, and practiced Lean manufacturing since 1996, I found your implementation and the culture you\'ve fostered to be exceptional examples of continuous improvement in action. It was awesome to see Lean principles translated into such an effective and engaging learning setting.']},
-  {g:'industry', who:'Lean Strategist', org:'Chick-fil-A', q:['I want to extend our sincere thanks to you and your students for the engaging and insightful tour of the Industrial and Systems Engineering LEGO Lab Simulator at Auburn University. We reflected on the experience with great enthusiasm during our drive back to Atlanta. Collectively, the three of us have been exposed to a wide range of continuous improvement theories across dozens of organizations. Yet, none of us could recall an experience or approach as thoughtfully designed, engaging, and effective as your simulation lab. Congratulations on creating what we believe to be a world-class learning environment.']},
+  {g:'academia', who:'Diana Schwerha', org:'Chair, Industrial Engineering · Liberty University', hl:true, mk:'we will be able to use some of the materials', q:['I\'m all in for getting a consortium together. Let me know how I can help. Thanks for sending the website link! This is great, and I know that we will be able to use some of the materials.']},
+  {g:'academia', who:'Maruf Rahman', org:'University of Texas at Arlington', hl:true, mk:'exceptional examples of continuous improvement in action', q:['I want to express my sincere appreciation for your kindness and hospitality toward me and our team from UTA. Our visit to Tiger Motor was truly memorable. Your leadership and the remarkable Lean training environment you have built at Tiger Motor deeply impressed me. Having lived, breathed, and practiced Lean manufacturing since 1996, I found your implementation and the culture you\'ve fostered to be exceptional examples of continuous improvement in action. It was awesome to see Lean principles translated into such an effective and engaging learning setting.']},
+  {g:'academia', who:"Auburn University official", org:"Auburn University", hl:true, mk:"Everyone was blown away at your presentation.", q:["I wanted to send you a personal thank you for the NASA tour on Monday. Everyone was blown away at your presentation. From a 10 year automotive veteran it was spot on. The leader of the NASA group even invited you to Michoud to teach Boeing how to work the SLS core stage."]},
+  {g:'industry', who:'Lean Strategist', org:'Chick-fil-A', hl:true, mk:'a world-class learning environment', q:['I want to extend our sincere thanks to you and your students for the engaging and insightful tour of the Industrial and Systems Engineering LEGO Lab Simulator at Auburn University. We reflected on the experience with great enthusiasm during our drive back to Atlanta. Collectively, the three of us have been exposed to a wide range of continuous improvement theories across dozens of organizations. Yet, none of us could recall an experience or approach as thoughtfully designed, engaging, and effective as your simulation lab. Congratulations on creating what we believe to be a world-class learning environment.']},
   {g:'industry', who:'Senior Strategy Consultant', org:'Accenture', q:['Tom Devall is one of my favorite professors from undergrad and brings a wealth of industry experience to the classroom. I think you two have a lot in common and will have plenty to talk about.']},
-  {g:'industry', who:'Chief Operating Officer', org:'Borbet Alabama', hl:true, q:['The Borbet Team has been extremely pleased with the Auburn University partnership. Over the past 2 years, we\'ve been able to implement lean manufacturing from ground zero and reduce waste throughout our value stream by applying techniques that the students have learned in Professor Devall\'s class. The students are true professionals and eager to learn and gain manufacturing experience on the shop floor. They are exposed to real-life issues and work with the entire workforce (hourly and salaried) to resolve problems and identify permanent corrective actions by working together as a cohesive team using a strategic and analytical approach. We look forward to our continued success working with the Industrial Engineering Department for future projects.']}
+  {g:'industry', who:'Chief Operating Officer', org:'Borbet Alabama', hl:true, mk:'The students are true professionals', q:['The Borbet Team has been extremely pleased with the Auburn University partnership. Over the past 2 years, we\'ve been able to implement lean manufacturing from ground zero and reduce waste throughout our value stream by applying techniques that the students have learned in Professor Devall\'s class. The students are true professionals and eager to learn and gain manufacturing experience on the shop floor. They are exposed to real-life issues and work with the entire workforce (hourly and salaried) to resolve problems and identify permanent corrective actions by working together as a cohesive team using a strategic and analytical approach. We look forward to our continued success working with the Industrial Engineering Department for future projects.']},
+  {g:'industry', who:"Maria S. Gutierrez", org:"Director, Corporate Responsibility and Sustainability · Bendix", hl:true, mk:"invaluable for the development of our future engineers", q:["The work that is being done there in teaching lean and production systems is invaluable for the development of our future engineers. Thank you for allowing us to benchmark your lab and sharing your profound knowledge and passion in production systems. This act of kindness has provided us with many ideas that we have integrated into one of our current projects – construction and equipment of an industrial production slab for a vocational high school in Mexico."]},
+  {g:'industry', who:"Brose Tuscaloosa", org:"Internal newsletter", hl:true, mk:"Benchmark practice at Brose Tuscaloosa recognized by Central Brose Plant/Production System", q:["Benchmark practice at Brose Tuscaloosa recognized by Central Brose Plant/Production System: In our journey towards inculcating a lean culture, Saurabh Ghonasgi, Industrial Engineer in the Production System department, in conjunction with his professor and mentor Tom Devall, Director of Automotive manufacturing initiatives at Auburn University, proposed a modified system during a senior management visit to Auburn University. As part of Brose's partnership, determined to make a difference and distinguish ourselves as a benchmark Plant in Continuous Improvement, the team decided to pilot the concept in IBK BMW seats division of the plant."]},
+  {g:'industry', who:"Bob Johnson", org:"Senior Manager · Honda", hl:true, mk:"impressed with the small-scale, total manufacturing center", q:["I appreciated seeing your team in action, and I was impressed with the small-scale, total manufacturing center you have in the basement."]}
 ];
 
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
@@ -377,16 +426,48 @@ window.addEventListener('resize',layout);
 layout();
 if(document.fonts&&document.fonts.ready) document.fonts.ready.then(layout);
 
+/* ---- highlights shown one at a time while scrolling (q must contain mk) ---- */
+var HIGHLIGHTS = [
+  {who:'Lean Strategist', org:'Chick-fil-A', mk:'a world-class learning environment', q:'None of us could recall an experience or approach as thoughtfully designed, engaging, and effective as your simulation lab. Congratulations on creating what we believe to be a world-class learning environment.'},
+  {who:'Production Manager', org:'Magna International', mk:'I have learned more in your class than any of the corporate training I have received to date.', q:'While our corporate training and the Magna Factory Concept Standards (MAFACT) mirror many Lean aspects, I have learned more in your class than any of the corporate training I have received to date.'},
+  {who:'Maria S. Gutierrez', org:'Director, Corporate Responsibility and Sustainability · Bendix', mk:'invaluable for the development of our future engineers.', q:'The work that is being done there in teaching lean and production systems is invaluable for the development of our future engineers.'},
+  {who:'Maruf Rahman', org:'University of Texas at Arlington', mk:'exceptional examples of continuous improvement in action.', q:'Having lived, breathed, and practiced Lean manufacturing since 1996, I found your implementation and the culture you\'ve fostered to be exceptional examples of continuous improvement in action.'},
+  {who:'Chief Operating Officer', org:'Borbet Alabama', mk:'implement lean manufacturing from ground zero', q:'Over the past 2 years, we\'ve been able to implement lean manufacturing from ground zero and reduce waste throughout our value stream by applying techniques that the students have learned in Professor Devall\'s class. The students are true professionals…'},
+  {who:'Auburn University official', org:'After a NASA visit to the lab', mk:'Everyone was blown away at your presentation.', q:'Everyone was blown away at your presentation. From a 10 year automotive veteran it was spot on. The leader of the NASA group even invited you to Michoud to teach Boeing how to work the SLS core stage.'}
+];
+(function(){
+  var spot=document.getElementById('spot'), box=document.getElementById('spotQuotes'), ticks=document.getElementById('spotTicks'), nEl=document.getElementById('spotN');
+  document.getElementById('spotT').textContent=String(HIGHLIGHTS.length).padStart(2,'0');
+  box.innerHTML=HIGHLIGHTS.map(function(h){ return '<figure class="sq"><span class="qm" aria-hidden="true">\u201C</span><blockquote>'+markUp(h.q,h.mk)+'</blockquote><cite><b>'+esc(h.who)+'</b><span class="mono">'+esc(h.org)+'</span></cite></figure>'; }).join('');
+  ticks.innerHTML=HIGHLIGHTS.map(function(){return '<i></i>';}).join('');
+  var qs=[].slice.call(box.children), ts=[].slice.call(ticks.children), cur=-1, raf=0;
+  function stacked(){ return reduce.matches; }
+  function size(){ spot.classList.toggle('stacked',stacked()); spot.style.height=stacked()?'':(window.innerHeight*(0.75*HIGHLIGHTS.length+0.6))+'px'; tick(); }
+  function tick(){
+    raf=0; if(stacked()){ qs.forEach(function(q){q.classList.add('on');}); return; }
+    var r=spot.getBoundingClientRect(), span=spot.offsetHeight-window.innerHeight, p=span>0?Math.min(.9999,Math.max(0,-r.top/span)):0;
+    var i=Math.floor(p*HIGHLIGHTS.length); if(i===cur) return; cur=i;
+    qs.forEach(function(q,k){ q.classList.toggle('on',k===i); q.classList.toggle('past',k<i); q.setAttribute('aria-hidden',k===i?'false':'true'); });
+    ts.forEach(function(t,k){ t.classList.toggle('on',k<=i); });
+    nEl.textContent=String(i+1).padStart(2,'0');
+  }
+  window.addEventListener('scroll',function(){ if(!raf) raf=requestAnimationFrame(tick); },{passive:true});
+  window.addEventListener('resize',size);
+  (reduce.addEventListener?reduce.addEventListener('change',size):reduce.addListener(size));
+  size();
+})();
+
 /* ---- testimonials ---- */
 var grid=document.getElementById('grid'), fEl=document.getElementById('filters'), fSub=document.getElementById('fSub');
 var counts={}; VOICES.forEach(function(v){counts[v.g]=(counts[v.g]||0)+1;});
 fEl.innerHTML='<button type="button" data-f="all" aria-pressed="true">All<span>'+VOICES.length+'</span></button>'+
   Object.keys(GROUPS).map(function(g){return '<button type="button" data-f="'+g+'" aria-pressed="false">'+GROUPS[g].l+'<span>'+(counts[g]||0)+'</span></button>';}).join('');
+function markUp(p,mk){ var t=esc(p); if(!mk) return t; var k=esc(mk), i=t.indexOf(k); return i<0?t:t.slice(0,i)+'<mark>'+k+'</mark>'+t.slice(i+k.length); }
 function render(f){
   var list=VOICES.filter(function(v){return f==='all'||v.g===f;});
   grid.innerHTML=list.map(function(v){
     var len=v.q.join(' ').length;
-    return '<figure class="q'+(v.hl?' hl':'')+(len>520?' long':'')+'"><span class="tag">'+esc(GROUPS[v.g].l)+'</span><blockquote>'+v.q.map(function(p){return '<p>'+esc(p)+'</p>';}).join('')+'</blockquote>'+
+    return '<figure class="q'+(v.hl?' hl':'')+(len>520?' long':'')+'"><span class="tag">'+esc(GROUPS[v.g].l)+'</span><blockquote>'+v.q.map(function(p){return '<p>'+markUp(p,v.mk)+'</p>';}).join('')+'</blockquote>'+
       '<cite>'+esc(v.who)+(v.org?'<small>'+esc(v.org)+'</small>':'')+'</cite></figure>';
   }).join('');
   fSub.textContent = GROUPS[f] ? GROUPS[f].d : '';
