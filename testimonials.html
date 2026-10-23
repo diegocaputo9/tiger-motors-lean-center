@@ -35,6 +35,8 @@ a{color:inherit}
 .top nav a{font:500 12px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;text-decoration:none;padding:8px 12px;border-radius:999px;color:var(--ink-2)}
 .top nav a:hover{background:var(--paper-2);color:var(--ink)}
 @media (max-width:640px){.top nav a.hide-sm{display:none}.home span{display:none}}
+/* the timeline stays hidden on phones until it has more content */
+@media (max-width:760px){#story,.story-link{display:none!important}}
 
 /* hero */
 .hero{padding:clamp(56px,10vw,120px) 0 clamp(40px,6vw,72px)}
@@ -196,7 +198,7 @@ mark{color:inherit;background:linear-gradient(transparent 58%,rgba(232,119,34,.4
       <div class="hero-row">
         <p class="lede">About fifteen years ago, Tiger Motors was an empty space with a gravel floor. Piece by piece, through donations, grants and a lot of student work, it became a full Lean manufacturing lab. This page collects its story and what the people who learned in it have said since.</p>
         <div class="hero-jump">
-          <a class="pill" href="#story">How the lab was built</a>
+          <a class="pill story-link" href="#story">How the lab was built</a>
           <a class="pill solid" href="#voices">Read the testimonials</a>
         </div>
       </div>
