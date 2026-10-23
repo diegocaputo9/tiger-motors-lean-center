@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script>try{if(localStorage.getItem('tm-mode')==='light')document.documentElement.setAttribute('data-mode','light');}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Voices from the Lab · Tiger Motors Lean Education Center</title>
 <meta name="description" content="How the Tiger Motors lab was built, and what students, engineers, professors and industry partners say about learning Lean in it.">
@@ -31,6 +32,14 @@ a{color:inherit}
 .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;height:62px}
 .home{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font:600 15px var(--f-body)}
 .home img{width:34px;height:34px;border-radius:50%}
+.home .logo-light,html[data-mode="light"] .home .logo-dark{display:none}
+html[data-mode="light"] .home .logo-light{display:block}
+.top nav{align-items:center}
+.mode{width:36px;height:36px;margin-left:4px;border-radius:50%;border:1px solid var(--line-2);background:transparent;color:var(--ink);display:grid;place-items:center;cursor:pointer;transition:border-color .2s,color .2s}
+.mode:hover{border-color:var(--orange);color:var(--orange)}
+.mode svg{width:17px;height:17px;grid-area:1/1}
+.mode .i-moon,html[data-mode="light"] .mode .i-sun{display:none}
+html[data-mode="light"] .mode .i-moon{display:block}
 .top nav{display:flex;gap:6px}
 .top nav a{font:500 12px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;text-decoration:none;padding:8px 12px;border-radius:999px;color:var(--ink-2)}
 .top nav a:hover{background:var(--paper-2);color:var(--ink)}
@@ -175,17 +184,39 @@ mark{color:inherit;background:linear-gradient(transparent 58%,rgba(232,119,34,.4
 .spot.stacked .sq{position:static;opacity:1;transform:none}
 .spot.stacked .spot-count,.spot.stacked .spot-ticks{display:none}
 @media (max-width:820px){.spot-in{grid-template-columns:1fr;gap:20px}.spot-side{gap:12px}.spot-side .pill,.spot-ticks{display:none}.spot-quotes{min-height:min(60vh,520px)}.spot-h{font-size:26px}}
+/* ---------- light mode (same switch and colors as the rest of the site) ---------- */
+html[data-mode="light"]{color-scheme:light;
+  --paper:#EDF0F3; --paper-2:#E2E7EC; --card:#FFFFFF; --ink:#0C1B2E; --ink-2:#43536A; --ink-3:#66778C;
+  --line:rgba(12,35,64,.13); --line-2:rgba(12,35,64,.24); --orange:#9A460C; --orange-2:#E87722}
+html[data-mode="light"] body{background:radial-gradient(1200px 700px at 85% -10%,rgba(232,119,34,.08),transparent 60%),var(--paper)}
+html[data-mode="light"] body::before{opacity:.25}
+html[data-mode="light"] .top{background:rgba(237,240,243,.85)}
+html[data-mode="light"] .tl-frame{box-shadow:0 24px 50px -30px rgba(12,35,64,.35)}
+html[data-mode="light"] .tl-ph .soon{background:rgba(255,255,255,.88)}
+html[data-mode="light"] .q{box-shadow:0 1px 0 rgba(12,35,64,.04)}
+html[data-mode="light"] .q.hl{background:linear-gradient(160deg,#FFF6EE,#FFFFFF);border-color:rgba(232,119,34,.5)}
+html[data-mode="light"] .q.hl::before{color:rgba(232,119,34,.22)}
+html[data-mode="light"] mark{background-image:linear-gradient(transparent 58%,rgba(232,119,34,.3) 58%,rgba(232,119,34,.3) 92%,transparent 92%)}
+html[data-mode="light"] .share{box-shadow:0 40px 80px -30px rgba(12,35,64,.45)}
+html[data-mode="light"] .share::backdrop{background:rgba(12,27,46,.45)}
+html[data-mode="light"] .share input,html[data-mode="light"] .share textarea{background:#F6F8FA}
+html[data-mode="light"] .share .err{color:#B42318}
+html[data-mode="light"] .share .done .ok{color:#1C7A55}
 @media (prefers-reduced-motion:reduce){mark{transition:none;background-size:100% 100%}.q{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
 <header class="top">
   <div class="wrap">
-    <a class="home" href="index.html"><img src="logo-circle.png" alt=""><span>Tiger Motors Lean Education Center</span></a>
+    <a class="home" href="index.html"><img class="logo-dark" src="logo-circle-dark.png" alt=""><img class="logo-light" src="logo-circle.png" alt=""><span>Tiger Motors Lean Education Center</span></a>
     <nav aria-label="Page sections">
       <a href="#story" class="hide-sm">The story</a>
       <a href="#voices" class="hide-sm">Voices</a>
-      <a href="index.html#project">← Back</a>
+      <a href="index.html">← Back</a>
+      <button class="mode" id="modeBtn" type="button" aria-label="Switch to light mode" title="Switch to light mode">
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 019.5 4a8.5 8.5 0 1010.5 10.5z"/></svg>
+      </button>
     </nav>
   </div>
 </header>
@@ -483,6 +514,19 @@ fEl.addEventListener('click',function(e){
   render(b.getAttribute('data-f'));
 });
 render('all');
+
+/* ---- light / dark switch, shared with the rest of the site ---- */
+(function(){
+  var btn=document.getElementById('modeBtn'), root=document.documentElement;
+  function sync(){ var t=root.getAttribute('data-mode')==='light'?'Switch to dark mode':'Switch to light mode'; btn.setAttribute('aria-label',t); btn.title=t; }
+  btn.addEventListener('click',function(){
+    var l=root.getAttribute('data-mode')==='light';
+    if(l) root.removeAttribute('data-mode'); else root.setAttribute('data-mode','light');
+    try{ localStorage.setItem('tm-mode', l?'dark':'light'); }catch(e){}
+    sync();
+  });
+  sync();
+})();
 
 /* ---- share your story: saved and emailed to Dr. Devall through the site's Supabase project ---- */
 var SB_URL='https://txmcwrwxqbribdhyprqu.supabase.co', SB_KEY='sb_publishable_rv7klDuiZhvrve5O8wsqmg_1rctcFoo';
