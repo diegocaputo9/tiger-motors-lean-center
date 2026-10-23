@@ -135,6 +135,7 @@ html[data-mode="light"] .mode .i-moon{display:block}
 /* photos scattered between the testimonials */
 .pc{break-inside:avoid;margin:0 0 20px;padding:10px 10px 12px;background:var(--card);border:1px solid var(--line);border-radius:6px;opacity:0;transform:translateY(14px) rotate(var(--tilt,0deg));transition:opacity .5s,transform .5s}
 .pc.in{opacity:1;transform:rotate(var(--tilt,0deg))}
+@media (min-width:1032px){.pc.col-top{break-before:column;-webkit-column-break-before:always}}
 .pc button{all:unset;display:block;width:100%;cursor:zoom-in;border-radius:3px;overflow:hidden}
 .pc button:focus-visible{outline:2px solid var(--orange-2);outline-offset:3px}
 .pc img{display:block;width:100%;height:auto;transition:transform .5s}
@@ -369,12 +370,13 @@ var VOICES = [
 ];
 
 /* ---- Photos shown between the testimonials: add new ones here (files go in testimonial-photos/).
-   before: an org name places the photo right above that testimonial in the full list; the others are spread evenly ---- */
+   before: an org name places the photo right above that testimonial in the full list; the others are spread evenly.
+   top: true starts a new column with this photo on wide screens, so it sits at the top of the right-hand column ---- */
 var PHOTOS = [
   {src:'testimonial-photos/honda-training-2024.jpg', cap:'Honda training at Tiger Motors · 2024', alt:'Honda team members with Tiger Motors staff in the lab'},
   {src:'testimonial-photos/tom-explaining.jpg', before:'Mayo Operations Components', cap:'Tom Devall teaching on the line', alt:'Tom Devall explaining a station to a group in the lab'},
   {src:'testimonial-photos/kia-fall-2024.jpg', cap:'Kia visit · Fall 2024', alt:'Auburn students and Kia staff in a Kia showroom'},
-  {src:'testimonial-photos/diego-explaining.jpg', cap:'Diego Caputo leading a lab session', alt:'Diego Caputo explaining the production system to visitors'},
+  {src:'testimonial-photos/diego-explaining.jpg', top:true, cap:'Diego Caputo leading a lab session', alt:'Diego Caputo explaining the production system to visitors'},
   {src:'testimonial-photos/honda-training-2025.jpg', cap:'Honda training at Tiger Motors · 2025', alt:'Honda team members gathered in the Tiger Motors lab'}
 ];
 
@@ -441,8 +443,8 @@ var counts={}; VOICES.forEach(function(v){counts[v.g]=(counts[v.g]||0)+1;});
 fEl.innerHTML='<button type="button" data-f="all" aria-pressed="true">All<span>'+VOICES.length+'</span></button>'+
   Object.keys(GROUPS).map(function(g){return '<button type="button" data-f="'+g+'" aria-pressed="false">'+GROUPS[g].l+'<span>'+(counts[g]||0)+'</span></button>';}).join('');
 function markUp(p,mk){ var t=esc(p); if(!mk) return t; var k=esc(mk), i=t.indexOf(k); return i<0?t:t.slice(0,i)+'<mark>'+k+'</mark>'+t.slice(i+k.length); }
-function photo(p,i){ var tilt=[-1.2,.9,-.6,1.1,-.8][i%5];
-  return '<figure class="pc" style="--tilt:'+tilt+'deg"><button type="button" data-lb="'+i+'" aria-label="'+esc('Enlarge photo: '+p.cap)+'"><img src="'+esc(p.src)+'" alt="'+esc(p.alt||p.cap)+'" loading="lazy"></button><figcaption>'+esc(p.cap)+'</figcaption></figure>'; }
+function photo(p,i,all){ var tilt=[-1.2,.9,-.6,1.1,-.8][i%5];
+  return '<figure class="pc'+(all&&p.top?' col-top':'')+'" style="--tilt:'+tilt+'deg"><button type="button" data-lb="'+i+'" aria-label="'+esc('Enlarge photo: '+p.cap)+'"><img src="'+esc(p.src)+'" alt="'+esc(p.alt||p.cap)+'" loading="lazy"></button><figcaption>'+esc(p.cap)+'</figcaption></figure>'; }
 var lb=document.getElementById('lb'), lbImg=document.getElementById('lbImg'), lbCap=document.getElementById('lbCap');
 grid.addEventListener('click',function(e){ var b=e.target.closest('[data-lb]'); if(!b) return; var p=PHOTOS[+b.getAttribute('data-lb')]; lbImg.src=p.src; lbImg.alt=p.alt||p.cap; lbCap.textContent=p.cap; if(lb.showModal) lb.showModal(); else lb.setAttribute('open',''); });
 document.getElementById('lbClose').addEventListener('click',function(){ lb.close(); });
@@ -458,9 +460,11 @@ function render(f){
   // all photos in the full list; filtered lists get about one photo per six testimonials
   var n=html.length, out=[], pinned={}, free=[];
   PHOTOS.forEach(function(p,pi){ var k=-1; if(f==='all'&&p.before) list.forEach(function(v,i){ if(k<0&&v.org===p.before) k=i; }); if(k>=0) pinned[k]=pi; else free.push(pi); });
-  var np=f==='all'?free.length:Math.min(free.length,Math.floor(n/6)), at={};
-  for(var k=0;k<np;k++) at[Math.round((k+1)*n/(np+1))]=free[k];
-  html.forEach(function(h,k){ if(k in pinned) out.push(photo(PHOTOS[pinned[k]],pinned[k])); out.push(h); if((k+1) in at) out.push(photo(PHOTOS[at[k+1]],at[k+1])); });
+  // in the full list every photo keeps its own evenly spaced slot, so pinning one does not move the others
+  var at={};
+  if(f==='all') free.forEach(function(pi){ at[Math.round((pi+1)*n/(PHOTOS.length+1))]=pi; });
+  else { var np=Math.min(free.length,Math.floor(n/6)); for(var k=0;k<np;k++) at[Math.round((k+1)*n/(np+1))]=free[k]; }
+  html.forEach(function(h,k){ if(k in pinned) out.push(photo(PHOTOS[pinned[k]],pinned[k],f==='all')); out.push(h); if((k+1) in at) out.push(photo(PHOTOS[at[k+1]],at[k+1],f==='all')); });
   grid.innerHTML=out.join('');
   fSub.textContent = GROUPS[f] ? GROUPS[f].d : '';
   reveal();
