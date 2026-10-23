@@ -121,7 +121,7 @@ async function getCertificate(){
     if(r.error){ toast('We could not issue the certificate yet: ' + r.error.message); return; }
     state.cert = r.data;
   }
-  location.href = 'certificate.html?id=' + encodeURIComponent(state.cert.id);
+  location.href = 'certificate?id=' + encodeURIComponent(state.cert.id);
 }
 
 /* ---------- painting the page ---------- */
@@ -155,8 +155,8 @@ function paintNav(){
   box.innerHTML = '<button type="button" class="acct-btn signed" aria-haspopup="true" aria-expanded="false" data-acct="menu">' + ring(s.pct, 30) + '<b class="acct-ini">' + esc(ini) + '</b><span class="acct-pct">' + s.pct + '%</span></button>' +
     '<div class="acct-menu" role="menu"><div class="am-head"><b>' + esc(((state.profile && (state.profile.first_name + ' ' + state.profile.last_name)) || '').trim() || state.user.email) + '</b><small>' + esc(state.user.email) + '</small></div>' +
     '<div class="am-prog"><span>Lean House progress</span><b>' + s.done + ' / ' + s.total + ' · ' + s.pct + '%</b><i><em style="width:' + s.pct + '%"></em></i></div>' +
-    '<a role="menuitem" href="modules.html">Continue in the Learning Modules</a>' +
-    (CFG.certificates ? (state.cert ? '<a role="menuitem" href="certificate.html?id=' + encodeURIComponent(state.cert.id) + '">View my certificate</a>' : (s.pct === 100 ? '<button type="button" role="menuitem" data-acct="cert">Get my certificate</button>' : '<span class="am-lock">Certificate unlocks at 100%</span>')) : '') +
+    '<a role="menuitem" href="modules">Continue in the Learning Modules</a>' +
+    (CFG.certificates ? (state.cert ? '<a role="menuitem" href="certificate?id=' + encodeURIComponent(state.cert.id) + '">View my certificate</a>' : (s.pct === 100 ? '<button type="button" role="menuitem" data-acct="cert">Get my certificate</button>' : '<span class="am-lock">Certificate unlocks at 100%</span>')) : '') +
     '<button type="button" role="menuitem" data-acct="signout">Sign out</button></div>';
 }
 
@@ -177,7 +177,7 @@ function bannerHTML(){
   }).join('');
   var cert = '';
   if(CFG.certificates){
-    cert = state.cert ? '<a class="btn btn-primary" href="certificate.html?id=' + encodeURIComponent(state.cert.id) + '">View my certificate</a>'
+    cert = state.cert ? '<a class="btn btn-primary" href="certificate?id=' + encodeURIComponent(state.cert.id) + '">View my certificate</a>'
       : (s.pct === 100 ? '<button type="button" class="btn btn-primary" data-acct="cert">Get my certificate</button>' : '<p class="ab-lock">Your certificate unlocks when you complete all ' + s.total + ' resources.</p>');
   }
   return '<div class="ab-ico" aria-hidden="true">' + ring(s.pct, 54) + '<b>' + s.pct + '%</b></div>' +
@@ -263,7 +263,7 @@ function openDialog(view, opts){
       '<p class="ad-err" role="alert" hidden></p>' +
       '<p class="ad-spam"><b>Heads up:</b> the sign-in email sometimes lands in <b>Spam</b> or <b>Junk</b>. If you do not see it in your inbox within a minute, please check there.</p>' +
       '<button type="submit" class="btn btn-primary ad-go">Email me my sign-in link</button>' +
-      '<p class="ad-fine">We only use your details for your account and, if you tick the box, certification news. <a href="privacy.html" target="_blank" rel="noopener">Privacy</a></p></form>' +
+      '<p class="ad-fine">We only use your details for your account and, if you tick the box, certification news. <a href="privacy" target="_blank" rel="noopener">Privacy</a></p></form>' +
       '<p class="ad-sw">Already have an account? <button type="button" data-view="signin">Sign in</button></p>';
   } else if(view === 'signin'){
     html += '<p class="ad-k">Welcome back</p><h3 id="authH">Sign in</h3>' +

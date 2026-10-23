@@ -2,8 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script>/* clean addresses: show /modules instead of /modules.html; when the files are opened straight from a folder, links get .html back */
+(function(){var p=location.pathname;if(/^https?:$/.test(location.protocol)){var c=p.replace(/\/index\.html$/,'/').replace(/\.html$/,'');if(c!==p&&history.replaceState)history.replaceState(null,'',c+location.search+location.hash);}
+else if(location.protocol==='file:')document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href'),m=h.match(/^(\/?)([a-z][a-z-]*)?([?#].*)?$/i);if(!m||(!m[1]&&!m[2]))return;a.setAttribute('href',(m[2]||'index')+'.html'+(m[3]||''));},true);})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Privacy · Tiger Motors Lean Education Center</title>
+<link rel="canonical" href="https://tigermotorslean.com/privacy">
 <meta name="description" content="How the Tiger Motors Lean Education Center uses the information in free learner accounts.">
 <link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,7 +29,7 @@ small{color:#66778C}
 </head>
 <body>
 <main>
-  <a class="home" href="index.html"><img src="logo-circle.png" alt="">Tiger Motors Lean Education Center</a>
+  <a class="home" href="/"><img src="logo-circle.png" alt="">Tiger Motors Lean Education Center</a>
   <h1>Privacy for free learner accounts</h1>
   <p>The learning materials on this site are free and available without an account. A free account is optional and lets you keep track of your progress and earn a certificate of completion.</p>
   <h2>What we collect</h2>

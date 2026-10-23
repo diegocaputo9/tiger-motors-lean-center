@@ -2,6 +2,9 @@
 <html lang="en" data-mode="light">
 <head>
 <meta charset="utf-8">
+<script>/* clean addresses: show /modules instead of /modules.html; when the files are opened straight from a folder, links get .html back */
+(function(){var p=location.pathname;if(/^https?:$/.test(location.protocol)){var c=p.replace(/\/index\.html$/,'/').replace(/\.html$/,'');if(c!==p&&history.replaceState)history.replaceState(null,'',c+location.search+location.hash);}
+else if(location.protocol==='file:')document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href'),m=h.match(/^(\/?)([a-z][a-z-]*)?([?#].*)?$/i);if(!m||(!m[1]&&!m[2]))return;a.setAttribute('href',(m[2]||'index')+'.html'+(m[3]||''));},true);})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>Learner Dashboard · Tiger Motors Lean</title>
@@ -58,7 +61,7 @@ td.p i em{display:block;height:100%;background:#E87722}
 </style>
 </head>
 <body>
-<header class="ad-top"><div class="nav-in"><a class="home" href="index.html"><img src="logo-circle.png" alt=""><span>Learner dashboard<small>Tiger Motors Lean</small></span></a></div></header>
+<header class="ad-top"><div class="nav-in"><a class="home" href="/"><img src="logo-circle.png" alt=""><span>Learner dashboard<small>Tiger Motors Lean</small></span></a></div></header>
 <main id="app"><div class="gate"><p class="muted">Loading…</p></div></main>
 <script src="modules-data.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
@@ -139,7 +142,7 @@ td.p i em{display:block;height:100%;background:#E87722}
       return '<tr><td>'+esc(u.name||'—')+'</td><td>'+esc(u.email)+'</td><td>'+esc(u.organization||'—')+'</td><td>'+fmt(u.created_at)+'</td><td>'+fmt(u.last_sign_in_at)+'</td>'+
         '<td><span class="pill'+(u.confirmed?' y':'')+'">'+(u.confirmed?'Yes':'Pending')+'</span></td>'+
         '<td class="p"><i><em style="width:'+u.pct+'%"></em></i>'+u.pct+'%</td>'+
-        '<td>'+(u.certificate_id?'<a href="certificate.html?id='+encodeURIComponent(u.certificate_id)+'" target="_blank" rel="noopener">'+esc(u.certificate_id)+'</a>':'—')+'</td>'+
+        '<td>'+(u.certificate_id?'<a href="certificate?id='+encodeURIComponent(u.certificate_id)+'" target="_blank" rel="noopener">'+esc(u.certificate_id)+'</a>':'—')+'</td>'+
         '<td>'+(u.cert_updates?'<span class="pill y">Yes</span>':'No')+'</td></tr>';
     }).join(''):'<tr><td colspan="9" class="muted">No learners match.</td></tr>';
   }
