@@ -349,9 +349,7 @@ a.mini:hover{border-color:rgba(232,119,34,.5);background:rgba(232,119,34,.07);tr
 .pl p{font-size:15px;color:var(--text-2);line-height:1.55}
 .leads{margin-top:28px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;color:var(--text-2);font-size:15px}
 .leads a{color:var(--text);text-decoration-color:var(--orange);text-underline-offset:4px}
-.hero-cta{align-items:flex-start}
-.hero-tst{display:grid;gap:8px;justify-items:start}
-.hero-tst small{max-width:26ch;padding-left:6px;font-size:12.5px;line-height:1.4;color:var(--text-3)}
+
 
 /* =========================================================
    NEWS + TEAM (light)
@@ -1076,4 +1074,4 @@ article.rc.is-done{border-color:rgba(63,182,139,.6);box-shadow:inset 0 3px 0 #3F
   .burger{width:40px;height:40px}
 }
 @media (max-width:380px){.au-corner{display:none}.nav-in>.acct-nav,.nav-in .acct-nav{margin-left:auto}.mode-btn{margin-left:0}}
-@media (max-width:480px){.hero-cta{margin-top:28px}.hero-tst small{max-width:none}}
+@media (max-width:480px){.hero-cta{margin-top:28px}}
