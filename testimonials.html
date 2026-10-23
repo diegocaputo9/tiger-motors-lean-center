@@ -132,6 +132,21 @@ html[data-mode="light"] .mode .i-moon{display:block}
 .q.hl{background:linear-gradient(160deg,#16365A,#0C2340);border-color:rgba(232,119,34,.45)}
 .q.hl::before{color:rgba(232,119,34,.25)}
 
+/* photos scattered between the testimonials */
+.pc{break-inside:avoid;margin:0 0 20px;padding:10px 10px 12px;background:var(--card);border:1px solid var(--line);border-radius:6px;opacity:0;transform:translateY(14px) rotate(var(--tilt,0deg));transition:opacity .5s,transform .5s}
+.pc.in{opacity:1;transform:rotate(var(--tilt,0deg))}
+.pc button{all:unset;display:block;width:100%;cursor:zoom-in;border-radius:3px;overflow:hidden}
+.pc button:focus-visible{outline:2px solid var(--orange-2);outline-offset:3px}
+.pc img{display:block;width:100%;height:auto;transition:transform .5s}
+.pc button:hover img{transform:scale(1.03)}
+.pc figcaption{margin-top:10px;font:500 11px/1.4 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.lb{margin:auto;padding:0;border:0;background:transparent;max-width:min(1200px,94vw);max-height:92dvh;overflow:visible}
+.lb::backdrop{background:rgba(3,9,16,.88)}
+.lb img{display:block;max-width:100%;max-height:82dvh;width:auto;height:auto;border-radius:6px}
+.lb p{margin-top:12px;text-align:center;font:500 12px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:#C9D6E4}
+.lb .x{position:absolute;top:-14px;right:-14px;width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:#0C1D33;color:#fff;font-size:20px;cursor:pointer}
+@media (max-width:600px){.lb .x{top:-48px;right:0}}
+
 /* contribute + footer */
 .more{padding:clamp(56px,8vw,96px) 0;border-top:1px solid var(--line);text-align:center}
 .more h2{font:400 clamp(30px,4vw,48px)/1.1 var(--f-display)}
@@ -247,6 +262,12 @@ html[data-mode="light"] .share .done .ok{color:#1C7A55}
   <p class="tl-hint mono">Scroll, drag or use the arrow keys to move through time</p>
 </dialog>
 
+<dialog class="lb" id="lb" aria-label="Photo">
+  <button type="button" class="x" id="lbClose" aria-label="Close photo">×</button>
+  <img id="lbImg" alt="">
+  <p id="lbCap"></p>
+</dialog>
+
 <dialog class="share" id="share" aria-labelledby="share-h">
   <button type="button" class="x" data-close aria-label="Close">×</button>
   <form id="shareForm" novalidate>
@@ -347,6 +368,15 @@ var VOICES = [
   {g:'industry', who:"Bob Johnson", org:"Senior Manager · Honda", hl:true, mk:"impressed with the small-scale, total manufacturing center", q:["I appreciated seeing your team in action, and I was impressed with the small-scale, total manufacturing center you have in the basement."]}
 ];
 
+/* ---- Photos shown between the testimonials: add new ones here (files go in testimonial-photos/) ---- */
+var PHOTOS = [
+  {src:'testimonial-photos/honda-training-2024.jpg', cap:'Honda training at Tiger Motors · 2024', alt:'Honda team members with Tiger Motors staff in the lab'},
+  {src:'testimonial-photos/tom-explaining.jpg', cap:'Tom Devall teaching on the line', alt:'Tom Devall explaining a station to a group in the lab'},
+  {src:'testimonial-photos/kia-fall-2024.jpg', cap:'Kia visit · Fall 2024', alt:'Auburn students and Kia staff in a Kia showroom'},
+  {src:'testimonial-photos/diego-explaining.jpg', cap:'Diego Caputo leading a lab session', alt:'Diego Caputo explaining the production system to visitors'},
+  {src:'testimonial-photos/honda-training-2025.jpg', cap:'Honda training at Tiger Motors · 2025', alt:'Honda team members gathered in the Tiger Motors lab'}
+];
+
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
 var ICONS = {
   gravel:'<svg viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 64h108"/><g fill="currentColor" stroke="none" opacity=".55"><circle cx="18" cy="58" r="3"/><circle cx="30" cy="60" r="2"/><circle cx="41" cy="57" r="3.5"/><circle cx="55" cy="60" r="2.4"/><circle cx="66" cy="57" r="3"/><circle cx="79" cy="60" r="2"/><circle cx="90" cy="58" r="3.2"/><circle cx="102" cy="60" r="2.2"/></g><path d="M14 52V18h92v34" stroke-dasharray="4 5"/></svg>',
@@ -410,13 +440,25 @@ var counts={}; VOICES.forEach(function(v){counts[v.g]=(counts[v.g]||0)+1;});
 fEl.innerHTML='<button type="button" data-f="all" aria-pressed="true">All<span>'+VOICES.length+'</span></button>'+
   Object.keys(GROUPS).map(function(g){return '<button type="button" data-f="'+g+'" aria-pressed="false">'+GROUPS[g].l+'<span>'+(counts[g]||0)+'</span></button>';}).join('');
 function markUp(p,mk){ var t=esc(p); if(!mk) return t; var k=esc(mk), i=t.indexOf(k); return i<0?t:t.slice(0,i)+'<mark>'+k+'</mark>'+t.slice(i+k.length); }
+function photo(p,i){ var tilt=[-1.2,.9,-.6,1.1,-.8][i%5];
+  return '<figure class="pc" style="--tilt:'+tilt+'deg"><button type="button" data-lb="'+i+'" aria-label="'+esc('Enlarge photo: '+p.cap)+'"><img src="'+esc(p.src)+'" alt="'+esc(p.alt||p.cap)+'" loading="lazy"></button><figcaption>'+esc(p.cap)+'</figcaption></figure>'; }
+var lb=document.getElementById('lb'), lbImg=document.getElementById('lbImg'), lbCap=document.getElementById('lbCap');
+grid.addEventListener('click',function(e){ var b=e.target.closest('[data-lb]'); if(!b) return; var p=PHOTOS[+b.getAttribute('data-lb')]; lbImg.src=p.src; lbImg.alt=p.alt||p.cap; lbCap.textContent=p.cap; if(lb.showModal) lb.showModal(); else lb.setAttribute('open',''); });
+document.getElementById('lbClose').addEventListener('click',function(){ lb.close(); });
+lb.addEventListener('click',function(e){ if(e.target===lb) lb.close(); });
 function render(f){
   var list=VOICES.filter(function(v){return f==='all'||v.g===f;});
-  grid.innerHTML=list.map(function(v){
+  var html=list.map(function(v){
     var len=v.q.join(' ').length;
     return '<figure class="q'+(v.hl?' hl':'')+(len>520?' long':'')+'"><span class="tag">'+esc(GROUPS[v.g].l)+'</span><blockquote>'+v.q.map(function(p){return '<p>'+markUp(p,v.mk)+'</p>';}).join('')+'</blockquote>'+
       '<cite>'+esc(v.who)+(v.org?'<small>'+esc(v.org)+'</small>':'')+'</cite></figure>';
-  }).join('');
+  });
+  // spread the photos evenly through the list (CSS columns then scatter them across the page)
+  // all photos in the full list; filtered lists get about one photo per six testimonials
+  var n=html.length, out=[], np=f==='all'?PHOTOS.length:Math.min(PHOTOS.length,Math.floor(n/6));
+  var at=[]; for(var k=0;k<np;k++) at.push(Math.round((k+1)*n/(np+1)));
+  html.forEach(function(h,k){ out.push(h); at.forEach(function(a,pi){ if(a===k+1) out.push(photo(PHOTOS[pi],pi)); }); });
+  grid.innerHTML=out.join('');
   fSub.textContent = GROUPS[f] ? GROUPS[f].d : '';
   reveal();
 }
