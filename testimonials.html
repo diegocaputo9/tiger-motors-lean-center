@@ -63,6 +63,14 @@ html[data-mode="light"] .mode .i-moon{display:block}
 .pill.solid{background:var(--orange-2);border-color:var(--orange-2);color:#1A0C02;box-shadow:0 10px 30px -10px rgba(232,119,34,.6)}
 .pill.solid:hover{background:var(--orange);border-color:var(--orange);color:#1A0C02}
 .pill svg{width:16px;height:16px}
+.v-acts{align-items:center;gap:10px 26px}
+.share-link{display:inline-flex;align-items:center;gap:8px;padding:8px 2px;border:0;background:none;color:var(--orange-2);font:500 17px/1.2 var(--f-body);cursor:pointer;transition:color .2s}
+.share-link svg{width:18px;height:18px;transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+.share-link:hover{color:var(--orange)}
+.share-link:hover svg{transform:translate(3px,-3px)}
+.share-link:focus-visible{outline:2px solid var(--orange-2);outline-offset:4px;border-radius:4px}
+html[data-mode="light"] .share-link{color:#B85A12}
+html[data-mode="light"] .share-link:hover{color:var(--orange)}
 
 /* section heads */
 .sec-k{display:flex;align-items:center;gap:14px;color:var(--orange)}
@@ -243,7 +251,7 @@ html[data-mode="light"] .share .done .ok{color:#1C7A55}
         </div>
         <div class="v-acts">
           <button type="button" class="pill story-btn" id="storyBtn" aria-haspopup="dialog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 12h18"/><circle cx="6" cy="12" r="2.2"/><circle cx="12" cy="12" r="2.2"/><circle cx="18" cy="12" r="2.2"/></svg>How the lab was built</button>
-          <button type="button" class="pill solid" data-share aria-haspopup="dialog">Share your story</button>
+          <button type="button" class="share-link" data-share aria-haspopup="dialog">Share your story <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 3 10.5 13.5"/><path d="M21 3 14.5 21l-4-7.5L3 9.5z"/></svg></button>
         </div>
       </div>
       <div class="filters" id="filters" role="toolbar" aria-label="Filter testimonials"></div>
