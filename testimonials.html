@@ -116,12 +116,17 @@ html[data-mode="light"] .mode .i-moon{display:block}
 
 /* ---------- voices ---------- */
 .voices{padding:0 0 clamp(56px,7vw,90px)}
-.filters{display:flex;flex-wrap:wrap;gap:8px;margin:clamp(24px,3vw,32px) 0 24px}
-.filters button{font:500 12.5px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;padding:10px 15px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink-2);cursor:pointer;transition:all .2s}
-.filters button span{color:var(--ink-3);margin-left:6px}
-.filters button:hover{border-color:var(--orange)}
-.filters button[aria-pressed="true"]{background:var(--orange-2);border-color:var(--orange-2);color:#1A0C02}
+/* filters: one segmented control, all options inside the same rounded track */
+.filters{display:flex;width:max-content;max-width:100%;gap:2px;padding:6px;margin:clamp(24px,3vw,32px) 0 24px;border-radius:999px;background:rgba(160,185,212,.1);border:1px solid var(--line);overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.filters::-webkit-scrollbar{display:none}
+.filters button{flex:none;font:500 15px/1 var(--f-body);padding:12px 20px;border-radius:999px;border:0;background:transparent;color:var(--ink-2);cursor:pointer;white-space:nowrap;transition:background .25s,color .25s}
+.filters button span{margin-left:7px;font:500 12px var(--f-mono);color:var(--ink-3)}
+.filters button:hover{color:var(--ink)}
+.filters button[aria-pressed="true"]{background:var(--orange-2);color:#1A0C02}
 .filters button[aria-pressed="true"] span{color:rgba(26,12,2,.6)}
+.filters button:focus-visible{outline:2px solid var(--orange-2);outline-offset:2px}
+html[data-mode="light"] .filters{background:rgba(12,35,64,.06)}
+@media (max-width:600px){.filters button{font-size:14px;padding:11px 15px}}
 .f-sub{margin:-12px 0 24px;color:var(--ink-2);font-size:15px}
 .grid{columns:3 320px;column-gap:20px}
 .q{break-inside:avoid;margin-bottom:20px;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:24px 24px 20px;position:relative;opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s}
