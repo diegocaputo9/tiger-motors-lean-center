@@ -144,6 +144,12 @@ html[data-mode="light"] .mode .i-moon{display:block}
 .pc button:focus-visible{outline:2px solid var(--orange-2);outline-offset:3px}
 .pc img{display:block;width:100%;height:auto;transition:transform .5s}
 .pc button:hover img{transform:scale(1.03)}
+.pc-set{display:grid;gap:6px}
+.pc-row .pc-set{grid-template-columns:repeat(3,1fr)}
+.pc-row img{aspect-ratio:3/4;object-fit:cover}
+.pc-mosaic .pc-set{grid-template-columns:1fr 1fr}
+.pc-mosaic button:first-child{grid-column:1/-1}
+.pc-mosaic img{aspect-ratio:4/3;object-fit:cover}
 .pc figcaption{margin-top:10px;font:500 11px/1.4 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
 .lb{margin:auto;padding:0;border:0;background:transparent;max-width:min(1200px,94vw);max-height:92dvh;overflow:visible}
 .lb::backdrop{background:rgba(3,9,16,.88)}
@@ -374,14 +380,33 @@ var VOICES = [
 ];
 
 /* ---- Photos shown between the testimonials: add new ones here (files go in testimonial-photos/).
-   before: an org name places the photo right above that testimonial in the full list; the others are spread evenly.
+   before: an org or name places the photo right above that testimonial in the full list; the others are spread evenly after it.
+   layout: 'row' puts three photos side by side, 'mosaic' puts one large photo over two smaller ones.
    top: true starts a new column with this photo on wide screens, so it sits at the top of the right-hand column ---- */
 var PHOTOS = [
-  {src:'testimonial-photos/honda-training-2024.jpg', cap:'Honda training at Tiger Motors · 2024', alt:'Honda team members with Tiger Motors staff in the lab'},
+  // pinned: these two stay at the top of the page
   {src:'testimonial-photos/tom-explaining.jpg', before:'Mayo Operations Components', cap:'Tom Devall teaching on the line', alt:'Tom Devall explaining a station to a group in the lab'},
+  {src:'testimonial-photos/diego-explaining.jpg', before:'Air Force Major', top:true, cap:'Diego Caputo leading a lab session', alt:'Diego Caputo explaining the production system to visitors'},
+  // spread through the rest of the list, in this order
+  {layout:'row', imgs:[{src:'testimonial-photos/industry-line-1.jpg', alt:'An industry participant assembling a car at a station'},{src:'testimonial-photos/industry-line-2.jpg', alt:'Industry participants working at stations on the line'},{src:'testimonial-photos/industry-line-3.jpg', alt:'Industry participants running the production line'}], cap:'Industry teams working on the line'},
+  {src:'testimonial-photos/honda-training-2024.jpg', cap:'Honda training at Tiger Motors · 2024', alt:'Honda team members with Tiger Motors staff in the lab'},
+  {src:'testimonial-photos/class-picture.jpg', cap:'Class picture in the Tiger Motors lab', alt:'A Lean class group photo in the lab'},
+  {layout:'row', imgs:[{src:'testimonial-photos/vr-lab-1.jpg', alt:'Diego Caputo presenting the virtual lab on a screen'},{src:'testimonial-photos/vr-lab-2.jpg', alt:'Visitors watching the virtual lab presentation'},{src:'testimonial-photos/vr-lab-3.jpg', alt:'Diego Caputo answering questions about the virtual lab'}], cap:'Diego Caputo presenting the virtual Lean lab'},
+  {src:'testimonial-photos/iise-poster-1.jpg', cap:'IISE Lean Six Sigma & Data Science Conference · poster session', alt:'Two presenters standing by their Tiger Motors poster'},
+  {src:'testimonial-photos/industry-training-1.jpg', cap:'Industry training in the lab', alt:'Industry participants watching a production run'},
   {src:'testimonial-photos/kia-fall-2024.jpg', cap:'Kia visit · Fall 2024', alt:'Auburn students and Kia staff in a Kia showroom'},
-  {src:'testimonial-photos/diego-explaining.jpg', top:true, cap:'Diego Caputo leading a lab session', alt:'Diego Caputo explaining the production system to visitors'},
-  {src:'testimonial-photos/honda-training-2025.jpg', cap:'Honda training at Tiger Motors · 2025', alt:'Honda team members gathered in the Tiger Motors lab'}
+  {layout:'mosaic', imgs:[{src:'testimonial-photos/germany-group-wurzburg.jpg', alt:'Auburn students in Würzburg with the fortress behind them'},{src:'testimonial-photos/germany-group-residence.jpg', alt:'Auburn students in front of the Würzburg Residence'},{src:'testimonial-photos/germany-group-1.jpg', alt:'Auburn students in front of a historic building in Germany'}], cap:'Auburn study abroad in Germany'},
+  {src:'testimonial-photos/honda-industry-training-2024.jpg', cap:'Honda industry training · 2024', alt:'Honda participants in the lab during training'},
+  {src:'testimonial-photos/thws-campus-green-belt.jpg', cap:'Auburn study abroad at the THWS campus, Germany · Lean International Green Belt', alt:'Auburn students and faculty at the THWS campus in Germany'},
+  {src:'testimonial-photos/industry-training-3.jpg', cap:'Industry training on the line', alt:'Diego Caputo explaining a station to industry visitors'},
+  {src:'testimonial-photos/diego-benchmarking-germany-1.jpg', cap:'Diego Caputo benchmarking a LEGO supply chain and logistics lab in Germany · 2024', alt:'Diego Caputo working at a LEGO logistics line in Germany'},
+  {src:'testimonial-photos/iise-poster-2.jpg', cap:'IISE Lean Six Sigma & Data Science Conference · presenting the poster', alt:'Diego Caputo presenting the poster to conference visitors'},
+  {src:'testimonial-photos/honda-training-2025.jpg', cap:'Honda training at Tiger Motors · 2025', alt:'Honda team members gathered in the Tiger Motors lab'},
+  {src:'testimonial-photos/industry-training-2.jpg', cap:'Industry training in the lab', alt:'Industry participants walking the line during training'},
+  {src:'testimonial-photos/germany-wurzburg-square.jpg', cap:'Auburn study abroad · Würzburg, Germany', alt:'Auburn students touring the market square in Würzburg'},
+  {src:'testimonial-photos/honda-training-2024-line.jpg', cap:'Honda training on the line · 2024', alt:'Honda participants at a workstation during training'},
+  {src:'testimonial-photos/diego-benchmarking-germany-2.jpg', cap:'Benchmarking a LEGO logistics line in Germany · 2024', alt:'Diego Caputo picking parts on a LEGO logistics line in Germany'},
+  {src:'testimonial-photos/iise-conference.jpg', cap:'IISE Lean Six Sigma & Data Science Conference', alt:'Diego Caputo and a colleague holding the conference sign'}
 ];
 
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
@@ -448,9 +473,10 @@ fEl.innerHTML='<button type="button" data-f="all" aria-pressed="true">All<span>'
   Object.keys(GROUPS).map(function(g){return '<button type="button" data-f="'+g+'" aria-pressed="false">'+GROUPS[g].l+'<span>'+(counts[g]||0)+'</span></button>';}).join('');
 function markUp(p,mk){ var t=esc(p); if(!mk) return t; var k=esc(mk), i=t.indexOf(k); return i<0?t:t.slice(0,i)+'<mark>'+k+'</mark>'+t.slice(i+k.length); }
 function photo(p,i,all){ var tilt=[-1.2,.9,-.6,1.1,-.8][i%5];
+  if(p.imgs) return '<figure class="pc pc-'+p.layout+'" style="--tilt:'+tilt+'deg"><div class="pc-set">'+p.imgs.map(function(im,k){ return '<button type="button" data-lb="'+i+'.'+k+'" aria-label="'+esc('Enlarge photo '+(k+1)+' of '+p.imgs.length+': '+p.cap)+'"><img src="'+esc(im.src)+'" alt="'+esc(im.alt||p.cap)+'" loading="lazy"></button>'; }).join('')+'</div><figcaption>'+esc(p.cap)+'</figcaption></figure>';
   return '<figure class="pc'+(all&&p.top?' col-top':'')+'" style="--tilt:'+tilt+'deg"><button type="button" data-lb="'+i+'" aria-label="'+esc('Enlarge photo: '+p.cap)+'"><img src="'+esc(p.src)+'" alt="'+esc(p.alt||p.cap)+'" loading="lazy"></button><figcaption>'+esc(p.cap)+'</figcaption></figure>'; }
 var lb=document.getElementById('lb'), lbImg=document.getElementById('lbImg'), lbCap=document.getElementById('lbCap');
-grid.addEventListener('click',function(e){ var b=e.target.closest('[data-lb]'); if(!b) return; var p=PHOTOS[+b.getAttribute('data-lb')]; lbImg.src=p.src; lbImg.alt=p.alt||p.cap; lbCap.textContent=p.cap; if(lb.showModal) lb.showModal(); else lb.setAttribute('open',''); });
+grid.addEventListener('click',function(e){ var b=e.target.closest('[data-lb]'); if(!b) return; var id=b.getAttribute('data-lb').split('.'), p=PHOTOS[+id[0]], im=p.imgs?p.imgs[+id[1]]:p; lbImg.src=im.src; lbImg.alt=im.alt||p.cap; lbCap.textContent=p.cap; if(lb.showModal) lb.showModal(); else lb.setAttribute('open',''); });
 document.getElementById('lbClose').addEventListener('click',function(){ lb.close(); });
 lb.addEventListener('click',function(e){ if(e.target===lb) lb.close(); });
 function render(f){
@@ -463,11 +489,12 @@ function render(f){
   // spread the photos evenly through the list (CSS columns then scatter them across the page)
   // all photos in the full list; filtered lists get about one photo per six testimonials
   var n=html.length, out=[], pinned={}, free=[];
-  PHOTOS.forEach(function(p,pi){ var k=-1; if(f==='all'&&p.before) list.forEach(function(v,i){ if(k<0&&v.org===p.before) k=i; }); if(k>=0) pinned[k]=pi; else free.push(pi); });
-  // in the full list every photo keeps its own evenly spaced slot, so pinning one does not move the others
-  var at={};
-  if(f==='all') free.forEach(function(pi){ at[Math.round((pi+1)*n/(PHOTOS.length+1))]=pi; });
-  else { var np=Math.min(free.length,Math.floor(n/6)); for(var k=0;k<np;k++) at[Math.round((k+1)*n/(np+1))]=free[k]; }
+  PHOTOS.forEach(function(p,pi){ var k=-1; if(f==='all'&&p.before) list.forEach(function(v,i){ if(k<0&&(v.org===p.before||v.who===p.before)) k=i; }); if(k>=0) pinned[k]=pi; else if(!p.before) free.push(pi); });
+  // full list: the free photos start after the first pinned photo so the top of the page stays the same;
+  // filtered lists get about one photo per six testimonials
+  var at={}, first=f==='all'?Math.min.apply(null,Object.keys(pinned).map(Number).concat([n]))+2:0;
+  var np=f==='all'?free.length:Math.min(free.length,Math.floor(n/6)), span=n-first;
+  for(var k=0;k<np;k++){ var a=first+Math.floor((k+.5)*span/np); while(at[a]!==undefined&&a<n) a++; at[a]=free[k]; }
   html.forEach(function(h,k){ if(k in pinned) out.push(photo(PHOTOS[pinned[k]],pinned[k],f==='all')); out.push(h); if((k+1) in at) out.push(photo(PHOTOS[at[k+1]],at[k+1],f==='all')); });
   grid.innerHTML=out.join('');
   fSub.textContent = GROUPS[f] ? GROUPS[f].d : '';
