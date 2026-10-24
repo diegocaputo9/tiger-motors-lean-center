@@ -185,11 +185,24 @@ function bannerHTML(){
     '<div class="ab-act">' + cert + '</div>';
 }
 function promoDismissed(){ try { return localStorage.getItem('tm-promo-closed') === '1'; } catch(e){ return false; } }
+// signed-in learners can fold the progress box into a slim bar and open it again; remembered on this device
+function progressMin(){ try { return localStorage.getItem('tm-progress-min') === '1'; } catch(e){ return false; } }
+function setProgressMin(v){ try { localStorage.setItem('tm-progress-min', v ? '1' : '0'); } catch(e){} }
+function miniHTML(){
+  var s = stats();
+  return '<div class="ab-ico ab-ico-sm" aria-hidden="true">' + ring(s.pct, 34) + '</div>' +
+    '<p class="ab-sum"><b>Your progress</b><span>' + s.done + ' of ' + s.total + ' resources · ' + s.pct + '%</span></p>' +
+    '<button type="button" class="ab-show" data-acct="show-progress" aria-expanded="false">Show <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>';
+}
 function paintBanners(){
   $$('[data-acct-banner]').forEach(function(el){
     if(!state.ready || (!state.user && promoDismissed())){ el.hidden = true; return; }
-    el.hidden = false; el.classList.toggle('in', !!state.user);
-    el.innerHTML = (state.user ? '' : '<button type="button" class="ab-x" data-acct="close-promo" aria-label="Close" title="Close. You can still sign in with the button at the top">×</button>') + bannerHTML();
+    var mini = !!state.user && progressMin();
+    el.hidden = false; el.classList.toggle('in', !!state.user); el.classList.toggle('mini', mini);
+    if(mini){ el.innerHTML = miniHTML(); return; }
+    el.innerHTML = (state.user
+      ? '<button type="button" class="ab-x ab-min" data-acct="min-progress" aria-expanded="true" aria-label="Minimize your progress" title="Minimize"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg></button>'
+      : '<button type="button" class="ab-x" data-acct="close-promo" aria-label="Close" title="Close. You can still sign in with the button at the top">×</button>') + bannerHTML();
   });
 }
 
@@ -232,6 +245,7 @@ document.addEventListener('click', function(e){
     else if(act === 'menu'){ var nav = $('#acctNav'); var open = !nav.classList.contains('open'); nav.classList.toggle('open', open); b.setAttribute('aria-expanded', open ? 'true' : 'false'); }
     else if(act === 'signout'){ signOut(); }
     else if(act === 'cert'){ getCertificate(); }
+    else if(act === 'min-progress' || act === 'show-progress'){ setProgressMin(act === 'min-progress'); paintBanners(); var f = $('[data-acct-banner] [data-acct="' + (act === 'min-progress' ? 'show' : 'min') + '-progress"]'); if(f) f.focus(); }
     else if(act === 'close-promo'){ try { localStorage.setItem('tm-promo-closed', '1'); } catch(err){} paintBanners(); toast('No problem. You can create an account or sign in any time with the Sign in button at the top.'); }
     return;
   }
