@@ -25,13 +25,16 @@ a{color:#9A460C}
 .status.ok{background:#E8F7F0;border:1px solid #9ED9BF;color:#1C5E43}
 .status.bad{background:#FEF3F2;border:1px solid #FECDCA;color:#B42318}
 .status b{font-weight:700}
+.cert-box{max-width:1000px;margin:0 auto;aspect-ratio:1.414/1;position:relative}
+.cert-box>.cert{position:absolute;left:0;top:0;width:1000px;max-width:none;transform-origin:0 0;transform:scale(var(--s,1))}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 .cert{container-type:inline-size;max-width:1000px;margin:0 auto;aspect-ratio:1.414/1;background:#fff;border-radius:6px;box-shadow:0 30px 60px -30px rgba(12,35,64,.45);position:relative;overflow:hidden;display:grid;place-items:center;padding:0;text-align:center}
 .cert::before{content:"";position:absolute;inset:1.8cqw;border:.2cqw solid var(--navy);border-radius:.3cqw;pointer-events:none}
 .cert::after{content:"";position:absolute;inset:2.6cqw;border:max(1px,.1cqw) solid rgba(232,119,34,.7);border-radius:.2cqw;pointer-events:none}
 .c-in{position:relative;display:grid;justify-items:center;gap:1.4cqw;width:86cqw}
 .c-logo{width:23cqw;height:auto}
 .c-k{font:600 1.3cqw "IBM Plex Mono",monospace;letter-spacing:.32em;text-transform:uppercase;color:var(--orange)}
-.c-title{font:800 5.2cqw/1 "Archivo",sans-serif;font-stretch:112%;color:var(--navy);letter-spacing:.01em}
+.c-title{font:800 5.6cqw/1 "Archivo",sans-serif;color:var(--navy)}
 .c-sub{font-size:1.6cqw;color:var(--ink2)}
 .c-name{font:700 5cqw/1.1 "Archivo",sans-serif;color:var(--ink);padding:0 4% .4cqw;border-bottom:.2cqw solid var(--orange);min-width:50%}
 .c-what{font-size:1.7cqw;line-height:1.5;color:var(--ink2);max-width:60ch}
@@ -56,7 +59,8 @@ a{color:#9A460C}
   body{background:#fff;padding:0}
   .top,.status,.acts,.note{display:none!important}
   html,body{width:100%;height:100%}body{display:grid;place-items:center}#out{width:100%}
-  .cert{max-width:none;width:min(100vw,141.4vh);height:auto;aspect-ratio:1.414/1;margin:0 auto;box-shadow:none;border-radius:0;background:#fff!important}
+  .cert-box{max-width:none;width:min(100vw,141.4vh);margin:0 auto}
+  .cert-box>.cert{position:static;width:100%;transform:none;box-shadow:none;border-radius:0;background:#fff!important}
 }
 </style>
 <script src="i18n-dict.js?v=20a4a812" defer></script>
@@ -85,14 +89,12 @@ a{color:#9A460C}
       load('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js'),
       load('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js')]);
     var stage=document.createElement('div');
-    stage.style.cssText='position:fixed;left:-10000px;top:0;width:1414px;pointer-events:none';
+    stage.style.cssText='position:fixed;left:-10000px;top:0;width:1000px;pointer-events:none';
     var copy=document.querySelector('.cert').cloneNode(true);
-    copy.style.cssText='max-width:none;width:1414px;margin:0;border-radius:0;box-shadow:none;background:#fff';
-    // the capture tool cannot draw letter-spacing or widened fonts, so the large lines use normal spacing and width
-    copy.querySelectorAll('.c-title,.c-name').forEach(function(n){ n.style.letterSpacing='normal'; n.style.fontStretch='normal'; });
+    copy.style.cssText='position:relative;transform:none;max-width:none;width:1000px;margin:0;border-radius:0;box-shadow:none;background:#fff';
     stage.appendChild(copy); document.body.appendChild(stage);
     libs.then(function(){ return (document.fonts&&document.fonts.ready)||null; }).then(function(){
-      return window.html2canvas(copy,{scale:2.4,backgroundColor:'#ffffff',useCORS:true,logging:false});
+      return window.html2canvas(copy,{scale:3.4,backgroundColor:'#ffffff',useCORS:true,logging:false});
     }).then(function(canvas){
       var letter=/^en-(US|CA)$|^(es-(US|MX)|fr-CA)$/i.test(navigator.language||'');
       var fmt=letter?'letter':'a4', pdf=new window.jspdf.jsPDF({orientation:'landscape',unit:'mm',format:fmt});
@@ -114,7 +116,7 @@ a{color:#9A460C}
       '&certUrl='+encodeURIComponent(url)+'&certId='+encodeURIComponent(c.id);
     out.innerHTML=
       '<div class="status ok">✓ <span><b>Verified certificate.</b> Issued by the Tiger Motors Lean Education Center to '+esc(c.full_name)+' on '+esc(date)+'.</span></div>'+
-      '<section class="cert" aria-label="Certificate of completion" data-i18n-skip><div class="c-in">'+
+      '<div class="cert-box"><section class="cert" aria-label="Certificate of completion" data-i18n-skip><div class="c-in">'+
         '<img class="c-logo" src="logo-full.svg" alt="Tiger Motors Lean Education Center">'+
         '<h1 class="c-title">Certificate of Completion</h1>'+
         '<p class="c-sub">This certifies that</p>'+
@@ -122,10 +124,13 @@ a{color:#9A460C}
         '<p class="c-what">has completed every learning resource of <b>Lean House Fundamentals</b>: the lectures, readings, podcasts, 360° experiences and laboratory activities of the Lean House.</p>'+
         '<p class="c-els">People · Standardization · Jidoka · Just in Time · Continuous Improvement</p>'+
         '<div class="c-foot"><div><b>Issued</b>'+esc(date)+'</div><div><b>Certificate ID</b>'+esc(c.id)+'</div><div><b>Verify at</b>tigermotorslean.com/certificate</div></div>'+
-      '</div></section>'+
+      '</div></section></div>'+
       '<div class="acts"><button class="b pri" type="button" id="pdf">Download PDF</button><button class="b" type="button" id="copy">Copy verification link</button><a class="b" href="'+esc(li)+'" target="_blank" rel="noopener">Add to LinkedIn</a></div>'+
       '<p class="note">The PDF is a single landscape page (Letter or A4), ready to print on your own paper. Anyone with the verification link can confirm this certificate is real.</p>';
     document.title=c.full_name+' · Certificate of Completion · Tiger Motors Lean Education Center';
+    var box=document.querySelector('.cert-box');
+    function fit(){ box.style.setProperty('--s', box.clientWidth/1000); }
+    fit(); if(window.ResizeObserver) new ResizeObserver(fit).observe(box); else window.addEventListener('resize',fit);
     document.getElementById('pdf').addEventListener('click',function(e){ makePdf(e.currentTarget, c); });
     document.getElementById('copy').addEventListener('click',function(e){ var b=e.currentTarget; (navigator.clipboard?navigator.clipboard.writeText(url):Promise.reject()).then(function(){ b.textContent='Link copied'; },function(){ prompt('Copy this link',url); }); });
   });
