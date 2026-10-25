@@ -1324,18 +1324,6 @@ window.TM_I18N = {
 "Asistentes de enseñanza",
 "Lehrassistenz"
 ],
-"About us": [
-"Sobre nosotros",
-"Über uns"
-],
-"Students gain hands-on experience in a 4,000-square-foot integrated manufacturing facility that simulates high-volume automotive manufacturing environments like those used by Toyota and Honda.": [
-"Los estudiantes adquieren experiencia práctica en una instalación integrada de manufactura de 4,000 pies cuadrados que simula entornos de manufactura automotriz de alto volumen como los de Toyota y Honda.",
-"Studierende sammeln praktische Erfahrung in einer integrierten Fertigungsanlage mit rund 370 m², die Großserienfertigung in der Automobilindustrie nachbildet, wie sie Toyota und Honda einsetzen."
-],
-"The goal of this online platform is to expand access to experiential training beyond campus.": [
-"El objetivo de esta plataforma en línea es ampliar el acceso a la formación práctica más allá del campus.",
-"Ziel dieser Online-Plattform ist es, praxisnahe Ausbildung über den Campus hinaus zugänglich zu machen."
-],
 "Biography": [
 "Biografía",
 "Biografie"
