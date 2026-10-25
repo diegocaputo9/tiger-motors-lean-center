@@ -194,6 +194,27 @@ function miniHTML(){
     '<p class="ab-sum"><b>Your progress</b><span>' + s.done + ' of ' + s.total + ' resources · ' + s.pct + '%</span></p>' +
     '<button type="button" class="ab-show" data-acct="show-progress" aria-expanded="false">Show <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>';
 }
+// smooth fold / unfold: the box eases between its two sizes, then its contents slide in from the left one by one
+function toggleProgress(min){
+  var els = $$('[data-acct-banner]').filter(function(el){ return !el.hidden; });
+  // corner radius in px, capped at half the height so a pill does not balloon while it grows
+  function rad(el, h){ return Math.min(parseFloat(getComputedStyle(el).borderTopLeftRadius) || 0, h / 2); }
+  var before = els.map(function(el){ var r = el.getBoundingClientRect(); return { w: r.width, h: r.height, rad: rad(el, r.height) }; });
+  setProgressMin(min); paintBanners();
+  var f = $('[data-acct-banner] [data-acct="' + (min ? 'show' : 'min') + '-progress"]'); if(f) f.focus({ preventScroll: true });
+  var still = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(still || !Element.prototype.animate) return;
+  var ease = 'cubic-bezier(.65,0,.35,1)', soft = 'cubic-bezier(.22,1,.36,1)';
+  els.forEach(function(el, i){
+    var r = el.getBoundingClientRect(), b = before[i], to = rad(el, r.height);
+    el.style.overflow = 'hidden';
+    var box = el.animate([{ width: b.w + 'px', height: b.h + 'px', borderRadius: b.rad + 'px' }, { width: r.width + 'px', height: r.height + 'px', borderRadius: to + 'px' }], { duration: 820, easing: ease });
+    box.onfinish = box.oncancel = function(){ el.style.overflow = ''; };
+    $$('.ab-ico,.ab-k,h3,.ab-mods li,.ab-act>*,.ab-sum,.ab-show,.ab-min', el).forEach(function(n, k){
+      n.animate([{ opacity: 0, transform: 'translateX(-16px)' }, { opacity: 1, transform: 'none' }], { duration: 620, delay: 320 + k * 80, easing: soft, fill: 'backwards' });
+    });
+  });
+}
 function paintBanners(){
   $$('[data-acct-banner]').forEach(function(el){
     if(!state.ready || (!state.user && promoDismissed())){ el.hidden = true; return; }
@@ -245,7 +266,7 @@ document.addEventListener('click', function(e){
     else if(act === 'menu'){ var nav = $('#acctNav'); var open = !nav.classList.contains('open'); nav.classList.toggle('open', open); b.setAttribute('aria-expanded', open ? 'true' : 'false'); }
     else if(act === 'signout'){ signOut(); }
     else if(act === 'cert'){ getCertificate(); }
-    else if(act === 'min-progress' || act === 'show-progress'){ setProgressMin(act === 'min-progress'); paintBanners(); var f = $('[data-acct-banner] [data-acct="' + (act === 'min-progress' ? 'show' : 'min') + '-progress"]'); if(f) f.focus(); }
+    else if(act === 'min-progress' || act === 'show-progress'){ toggleProgress(act === 'min-progress'); }
     else if(act === 'close-promo'){ try { localStorage.setItem('tm-promo-closed', '1'); } catch(err){} paintBanners(); toast('No problem. You can create an account or sign in any time with the Sign in button at the top.'); }
     return;
   }
