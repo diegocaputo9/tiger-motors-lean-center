@@ -1175,3 +1175,9 @@ article.rc.is-done{border-color:rgba(63,182,139,.6);box-shadow:inset 0 3px 0 #3F
   .about-box p{font-size:13.5px;line-height:1.5}
   .about-box p+p{margin-top:6px}
 }
+/* phones, portrait and landscape: drop secondary text (news summaries, Project and Lean Team intros, plan notes) */
+@media (max-width:640px),(orientation:landscape) and (max-height:500px){
+  .news-feature .news-body p{display:none}
+  #project .lede,.team-head .lede{display:none}
+  .plan-cap{display:none}
+}
