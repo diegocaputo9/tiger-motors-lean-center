@@ -1210,3 +1210,28 @@ article.rc.is-done{border-color:rgba(63,182,139,.6);box-shadow:inset 0 3px 0 #3F
 .nav-compact .nav-in>.nav-links{display:none}
 .nav-compact .burger{display:inline-flex}
 .nav-compact .nav-in .acct-nav{margin-left:auto}
+
+/* phones: no step chips above the Lean House, just a one-line hint */
+.house-hint{display:none}
+@media (max-width:640px),(orientation:landscape) and (max-height:500px){
+  #lean-house .steps{display:none}
+  .house-hint{display:flex;align-items:center;justify-content:center;gap:8px;margin:0 0 10px;font:500 13px/1.3 var(--f-body);color:var(--text-2);white-space:nowrap}
+  .house-hint svg{width:17px;height:17px;flex:none;color:var(--orange-2)}
+}
+/* small phones (SE, mini): slightly smaller header icons so the full TIGER MOTORS name fits */
+@media (max-width:400px){
+  .nav-in{gap:6px}
+  .brand{gap:7px}
+  .brand-mark,.brand-mark-dark{width:32px;height:32px}
+  .brand-txt b{font-size:13px}
+  .acct-btn,.mode-btn{height:34px}
+  .mode-btn{width:34px}
+  .acct-btn:not(.signed){padding:0 8px}
+  .acct-btn.signed .acct-ring{width:28px;height:28px}
+  .nav-in .lang-sw{width:34px;height:34px}
+  .nav-in .ls-menu{width:34px;max-height:34px;border-radius:17px}
+  .nav-in .ls-opt{width:32px;height:34px}
+  .nav-in .lang-sw.open .ls-menu{max-height:108px}
+  .burger{width:36px;height:36px}
+}
+@media (max-width:400px) and (hover:hover){.nav-in .lang-sw:hover .ls-menu{max-height:108px}}

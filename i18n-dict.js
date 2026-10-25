@@ -2371,5 +2371,9 @@ window.TM_I18N = {
 "Last updated October 2026.": [
 "Última actualización: octubre de 2026.",
 "Zuletzt aktualisiert: Oktober 2026."
+],
+"Tap a part of the house to see its materials": [
+"Toca una parte de la casa para ver sus materiales",
+"Tippen Sie auf das Haus, um Materialien zu sehen"
 ]
 };
