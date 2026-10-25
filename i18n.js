@@ -162,6 +162,27 @@ window.TMI18n = {
     var v = it.type === 'text' ? norm(it.node.__tm !== undefined ? it.node.__tm : it.node.nodeValue) : it.type === 'unit' ? norm(it.node.__tm !== undefined ? it.node.__tm : it.node.innerHTML) : norm(it.node['__tm_' + it.attr] !== undefined ? it.node['__tm_' + it.attr] : it.node.getAttribute(it.attr));
     if(v && hasLetters(v)) out.push(v); }); return out; }
 };
-function init(){ addCSS(); paintSwitch(); watch(); if(lang !== 'en') setLang(lang); else document.documentElement.lang = 'en'; }
+/* keep the desktop header on one line in every language */
+function fitNav(){
+  var n = document.querySelector('.nav-in'); if(!n) return;
+  var root = document.documentElement;
+  root.classList.remove('nav-snug', 'nav-snug2', 'nav-compact');
+  if(window.innerWidth <= 1060) return;
+  function fits(){ return n.scrollWidth <= n.clientWidth + 1; }
+  // step by step: tighter menu, then no brand subtitle, then the menu button
+  var steps = ['nav-snug', 'nav-snug2', 'nav-compact'];
+  for(var i = 0; i < steps.length && !fits(); i++) root.classList.add(steps[i]);
+}
+var fitT = 0; function fitSoon(){ cancelAnimationFrame(fitT); fitT = requestAnimationFrame(fitNav); }
+window.addEventListener('resize', fitSoon);
+document.addEventListener('tm-lang', fitSoon);
+function watchNav(){
+  var n = document.querySelector('.nav-in'); if(!n) return;
+  new MutationObserver(fitSoon).observe(n, { childList: true, subtree: true, characterData: true });
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(fitSoon);
+  fitNav();
+}
+
+function init(){ addCSS(); paintSwitch(); watchNav(); watch(); if(lang !== 'en') setLang(lang); else document.documentElement.lang = 'en'; }
 if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
