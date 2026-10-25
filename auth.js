@@ -184,11 +184,11 @@ function bannerHTML(){
     '<div class="ab-txt"><p class="ab-k">Your progress</p><h3>' + (name ? 'Hi ' + esc(name) + ', ' : '') + 'you have completed ' + s.done + ' of ' + s.total + ' resources</h3><ul class="ab-mods">' + mods + '</ul></div>' +
     '<div class="ab-act">' + cert + '</div>';
 }
-// the box above the Lean House folds into a slim bar and opens again; it starts open.
-// Signed in: folding is remembered on this device. Signed out: it only lasts until the page is reloaded.
-var promoMin = false;
-function progressMin(){ if(!state.user) return promoMin; try { return localStorage.getItem('tm-progress-min') === '1'; } catch(e){ return false; } }
-function setProgressMin(v){ if(!state.user){ promoMin = !!v; return; } try { localStorage.setItem('tm-progress-min', v ? '1' : '0'); } catch(e){} }
+// the box above the Lean House folds into a slim bar and opens again; it starts open, and folding is
+// remembered on this device (separately for the signed-in progress box and the signed-out invite)
+function minKey(){ return state.user ? 'tm-progress-min' : 'tm-promo-min'; }
+function progressMin(){ try { return localStorage.getItem(minKey()) === '1'; } catch(e){ return false; } }
+function setProgressMin(v){ try { localStorage.setItem(minKey(), v ? '1' : '0'); } catch(e){} }
 function miniHTML(){
   var s = stats();
   return '<div class="ab-ico ab-ico-sm" aria-hidden="true">' + ring(s.pct, 34) + '</div>' +
