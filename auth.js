@@ -184,14 +184,19 @@ function bannerHTML(){
     '<div class="ab-txt"><p class="ab-k">Your progress</p><h3>' + (name ? 'Hi ' + esc(name) + ', ' : '') + 'you have completed ' + s.done + ' of ' + s.total + ' resources</h3><ul class="ab-mods">' + mods + '</ul></div>' +
     '<div class="ab-act">' + cert + '</div>';
 }
-function promoDismissed(){ try { return localStorage.getItem('tm-promo-closed') === '1'; } catch(e){ return false; } }
-// signed-in learners can fold the progress box into a slim bar and open it again; remembered on this device
-function progressMin(){ try { return localStorage.getItem('tm-progress-min') === '1'; } catch(e){ return false; } }
-function setProgressMin(v){ try { localStorage.setItem('tm-progress-min', v ? '1' : '0'); } catch(e){} }
+// the box above the Lean House (progress when signed in, free-account invite when signed out) folds into a slim bar
+// and opens again; each state is remembered on this device. Someone who closed the old invite sees it folded.
+function progressMin(){ try {
+  if(state.user) return localStorage.getItem('tm-progress-min') === '1';
+  var v = localStorage.getItem('tm-promo-min'); return v === null ? localStorage.getItem('tm-promo-closed') === '1' : v === '1';
+} catch(e){ return false; } }
+function setProgressMin(v){ try { localStorage.setItem(state.user ? 'tm-progress-min' : 'tm-promo-min', v ? '1' : '0'); } catch(e){} }
 function miniHTML(){
   var s = stats();
   return '<div class="ab-ico ab-ico-sm" aria-hidden="true">' + ring(s.pct, 34) + '</div>' +
-    '<p class="ab-sum"><b>Your progress</b><span>' + s.done + ' of ' + s.total + ' resources · ' + s.pct + '%</span></p>' +
+    (state.user
+      ? '<p class="ab-sum"><b>Your progress</b><span>' + s.done + ' of ' + s.total + ' resources · ' + s.pct + '%</span></p>'
+      : '<p class="ab-sum"><b>Free account</b><span>Track your progress' + (CFG.certificates ? ' and earn a certificate' : '') + '</span></p>') +
     '<button type="button" class="ab-show" data-acct="show-progress" aria-expanded="false">Show <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>';
 }
 // smooth fold / unfold: the box eases between its two sizes, then its contents slide in from the left one by one
@@ -210,20 +215,18 @@ function toggleProgress(min){
     el.style.overflow = 'hidden';
     var box = el.animate([{ width: b.w + 'px', height: b.h + 'px', borderRadius: b.rad + 'px' }, { width: r.width + 'px', height: r.height + 'px', borderRadius: to + 'px' }], { duration: 820, easing: ease });
     box.onfinish = box.oncancel = function(){ el.style.overflow = ''; };
-    $$('.ab-ico,.ab-k,h3,.ab-mods li,.ab-act>*,.ab-sum,.ab-show,.ab-min', el).forEach(function(n, k){
+    $$('.ab-ico,.ab-k,h3,.ab-txt>p:not(.ab-k),.ab-mods li,.ab-act>*,.ab-sum,.ab-show,.ab-min', el).forEach(function(n, k){
       n.animate([{ opacity: 0, transform: 'translateX(-16px)' }, { opacity: 1, transform: 'none' }], { duration: 620, delay: 320 + k * 80, easing: soft, fill: 'backwards' });
     });
   });
 }
 function paintBanners(){
   $$('[data-acct-banner]').forEach(function(el){
-    if(!state.ready || (!state.user && promoDismissed())){ el.hidden = true; return; }
-    var mini = !!state.user && progressMin();
+    if(!state.ready){ el.hidden = true; return; }
+    var mini = progressMin();
     el.hidden = false; el.classList.toggle('in', !!state.user); el.classList.toggle('mini', mini);
     if(mini){ el.innerHTML = miniHTML(); return; }
-    el.innerHTML = (state.user
-      ? '<button type="button" class="ab-x ab-min" data-acct="min-progress" aria-expanded="true" aria-label="Minimize your progress" title="Minimize"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg></button>'
-      : '<button type="button" class="ab-x" data-acct="close-promo" aria-label="Close" title="Close. You can still sign in with the button at the top">×</button>') + bannerHTML();
+    el.innerHTML = '<button type="button" class="ab-x ab-min" data-acct="min-progress" aria-expanded="true" aria-label="' + (state.user ? 'Minimize your progress' : 'Minimize') + '" title="Minimize"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg></button>' + bannerHTML();
   });
 }
 
@@ -267,7 +270,7 @@ document.addEventListener('click', function(e){
     else if(act === 'signout'){ signOut(); }
     else if(act === 'cert'){ getCertificate(); }
     else if(act === 'min-progress' || act === 'show-progress'){ toggleProgress(act === 'min-progress'); }
-    else if(act === 'close-promo'){ try { localStorage.setItem('tm-promo-closed', '1'); } catch(err){} paintBanners(); toast('No problem. You can create an account or sign in any time with the Sign in button at the top.'); }
+    else if(act === 'close-promo'){ toggleProgress(true); }
     return;
   }
   var nav2 = $('#acctNav'); if(nav2 && !nav2.contains(e.target)) nav2.classList.remove('open');
