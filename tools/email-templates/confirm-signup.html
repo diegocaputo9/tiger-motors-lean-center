@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
+<title>Welcome to the Tiger Motors Lean Education Center</title>
+</head>
+<body style="margin:0;padding:0;background:#EDF0F3;">
+<!-- Supabase → Authentication → Emails → Templates → "Confirm signup". Subject: Welcome to Tiger Motors Lean: confirm your email -->
+<div style="display:none;max-height:0;overflow:hidden;opacity:0;">Confirm your email to finish creating your free Tiger Motors Lean account.</div>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#EDF0F3;">
+  <tr><td align="center" style="padding:32px 16px;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:560px;">
+      <!-- header -->
+      <tr><td style="background:#0C2340;border-radius:18px 18px 0 0;padding:28px 32px 26px;">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
+          <td valign="middle" style="padding-right:14px;"><img src="https://tigermotorslean.com/logo-circle-dark.png" width="52" height="52" alt="Tiger Motors" style="display:block;border:0;border-radius:50%;"></td>
+          <td valign="middle" style="font-family:Arial,Helvetica,sans-serif;">
+            <div style="font-size:17px;font-weight:bold;letter-spacing:.5px;color:#FFFFFF;">TIGER MOTORS</div>
+            <div style="font-size:11px;letter-spacing:2px;color:#A9B8C9;text-transform:uppercase;padding-top:3px;">Lean Education Center</div>
+          </td>
+        </tr></table>
+      </td></tr>
+      <tr><td style="background:#E87722;height:4px;line-height:4px;font-size:4px;">&nbsp;</td></tr>
+      <!-- body -->
+      <tr><td style="background:#FFFFFF;padding:36px 32px 30px;font-family:Arial,Helvetica,sans-serif;color:#0C1B2E;">
+        <div style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#B65410;font-weight:bold;">Free account</div>
+        <h1 style="margin:10px 0 14px;font-size:26px;line-height:1.2;color:#0C2340;">{{ if .Data.first_name }}Welcome, {{ .Data.first_name }}{{ else }}Welcome{{ end }}</h1>
+        <p style="margin:0 0 26px;font-size:16px;line-height:1.6;color:#43536A;">Confirm your email to finish creating your free account. From now on, every lecture, reading and lab you open is checked off automatically, and when you complete the Lean House you can get your certificate of completion.</p>
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
+          <td align="center" bgcolor="#E87722" style="border-radius:999px;">
+            <a href="{{ .ConfirmationURL }}" style="display:inline-block;padding:15px 34px;font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;letter-spacing:1px;color:#1A0C02;text-decoration:none;border-radius:999px;">CONFIRM AND SIGN IN&nbsp;&nbsp;&rarr;</a>
+          </td>
+        </tr></table>
+        <p style="margin:26px 0 0;font-size:13px;line-height:1.6;color:#66778C;">The link works once and expires in about an hour. If you did not create an account, you can ignore this email.</p>
+        <p style="margin:18px 0 0;font-size:12px;line-height:1.6;color:#8796A8;">Button not working? Copy this link into your browser:<br><a href="{{ .ConfirmationURL }}" style="color:#B65410;word-break:break-all;">{{ .ConfirmationURL }}</a></p>
+      </td></tr>
+      <!-- footer -->
+      <tr><td style="background:#F6F8FA;border-radius:0 0 18px 18px;padding:20px 32px;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:1.6;color:#66778C;border-top:1px solid #E2E7EC;">
+        Tiger Motors Lean Education Center · Department of Industrial and Systems Engineering, Auburn University<br>
+        <a href="https://tigermotorslean.com" style="color:#0C2340;font-weight:bold;text-decoration:none;">tigermotorslean.com</a> &nbsp;·&nbsp; Questions? <a href="mailto:leanmanufacturingteam@eng.auburn.edu" style="color:#0C2340;text-decoration:none;">leanmanufacturingteam@eng.auburn.edu</a>
+      </td></tr>
+    </table>
+  </td></tr>
+</table>
+</body>
+</html>
