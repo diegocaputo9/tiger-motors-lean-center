@@ -276,9 +276,9 @@ window.TM_I18N = {
 "APRENDE",
 "LERNEN"
 ],
-"Learn Lean Manufacturing concepts": [
-"Aprende los conceptos de la manufactura esbelta",
-"Lean-Manufacturing-Konzepte lernen"
+"<em>Learn</em> Lean Manufacturing concepts": [
+"<em>Aprende</em> los conceptos de la manufactura esbelta",
+"Lean-Manufacturing-Konzepte <em>lernen</em>"
 ],
 "Lectures and supplemental material organized around the Lean House, from People to Continuous Improvement.": [
 "Clases y material complementario organizados en torno a la Casa Lean, desde las Personas hasta la Mejora Continua.",
@@ -288,9 +288,9 @@ window.TM_I18N = {
 "EXPLORA",
 "ENTDECKEN"
 ],
-"Explore a realistic manufacturing system": [
-"Explora un sistema de manufactura realista",
-"Ein realistisches Fertigungssystem erkunden"
+"<em>Explore</em> a realistic manufacturing system": [
+"<em>Explora</em> un sistema de manufactura realista",
+"Ein realistisches Fertigungssystem <em>erkunden</em>"
 ],
 "360° experiences of the Tiger Motors laboratory and 360° videos of students running the production system.": [
 "Experiencias 360° del laboratorio Tiger Motors y videos 360° de estudiantes operando el sistema de producción.",
@@ -300,9 +300,9 @@ window.TM_I18N = {
 "CONECTA",
 "VERBINDEN"
 ],
-"Connect concepts with hands-on activities": [
-"Conecta los conceptos con actividades prácticas",
-"Konzepte mit praktischen Übungen verbinden"
+"<em>Connect</em> concepts with hands-on activities": [
+"<em>Conecta</em> los conceptos con actividades prácticas",
+"Konzepte mit praktischen Übungen <em>verbinden</em>"
 ],
 "Laboratory activities that apply each Lean concept inside the same manufacturing environment.": [
 "Actividades de laboratorio que aplican cada concepto Lean dentro del mismo entorno de manufactura.",
