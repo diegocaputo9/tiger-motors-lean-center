@@ -596,8 +596,11 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
 
     <div class="news-more" id="newsMore">
       <div class="news-more-head"><h3>More news</h3><p>Stories about the Lean team and the project</p></div>
-      <div class="news-grid" id="newsGrid"></div>
-      <button type="button" class="news-all" id="newsAll" hidden></button>
+      <button type="button" class="news-more-btn" id="newsMoreBtn" aria-expanded="false" aria-controls="newsMoreBody"><span>More news</span><small id="newsMoreCount"></small><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+      <div class="news-more-body" id="newsMoreBody"><div class="nmb-in">
+        <div class="news-grid" id="newsGrid"></div>
+        <button type="button" class="news-all" id="newsAll" hidden></button>
+      </div></div>
     </div>
 
     <div class="sec-head team-head" id="team">
@@ -1406,6 +1409,10 @@ if('IntersectionObserver' in window && !reduce){
     if(NEWS.length>SHOW){ btn.hidden=false; btn.textContent=open?'Show fewer':'Show all '+NEWS.length+' stories'; } else btn.hidden=true;
   }
   btn.addEventListener('click',function(){ open=!open; render(); });
+  // phones: More news is a button that opens and closes the list of smaller stories
+  var mb=document.getElementById('newsMoreBtn'), mc=document.getElementById('newsMoreCount'), more=document.getElementById('newsMore');
+  if(mc) mc.textContent=NEWS.length+(NEWS.length===1?' story':' stories');
+  if(mb) mb.addEventListener('click',function(){ var o=!more.classList.contains('open'); more.classList.toggle('open',o); mb.setAttribute('aria-expanded',o?'true':'false'); });
   render();
 })();
 

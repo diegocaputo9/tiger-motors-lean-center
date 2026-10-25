@@ -1181,3 +1181,17 @@ article.rc.is-done{border-color:rgba(63,182,139,.6);box-shadow:inset 0 3px 0 #3F
   #project .lede,.team-head .lede{display:none}
   .plan-cap{display:none}
 }
+
+/* More news: on phones it is a button that opens the list of smaller stories */
+.news-more-btn{display:none}
+@media (max-width:640px),(orientation:landscape) and (max-height:500px){
+  .news-more .news-more-head{display:none}
+  .news-more-btn{display:flex;align-items:center;gap:10px;width:100%;padding:14px 16px;border-radius:14px;border:1px solid var(--paper-line);background:#fff;color:var(--ink);font:700 13px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;cursor:pointer;text-align:left}
+  .news-more-btn small{margin-left:auto;font:500 12px var(--f-body);letter-spacing:0;text-transform:none;color:var(--ink-3)}
+  .news-more-btn svg{width:18px;height:18px;flex:none;color:#9A460C;transition:transform .45s cubic-bezier(.65,0,.35,1)}
+  .news-more.open .news-more-btn svg{transform:rotate(180deg)}
+  .news-more-body{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .55s cubic-bezier(.65,0,.35,1),opacity .4s}
+  .news-more.open .news-more-body{grid-template-rows:1fr;opacity:1}
+  .nmb-in{overflow:hidden;min-height:0}
+  .nmb-in .news-grid{margin-top:10px}
+}
