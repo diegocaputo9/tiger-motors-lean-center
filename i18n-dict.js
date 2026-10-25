@@ -436,10 +436,6 @@ window.TM_I18N = {
 "Producto terminado",
 "Fertigware"
 ],
-"Station 10": [
-"Estación 10",
-"Station 10"
-],
 "HEIJUNKA BOX": [
 "CAJA HEIJUNKA",
 "HEIJUNKA-BOX"
