@@ -1085,3 +1085,21 @@ article.rc.is-done{border-color:rgba(63,182,139,.6);box-shadow:inset 0 3px 0 #3F
 }
 @media (max-width:380px){.au-corner{display:none}.nav-in>.acct-nav,.nav-in .acct-nav{margin-left:auto}.mode-btn{margin-left:0}}
 @media (max-width:480px){.hero-cta{margin-top:28px}}
+/* phones: Learn / Explore / Connect as one grouped card with dividers */
+@media (max-width:640px){
+  .ideas{gap:0;background:var(--glass);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%)}
+  .ideas .idea,html[data-mode="light"] .ideas .idea{background:transparent;border:0;border-radius:0;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;padding:18px 20px;gap:6px}
+  .ideas .idea+.idea{border-top:1px solid var(--line)}
+  .ideas .idea:hover{transform:none;background:transparent}
+  .idea h3{font-size:19px;line-height:1.2}
+  .idea p{font-size:14.5px;line-height:1.5}
+  /* the facility plan keeps the view switch but drops the cell/area chips */
+  .plan-legend{display:none}
+}
+/* fact titles may wrap instead of running out of their box (e.g. High-Volume on landscape phones) */
+.fact b{white-space:normal;overflow-wrap:break-word}
+.fact b em{white-space:nowrap}
+/* JIT value stream: wider boxes so labels like LAB ACTIVITY fit */
+.vsm-row{min-width:1080px}
+.vbox{min-width:0}
+.vbox em{overflow-wrap:anywhere}
