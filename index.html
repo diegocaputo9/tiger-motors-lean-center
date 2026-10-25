@@ -811,7 +811,24 @@ function select(k, fromUser){
   document.querySelectorAll('#house .hz').forEach(function(g){g.classList.toggle('on', g.getAttribute('data-k')===k);});
   document.querySelectorAll('.step-chip').forEach(function(b){b.setAttribute('aria-pressed', b.getAttribute('data-k')===k?'true':'false');});
   renderPanel(k);
-  if(fromUser && window.innerWidth<=900){ panel.scrollIntoView({behavior:reduce?'auto':'smooth', block:'start'}); }
+  if(fromUser && window.innerWidth<=900) glideTo(panel);
+}
+// gentle scroll down to the materials: about a second, easing in and out; a touch or wheel stops it
+function glideTo(el){
+  var nav = document.getElementById('nav'), off = (nav ? nav.offsetHeight : 0) + 12;
+  var from = window.scrollY, to = Math.max(0, el.getBoundingClientRect().top + from - off), dist = to - from;
+  if(reduce || Math.abs(dist) < 4){ window.scrollTo({ top: to, behavior: 'instant' }); return; }
+  var dur = Math.min(1300, 700 + Math.abs(dist) * .5), t0 = performance.now(), stop = false;
+  function cancel(){ stop = true; }
+  ['wheel','touchstart','keydown'].forEach(function(ev){ window.addEventListener(ev, cancel, { once: true, passive: true }); });
+  function ease(u){ return u < .5 ? 4*u*u*u : 1 - Math.pow(-2*u + 2, 3) / 2; }
+  (function step(now){
+    if(stop) return;
+    var u = Math.min(1, (now - t0) / dur);
+    window.scrollTo({ top: from + dist * ease(u), behavior: 'instant' });
+    if(u < 1) requestAnimationFrame(step);
+    else ['wheel','touchstart','keydown'].forEach(function(ev){ window.removeEventListener(ev, cancel); });
+  })(t0);
 }
 document.querySelectorAll('#house .hz').forEach(function(g){
   g.addEventListener('click', function(){select(g.getAttribute('data-k'), true);});
