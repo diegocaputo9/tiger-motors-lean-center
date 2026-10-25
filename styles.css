@@ -1253,3 +1253,10 @@ article.rc.is-done{border-color:rgba(63,182,139,.6);box-shadow:inset 0 3px 0 #3F
 @media (min-width:1025px){.site-rev{display:block;margin-top:22px;font:500 11px var(--f-mono);letter-spacing:.08em;color:var(--text-3);opacity:.8}}
 /* phones: no 360° · 3DVista / 360° · YouTube tags */
 @media (max-width:640px),(orientation:landscape) and (max-height:500px){.portal-body .tag,.lv-text .tag{display:none}}
+/* phones: the four facility facts as a compact 2×2 box */
+@media (max-width:640px),(orientation:landscape) and (max-height:500px){
+  .facts,.intro-top .facts{grid-template-columns:repeat(2,1fr)}
+  .fact{padding:13px 14px 12px;gap:4px;align-content:start}
+  .fact b{font-size:19px;line-height:1.05}
+  .fact span{font-size:12px;line-height:1.35}
+}
