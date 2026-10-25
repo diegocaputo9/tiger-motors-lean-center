@@ -1195,3 +1195,11 @@ article.rc.is-done{border-color:rgba(63,182,139,.6);box-shadow:inset 0 3px 0 #3F
   .nmb-in{overflow:hidden;min-height:0}
   .nmb-in .news-grid{margin-top:10px}
 }
+/* language switch sits just left of the light/dark button */
+@media (max-width:1060px){.nav-in .lang-sw{margin-left:auto}.nav-in .lang-sw+.mode-btn{margin-left:0}}
+@media (max-width:480px){.au-corner{display:none}}
+@media (max-width:380px){.nav-in{gap:6px}.nav-in .lang-sw{margin-left:0}}
+/* the brand never wraps; on mid-size screens the menu tightens so longer Spanish/German labels fit */
+.brand-txt b,.brand-txt span{white-space:nowrap}
+@media (min-width:1061px) and (max-width:1380px){.nav-in{gap:12px}.nav-links a{padding:10px 10px;font-size:13px}}
+@media (min-width:1061px) and (max-width:1240px){.brand-txt span{display:none}}

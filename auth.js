@@ -142,7 +142,7 @@ function paintNav(){
   var box = $('#acctNav');
   if(!box){
     box = document.createElement('div'); box.id = 'acctNav'; box.className = 'acct-nav';
-    var anchor = $('.mode-btn', host); host.insertBefore(box, anchor || null);
+    var anchor = $('.lang-sw', host) || $('.mode-btn', host); host.insertBefore(box, anchor || null);
   }
   if(!state.ready){ box.innerHTML = ''; return; }
   if(!state.user){

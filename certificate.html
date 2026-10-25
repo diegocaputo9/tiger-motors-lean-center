@@ -19,6 +19,7 @@ body{font-family:"IBM Plex Sans",system-ui,sans-serif;background:var(--paper);co
 a{color:#9A460C}
 .top{max-width:1000px;margin:0 auto 18px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
 .top a.home{display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font:700 15px "Archivo",sans-serif}
+.top-r{display:inline-flex;align-items:center;gap:14px}
 .top a.home img{width:36px;height:36px;border-radius:50%}
 .status{max-width:1000px;margin:0 auto 16px;display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:14px;font-size:14.5px}
 .status.ok{background:#E8F7F0;border:1px solid #9ED9BF;color:#1C5E43}
@@ -53,9 +54,11 @@ a{color:#9A460C}
   .cert{max-width:none;width:100vw;height:100vh;aspect-ratio:auto;box-shadow:none;border-radius:0}
 }
 </style>
+<script src="i18n-dict.js" defer></script>
+<script src="i18n.js" defer></script>
 </head>
 <body>
-<div class="top"><a class="home" href="/"><img src="logo-circle.png" alt="">Tiger Motors Lean Education Center</a><a href="modules">Learning Modules →</a></div>
+<div class="top"><a class="home" href="/"><img src="logo-circle.png" alt="">Tiger Motors Lean Education Center</a><span class="top-r"><a href="modules">Learning Modules →</a><div class="lang-sw" data-lang-switch></div></span></div>
 <div id="out"><p class="note">Checking certificate…</p></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script>window.TM_ACCOUNTS_FORCE=true;</script>
@@ -78,7 +81,7 @@ a{color:#9A460C}
       '&certUrl='+encodeURIComponent(url)+'&certId='+encodeURIComponent(c.id);
     out.innerHTML=
       '<div class="status ok">✓ <span><b>Verified certificate.</b> Issued by the Tiger Motors Lean Education Center to '+esc(c.full_name)+' on '+esc(date)+'.</span></div>'+
-      '<section class="cert" aria-label="Certificate of completion"><div class="c-in">'+
+      '<section class="cert" aria-label="Certificate of completion" data-i18n-skip><div class="c-in">'+
         '<img class="c-logo" src="logo-circle.png" alt="Tiger Motors Lean Education Center">'+
         '<p class="c-k">Tiger Motors Lean Education Center</p>'+
         '<h1 class="c-title">Certificate of Completion</h1>'+

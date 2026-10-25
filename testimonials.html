@@ -225,6 +225,8 @@ html[data-mode="light"] .share .err{color:#B42318}
 html[data-mode="light"] .share .done .ok{color:#1C7A55}
 @media (prefers-reduced-motion:reduce){mark{transition:none;background-size:100% 100%}.q{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
 </style>
+<script src="i18n-dict.js" defer></script>
+<script src="i18n.js" defer></script>
 </head>
 <body>
 <header class="top">
@@ -232,6 +234,7 @@ html[data-mode="light"] .share .done .ok{color:#1C7A55}
     <a class="home" href="/"><img class="logo-dark" src="logo-circle-dark.png" alt=""><img class="logo-light" src="logo-circle.png" alt=""><span>Tiger Motors Lean Education Center</span></a>
     <nav aria-label="Page sections">
       <a href="/">← Back</a>
+      <div class="lang-sw" data-lang-switch></div>
       <button class="mode" id="modeBtn" type="button" aria-label="Switch to light mode" title="Switch to light mode">
         <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg>
         <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 019.5 4a8.5 8.5 0 1010.5 10.5z"/></svg>
@@ -491,8 +494,8 @@ function render(f){
   var list=VOICES.filter(function(v){return f==='all'||v.g===f;});
   var html=list.map(function(v){
     var len=v.q.join(' ').length;
-    return '<figure class="q'+(v.hl?' hl':'')+(len>520?' long':'')+'"><span class="tag">'+esc(GROUPS[v.g].l)+'</span><blockquote>'+v.q.map(function(p){return '<p>'+markUp(p,v.mk)+'</p>';}).join('')+'</blockquote>'+
-      '<cite>'+esc(v.who)+(v.org?'<small>'+esc(v.org)+'</small>':'')+'</cite></figure>';
+    return '<figure class="q'+(v.hl?' hl':'')+(len>520?' long':'')+'"><span class="tag">'+esc(GROUPS[v.g].l)+'</span><blockquote data-i18n-skip>'+v.q.map(function(p){return '<p>'+markUp(p,v.mk)+'</p>';}).join('')+'</blockquote>'+
+      '<cite data-i18n-skip>'+esc(v.who)+(v.org?'<small>'+esc(v.org)+'</small>':'')+'</cite></figure>';
   });
   // spread the photos evenly through the list (CSS columns then scatter them across the page)
   // all photos in the full list; filtered lists get about one photo per six testimonials

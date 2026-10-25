@@ -23,6 +23,8 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="styles.css">
 
+<script src="i18n-dict.js" defer></script>
+<script src="i18n.js" defer></script>
 </head>
 <body>
 <script>try{var m=localStorage.getItem('tm-mode');if(m==='light')document.documentElement.setAttribute('data-mode','light');}catch(e){}</script>
@@ -73,6 +75,7 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
       <a href="#team">Team</a>
       <a href="#contact">Contact</a>
     </nav>
+    <div class="lang-sw" data-lang-switch></div>
     <button class="mode-btn" id="modeBtn" type="button" aria-label="Switch to light mode" title="Switch to light mode">
       <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg>
       <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 019.5 4a8.5 8.5 0 1010.5 10.5z"/></svg>
@@ -732,7 +735,7 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
 (function(){
 "use strict";
 var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-var LITE = !!(window.matchMedia && (matchMedia('(max-width:1100px)').matches || matchMedia('(pointer:coarse)').matches));
+var LITE = window.TM_LITE = !!(window.matchMedia && (matchMedia('(max-width:1100px)').matches || matchMedia('(pointer:coarse)').matches));
 if(LITE) document.documentElement.classList.add('lite');
 
 /* =========================================================
@@ -768,7 +771,7 @@ var panel = document.getElementById('panel');
 function countsText(m){
   var c = {};
   m.items.forEach(function(it){ var l = TYPES[it.type].label; c[l]=(c[l]||0)+1; });
-  var parts = Object.keys(c).map(function(k){return c[k]+' '+k.toLowerCase()+(c[k]>1&&!/°/.test(k)?'s':'');});
+  var parts = Object.keys(c).map(function(k){var w=k.toLowerCase(); return c[k]+' '+(c[k]>1&&!/°/.test(k)?(/y$/.test(w)?w.slice(0,-1)+'ies':w+'s'):w);});
   return parts.length ? parts.join(' · ') : 'Coming in Spring 2027';
 }
 function mini(it){
@@ -1379,7 +1382,7 @@ if('IntersectionObserver' in window && !reduce){
     title.textContent=T[m]; capR.textContent=C[m]; legend.hidden=!info;
     if(shuttle&&shAnim){ if(info){ if(shAnim.parentNode) shAnim.parentNode.removeChild(shAnim); shuttle.setAttribute('y',REST); } else if(!shAnim.parentNode){ shuttle.appendChild(shAnim); } }
     var sv=plan.querySelector('.plan-svg');
-    if(sv&&sv.pauseAnimations){ if(info||LITE){ try{sv.setCurrentTime(0);}catch(e){} sv.pauseAnimations(); } else { sv.unpauseAnimations(); } }
+    if(sv&&sv.pauseAnimations){ if(info||window.TM_LITE){ try{sv.setCurrentTime(0);}catch(e){} sv.pauseAnimations(); } else { sv.unpauseAnimations(); } }
     restView(); clearHits(); if(info) start();
   }
   plan.querySelectorAll('[data-pmode]').forEach(function(b){b.addEventListener('click',function(){setMode(b.getAttribute('data-pmode'));});});
