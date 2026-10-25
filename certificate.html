@@ -49,8 +49,8 @@ a{color:#9A460C}
 .empty h1{font:800 32px "Archivo",sans-serif;color:var(--navy)}
 /* paper look on screen: warm white, fine grain, faint fibers and slightly darker edges (the PDF stays plain white) */
 @media screen{.cert{background-color:#FFFFFF;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 .03 0'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23g)'/%3E%3C/svg%3E"),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='480'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .22' numOctaves='2' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 .045 -.016'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23f)'/%3E%3C/svg%3E"),radial-gradient(130% 120% at 50% 45%,rgba(255,255,255,0) 58%,rgba(100,100,100,.03) 100%);background-size:220px 220px,480px 480px,100% 100%}}
-/* phones: the card grows to fit its content instead of cutting it off (print keeps the landscape page) */
-@media screen and (max-width:640px){.cert{aspect-ratio:auto;padding:46px 30px 40px}.cert::before{inset:12px;border-width:2px}.cert::after{inset:18px;border-width:1px}.c-in{gap:10px}.c-logo{width:120px}.c-k{font-size:10px}.c-title{font-size:26px}.c-sub{font-size:12px}.c-name{font-size:24px}.c-what{font-size:12.5px}.c-els{font-size:9px}.c-foot,.c-foot b{font-size:11px}.c-foot{flex-direction:column;gap:8px;text-align:center}.c-foot div:last-child{text-align:center}}
+/* phones: same landscape document, scaled down; pinch to zoom */
+@media screen and (max-width:640px){body{padding:16px 10px 40px}.cert{border-radius:3px}}
 @media print{
   @page{size:landscape;margin:0}
   body{background:#fff;padding:0}
@@ -59,7 +59,7 @@ a{color:#9A460C}
   .cert{max-width:none;width:min(100vw,141.4vh);height:auto;aspect-ratio:1.414/1;margin:0 auto;box-shadow:none;border-radius:0;background:#fff!important}
 }
 </style>
-<script src="i18n-dict.js?v=9c60fc6e" defer></script>
+<script src="i18n-dict.js?v=20a4a812" defer></script>
 <script src="i18n.js?v=1a2a8cdb" defer></script>
 </head>
 <body>
@@ -76,6 +76,34 @@ a{color:#9A460C}
   function notFound(msg){ out.innerHTML='<div class="empty"><h1>Certificate not found</h1><p>'+esc(msg)+'</p><p><a href="/">Go to the Tiger Motors Lean Education Center</a></p></div>'; }
   if(!id){ notFound('This link does not include a certificate ID.'); return; }
   var sb=window.TMAuth&&window.TMAuth.client; if(!sb){ notFound('Verification is temporarily unavailable. Please try again later.'); return; }
+  /* Download PDF: one landscape page, Letter in the US and A4 elsewhere, drawn from a full-size copy of the
+     certificate so the result is the same on phones and computers. */
+  function load(src){ return new Promise(function(ok,no){ var t=document.createElement('script'); t.src=src; t.onload=ok; t.onerror=no; document.head.appendChild(t); }); }
+  function makePdf(btn, c){
+    var label=btn.textContent; btn.disabled=true; btn.textContent='Preparing PDF…';
+    var libs=window.html2canvas&&window.jspdf?Promise.resolve():Promise.all([
+      load('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js'),
+      load('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js')]);
+    var stage=document.createElement('div');
+    stage.style.cssText='position:fixed;left:-10000px;top:0;width:1414px;pointer-events:none';
+    var copy=document.querySelector('.cert').cloneNode(true);
+    copy.style.cssText='max-width:none;width:1414px;margin:0;border-radius:0;box-shadow:none;background:#fff';
+    // the capture tool cannot draw letter-spacing or widened fonts, so the large lines use normal spacing and width
+    copy.querySelectorAll('.c-title,.c-name').forEach(function(n){ n.style.letterSpacing='normal'; n.style.fontStretch='normal'; });
+    stage.appendChild(copy); document.body.appendChild(stage);
+    libs.then(function(){ return (document.fonts&&document.fonts.ready)||null; }).then(function(){
+      return window.html2canvas(copy,{scale:2.4,backgroundColor:'#ffffff',useCORS:true,logging:false});
+    }).then(function(canvas){
+      var letter=/^en-(US|CA)$|^(es-(US|MX)|fr-CA)$/i.test(navigator.language||'');
+      var fmt=letter?'letter':'a4', pdf=new window.jspdf.jsPDF({orientation:'landscape',unit:'mm',format:fmt});
+      var pw=pdf.internal.pageSize.getWidth(), ph=pdf.internal.pageSize.getHeight(), r=canvas.width/canvas.height;
+      var w=pw, h=pw/r; if(h>ph){ h=ph; w=ph*r; }
+      pdf.addImage(canvas.toDataURL('image/jpeg',0.95),'JPEG',(pw-w)/2,(ph-h)/2,w,h);
+      pdf.save('Tiger-Motors-Certificate-'+c.id+'.pdf');
+    }).catch(function(){ window.print(); }).then(function(){
+      stage.remove(); btn.disabled=false; btn.textContent=label;
+    });
+  }
   sb.rpc('verify_certificate',{p_id:id}).then(function(r){
     var c=r.data&&r.data[0];
     if(r.error||!c){ notFound('No certificate exists with the ID '+id+'. Check the ID and try again.'); return; }
@@ -96,9 +124,9 @@ a{color:#9A460C}
         '<div class="c-foot"><div><b>Issued</b>'+esc(date)+'</div><div><b>Certificate ID</b>'+esc(c.id)+'</div><div><b>Verify at</b>tigermotorslean.com/certificate</div></div>'+
       '</div></section>'+
       '<div class="acts"><button class="b pri" type="button" id="pdf">Download PDF</button><button class="b" type="button" id="copy">Copy verification link</button><a class="b" href="'+esc(li)+'" target="_blank" rel="noopener">Add to LinkedIn</a></div>'+
-      '<p class="note">To save as PDF, choose “Save as PDF” in the print window. Anyone with the verification link can confirm this certificate is real.</p>';
+      '<p class="note">The PDF is a single landscape page (Letter or A4), ready to print on your own paper. Anyone with the verification link can confirm this certificate is real.</p>';
     document.title=c.full_name+' · Certificate of Completion · Tiger Motors Lean Education Center';
-    document.getElementById('pdf').addEventListener('click',function(){ window.print(); });
+    document.getElementById('pdf').addEventListener('click',function(e){ makePdf(e.currentTarget, c); });
     document.getElementById('copy').addEventListener('click',function(e){ var b=e.currentTarget; (navigator.clipboard?navigator.clipboard.writeText(url):Promise.reject()).then(function(){ b.textContent='Link copied'; },function(){ prompt('Copy this link',url); }); });
   });
 })();

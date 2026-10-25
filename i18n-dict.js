@@ -2296,10 +2296,6 @@ window.TM_I18N = {
 "Agregar a LinkedIn",
 "Zu LinkedIn hinzufügen"
 ],
-"To save as PDF, choose “Save as PDF” in the print window. Anyone with the verification link can confirm this certificate is real.": [
-"Para guardarlo como PDF, elige “Guardar como PDF” en la ventana de impresión. Cualquier persona con el enlace de verificación puede confirmar que este certificado es auténtico.",
-"Zum Speichern als PDF wählen Sie im Druckfenster „Als PDF speichern“. Jede Person mit dem Prüflink kann bestätigen, dass dieses Zertifikat echt ist."
-],
 "Privacy for free learner accounts": [
 "Privacidad de las cuentas gratuitas",
 "Datenschutz für kostenlose Lernkonten"
@@ -2375,5 +2371,13 @@ window.TM_I18N = {
 "re:^Last updated (.+) · Revision (\\d+)$": [
 "Última actualización: $1 · Revisión $2",
 "Zuletzt aktualisiert: $1 · Revision $2"
+],
+"The PDF is a single landscape page (Letter or A4), ready to print on your own paper. Anyone with the verification link can confirm this certificate is real.": [
+"El PDF es una sola página horizontal (Carta o A4), lista para imprimir en tu propio papel. Cualquier persona con el enlace de verificación puede confirmar que este certificado es auténtico.",
+"Das PDF ist eine einzelne Seite im Querformat (Letter oder A4), bereit zum Drucken auf Ihrem eigenen Papier. Jede Person mit dem Prüflink kann bestätigen, dass dieses Zertifikat echt ist."
+],
+"Preparing PDF…": [
+"Preparando el PDF…",
+"PDF wird erstellt…"
 ]
 };
