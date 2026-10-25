@@ -29,7 +29,7 @@ a{color:#9A460C}
 .cert::before{content:"";position:absolute;inset:18px;border:2px solid var(--navy);border-radius:3px;pointer-events:none}
 .cert::after{content:"";position:absolute;inset:26px;border:1px solid rgba(232,119,34,.7);border-radius:2px;pointer-events:none}
 .c-in{position:relative;display:grid;justify-items:center;gap:1.4vw}
-.c-logo{width:clamp(56px,9vw,96px);height:auto;border-radius:50%}
+.c-logo{width:clamp(70px,20vw,230px);height:auto}
 .c-k{font:600 clamp(10px,1.2vw,13px) "IBM Plex Mono",monospace;letter-spacing:.32em;text-transform:uppercase;color:var(--orange)}
 .c-title{font:800 clamp(26px,4.6vw,52px)/1 "Archivo",sans-serif;font-stretch:112%;color:var(--navy);letter-spacing:.01em}
 .c-sub{font-size:clamp(12px,1.5vw,16px);color:var(--ink2)}
@@ -47,6 +47,8 @@ a{color:#9A460C}
 .note{max-width:1000px;margin:14px auto 0;font-size:13px;color:#66778C}
 .empty{max-width:640px;margin:60px auto;text-align:center;display:grid;gap:12px}
 .empty h1{font:800 32px "Archivo",sans-serif;color:var(--navy)}
+/* phones: the card grows to fit its content instead of cutting it off (print keeps the landscape page) */
+@media (max-width:640px){.cert{aspect-ratio:auto;padding:46px 30px 40px}.c-in{gap:10px}.c-foot{flex-direction:column;gap:8px;text-align:center}.c-foot div:last-child{text-align:center}}
 @media print{
   @page{size:landscape;margin:0}
   body{background:#fff;padding:0}
@@ -82,7 +84,7 @@ a{color:#9A460C}
     out.innerHTML=
       '<div class="status ok">✓ <span><b>Verified certificate.</b> Issued by the Tiger Motors Lean Education Center to '+esc(c.full_name)+' on '+esc(date)+'.</span></div>'+
       '<section class="cert" aria-label="Certificate of completion" data-i18n-skip><div class="c-in">'+
-        '<img class="c-logo" src="logo-circle.png" alt="Tiger Motors Lean Education Center">'+
+        '<img class="c-logo" src="logo-full.svg" alt="Tiger Motors Lean Education Center">'+
         '<p class="c-k">Tiger Motors Lean Education Center</p>'+
         '<h1 class="c-title">Certificate of Completion</h1>'+
         '<p class="c-sub">This certifies that</p>'+
