@@ -184,13 +184,11 @@ function bannerHTML(){
     '<div class="ab-txt"><p class="ab-k">Your progress</p><h3>' + (name ? 'Hi ' + esc(name) + ', ' : '') + 'you have completed ' + s.done + ' of ' + s.total + ' resources</h3><ul class="ab-mods">' + mods + '</ul></div>' +
     '<div class="ab-act">' + cert + '</div>';
 }
-// the box above the Lean House (progress when signed in, free-account invite when signed out) folds into a slim bar
-// and opens again; each state is remembered on this device. Someone who closed the old invite sees it folded.
-function progressMin(){ try {
-  if(state.user) return localStorage.getItem('tm-progress-min') === '1';
-  var v = localStorage.getItem('tm-promo-min'); return v === null ? localStorage.getItem('tm-promo-closed') === '1' : v === '1';
-} catch(e){ return false; } }
-function setProgressMin(v){ try { localStorage.setItem(state.user ? 'tm-progress-min' : 'tm-promo-min', v ? '1' : '0'); } catch(e){} }
+// the box above the Lean House folds into a slim bar and opens again; it starts open.
+// Signed in: folding is remembered on this device. Signed out: it only lasts until the page is reloaded.
+var promoMin = false;
+function progressMin(){ if(!state.user) return promoMin; try { return localStorage.getItem('tm-progress-min') === '1'; } catch(e){ return false; } }
+function setProgressMin(v){ if(!state.user){ promoMin = !!v; return; } try { localStorage.setItem('tm-progress-min', v ? '1' : '0'); } catch(e){} }
 function miniHTML(){
   var s = stats();
   return '<div class="ab-ico ab-ico-sm" aria-hidden="true">' + ring(s.pct, 34) + '</div>' +

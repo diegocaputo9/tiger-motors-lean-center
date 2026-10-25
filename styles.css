@@ -994,6 +994,7 @@ html[data-mode="light"] .acct-menu{background:rgba(255,255,255,.98);box-shadow:0
 .acct-banner p:not(.ab-k){font-size:14.5px;line-height:1.55;color:#C9D6E4;max-width:70ch}
 .acct-banner p b{color:#fff}
 .ab-act{display:grid;gap:8px;justify-items:start}
+.acct-banner:not(.in) .ab-act{justify-items:center;text-align:center}
 .ab-link{background:none;border:0;padding:4px 0;color:#FFB877;font:600 12.5px var(--f-mono);letter-spacing:.06em;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 .ab-lock{font-size:13px!important;color:#9FB0C4!important;max-width:28ch}
 .ab-mods{list-style:none;margin:10px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px 18px}
