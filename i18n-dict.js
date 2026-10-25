@@ -2375,5 +2375,9 @@ window.TM_I18N = {
 "Tap a part of the house to see its materials": [
 "Toca una parte de la casa para ver sus materiales",
 "Tippen Sie auf das Haus, um Materialien zu sehen"
+],
+"re:^Last updated (.+) · Revision (\\d+)$": [
+"Última actualización: $1 · Revisión $2",
+"Zuletzt aktualisiert: $1 · Revision $2"
 ]
 };

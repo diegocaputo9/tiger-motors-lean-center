@@ -1247,3 +1247,9 @@ article.rc.is-done{border-color:rgba(63,182,139,.6);box-shadow:inset 0 3px 0 #3F
   .bdlg-x.dlg-x{background:#fff;border:1px solid rgba(12,35,64,.16);color:var(--ink)}
   html[data-mode="light"] .pdlg-x.dlg-x{background:#fff;border-color:rgba(12,35,64,.16);color:var(--ink)}
 }
+
+/* small "last updated · revision" line at the bottom of the page, desktop and laptop only (filled in by tools/stamp-assets.py) */
+.site-rev{display:none}
+@media (min-width:1025px){.site-rev{display:block;margin-top:22px;font:500 11px var(--f-mono);letter-spacing:.08em;color:var(--text-3);opacity:.8}}
+/* phones: no 360° · 3DVista / 360° · YouTube tags */
+@media (max-width:640px),(orientation:landscape) and (max-height:500px){.portal-body .tag,.lv-text .tag{display:none}}
