@@ -1103,3 +1103,15 @@ article.rc.is-done{border-color:rgba(63,182,139,.6);box-shadow:inset 0 3px 0 #3F
 .vsm-row{min-width:1080px}
 .vbox{min-width:0}
 .vbox em{overflow-wrap:anywhere}
+/* phones: contact is one compact card with the Lean Team details and a link to the ISE department */
+.cc-mob{display:none}
+@media (max-width:640px){
+  .contact{padding-block:56px 64px}
+  .contact .sec-head{margin-bottom:20px}
+  .contact-grid .cc:not(:first-child){display:none}
+  .contact-grid .cc{padding:20px;gap:12px}
+  .contact-grid .cc h3{font-size:20px}
+  .cc-mob{display:grid;margin-top:2px}
+  .contact-grid .cline{padding-top:10px}
+  .contact-grid .cline .val{font-size:15px}
+}
