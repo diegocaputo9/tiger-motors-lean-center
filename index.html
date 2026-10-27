@@ -33,7 +33,7 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="styles.css?v=5cfb2373">
+<link rel="stylesheet" href="styles.css?v=4c42ab8f">
 
 <script src="i18n-dict.js?v=a51a43f0" defer></script>
 <script src="i18n.js?v=1a2a8cdb" defer></script>
@@ -494,6 +494,7 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
         <p class="house-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V10m0-1.5a1.5 1.5 0 0 1 3 0V11m0-1a1.5 1.5 0 0 1 3 0v4.5a6 6 0 0 1-6 6h-.6a6 6 0 0 1-4.9-2.5L4.2 14a1.5 1.5 0 0 1 2.4-1.8L9 15"/></svg>Tap a part of the house to see its materials</p>
         <svg class="house" id="house" viewBox="0 0 600 600" role="group" aria-label="Lean House diagram">
           <defs>
+            <marker id="pdArr" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="3.2" markerHeight="3.2" orient="auto"><path d="M1.5 1.5L7 5l-5.5 3.5" fill="none" stroke="#FF9B4D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></marker>
             <linearGradient id="roofg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(232,119,34,.22)"/><stop offset="1" stop-color="rgba(20,40,64,.5)"/></linearGradient>
           </defs>
           <!-- Customer satisfaction (roof) -->
@@ -518,10 +519,10 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
           <g class="hz" data-k="ci" tabindex="0" role="button" aria-label="Step 5: Continuous Improvement">
             <rect class="sh" x="200" y="258" width="200" height="198" rx="4"/>
             <text x="300" y="294" text-anchor="middle" font-size="18" class="num">STEP 5</text>
-            <g transform="translate(300 336)">
-              <circle r="24" fill="none" stroke="rgba(232,119,34,.5)" stroke-dasharray="3 5"><animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="14s" repeatCount="indefinite"/></circle>
-              <path d="M-10 -4a11 11 0 0120 0M10 4a11 11 0 01-20 0" fill="none" stroke="#FF9B4D" stroke-width="2" stroke-linecap="round"/>
-              <path d="M10 -9v5h-5M-10 9V4h5" fill="none" stroke="#FF9B4D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <g transform="translate(300 336)" class="pdca">
+              <g class="pdca-ring"><path d="M6.45 -30.32A31 31 0 0 1 30.32 -6.45" marker-end="url(#pdArr)"/><path d="M30.32 6.45A31 31 0 0 1 6.45 30.32" marker-end="url(#pdArr)"/><path d="M-6.45 30.32A31 31 0 0 1 -30.32 6.45" marker-end="url(#pdArr)"/><path d="M-30.32 -6.45A31 31 0 0 1 -6.45 -30.32" marker-end="url(#pdArr)"/></g>
+              <g class="pdca-q"><path transform="translate(1.4 -1.4)" d="M0 0L0.00 -19.00A19 19 0 0 1 19.00 -0.00Z"/><path transform="translate(1.4 1.4)" d="M0 0L19.00 -0.00A19 19 0 0 1 0.00 19.00Z"/><path transform="translate(-1.4 1.4)" d="M0 0L0.00 19.00A19 19 0 0 1 -19.00 0.00Z"/><path transform="translate(-1.4 -1.4)" d="M0 0L-19.00 0.00A19 19 0 0 1 -0.00 -19.00Z"/></g>
+              <text x="8.4" y="-4.6" text-anchor="middle" class="pdca-l">P</text><text x="8.4" y="12.6" text-anchor="middle" class="pdca-l">D</text><text x="-8.4" y="12.6" text-anchor="middle" class="pdca-l">C</text><text x="-8.4" y="-4.6" text-anchor="middle" class="pdca-l">A</text>
             </g>
             <text x="300" y="392" text-anchor="middle" font-size="19" style="font-stretch:100%">CONTINUOUS</text>
             <text x="300" y="414" text-anchor="middle" font-size="19" style="font-stretch:100%">IMPROVEMENT</text>
@@ -725,7 +726,7 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
       <a href="#lab">Explore the Lab</a><a href="#lean-house">Lean House</a><a href="modules">Modules</a><a href="#project">About</a><a href="testimonials">Testimonials</a><a href="#contact">Contact</a>
     </div>
   </div>
-  <div class="wrap"><p class="site-rev">Last updated October 27, 2026 · Revision 109</p></div>
+  <div class="wrap"><p class="site-rev">Last updated October 27, 2026 · Revision 110</p></div>
 </footer>
 
 <dialog class="bdlg" id="bioDlg" aria-labelledby="bdlg-h">

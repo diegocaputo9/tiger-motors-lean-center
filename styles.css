@@ -1270,3 +1270,14 @@ article.rc.is-done{border-color:rgba(63,182,139,.6);box-shadow:inset 0 3px 0 #3F
   .ideas .idea{padding:15px 18px;gap:4px}
   .idea h3 em{color:var(--orange-2)}
 }
+/* Lean House step 5: a small PDCA wheel, one colour; the outer arrows keep turning to show the cycle never ends */
+.pdca-ring path{fill:none;stroke:#FF9B4D;stroke-width:2.2;stroke-linecap:round}
+.pdca-ring{animation:pdcaSpin 16s linear infinite}
+@keyframes pdcaSpin{to{transform:rotate(360deg)}}
+.pdca-q path{fill:rgba(255,255,255,.035);stroke:rgba(255,155,77,.75);stroke-width:1;stroke-linejoin:round}
+.hz text.pdca-l,.hz.on text.pdca-l:not(.num):not(.sm){fill:#FF9B4D;font:700 11px var(--f-display);letter-spacing:0}
+.hz.on .pdca-q path{fill:rgba(255,155,77,.1)}
+html[data-mode="light"] .pdca-ring path,html[data-mode="light"] #pdArr path{stroke:#C9621A}
+html[data-mode="light"] .hz text.pdca-l,html[data-mode="light"] .hz.on text.pdca-l:not(.num):not(.sm){fill:#B65410}
+html[data-mode="light"] .pdca-q path{fill:rgba(232,119,34,.14);stroke:rgba(201,98,26,.6)}
+@media (prefers-reduced-motion:reduce){.pdca-ring{animation:none}}
