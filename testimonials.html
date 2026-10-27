@@ -66,7 +66,11 @@ html[data-mode="light"] .mode .i-moon{display:block}
 .top nav a:hover{background:var(--paper-2);color:var(--ink)}
 @media (max-width:640px){.top nav a.hide-sm{display:none}.home span{display:none}}
 /* the timeline stays hidden on phones until it has more content */
-@media (max-width:760px){.story-btn{display:none!important}}
+@media (max-width:760px){.story-btn,.soon-wrap{display:none!important}}
+/* "How the lab was built" is switched off while the page is being finished: faded, dashed, with an orange tag */
+.soon-wrap{position:relative;display:inline-flex;cursor:not-allowed}
+.story-btn:disabled{opacity:.45;border-style:dashed;cursor:not-allowed;pointer-events:none}
+.soon-tag{position:absolute;top:-11px;right:-10px;padding:4px 9px 3px;border-radius:999px;background:var(--orange-2);color:#1A0C02;font:600 10px/1.2 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;box-shadow:0 6px 16px -6px rgba(232,119,34,.7);transform:rotate(3deg);pointer-events:none}
 
 /* page head: short, so the testimonials start right away */
 .v-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px 32px;padding:clamp(32px,5vw,56px) 0 0}
@@ -244,7 +248,7 @@ html[data-mode="light"] .share .err{color:#B42318}
 html[data-mode="light"] .share .done .ok{color:#1C7A55}
 @media (prefers-reduced-motion:reduce){mark{transition:none;background-size:100% 100%}.q{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
 </style>
-<script src="i18n-dict.js?v=9f68a0b7" defer></script>
+<script src="i18n-dict.js?v=a51a43f0" defer></script>
 <script src="i18n.js?v=1a2a8cdb" defer></script>
 </head>
 <body>
@@ -272,7 +276,7 @@ html[data-mode="light"] .share .done .ok{color:#1C7A55}
           <p class="v-sub">What students, working engineers, universities and industry partners say about learning Lean at Tiger Motors.</p>
         </div>
         <div class="v-acts">
-          <button type="button" class="pill story-btn" id="storyBtn" aria-haspopup="dialog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 12h18"/><circle cx="6" cy="12" r="2.2"/><circle cx="12" cy="12" r="2.2"/><circle cx="18" cy="12" r="2.2"/></svg>How the lab was built</button>
+          <span class="soon-wrap" title="We are working on this page"><button type="button" class="pill story-btn" id="storyBtn" aria-haspopup="dialog" disabled aria-describedby="storySoon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 12h18"/><circle cx="6" cy="12" r="2.2"/><circle cx="12" cy="12" r="2.2"/><circle cx="18" cy="12" r="2.2"/></svg>How the lab was built</button><span class="soon-tag" id="storySoon">Under construction</span></span>
           <button type="button" class="share-link" data-share aria-haspopup="dialog"><span>Share your story</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 3 10.5 13.5"/><path d="M21 3 14.5 21l-4-7.5L3 9.5z"/></svg></button>
         </div>
       </div>
@@ -346,7 +350,7 @@ html[data-mode="light"] .share .done .ok{color:#1C7A55}
     <span>Tiger Motors Lean Education Center · Department of Industrial and Systems Engineering, Auburn University</span>
     <a href="/">tigermotorslean.com</a>
   </div>
-  <div class="wrap"><p class="site-rev">Last updated October 26, 2026 · Revision 108</p></div>
+  <div class="wrap"><p class="site-rev">Last updated October 27, 2026 · Revision 109</p></div>
 </footer>
 
 <script>

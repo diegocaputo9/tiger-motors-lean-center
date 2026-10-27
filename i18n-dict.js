@@ -2387,5 +2387,13 @@ window.TM_I18N = {
 "We count visits to the site with Cloudflare Web Analytics. It does not use cookies or follow you to other sites; it only shows us totals, such as how many pages were viewed and from which countries, never who you are.": [
 "Contamos las visitas al sitio con Cloudflare Web Analytics. No usa cookies ni te sigue a otros sitios; solo nos muestra totales, como cuántas páginas se vieron y desde qué países, nunca quién eres.",
 "Wir zählen die Besuche der Website mit Cloudflare Web Analytics. Es verwendet keine Cookies und verfolgt Sie nicht auf andere Websites; es zeigt uns nur Gesamtzahlen, etwa wie viele Seiten aus welchen Ländern aufgerufen wurden, niemals, wer Sie sind."
+],
+"Under construction": [
+"En construcción",
+"In Arbeit"
+],
+"We are working on this page": [
+"Estamos trabajando en esta página",
+"Wir arbeiten an dieser Seite"
 ]
 };
