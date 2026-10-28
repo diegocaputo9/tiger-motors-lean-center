@@ -33,9 +33,9 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="styles.css?v=4c42ab8f">
+<link rel="stylesheet" href="styles.css?v=d7f25671">
 
-<script src="i18n-dict.js?v=a51a43f0" defer></script>
+<script src="i18n-dict.js?v=c4ae2d4f" defer></script>
 <script src="i18n.js?v=1a2a8cdb" defer></script>
 </head>
 <body>
@@ -726,7 +726,7 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
       <a href="#lab">Explore the Lab</a><a href="#lean-house">Lean House</a><a href="modules">Modules</a><a href="#project">About</a><a href="testimonials">Testimonials</a><a href="#contact">Contact</a>
     </div>
   </div>
-  <div class="wrap"><p class="site-rev">Last updated October 28, 2026 · Revision 112</p></div>
+  <div class="wrap"><p class="site-rev">Last updated October 28, 2026 · Revision 113</p></div>
 </footer>
 
 <dialog class="bdlg" id="bioDlg" aria-labelledby="bdlg-h">
@@ -811,13 +811,34 @@ function renderPanel(k){
     h += '</div></div>';
   });
   }
-  h += '</div><div class="p-nav"><div class="pn">'+
+  h += '</div><div class="p-next" aria-live="polite"></div><div class="p-nav"><div class="pn">'+
        '<button class="ibtn" data-go="-1" aria-label="Previous element">'+icon('left')+'</button>'+
        '<button class="ibtn" data-go="1" aria-label="Next element">'+icon('right')+'</button></div>'+
        '<a class="linkline" href="modules#mod-'+k+'"><span>Open full learning modules</span> '+icon('arrow').replace('<svg','<svg width="14" height="14"')+'</a></div>';
   panel.innerHTML = h;
   panel.classList.remove('panel-swap'); void panel.offsetWidth; panel.classList.add('panel-swap');
+  updateNext(false);
 }
+// once every resource of a step is opened, the way to the next step lights up
+function updateNext(animate){
+  var box = panel.querySelector('.p-next'), nxt = panel.querySelector('.ibtn[data-go="1"]'); if(!box || !window.TMAuth) return;
+  var i = SEQ.indexOf(current), ms = i>-1 ? TMAuth.moduleStats(current) : null, html = '';
+  if(ms && ms.total && ms.pct === 100){
+    var done = '<span class="pn-done"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12.5l4 4L18 8"/></svg><span>Step '+(i+1)+' complete</span></span>';
+    if(i < SEQ.length-1){
+      var n = BYK[SEQ[i+1]];
+      html = done+'<button type="button" class="btn btn-primary pn-go" data-go="1"><span>Next step</span> <b>'+esc(n.name)+'</b>'+icon('right')+'</button>';
+    } else if(TMAuth.config.certificates){
+      var all = TMAuth.stats().pct === 100, user = TMAuth.state.user;
+      html = done+(all ? (user ? '<button type="button" class="btn btn-primary pn-go" data-acct="cert">Get my certificate</button>' : '<button type="button" class="btn btn-primary pn-go" data-acct="signup">Create a free account to get your certificate</button>') : '<a class="btn btn-primary pn-go" href="modules">See what is left</a>');
+    }
+  }
+  if(box.getAttribute('data-h') === html) return;
+  box.setAttribute('data-h', html); box.innerHTML = html;
+  box.classList.toggle('on', !!html); if(nxt) nxt.classList.toggle('pn-lit', !!html && i < SEQ.length-1);
+  if(html && animate){ box.classList.remove('pop'); void box.offsetWidth; box.classList.add('pop'); }
+}
+(function hookAuth(){ if(!window.TMAuth){ setTimeout(hookAuth, 250); return; } TMAuth.onChange(function(){ updateNext(true); }); })();
 var ORDER = SEQ.concat(['sqdcm','cs']);
 var current = 'people';
 function select(k, fromUser){
@@ -1151,6 +1172,7 @@ if('IntersectionObserver' in window && !reduce){
     {k:'You are ready', t:'Now explore the house', tg:['.house-wrap'], p:'Foundation, floor, pillars, improvement, then the roof. Select any element to open its materials, and follow the numbered steps 01 to 05 in order.', last:true, next:'Finish'}
   ];
   var layer,spot,card,idx=0,openT=false,opener=null,timer=0,els={};
+  var HELLO=STEPS[0], WELCOME={k:'Welcome', t:'Your account is ready', p:'Take the one-minute tour of the Lean House to see how the learning path works: where to start, where the materials are, and how to move from step to step. Already know your way around? Skip it.', first:true, next:'Take the tour', exit:'I know my way around'};
 
   function build(){
     layer=document.createElement('div'); layer.className='tour-layer';
@@ -1230,8 +1252,9 @@ if('IntersectionObserver' in window && !reduce){
   }
   var rzT=0;
   function onResize(){ if(!openT) return; clearTimeout(rzT); rzT=setTimeout(function(){place(false);},120); }
-  function open(){
+  function open(welcome){
     if(openT) return; openT=true; opener=document.activeElement; idx=0;
+    STEPS[0] = welcome===true ? WELCOME : HELLO;
     if(!layer) build();
     layer.style.display=''; spot.style.display=''; card.style.display='';
     var house=document.getElementById('lean-house'); if(house) house.scrollIntoView({block:'start',behavior:'auto'});
@@ -1247,7 +1270,15 @@ if('IntersectionObserver' in window && !reduce){
     setTimeout(function(){ if(openT) return; layer.style.display='none'; spot.style.display='none'; card.style.display='none'; spot.style.opacity=''; },260);
     if(opener&&opener.focus) opener.focus({preventScroll:true});
   }
-  btn.addEventListener('click',open);
+  btn.addEventListener('click',function(){ open(false); });
+  // a new learner's first sign-in (nothing opened yet) offers the tour once, on this device
+  (function hook(){ if(!window.TMAuth){ setTimeout(hook,250); return; }
+    TMAuth.onChange(function(st){
+      if(!st.ready || !st.user || openT || TMAuth.stats().done > 0) return;
+      var key='tm-welcome-tour-'+st.user.id; try{ if(localStorage.getItem(key)) return; localStorage.setItem(key,'1'); }catch(e){ return; }
+      setTimeout(function(){ open(true); }, 1200);
+    });
+  })();
 })();
 
 /* ---- lab video: muted 30s loop, loaded only when scrolled into view ---- */

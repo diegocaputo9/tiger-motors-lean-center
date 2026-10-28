@@ -2395,5 +2395,37 @@ window.TM_I18N = {
 "We are working on this page": [
 "Estamos trabajando en esta página",
 "Wir arbeiten an dieser Seite"
+],
+"re:^Step (\\d+) complete$": [
+"Paso $1 completado",
+"Schritt $1 abgeschlossen"
+],
+"Next step": [
+"Siguiente paso",
+"Nächster Schritt"
+],
+"Your account is ready": [
+"Tu cuenta está lista",
+"Ihr Konto ist bereit"
+],
+"Take the one-minute tour of the Lean House to see how the learning path works: where to start, where the materials are, and how to move from step to step. Already know your way around? Skip it.": [
+"Haz el recorrido de un minuto por la Casa Lean para ver cómo funciona la ruta de aprendizaje: por dónde empezar, dónde están los materiales y cómo pasar de un paso al siguiente. ¿Ya sabes cómo funciona? Sáltalo.",
+"Machen Sie die einminütige Tour durch das Lean-Haus und sehen Sie, wie der Lernpfad funktioniert: wo Sie beginnen, wo die Materialien sind und wie Sie von Schritt zu Schritt gehen. Sie kennen sich schon aus? Überspringen Sie sie."
+],
+"Take the tour": [
+"Hacer el recorrido",
+"Tour starten"
+],
+"I know my way around": [
+"Ya sé cómo funciona",
+"Ich kenne mich aus"
+],
+"Create a free account to get your certificate": [
+"Crea una cuenta gratuita para obtener tu certificado",
+"Erstellen Sie ein kostenloses Konto, um Ihr Zertifikat zu erhalten"
+],
+"See what is left": [
+"Ver lo que falta",
+"Sehen, was noch fehlt"
 ]
 };

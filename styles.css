@@ -1281,3 +1281,19 @@ html[data-mode="light"] .pdca-ring path,html[data-mode="light"] #pdArr path{stro
 html[data-mode="light"] .hz text.pdca-l,html[data-mode="light"] .hz.on text.pdca-l:not(.num):not(.sm){fill:#B65410}
 html[data-mode="light"] .pdca-q path{fill:rgba(232,119,34,.14);stroke:rgba(201,98,26,.6)}
 @media (prefers-reduced-motion:reduce){.pdca-ring{animation:none}}
+/* Lean House panel: when a step is complete, the way to the next one lights up */
+.p-next{display:none}
+.p-next.on{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:14px 16px;margin-bottom:14px;border:1px solid rgba(232,119,34,.45);border-radius:14px;background:rgba(232,119,34,.08)}
+.p-next.pop{animation:pnPop .7s cubic-bezier(.22,1,.36,1)}
+@keyframes pnPop{from{opacity:0;transform:translateY(8px) scale(.98)}to{opacity:1;transform:none}}
+.pn-done{display:inline-flex;align-items:center;gap:8px;font:600 12px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--orange-2)}
+.pn-done svg{width:20px;height:20px;padding:3px;border-radius:50%;background:var(--orange-2);fill:none;stroke:#1A0C02;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.pn-go{gap:8px}
+.pn-go b{font-weight:700}
+.pn-go b::before{content:"·";margin-right:8px;opacity:.55}
+.pn-go svg{width:16px;height:16px}
+.ibtn.pn-lit{border-color:var(--orange-2);color:var(--orange-2);box-shadow:0 0 0 0 rgba(232,119,34,.55);animation:pnRing 2.4s ease-out infinite}
+@keyframes pnRing{0%{box-shadow:0 0 0 0 rgba(232,119,34,.55)}70%,100%{box-shadow:0 0 0 10px rgba(232,119,34,0)}}
+html[data-mode="light"] .p-next.on{background:rgba(232,119,34,.07)}
+html[data-mode="light"] .pn-done{color:#B65410}
+@media (prefers-reduced-motion:reduce){.p-next.pop,.ibtn.pn-lit{animation:none}}
