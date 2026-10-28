@@ -18,11 +18,11 @@ window.TM_I18N = {
 ],
 "Lean House": [
 "Casa Lean",
-"Lean-Haus"
+"Lean House"
 ],
 "Go to the Lean House": [
 "Ir a la Casa Lean",
-"Zum Lean-Haus"
+"Zum Lean House"
 ],
 "Scroll to the interactive house": [
 "Desplázate hasta la casa interactiva",
@@ -98,7 +98,7 @@ window.TM_I18N = {
 ],
 "Auburn University · Industrial & Systems Engineering": [
 "Auburn University · Ingeniería Industrial y de Sistemas",
-"Auburn University · Wirtschaftsingenieurwesen und Systemtechnik"
+"Auburn University · Industrial and Systems Engineering"
 ],
 "Experience Lean Manufacturing.": [
 "Vive la manufactura esbelta.",
@@ -130,11 +130,11 @@ window.TM_I18N = {
 ],
 "Companies and partners that train with us": [
 "Empresas y socios que se forman con nosotros",
-"Unternehmen und Partner, die mit uns trainieren"
+"Unternehmen und Partner, die mit uns zusammenarbeiten"
 ],
 "Organizations whose teams have trained in Lean Manufacturing with Tiger Motors, in our lab and through our online platform.": [
 "Organizaciones cuyos equipos se han formado en manufactura esbelta con Tiger Motors, en nuestro laboratorio y a través de nuestra plataforma en línea.",
-"Organisationen, deren Teams mit Tiger Motors in Lean Manufacturing geschult wurden, in unserem Labor und über unsere Online-Plattform."
+"Organisationen, deren Teams mit Tiger Motors in Lean Manufacturing geschult wurden, sowohl in unserem Labor als auch über unsere Online-Plattform."
 ],
 "View all partners": [
 "Ver todos los socios",
@@ -238,11 +238,11 @@ window.TM_I18N = {
 ],
 "Auburn University's <strong>Industrial and Systems Engineering</strong> department has developed a <strong>4,000-square-foot Integrated Manufacturing Facility</strong> that simulates real-world automotive production environments. It gives students experiential learning opportunities in high-volume manufacturing settings like those used by Toyota and Honda.": [
 "El departamento de <strong>Ingeniería Industrial y de Sistemas</strong> de Auburn University desarrolló una <strong>Instalación Integrada de Manufactura de 4,000 pies cuadrados</strong> que simula entornos reales de producción automotriz. Ofrece a los estudiantes aprendizaje práctico en entornos de manufactura de alto volumen como los que usan Toyota y Honda.",
-"Das Department für <strong>Wirtschaftsingenieurwesen und Systemtechnik</strong> der Auburn University hat eine <strong>integrierte Fertigungsanlage mit rund 370 m²</strong> aufgebaut, die reale Produktionsumgebungen der Automobilindustrie nachbildet. Studierende lernen dort praxisnah in Großserienfertigung, wie sie Toyota und Honda einsetzen."
+"Das Department of <strong>Industrial and Systems Engineering</strong> der Auburn University hat eine <strong>integrierte Fertigungsanlage mit rund 370 m²</strong> aufgebaut, die reale Produktionsumgebungen der Automobilindustrie nachbildet. Studierende lernen dort praxisnah in Großserienfertigung, wie sie Toyota und Honda einsetzen."
 ],
 "This is where the Lean Systems class is taught. The digital platform extends access to that experiential environment beyond the physical laboratory, so the system can be studied, explored and revisited from anywhere.": [
 "Aquí se imparte la clase de Sistemas Lean. La plataforma digital lleva ese entorno práctico más allá del laboratorio físico, para que el sistema pueda estudiarse, explorarse y revisarse desde cualquier lugar.",
-"Hier wird der Kurs Lean Systems unterrichtet. Die digitale Plattform macht diese praxisnahe Umgebung über das physische Labor hinaus zugänglich, sodass das System von überall studiert, erkundet und erneut besucht werden kann."
+"Hier wird der Kurs Lean Systems unterrichtet. Die digitale Plattform macht diese praxisnahe Umgebung über das physische Labor hinaus zugänglich, sodass das System von überall studiert, erkundet und immer wieder besucht werden kann."
 ],
 "4,000 <em>sq&nbsp;ft</em>": [
 "4,000 <em>pies²</em>",
@@ -282,7 +282,7 @@ window.TM_I18N = {
 ],
 "Lectures and supplemental material organized around the Lean House, from People to Continuous Improvement.": [
 "Clases y material complementario organizados en torno a la Casa Lean, desde las Personas hasta la Mejora Continua.",
-"Vorlesungen und Begleitmaterial rund um das Lean-Haus, von den Menschen bis zur kontinuierlichen Verbesserung."
+"Vorlesungen und Begleitmaterial rund um das Lean House, von den Menschen bis zur kontinuierlichen Verbesserung."
 ],
 "EXPLORE": [
 "EXPLORA",
@@ -322,7 +322,7 @@ window.TM_I18N = {
 ],
 "Change the view of the diagram: pick what you want to see": [
 "Cambia la vista del diagrama: elige lo que quieres ver",
-"Ansicht des Diagramms wechseln: wählen Sie, was Sie sehen möchten"
+"Ansicht wechseln: wählen Sie, was Sie sehen möchten"
 ],
 "Choose a view of the facility diagram": [
 "Elige una vista del diagrama de las instalaciones",
@@ -378,7 +378,7 @@ window.TM_I18N = {
 ],
 "Conveyor line": [
 "Línea con transportador",
-"Förderbandlinie"
+"Förderband"
 ],
 "Raw Stock": [
 "Materia prima",
@@ -394,7 +394,7 @@ window.TM_I18N = {
 ],
 "Schematic floor plan of the Integrated Manufacturing Facility. Cell 1, a U-shaped cell, feeds Cell 2, a U-shaped cell, which feeds Cell 3, a conveyor line.": [
 "Plano esquemático de la Instalación Integrada de Manufactura. La celda 1, en forma de U, alimenta a la celda 2, también en U, que alimenta a la celda 3, una línea con transportador.",
-"Schematischer Grundriss der integrierten Fertigungsanlage. Zelle 1, eine U-Zelle, versorgt Zelle 2, ebenfalls eine U-Zelle, die Zelle 3 versorgt, eine Förderbandlinie."
+"Schematischer Grundriss der integrierten Fertigungsanlage. Zelle 1, eine U-Zelle, versorgt Zelle 2, ebenfalls eine U-Zelle, die Zelle 3 versorgt, ein Förderband."
 ],
 "MATERIAL DELIVERY": [
 "ENTREGA DE MATERIAL",
@@ -486,11 +486,11 @@ window.TM_I18N = {
 ],
 "SMED: Single-Minute Exchange of Die": [
 "SMED: cambio de herramental en un solo dígito de minutos",
-"SMED: Rüstzeitreduzierung auf einstellige Minuten"
+"SMED: Single-Minute Exchange of Die"
 ],
 "AS/RS feeds raw stock · Raw Stock delivers material to Cells 1, 2 and 3 · product flows Cell 1 → Cell 2 → Cell 3": [
 "El AS/RS abastece la materia prima · la materia prima se entrega a las celdas 1, 2 y 3 · el producto fluye celda 1 → celda 2 → celda 3",
-"Das AS/RS versorgt das Rohmaterial · das Rohmaterial wird an die Zellen 1, 2 und 3 geliefert · das Produkt fließt Zelle 1 → Zelle 2 → Zelle 3"
+"Das AS/RS versorgt das Rohmaterial · das Rohmaterial wird an die Zellen 1, 2 und 3 geliefert · Das Produkt fließt von Zelle 1 → Zelle 2 → Zelle 3"
 ],
 "re:^(<i[^>]*></i>)(.+)$": [
 "$1$2",
@@ -558,7 +558,7 @@ window.TM_I18N = {
 ],
 "The Lean House": [
 "La Casa Lean",
-"Das Lean-Haus"
+"Das Lean House"
 ],
 "Follow the system from people to continuous improvement. Select an element of the house, in sequence, to open its learning materials.": [
 "Sigue el sistema desde las personas hasta la mejora continua. Selecciona un elemento de la casa, en orden, para abrir sus materiales de aprendizaje.",
@@ -566,7 +566,7 @@ window.TM_I18N = {
 ],
 "Understand the Lean House": [
 "Entiende la Casa Lean",
-"Das Lean-Haus verstehen"
+"Das Lean House verstehen"
 ],
 "First time here? A one-minute guide to following the elements through the house, step by step.": [
 "¿Primera vez aquí? Una guía de un minuto para recorrer los elementos de la casa, paso a paso.",
@@ -574,7 +574,7 @@ window.TM_I18N = {
 ],
 "Lean House sequence": [
 "Secuencia de la Casa Lean",
-"Reihenfolge im Lean-Haus"
+"Reihenfolge im Lean House"
 ],
 "re:^Step (\\d+): (.+)$": [
 "Paso $1: $2",
@@ -618,7 +618,7 @@ window.TM_I18N = {
 ],
 "Lean House diagram": [
 "Diagrama de la Casa Lean",
-"Diagramm des Lean-Hauses"
+"Diagramm des Lean House"
 ],
 "CUSTOMER": [
 "SATISFACCIÓN",
@@ -890,7 +890,7 @@ window.TM_I18N = {
 ],
 "Welcome to the Lean House": [
 "Bienvenido a la Casa Lean",
-"Willkommen im Lean-Haus"
+"Willkommen im Lean House"
 ],
 "This short guide shows you how to follow the learning sequence, from the foundation up. It takes about a minute, and you can leave at any time.": [
 "Esta breve guía te muestra cómo seguir la secuencia de aprendizaje, desde los cimientos hacia arriba. Toma un minuto y puedes salir en cualquier momento.",
@@ -926,7 +926,7 @@ window.TM_I18N = {
 ],
 "Every house needs a foundation before anything else goes up, and the Lean House is no different. People are that foundation: every tool, standard and improvement depends on the people who use it.": [
 "Toda casa necesita cimientos antes de construir lo demás, y la Casa Lean no es la excepción. Las personas son esos cimientos: cada herramienta, estándar y mejora depende de quienes la usan.",
-"Jedes Haus braucht ein Fundament, bevor etwas anderes entsteht, und das Lean-Haus ist da keine Ausnahme. Die Menschen sind dieses Fundament: Jedes Werkzeug, jeder Standard und jede Verbesserung hängt von den Menschen ab, die sie nutzen."
+"Jedes Haus braucht ein Fundament, bevor etwas anderes entsteht, und das Lean House ist da keine Ausnahme. Die Menschen sind dieses Fundament: Jedes Werkzeug, jeder Standard und jede Verbesserung hängt von den Menschen ab, die sie nutzen."
 ],
 "Open People": [
 "Abrir Personas",
@@ -1114,11 +1114,11 @@ window.TM_I18N = {
 ],
 "Tom Devall, Tiger Motors Lab director, Jorge Valenzuela, Philpott-WestPoint Stevens Professor of Industrial and Systems Engineering, and Chih-hsuan Wang, professor in the Department of Educational Foundations, Leadership and Technology, will lead this project.": [
 "Tom Devall, director del laboratorio Tiger Motors; Jorge Valenzuela, profesor Philpott-WestPoint Stevens de Ingeniería Industrial y de Sistemas; y Chih-hsuan Wang, profesora del Departamento de Fundamentos Educativos, Liderazgo y Tecnología, dirigirán este proyecto.",
-"Tom Devall, Leiter des Tiger-Motors-Labors, Jorge Valenzuela, Philpott-WestPoint-Stevens-Professor für Wirtschaftsingenieurwesen und Systemtechnik, und Chih-hsuan Wang, Professorin am Department of Educational Foundations, Leadership and Technology, leiten dieses Projekt."
+"Tom Devall, Leiter des Tiger-Motors-Labors, Jorge Valenzuela, Philpott-WestPoint-Stevens-Professor für Industrial and Systems Engineering, und Chih-hsuan Wang, Professorin am Department of Educational Foundations, Leadership and Technology, leiten dieses Projekt."
 ],
 "Sathya Aakur, associate professor of computer science and software engineering, and Konstantinos Mykoniatis, associate professor of industrial and systems engineering, are developing AI systems that monitor assembly-line tasks, flag potential problems, and predict whether small errors could grow into larger ones. The system will be tested at the Tiger Motors Lab.": [
 "Sathya Aakur, profesor asociado de ciencias de la computación e ingeniería de software, y Konstantinos Mykoniatis, profesor asociado de ingeniería industrial y de sistemas, desarrollan sistemas de IA que supervisan las tareas de la línea de ensamble, señalan posibles problemas y predicen si los errores pequeños podrían convertirse en grandes. El sistema se probará en el laboratorio Tiger Motors.",
-"Sathya Aakur, Associate Professor für Informatik und Softwaretechnik, und Konstantinos Mykoniatis, Associate Professor für Wirtschaftsingenieurwesen und Systemtechnik, entwickeln KI-Systeme, die Montagetätigkeiten überwachen, mögliche Probleme melden und vorhersagen, ob kleine Fehler zu größeren werden könnten. Das System wird im Tiger-Motors-Labor getestet."
+"Sathya Aakur, Associate Professor für Informatik und Softwaretechnik, und Konstantinos Mykoniatis, Associate Professor für Industrial and Systems Engineering, entwickeln KI-Systeme, die Montagetätigkeiten überwachen, mögliche Probleme melden und vorhersagen, ob kleine Fehler zu größeren werden könnten. Das System wird im Tiger-Motors-Labor getestet."
 ],
 "Read the article": [
 "Leer el artículo",
@@ -1286,7 +1286,7 @@ window.TM_I18N = {
 ],
 "Industrial & Systems Engineering": [
 "Ingeniería Industrial y de Sistemas",
-"Wirtschaftsingenieurwesen und Systemtechnik"
+"Industrial and Systems Engineering"
 ],
 "Read bio": [
 "Leer biografía",
@@ -1298,7 +1298,7 @@ window.TM_I18N = {
 ],
 "Philpott-WestPoint Stevens Professor of Industrial and Systems Engineering": [
 "Profesor Philpott-WestPoint Stevens de Ingeniería Industrial y de Sistemas",
-"Philpott-WestPoint-Stevens-Professor für Wirtschaftsingenieurwesen und Systemtechnik"
+"Philpott-WestPoint-Stevens-Professor für Industrial and Systems Engineering"
 ],
 "Professor, Department of Educational Foundations, Leadership and Technology": [
 "Profesora, Departamento de Fundamentos Educativos, Liderazgo y Tecnología",
@@ -1338,7 +1338,7 @@ window.TM_I18N = {
 ],
 "Dr. Tom Devall is the Director of Manufacturing Initiatives in the Department of Industrial and Systems Engineering at Auburn University. He brings more than 49 years of combined industry and academic experience, including 34 years in manufacturing leadership and over 15 years in engineering education. His expertise spans Lean manufacturing, Six Sigma, continuous improvement, organizational leadership, and experiential learning.": [
 "El Dr. Tom Devall es director de Iniciativas de Manufactura del Departamento de Ingeniería Industrial y de Sistemas de Auburn University. Aporta más de 49 años de experiencia combinada en la industria y la academia, incluidos 34 años en puestos de liderazgo en manufactura y más de 15 años en la enseñanza de la ingeniería. Su experiencia abarca la manufactura esbelta, Six Sigma, la mejora continua, el liderazgo organizacional y el aprendizaje práctico.",
-"Dr. Tom Devall ist Director of Manufacturing Initiatives am Department für Wirtschaftsingenieurwesen und Systemtechnik der Auburn University. Er bringt mehr als 49 Jahre Erfahrung aus Industrie und Hochschule mit, davon 34 Jahre in Führungspositionen der Fertigung und über 15 Jahre in der Ingenieurausbildung. Seine Schwerpunkte sind Lean Manufacturing, Six Sigma, kontinuierliche Verbesserung, Organisationsführung und erfahrungsbasiertes Lernen."
+"Dr. Tom Devall ist Director of Manufacturing Initiatives am Department of Industrial and Systems Engineering der Auburn University. Er bringt mehr als 49 Jahre Erfahrung aus Industrie und Hochschule mit, davon 34 Jahre in Führungspositionen der Fertigung und über 15 Jahre in der Ingenieurausbildung. Seine Schwerpunkte sind Lean Manufacturing, Six Sigma, kontinuierliche Verbesserung, Organisationsführung und erfahrungsbasiertes Lernen."
 ],
 "Before entering academia, Dr. Devall spent 31 years with Chrysler Corporation, holding leadership positions in automotive manufacturing operations. He subsequently served as Vice President of Manufacturing at Teledyne Continental Motors. This extensive industry experience provides the foundation for his practical, results-oriented approach to Lean training and organizational improvement.": [
 "Antes de dedicarse a la academia, el Dr. Devall trabajó 31 años en Chrysler Corporation, en puestos de liderazgo en operaciones de manufactura automotriz. Después fue vicepresidente de Manufactura en Teledyne Continental Motors. Esta amplia experiencia industrial es la base de su enfoque práctico y orientado a resultados para la formación Lean y la mejora organizacional.",
@@ -1362,11 +1362,11 @@ window.TM_I18N = {
 ],
 "Ph.D. Student, Industrial and Systems Engineering, Auburn University · Graduate Teaching Assistant, Lean Systems · Advisor, Tiger Motors Lean Educational Center": [
 "Estudiante de doctorado, Ingeniería Industrial y de Sistemas, Auburn University · Asistente de enseñanza de posgrado, Sistemas Lean · Asesor, Tiger Motors Lean Educational Center",
-"Doktorand, Wirtschaftsingenieurwesen und Systemtechnik, Auburn University · Lehrassistent, Lean Systems · Berater, Tiger Motors Lean Educational Center"
+"Doktorand, Industrial and Systems Engineering, Auburn University · Lehrassistent, Lean Systems · Berater, Tiger Motors Lean Educational Center"
 ],
 "Diego Caputo is a Ph.D. student in Industrial and Systems Engineering at Auburn University and a Graduate Teaching Assistant for Lean Systems. His research examines using lean thinking in the design and development of manufacturing training. He holds a Lean Six Sigma Green Belt and a Graduate Certificate in Modeling and Data Analytics.": [
 "Diego Caputo es estudiante de doctorado en Ingeniería Industrial y de Sistemas en Auburn University y asistente de enseñanza de posgrado de Sistemas Lean. Su investigación estudia el uso del pensamiento Lean en el diseño y desarrollo de la formación en manufactura. Tiene un Lean Six Sigma Green Belt y un certificado de posgrado en Modelado y Analítica de Datos.",
-"Diego Caputo ist Doktorand im Wirtschaftsingenieurwesen und in der Systemtechnik an der Auburn University und Lehrassistent für Lean Systems. Er forscht dazu, wie Lean-Denken bei der Gestaltung und Entwicklung von Fertigungsschulungen eingesetzt werden kann. Er hat einen Lean Six Sigma Green Belt und ein Graduate Certificate in Modellierung und Datenanalyse."
+"Diego Caputo ist Doktorand in Industrial and Systems Engineering an der Auburn University und Lehrassistent für Lean Systems. Er forscht dazu, wie Lean-Denken bei der Gestaltung und Entwicklung von Fertigungsschulungen eingesetzt werden kann. Er hat einen Lean Six Sigma Green Belt und ein Graduate Certificate in Modellierung und Datenanalyse."
 ],
 "Diego is a former president of the Tiger Motors Lean Educational Center (the Lego Lab), where he now serves as an advisor. In the lab he helps teach lean concepts such as JIT, SMED, Heijunka, one-piece flow, Kanban and 5S, and facilitates A3 problem solving and Kaizen exercises in the simulated high-volume assembly plant. He also helps host industry and community visitors, including American Honda and local Cub Scout groups. He works on the lab’s NSF-funded project to build immersive lean education modules that can be shared with universities worldwide. He has presented that work to the Auburn Alumni Engineering Council and at Germany’s Technical University of Applied Sciences Würzburg-Schweinfurt (THWS).": [
 "Diego fue presidente del Tiger Motors Lean Educational Center (el Lego Lab), donde ahora es asesor. En el laboratorio ayuda a enseñar conceptos Lean como JIT, SMED, Heijunka, flujo de una pieza, Kanban y 5S, y facilita ejercicios de solución de problemas A3 y Kaizen en la planta de ensamble simulada de alto volumen. También ayuda a recibir a visitantes de la industria y de la comunidad, como American Honda y grupos locales de Cub Scouts. Trabaja en el proyecto del laboratorio financiado por la NSF para crear módulos inmersivos de educación Lean que puedan compartirse con universidades de todo el mundo. Ha presentado ese trabajo ante el Auburn Alumni Engineering Council y en la Universidad Técnica de Ciencias Aplicadas Würzburg-Schweinfurt (THWS) de Alemania.",
@@ -1430,7 +1430,7 @@ window.TM_I18N = {
 ],
 "<b style=\"color:var(--text)\">Tiger Motors Lean Education Center</b> · Department of Industrial and Systems Engineering, Auburn University.": [
 "<b style=\"color:var(--text)\">Tiger Motors Lean Education Center</b> · Departamento de Ingeniería Industrial y de Sistemas, Auburn University.",
-"<b style=\"color:var(--text)\">Tiger Motors Lean Education Center</b> · Department für Wirtschaftsingenieurwesen und Systemtechnik, Auburn University."
+"<b style=\"color:var(--text)\">Tiger Motors Lean Education Center</b> · Department of Industrial and Systems Engineering, Auburn University."
 ],
 "This material is based upon work supported by the National Science Foundation under Grant No. NSF-DUE-2417082. Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.": [
 "Este material se basa en trabajo apoyado por la National Science Foundation con la subvención n.º NSF-DUE-2417082. Las opiniones, hallazgos, conclusiones o recomendaciones expresados en este material son de los autores y no reflejan necesariamente los puntos de vista de la National Science Foundation.",
@@ -1458,11 +1458,11 @@ window.TM_I18N = {
 ],
 "Every lecture, reading and lab you open is checked off automatically, and when you complete all the Lean House modules you get a certificate of completion. Your progress is saved to your account, so you can pick up on any device.": [
 "Cada clase, lectura y laboratorio que abras se marca automáticamente, y al completar todos los módulos de la Casa Lean obtienes un certificado de finalización. Tu progreso se guarda en tu cuenta, así que puedes continuar en cualquier dispositivo.",
-"Jede Vorlesung, Lektüre und Laborübung, die Sie öffnen, wird automatisch abgehakt, und wenn Sie alle Module des Lean-Hauses abschließen, erhalten Sie ein Abschlusszertifikat. Ihr Fortschritt wird in Ihrem Konto gespeichert, sodass Sie auf jedem Gerät weitermachen können."
+"Jede Vorlesung, Lektüre und Laborübung, die Sie öffnen, wird automatisch abgehakt, und wenn Sie alle Module des Lean House abschließen, erhalten Sie ein Abschlusszertifikat. Ihr Fortschritt wird in Ihrem Konto gespeichert, sodass Sie auf jedem Gerät weitermachen können."
 ],
 "re:^Every lecture, reading and lab you open is checked off automatically, and when you complete all the Lean House modules you get a certificate of completion\\. Your progress is saved to your account, so you can pick up on any device\\. <b>You have already opened (\\d+) resources? on this device\\. Create an account to keep (?:them|it)\\.</b>$": [
 "Cada clase, lectura y laboratorio que abras se marca automáticamente, y al completar todos los módulos de la Casa Lean obtienes un certificado de finalización. Tu progreso se guarda en tu cuenta, así que puedes continuar en cualquier dispositivo. <b>Ya abriste $1 recurso(s) en este dispositivo. Crea una cuenta para conservarlos.</b>",
-"Jede Vorlesung, Lektüre und Laborübung, die Sie öffnen, wird automatisch abgehakt, und wenn Sie alle Module des Lean-Hauses abschließen, erhalten Sie ein Abschlusszertifikat. Ihr Fortschritt wird in Ihrem Konto gespeichert, sodass Sie auf jedem Gerät weitermachen können. <b>Sie haben auf diesem Gerät bereits $1 Ressource(n) geöffnet. Erstellen Sie ein Konto, um sie zu behalten.</b>"
+"Jede Vorlesung, Lektüre und Laborübung, die Sie öffnen, wird automatisch abgehakt, und wenn Sie alle Module des Lean House abschließen, erhalten Sie ein Abschlusszertifikat. Ihr Fortschritt wird in Ihrem Konto gespeichert, sodass Sie auf jedem Gerät weitermachen können. <b>Sie haben auf diesem Gerät bereits $1 Ressource(n) geöffnet. Erstellen Sie ein Konto, um sie zu behalten.</b>"
 ],
 "Create free account": [
 "Crear cuenta gratuita",
@@ -1510,11 +1510,11 @@ window.TM_I18N = {
 ],
 "Lean House progress": [
 "Progreso en la Casa Lean",
-"Fortschritt im Lean-Haus"
+"Fortschritt im Lean House"
 ],
 "Continue in the Learning Modules": [
 "Continuar en los módulos de aprendizaje",
-"In den Lernmodulen weitermachen"
+"Die Lernmodule fortsetzen"
 ],
 "Certificate unlocks at 100%": [
 "El certificado se desbloquea al 100%",
@@ -1542,7 +1542,7 @@ window.TM_I18N = {
 ],
 "Track every lecture, reading and lab automatically and earn a certificate of completion when you finish the Lean House. No password: we email you a unique sign-in link, and clicking it signs you in automatically.": [
 "Registra automáticamente cada clase, lectura y laboratorio, y obtén un certificado de finalización al terminar la Casa Lean. Sin contraseña: te enviamos por correo un enlace único de acceso y, al hacer clic, inicias sesión automáticamente.",
-"Verfolgen Sie jede Vorlesung, Lektüre und Laborübung automatisch und erhalten Sie ein Abschlusszertifikat, wenn Sie das Lean-Haus abschließen. Kein Passwort: Wir senden Ihnen einen persönlichen Anmeldelink per E-Mail, und ein Klick darauf meldet Sie automatisch an."
+"Verfolgen Sie jede Vorlesung, Lektüre und Laborübung automatisch und erhalten Sie ein Abschlusszertifikat, wenn Sie das Lean House abschließen. Kein Passwort: Wir senden Ihnen einen persönlichen Anmeldelink per E-Mail, und ein Klick darauf meldet Sie automatisch an."
 ],
 "First name": [
 "Nombre",
@@ -1710,7 +1710,7 @@ window.TM_I18N = {
 ],
 "Voices from the Lab · Tiger Motors Lean Education Center": [
 "Voces del laboratorio · Tiger Motors Lean Education Center",
-"Stimmen aus dem Labor · Tiger Motors Lean Education Center"
+"Berichte und Erfahrungen aus dem Labor · Tiger Motors Lean Education Center"
 ],
 "Certificate of Completion · Tiger Motors Lean Education Center": [
 "Certificado de finalización · Tiger Motors Lean Education Center",
@@ -1722,7 +1722,7 @@ window.TM_I18N = {
 ],
 "← Back to the Lean House": [
 "← Volver a la Casa Lean",
-"← Zurück zum Lean-Haus"
+"← Zurück zum Lean House"
 ],
 "Learning modules": [
 "Módulos de aprendizaje",
@@ -1730,7 +1730,7 @@ window.TM_I18N = {
 ],
 "Lectures, supplemental material, 360° experiences and laboratory activities for each element of the Lean House. Step numbers follow the order used in the course materials.": [
 "Clases, material complementario, experiencias 360° y actividades de laboratorio para cada elemento de la Casa Lean. Los números de paso siguen el orden de los materiales del curso.",
-"Vorlesungen, Begleitmaterial, 360°-Erlebnisse und Laborübungen für jedes Element des Lean-Hauses. Die Schrittnummern folgen der Reihenfolge der Kursmaterialien."
+"Vorlesungen, Begleitmaterial, 360°-Erlebnisse und Laborübungen für jedes Element des Lean House. Die Schrittnummern folgen der Reihenfolge der Kursmaterialien."
 ],
 "Filter by resource type": [
 "Filtrar por tipo de recurso",
@@ -1750,7 +1750,7 @@ window.TM_I18N = {
 ],
 "View in Lean House →": [
 "Ver en la Casa Lean →",
-"Im Lean-Haus ansehen →"
+"Im Lean House ansehen →"
 ],
 "Video lecture": [
 "Clase en video",
@@ -1870,7 +1870,7 @@ window.TM_I18N = {
 ],
 "Supported by the Lean House: People · Standardization · Jidoka · JIT · Continuous Improvement": [
 "Sostenido por la Casa Lean: Personas · Estandarización · Jidoka · JIT · Mejora continua",
-"Getragen vom Lean-Haus: Menschen · Standardisierung · Jidoka · JIT · Kontinuierliche Verbesserung"
+"Getragen vom Lean House: Menschen · Standardisierung · Jidoka · JIT · Kontinuierliche Verbesserung"
 ],
 "Navigate the cycle": [
 "Recorre el ciclo",
@@ -1950,7 +1950,7 @@ window.TM_I18N = {
 ],
 "Voices from <em>the Lab</em>": [
 "Voces del <em>laboratorio</em>",
-"Stimmen aus <em>dem Labor</em>"
+"Berichte und Erfahrungen <em>aus dem Labor</em>"
 ],
 "What students, working engineers, universities and industry partners say about learning Lean at Tiger Motors.": [
 "Lo que dicen estudiantes, ingenieros en ejercicio, universidades y socios de la industria sobre aprender Lean en Tiger Motors. Los testimonios se muestran en su idioma original, inglés.",
@@ -2074,7 +2074,7 @@ window.TM_I18N = {
 ],
 "More memories are on the way": [
 "Vienen más recuerdos",
-"Weitere Erinnerungen folgen"
+"Weitere Erfahrungsberichte folgen"
 ],
 "New testimonials, photos and videos from the lab's history will be added over time. Learned Lean at Tiger Motors? We'd like to hear from you.": [
 "Con el tiempo se agregarán nuevos testimonios, fotos y videos de la historia del laboratorio. ¿Aprendiste Lean en Tiger Motors? Nos encantaría saber de ti.",
@@ -2242,7 +2242,7 @@ window.TM_I18N = {
 ],
 "Tiger Motors Lean Education Center · Department of Industrial and Systems Engineering, Auburn University": [
 "Tiger Motors Lean Education Center · Departamento de Ingeniería Industrial y de Sistemas, Auburn University",
-"Tiger Motors Lean Education Center · Department für Wirtschaftsingenieurwesen und Systemtechnik, Auburn University"
+"Tiger Motors Lean Education Center · Department of Industrial and Systems Engineering, Auburn University"
 ],
 "Learning Modules →": [
 "Módulos de aprendizaje →",
@@ -2338,7 +2338,7 @@ window.TM_I18N = {
 ],
 "To understand, in aggregate, how learners use the Lean House so we can improve it.": [
 "Para entender, de forma agregada, cómo usan la Casa Lean los participantes y así mejorarla.",
-"Um in zusammengefasster Form zu verstehen, wie Lernende das Lean-Haus nutzen, damit wir es verbessern können."
+"Um in zusammengefasster Form zu verstehen, wie Lernende das Lean House nutzen, damit wir es verbessern können."
 ],
 "To email you about the official certification only if you ticked that box.": [
 "Para escribirte sobre la certificación oficial solo si marcaste esa casilla.",
@@ -2410,7 +2410,7 @@ window.TM_I18N = {
 ],
 "Take the one-minute tour of the Lean House to see how the learning path works: where to start, where the materials are, and how to move from step to step. Already know your way around? Skip it.": [
 "Haz el recorrido de un minuto por la Casa Lean para ver cómo funciona la ruta de aprendizaje: por dónde empezar, dónde están los materiales y cómo pasar de un paso al siguiente. ¿Ya sabes cómo funciona? Sáltalo.",
-"Machen Sie die einminütige Tour durch das Lean-Haus und sehen Sie, wie der Lernpfad funktioniert: wo Sie beginnen, wo die Materialien sind und wie Sie von Schritt zu Schritt gehen. Sie kennen sich schon aus? Überspringen Sie sie."
+"Machen Sie die einminütige Tour durch das Lean House und sehen Sie, wie der Lernpfad funktioniert: wo Sie beginnen, wo die Materialien sind und wie Sie von Schritt zu Schritt gehen. Sie kennen sich schon aus? Überspringen Sie sie."
 ],
 "Take the tour": [
 "Hacer el recorrido",

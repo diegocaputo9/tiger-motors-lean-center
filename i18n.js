@@ -51,8 +51,10 @@ function isUnit(el){
 /* walk a subtree and call fn for every translatable piece */
 function walk(root, fn){
   if(root.nodeType === 3){ if(root.parentNode && !skipped(root.parentNode)) fn({ type: 'text', node: root }); return; }
-  if(root.nodeType !== 1 || SKIP[root.tagName] || root.hasAttribute('data-i18n-skip')) return;
+  if(root.nodeType !== 1 || root.hasAttribute('data-i18n-skip')) return;
+  // attributes first, so form fields and images (whose contents are skipped) still get their placeholder, label and alt text
   ATTRS.forEach(function(a){ if(root.hasAttribute(a) && !(a === 'title' && root.tagName === 'HTML')) fn({ type: 'attr', node: root, attr: a }); });
+  if(SKIP[root.tagName]) return;
   if(root.tagName !== 'svg' && root.tagName !== 'SVG' && root.namespaceURI !== 'http://www.w3.org/2000/svg' && isUnit(root)){ fn({ type: 'unit', node: root }); return; }
   for(var n = root.firstChild; n; n = n.nextSibling){
     if(n.nodeType === 3){ if(norm(n.nodeValue)) fn({ type: 'text', node: n }); }
