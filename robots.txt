@@ -1,0 +1,6 @@
+# Search engines are welcome to read every public page.
+User-agent: *
+Allow: /
+Disallow: /admin
+
+Sitemap: https://tigermotorslean.com/sitemap.xml

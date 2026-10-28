@@ -31,7 +31,7 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
 <meta name="application-name" content="Tiger Motors">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..600&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..500;1,9..144,400&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <style>
 :root{
   --paper:#07121F; --paper-2:#10263F; --card:#0C1D33; --ink:#E9EEF4; --ink-2:#A9B8C9; --ink-3:#7D8FA3;
@@ -350,7 +350,7 @@ html[data-mode="light"] .share .done .ok{color:#1C7A55}
     <span>Tiger Motors Lean Education Center · Department of Industrial and Systems Engineering, Auburn University</span>
     <a href="/">tigermotorslean.com</a>
   </div>
-  <div class="wrap"><p class="site-rev">Last updated October 27, 2026 · Revision 110</p></div>
+  <div class="wrap"><p class="site-rev">Last updated October 28, 2026 · Revision 111</p></div>
 </footer>
 
 <script>
@@ -419,7 +419,8 @@ var VOICES = [
   {g:'industry', who:"Bob Johnson", org:"Senior Manager · Honda", hl:true, mk:"impressed with the small-scale, total manufacturing center", q:["I appreciated seeing your team in action, and I was impressed with the small-scale, total manufacturing center you have in the basement."]}
 ];
 
-/* ---- Photos shown between the testimonials: add new ones here (files go in testimonial-photos/).
+/* ---- Photos shown between the testimonials: add new ones here (files go in testimonial-photos/, then run tools/make-thumbs.py
+   so the page shows a light copy from testimonial-photos/thumbs/; the full photo opens when clicked).
    before: an org or name places the photo right above that testimonial in the full list; the others are spread evenly after it.
    layout: 'row' puts three photos side by side, 'mosaic' puts one large photo over two smaller ones.
    top: true starts a new column with this photo on wide screens, so it sits at the top of the right-hand column ---- */
@@ -507,9 +508,11 @@ var counts={}; VOICES.forEach(function(v){counts[v.g]=(counts[v.g]||0)+1;});
 fEl.innerHTML='<button type="button" data-f="all" aria-pressed="true">All<span>'+VOICES.length+'</span></button>'+
   Object.keys(GROUPS).map(function(g){return '<button type="button" data-f="'+g+'" aria-pressed="false">'+GROUPS[g].l+'<span>'+(counts[g]||0)+'</span></button>';}).join('');
 function markUp(p,mk){ var t=esc(p); if(!mk) return t; var k=esc(mk), i=t.indexOf(k); return i<0?t:t.slice(0,i)+'<mark>'+k+'</mark>'+t.slice(i+k.length); }
+// the grid shows the light copy; if a new photo has no copy yet, it falls back to the full one
+function thumb(src){ return '<img src="'+esc(src.replace('testimonial-photos/','testimonial-photos/thumbs/'))+'" data-full="'+esc(src)+'" onerror="this.onerror=null;this.src=this.dataset.full"'; }
 function photo(p,i,all){
-  if(p.imgs) return '<figure class="pc pc-'+p.layout+'"><div class="pc-set">'+p.imgs.map(function(im,k){ return '<button type="button" data-lb="'+i+'.'+k+'" aria-label="'+esc('Enlarge photo '+(k+1)+' of '+p.imgs.length+': '+p.cap)+'"><img src="'+esc(im.src)+'" alt="'+esc(im.alt||p.cap)+'" loading="lazy"></button>'; }).join('')+'</div><figcaption>'+esc(p.cap)+'</figcaption></figure>';
-  return '<figure class="pc'+(all&&p.top?' col-top':'')+'"><button type="button" data-lb="'+i+'" aria-label="'+esc('Enlarge photo: '+p.cap)+'"><img src="'+esc(p.src)+'" alt="'+esc(p.alt||p.cap)+'" loading="lazy"></button><figcaption>'+esc(p.cap)+'</figcaption></figure>'; }
+  if(p.imgs) return '<figure class="pc pc-'+p.layout+'"><div class="pc-set">'+p.imgs.map(function(im,k){ return '<button type="button" data-lb="'+i+'.'+k+'" aria-label="'+esc('Enlarge photo '+(k+1)+' of '+p.imgs.length+': '+p.cap)+'">'+thumb(im.src)+' alt="'+esc(im.alt||p.cap)+'" loading="lazy"></button>'; }).join('')+'</div><figcaption>'+esc(p.cap)+'</figcaption></figure>';
+  return '<figure class="pc'+(all&&p.top?' col-top':'')+'"><button type="button" data-lb="'+i+'" aria-label="'+esc('Enlarge photo: '+p.cap)+'">'+thumb(p.src)+' alt="'+esc(p.alt||p.cap)+'" loading="lazy"></button><figcaption>'+esc(p.cap)+'</figcaption></figure>'; }
 var lb=document.getElementById('lb'), lbImg=document.getElementById('lbImg'), lbCap=document.getElementById('lbCap');
 grid.addEventListener('click',function(e){ var b=e.target.closest('[data-lb]'); if(!b) return; var id=b.getAttribute('data-lb').split('.'), p=PHOTOS[+id[0]], im=p.imgs?p.imgs[+id[1]]:p; lbImg.src=im.src; lbImg.alt=im.alt||p.cap; lbCap.textContent=p.cap; if(lb.showModal) lb.showModal(); else lb.setAttribute('open',''); });
 document.getElementById('lbClose').addEventListener('click',function(){ lb.close(); });
