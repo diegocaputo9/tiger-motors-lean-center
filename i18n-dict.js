@@ -600,6 +600,18 @@ window.TM_I18N = {
 "Secuencia de la Casa Lean",
 "Reihenfolge im Lean House"
 ],
+"re:^Module (\\d+): (.+)$": [
+"Módulo $1: $2",
+"Modul $1: $2"
+],
+"re:^Module (\\d+) of (\\d+)$": [
+"Módulo $1 de $2",
+"Modul $1 von $2"
+],
+"re:^MODULE (\\d+)$": [
+"MÓDULO $1",
+"MODUL $1"
+],
 "re:^Step (\\d+): (.+)$": [
 "Paso $1: $2",
 "Schritt $1: $2"
@@ -940,9 +952,9 @@ window.TM_I18N = {
 "Terminar",
 "Fertig"
 ],
-"Step 1 · The foundation": [
-"Paso 1 · Los cimientos",
-"Schritt 1 · Das Fundament"
+"Module 1 · The foundation": [
+"Módulo 1 · Los cimientos",
+"Modul 1 · Das Fundament"
 ],
 "Start with People": [
 "Empieza por las personas",
@@ -976,13 +988,13 @@ window.TM_I18N = {
 "Ve al siguiente elemento",
 "Zum nächsten Element"
 ],
-"When you finish an element, use these arrows, or click the next element in the house, to keep climbing the structure.": [
-"Cuando termines un elemento, usa estas flechas o haz clic en el siguiente elemento de la casa para seguir subiendo por la estructura.",
-"Wenn Sie ein Element abgeschlossen haben, nutzen Sie diese Pfeile oder klicken Sie auf das nächste Element im Haus, um die Struktur weiter hinaufzusteigen."
+"When you finish a module, use the arrows on the sides of this box, or click the next element in the house, to keep climbing the structure.": [
+"Cuando termines un módulo, usa las flechas a los lados de este recuadro o haz clic en el siguiente elemento de la casa para seguir subiendo por la estructura.",
+"Wenn Sie ein Modul abgeschlossen haben, nutzen Sie die Pfeile an den Seiten dieses Kastens oder klicken Sie auf das nächste Element im Haus, um die Struktur weiter hinaufzusteigen."
 ],
-"Step 2 · The floor": [
-"Paso 2 · El piso",
-"Schritt 2 · Der Boden"
+"Module 2 · The floor": [
+"Módulo 2 · El piso",
+"Modul 2 · Der Boden"
 ],
 "Above the people sits the floor of the house: standard work. A stable, repeatable way of doing the job is what everything else is built on. You cannot improve a process that changes every time it runs.": [
 "Sobre las personas está el piso de la casa: el trabajo estandarizado. Una forma estable y repetible de hacer el trabajo es la base de todo lo demás. No se puede mejorar un proceso que cambia cada vez que se ejecuta.",
@@ -1008,9 +1020,9 @@ window.TM_I18N = {
 "Por eso Lean se dibuja como una casa y no como una lista. Los cimientos sostienen el piso, el piso sostiene los pilares y los pilares sostienen el techo. Si te saltas un nivel, todo lo que está encima se debilita.",
 "Deshalb wird Lean als Haus dargestellt, nicht als Liste. Das Fundament trägt den Boden, der Boden trägt die Säulen, und die Säulen tragen das Dach. Lässt man eine Ebene aus, wird alles darüber schwächer."
 ],
-"Step 3 · First pillar": [
-"Paso 3 · Primer pilar",
-"Schritt 3 · Erste Säule"
+"Module 3 · First pillar": [
+"Módulo 3 · Primer pilar",
+"Modul 3 · Erste Säule"
 ],
 "Jidoka: build quality in": [
 "Jidoka: integrar la calidad",
@@ -1020,17 +1032,17 @@ window.TM_I18N = {
 "Los pilares cargan el peso del techo. Jidoka significa detenerse cuando algo sale mal para que los defectos nunca avancen en el proceso. La calidad se construye, no se inspecciona.",
 "Säulen tragen die Last des Daches. Jidoka bedeutet, anzuhalten, wenn etwas schiefgeht, damit Fehler nie weitergegeben werden. Qualität wird eingebaut, nicht erprüft."
 ],
-"Step 4 · Second pillar": [
-"Paso 4 · Segundo pilar",
-"Schritt 4 · Zweite Säule"
+"Module 4 · Second pillar": [
+"Módulo 4 · Segundo pilar",
+"Modul 4 · Zweite Säule"
 ],
 "The second pillar: the right part, in the right amount, at the right time. Together with Jidoka it carries the roof: quality on one side, flow on the other.": [
 "El segundo pilar: la pieza correcta, en la cantidad correcta, en el momento correcto. Junto con Jidoka sostiene el techo: calidad de un lado y flujo del otro.",
 "Die zweite Säule: das richtige Teil, in der richtigen Menge, zur richtigen Zeit. Zusammen mit Jidoka trägt sie das Dach: Qualität auf der einen Seite, Fluss auf der anderen."
 ],
-"Step 5 · Between the pillars": [
-"Paso 5 · Entre los pilares",
-"Schritt 5 · Zwischen den Säulen"
+"Module 5 · Between the pillars": [
+"Módulo 5 · Entre los pilares",
+"Modul 5 · Zwischen den Säulen"
 ],
 "Continuous Improvement (PDCA)": [
 "Mejora continua (PDCA)",
@@ -1064,9 +1076,9 @@ window.TM_I18N = {
 "Ahora explora la casa",
 "Jetzt das Haus erkunden"
 ],
-"Foundation, floor, pillars, improvement, then the roof. Select any element to open its materials, and follow the numbered steps 01 to 05 in order.": [
-"Cimientos, piso, pilares, mejora y luego el techo. Selecciona cualquier elemento para abrir sus materiales y sigue en orden los pasos numerados del 01 al 05.",
-"Fundament, Boden, Säulen, Verbesserung, dann das Dach. Wählen Sie ein Element, um seine Materialien zu öffnen, und folgen Sie den nummerierten Schritten 01 bis 05 der Reihe nach."
+"Foundation, floor, pillars, improvement, then the roof. Select any element to open its materials, and follow the modules 1 to 5 in order.": [
+"Cimientos, piso, pilares, mejora y luego el techo. Selecciona cualquier elemento para abrir sus materiales y sigue en orden los módulos del 1 al 5.",
+"Fundament, Boden, Säulen, Verbesserung, dann das Dach. Wählen Sie ein Element, um seine Materialien zu öffnen, und folgen Sie den Modulen 1 bis 5 der Reihe nach."
 ],
 "Project background": [
 "Antecedentes del proyecto",
@@ -2420,21 +2432,21 @@ window.TM_I18N = {
 "Estamos trabajando en esta página",
 "Wir arbeiten an dieser Seite"
 ],
-"re:^Step (\\d+) complete$": [
-"Paso $1 completado",
-"Schritt $1 abgeschlossen"
+"re:^Module (\\d+) complete$": [
+"Módulo $1 completado",
+"Modul $1 abgeschlossen"
 ],
-"Next step": [
-"Siguiente paso",
-"Nächster Schritt"
+"Next module": [
+"Siguiente módulo",
+"Nächstes Modul"
 ],
 "Your account is ready": [
 "Tu cuenta está lista",
 "Ihr Konto ist bereit"
 ],
-"Take the one-minute tour of the Lean House to see how the learning path works: where to start, where the materials are, and how to move from step to step. Already know your way around? Skip it.": [
-"Haz el recorrido de un minuto por la Casa Lean para ver cómo funciona la ruta de aprendizaje: por dónde empezar, dónde están los materiales y cómo pasar de un paso al siguiente. ¿Ya sabes cómo funciona? Sáltalo.",
-"Machen Sie die einminütige Tour durch das Lean House und sehen Sie, wie der Lernpfad funktioniert: wo Sie beginnen, wo die Materialien sind und wie Sie von Schritt zu Schritt gehen. Sie kennen sich schon aus? Überspringen Sie sie."
+"Take the one-minute tour of the Lean House to see how the learning path works: where to start, where the materials are, and how to move from module to module. Already know your way around? Skip it.": [
+"Haz el recorrido de un minuto por la Casa Lean para ver cómo funciona la ruta de aprendizaje: por dónde empezar, dónde están los materiales y cómo pasar de un módulo al siguiente. ¿Ya sabes cómo funciona? Sáltalo.",
+"Machen Sie die einminütige Tour durch das Lean House und sehen Sie, wie der Lernpfad funktioniert: wo Sie beginnen, wo die Materialien sind und wie Sie von Modul zu Modul gehen. Sie kennen sich schon aus? Überspringen Sie sie."
 ],
 "Take the tour": [
 "Hacer el recorrido",
