@@ -832,9 +832,9 @@ window.TM_I18N = {
 "Elemento siguiente",
 "Nächstes Element"
 ],
-"Open full learning modules": [
-"Abrir los módulos de aprendizaje completos",
-"Vollständige Lernmodule öffnen"
+"Open learning modules": [
+"Abrir los módulos de aprendizaje",
+"Lernmodule öffnen"
 ],
 "Coming in Spring 2027": [
 "Disponible en la primavera de 2027",
