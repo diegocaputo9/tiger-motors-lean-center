@@ -1297,3 +1297,13 @@ html[data-mode="light"] .pdca-q path{fill:rgba(232,119,34,.14);stroke:rgba(201,9
 html[data-mode="light"] .p-next.on{background:rgba(232,119,34,.07)}
 html[data-mode="light"] .pn-done{color:#B65410}
 @media (prefers-reduced-motion:reduce){.p-next.pop,.ibtn.pn-lit{animation:none}}
+
+/* Explore the Lab: numbered intro above each of the three parts */
+.lab-step{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;align-items:baseline;margin:clamp(48px,6vw,72px) 0 18px;max-width:760px}
+.lab-step .ls-n{font:500 13px var(--f-mono);letter-spacing:.14em;color:var(--orange-2)}
+.lab-step h3{font-size:clamp(20px,2vw,24px);font-stretch:108%}
+.lab-step p{margin:6px 0 0;color:var(--text-2);max-width:62ch}
+.lab .sec-head + .lab-step{margin-top:0}
+.lab-step + .plan,.lab-step + .portal,.lab-step + .runs{margin-top:0}
+.light .lab-step .ls-n{color:var(--orange-ink,#B65410)}
+@media (max-width:640px){.lab-step{gap:4px 12px;margin-top:40px}.lab-step p{font-size:15px}}

@@ -316,13 +316,37 @@ window.TM_I18N = {
 "Entra al laboratorio Tiger Motors",
 "Willkommen im Tiger-Motors-Labor"
 ],
-"Explore the manufacturing system from anywhere. The platform connects interactive 360° experiences to the physical laboratory, so you can walk the facility, watch the production system run and complete lab activities inside the same environment.": [
-"Explora el sistema de manufactura desde cualquier lugar. La plataforma conecta experiencias interactivas 360° con el laboratorio físico, para que puedas recorrer las instalaciones, ver funcionar el sistema de producción y completar actividades de laboratorio en el mismo entorno.",
-"Erkunden Sie das Fertigungssystem von überall. Die Plattform verbindet interaktive 360°-Erlebnisse mit dem physischen Labor: Sie können die Anlage durchlaufen, das Produktionssystem in Betrieb sehen und Laborübungen in derselben Umgebung absolvieren."
+"Three ways to get to know the lab, in order.": [
+"Tres formas de conocer el laboratorio, en orden.",
+"Drei Wege, das Labor kennenzulernen, der Reihe nach."
 ],
-"Change the view of the diagram: pick what you want to see": [
-"Cambia la vista del diagrama: elige lo que quieres ver",
-"Ansicht wechseln: wählen Sie, was Sie sehen möchten"
+"The plant layout": [
+"La distribución de la planta",
+"Das Anlagenlayout"
+],
+"Start with the map. Switch between two views: how the product and material moves from cell to cell, and how kanban cards carry the information that tells each cell what to build.": [
+"Empieza por el mapa. Cambia entre dos vistas: cómo se mueven el producto y el material de celda en celda, y cómo las tarjetas kanban llevan la información que le dice a cada celda qué construir.",
+"Beginnen Sie mit dem Plan. Wechseln Sie zwischen zwei Ansichten: wie sich Produkt und Material von Zelle zu Zelle bewegen und wie Kanban-Karten die Information transportieren, die jeder Zelle sagt, was sie bauen soll."
+],
+"Walk the facility": [
+"Recorre las instalaciones",
+"Die Anlage begehen"
+],
+"Now step inside. Move through the same three cells in an interactive 360° tour.": [
+"Ahora entra. Recorre las mismas tres celdas en un tour interactivo 360°.",
+"Treten Sie nun ein. Bewegen Sie sich in einer interaktiven 360°-Tour durch dieselben drei Zellen."
+],
+"See it running": [
+"Míralo en funcionamiento",
+"Im Betrieb erleben"
+],
+"Watch students run the full production system in a 360° video.": [
+"Mira a estudiantes operar todo el sistema de producción en un video 360°.",
+"Sehen Sie in einem 360°-Video, wie Studierende das gesamte Produktionssystem betreiben."
+],
+"Pick a view": [
+"Elige una vista",
+"Ansicht wählen"
 ],
 "Choose a view of the facility diagram": [
 "Elige una vista del diagrama de las instalaciones",

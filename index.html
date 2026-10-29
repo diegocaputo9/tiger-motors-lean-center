@@ -33,9 +33,9 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="styles.css?v=d7f25671">
+<link rel="stylesheet" href="styles.css?v=958c0f97">
 
-<script src="i18n-dict.js?v=264078f1" defer></script>
+<script src="i18n-dict.js?v=ce93bae4" defer></script>
 <script src="i18n.js?v=89329dd6" defer></script>
 </head>
 <body>
@@ -211,13 +211,17 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
     <div class="sec-head">
       <p class="eyebrow">Immersive lab experience</p>
       <h2 class="h2">Enter the Tiger Motors Lab</h2>
-      <p class="lede">Explore the manufacturing system from anywhere. The platform connects interactive 360° experiences to the physical laboratory, so you can walk the facility, watch the production system run and complete lab activities inside the same environment.</p>
+      <p class="lede">Three ways to get to know the lab, in order.</p>
     </div>
 
+    <div class="lab-step">
+      <span class="ls-n">01</span>
+      <div><h3>The plant layout</h3><p>Start with the map. Switch between two views: how the product and material moves from cell to cell, and how kanban cards carry the information that tells each cell what to build.</p></div>
+    </div>
     <!-- Facility layout schematic, redrawn from the lab's floor plan -->
     <figure class="plan glass" id="plan">
       <div class="plan-switch">
-        <p class="plan-switch-label"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h13M12 6l6 6-6 6M21 5v14"/></svg>Change the view of the diagram: pick what you want to see</p>
+        <p class="plan-switch-label"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h13M12 6l6 6-6 6M21 5v14"/></svg>Pick a view</p>
         <div class="plan-modes" role="group" aria-label="Choose a view of the facility diagram">
           <button type="button" class="pmode" data-pmode="material" aria-pressed="true"><b>Product / Material flow</b><small>How product moves from cell to cell</small></button>
           <button type="button" class="pmode" data-pmode="info" aria-pressed="false"><b>Information flow · Kanban</b><small>How kanban cards signal what to build</small></button>
@@ -417,6 +421,10 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
       </div>
     </figure>
 
+    <div class="lab-step">
+      <span class="ls-n">02</span>
+      <div><h3>Walk the facility</h3><p>Now step inside. Move through the same three cells in an interactive 360° tour.</p></div>
+    </div>
     <div class="portal fx-dark">
       <a class="portal-vis launch" href="https://cloud.3dvista.com/hosting/8253122/3/index.htm" target="_blank" rel="noopener" aria-label="Launch the 360° Lab Tour">
         <!-- 360° Lab Tour screenshot with animated overlay on top -->
@@ -451,6 +459,10 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
       </div>
     </div>
 
+    <div class="lab-step">
+      <span class="ls-n">03</span>
+      <div><h3>See it running</h3><p>Watch students run the full production system in a 360° video.</p></div>
+    </div>
     <div class="runs glass lab-video">
       <div class="lv-media" id="lvMedia" data-vid="OlPsvqmmc_A">
         <img class="lv-thumb" src="https://i.ytimg.com/vi/OlPsvqmmc_A/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
@@ -726,7 +738,7 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
       <a href="#lab">Explore the Lab</a><a href="#lean-house">Lean House</a><a href="modules">Modules</a><a href="#project">About</a><a href="testimonials">Testimonials</a><a href="#contact">Contact</a>
     </div>
   </div>
-  <div class="wrap"><p class="site-rev">Last updated October 28, 2026 · Revision 114</p></div>
+  <div class="wrap"><p class="site-rev">Last updated October 29, 2026 · Revision 115</p></div>
 </footer>
 
 <dialog class="bdlg" id="bioDlg" aria-labelledby="bdlg-h">
