@@ -146,15 +146,15 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') documen
 
 /* ---------- switch styles (shared by every page) ---------- */
 var CSS = '.lang-sw{position:relative;width:42px;height:42px;flex:none;z-index:5}' +
-  '.ls-menu{position:absolute;top:0;left:0;width:42px;max-height:42px;display:grid;overflow:hidden;border-radius:21px;border:1px solid var(--line-2,rgba(160,185,212,.32));background:rgba(20,40,64,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:max-height .45s cubic-bezier(.65,0,.35,1),box-shadow .3s}' +
+  '.ls-menu{position:absolute;top:0;left:0;width:42px;max-height:42px;display:grid;overflow:hidden;border-radius:21px;border:1px solid var(--line-2,rgba(160,185,212,.32));background:rgba(16,32,52,.97);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:max-height .45s cubic-bezier(.65,0,.35,1),box-shadow .3s}' +
   '.lang-sw.open .ls-menu{max-height:175px;box-shadow:0 18px 36px -16px rgba(0,0,0,.6)}' +
   '@media (hover:hover){.lang-sw:hover .ls-menu{max-height:175px;box-shadow:0 18px 36px -16px rgba(0,0,0,.6)}}' +
   '.ls-opt{width:40px;height:42px;flex:none;display:grid;place-items:center;align-content:center;gap:2px;padding:0;border:0;background:transparent;color:var(--text,#E9EEF4);cursor:pointer;font:700 9.5px/1 "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.06em;transition:background .2s}' +
   '.ls-opt+.ls-opt{border-top:1px solid var(--line,rgba(160,185,212,.16))}' +
   '.ls-opt:hover,.ls-opt:focus-visible{background:rgba(232,119,34,.18)}' +
-  '.ls-opt:first-child b{color:var(--orange-2,#FF9B4D)}' +
+  '.ls-opt:first-child b{color:#FFC99E}' +
   '.ls-flag{width:20px;height:14px;border-radius:3px;overflow:hidden;box-shadow:0 0 0 1px rgba(255,255,255,.25)}.ls-flag svg{display:block;width:100%;height:100%}' +
-  'html[data-mode="light"] .ls-menu{background:rgba(255,255,255,.92);border-color:rgba(12,35,64,.18)}html[data-mode="light"] .ls-opt{color:#0C1B2E}html[data-mode="light"] .ls-opt:first-child b{color:#9A460C}' +
+  'html[data-mode="light"] .ls-menu{background:rgba(255,255,255,.92);border-color:rgba(12,35,64,.18)}html[data-mode="light"] .ls-opt{color:#0C1B2E}html[data-mode="light"] .ls-opt:first-child b{color:#5A2603}' +
   '@media (max-width:480px){.lang-sw,.ls-menu{width:38px}.lang-sw{height:38px}.ls-menu{max-height:38px;border-radius:19px}.ls-opt{width:36px;height:38px}}';
 function addCSS(){ if(document.getElementById('tm-lang-css')) return; var st = document.createElement('style'); st.id = 'tm-lang-css'; st.textContent = CSS; document.head.appendChild(st); }
 

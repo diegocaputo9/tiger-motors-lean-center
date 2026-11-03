@@ -82,8 +82,8 @@ css.textContent =
   '.fbk-btn{padding:11px 20px;border-radius:999px;border:1px solid var(--line-2,rgba(160,185,212,.32));background:transparent;color:inherit;font:600 14px var(--f-body,system-ui,sans-serif);cursor:pointer}' +
   '.fbk-btn.solid{background:var(--orange,#E87722);border-color:var(--orange,#E87722);color:#1A0C02}.fbk-btn:disabled{opacity:.6;cursor:wait}' +
   'html[data-mode="light"] .fbk-dlg{background:#fff;color:#0C1B2E;border-color:rgba(12,35,64,.14)}' +
-  'html[data-mode="light"] .fbk-sub,html[data-mode="light"] .fbk-l small{color:#43536A}' +
+  'html[data-mode="light"] .fbk-sub,html[data-mode="light"] .fbk-l small{color:#26313F}' +
   'html[data-mode="light"] .fbk-l textarea,html[data-mode="light"] .fbk-l input{background:#F4F6F9;border-color:rgba(12,35,64,.18)}' +
-  'html[data-mode="light"] .fbk-open{color:#0C1B2E;border-color:rgba(12,35,64,.22)}html[data-mode="light"] .fbk-kicker{color:#B65410}html[data-mode="light"] .fbk-err{color:#B42318}';
+  'html[data-mode="light"] .fbk-open{color:#0C1B2E;border-color:rgba(12,35,64,.22)}html[data-mode="light"] .fbk-kicker{color:#5A2603}html[data-mode="light"] .fbk-err{color:#B42318}';
 document.head.appendChild(css);
 })();

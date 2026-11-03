@@ -3144,5 +3144,20 @@ window.TM_I18N = {
 "Usa las flechas del teclado para avanzar",
 "Mit den Pfeiltasten weiterblättern",
 "Usa i tasti freccia per spostarti"
+],
+"Video": [
+"Video",
+"Video",
+"Video"
+],
+"Watch on YouTube": [
+"Ver en YouTube",
+"Auf YouTube ansehen",
+"Guarda su YouTube"
+],
+"Open in new tab": [
+"Abrir en una pestaña nueva",
+"In neuem Tab öffnen",
+"Apri in una nuova scheda"
 ]
 };

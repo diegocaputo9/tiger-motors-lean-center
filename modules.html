@@ -32,11 +32,12 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="styles.css?v=2f0f2f70">
-<style>.back-link{display:inline-flex;align-items:center;gap:8px;font:600 12px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:#9A460C;text-decoration:none;margin-bottom:6px}.back-link:hover{color:var(--ink)}main>.sec:first-child{padding-top:calc(var(--nav-h) + 44px)}</style>
-<script src="i18n-dict.js?v=d57b8ea6" defer></script>
-<script src="i18n.js?v=187c5957" defer></script>
-<script src="feedback.js?v=9e340c4a" defer></script>
+<link rel="stylesheet" href="styles.css?v=9e015501">
+<style>.back-link{display:inline-flex;align-items:center;gap:8px;font:600 12px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:#5A2603;text-decoration:none;margin-bottom:6px}.back-link:hover{color:var(--ink)}main>.sec:first-child{padding-top:calc(var(--nav-h) + 44px)}</style>
+<script src="i18n-dict.js?v=34d62658" defer></script>
+<script src="i18n.js?v=9012fe60" defer></script>
+<script src="feedback.js?v=1e628075" defer></script>
+<script src="viewer.js?v=6cb00f4d" defer></script>
 </head>
 <body>
 <script>try{var m=localStorage.getItem('tm-mode');if(m==='light')document.documentElement.setAttribute('data-mode','light');}catch(e){}</script>
@@ -140,7 +141,7 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
       <a href="/#lab">Explore the Lab</a><a href="/#lean-house">Lean House</a><a href="modules">Modules</a><a href="/#project">About</a><a href="testimonials">Testimonials</a><a href="/#contact">Contact</a>
     </div>
   </div>
-  <div class="wrap"><p class="site-rev">Last updated November 2, 2026 · Revision 118</p></div>
+  <div class="wrap"><p class="site-rev">Last updated November 2, 2026 · Revision 119</p></div>
 </footer>
 <div class="toast" id="toast" role="status"><i></i><span>Opening 360° experience</span></div>
 <script src="modules-data.js?v=a0518003"></script>
@@ -212,7 +213,7 @@ lib.innerHTML = LIB_ORDER.map(function(k){
   var counts = {}; m.items.forEach(function(it){var l=TYPES[it.type].label; counts[l]=(counts[l]||0)+1;});
   return '<div class="mod" id="mod-'+k+'" data-k="'+k+'"><div class="mod-side"><span class="mod-num">'+(m.n?'MODULE '+(+m.n):'SYSTEM LEVEL')+'</span><h3>'+esc(m.name)+'</h3><p>'+esc(m.role)+'</p>'+
     '<div class="counts">'+Object.keys(counts).map(function(l){return '<span>'+counts[l]+' × '+esc(l)+'</span>';}).join('')+'</div>'+
-    '<button class="linkline" style="background:none;border:0;padding:0;cursor:pointer;justify-self:start;color:#9A460C" data-house="'+k+'">View in Lean House →</button></div>'+
+    '<button class="linkline" style="background:none;border:0;padding:0;cursor:pointer;justify-self:start;color:#5A2603" data-house="'+k+'">View in Lean House →</button></div>'+
     '<div class="mod-main">'+vis+'<div class="cards">'+cards.join('')+'</div></div></div>';
 }).join('');
 
@@ -304,7 +305,7 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape' && !mnav.h
 /* ---------------- Launch toast for 360 links ---------------- */
 var toast = document.getElementById('toast'), tt;
 document.addEventListener('click', function(e){
-  var a = e.target.closest('a.launch'); if(!a) return;
+  var a = e.target.closest('a.launch'); if(!a || (window.TMViewer && TMViewer.handles(a))) return;
   toast.classList.add('show'); clearTimeout(tt); tt=setTimeout(function(){toast.classList.remove('show');},1800);
 });
 

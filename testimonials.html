@@ -34,8 +34,8 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..500;1,9..144,400&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <style>
 :root{
-  --paper:#07121F; --paper-2:#10263F; --card:#0C1D33; --ink:#E9EEF4; --ink-2:#A9B8C9; --ink-3:#7D8FA3;
-  --line:rgba(160,185,212,.18); --line-2:rgba(160,185,212,.32); --orange:#FF9B4D; --orange-2:#E87722; --navy:#0C2340;
+  --paper:#07121F; --paper-2:#10263F; --card:#0C1D33; --ink:#E9EEF4; --ink-2:#E2E9F1; --ink-3:#E2E9F1;
+  --line:rgba(160,185,212,.18); --line-2:rgba(160,185,212,.32); --orange:#FFC99E; --orange-2:#FBB574; --navy:#0C2340;
   --f-display:"Fraunces",Georgia,serif; --f-body:"IBM Plex Sans",system-ui,sans-serif; --f-mono:"IBM Plex Mono",ui-monospace,monospace;
 }
 *{box-sizing:border-box;margin:0}
@@ -90,7 +90,7 @@ html[data-mode="light"] .mode .i-moon{display:block}
 .share-link:hover{color:var(--orange)}
 .share-link:hover svg{transform:translate(3px,-3px)}
 .share-link:focus-visible{outline:2px solid var(--orange-2);outline-offset:4px;border-radius:4px}
-html[data-mode="light"] .share-link{color:#B85A12}
+html[data-mode="light"] .share-link{color:#5A2603}
 html[data-mode="light"] .share-link:hover{color:var(--orange)}
 
 /* section heads */
@@ -152,7 +152,7 @@ html[data-mode="light"] .share-link:hover{color:var(--orange)}
 .filters button span{margin-left:7px;font:500 12px var(--f-mono);color:var(--ink-3)}
 .filters button:hover{color:var(--ink)}
 .filters button[aria-pressed="true"]{background:var(--orange-2);color:#1A0C02}
-.filters button[aria-pressed="true"] span{color:rgba(26,12,2,.6)}
+.filters button[aria-pressed="true"] span{color:#1A0C02}
 .filters button:focus-visible{outline:2px solid var(--orange-2);outline-offset:2px}
 html[data-mode="light"] .filters{background:rgba(12,35,64,.06)}
 @media (max-width:600px){.filters button{font-size:14px;padding:11px 15px}}
@@ -162,6 +162,8 @@ html[data-mode="light"] .filters{background:rgba(12,35,64,.06)}
 .q.in{opacity:1;transform:none}
 .q::before{content:"\201C";position:absolute;top:6px;right:16px;font:400 64px/1 var(--f-display);color:var(--paper-2)}
 .q .tag{font:500 10.5px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--orange)}
+html:not([data-mode="light"]) .q .tag{color:#FFD5AD}
+html:not([data-mode="light"]) .q.hl .tag{color:#FFE2C8}
 .q blockquote{margin-top:12px;font:400 17px/1.55 var(--f-display);color:var(--ink);position:relative}
 .q blockquote p+p{margin-top:10px}
 .q cite{display:block;margin-top:16px;padding-top:12px;border-top:1px dashed var(--line);font:600 13.5px/1.4 var(--f-body);font-style:normal;color:var(--ink)}
@@ -188,7 +190,7 @@ html[data-mode="light"] .filters{background:rgba(12,35,64,.06)}
 .lb{margin:auto;padding:0;border:0;background:transparent;max-width:min(1200px,94vw);max-height:92dvh;overflow:visible}
 .lb::backdrop{background:rgba(3,9,16,.88)}
 .lb img{display:block;max-width:100%;max-height:82dvh;width:auto;height:auto;border-radius:6px}
-.lb p{margin-top:12px;text-align:center;font:500 12px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:#C9D6E4}
+.lb p{margin-top:12px;text-align:center;font:500 12px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:#DCE5EF}
 .lb .x{position:absolute;top:-14px;right:-14px;width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:#0C1D33;color:#fff;font-size:20px;cursor:pointer}
 @media (max-width:600px){.lb .x{top:-48px;right:0}}
 
@@ -200,7 +202,7 @@ html[data-mode="light"] .filters{background:rgba(12,35,64,.06)}
 footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--ink-3);font-size:13.5px}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px}
 .site-rev{display:none}
-@media (min-width:1025px){footer .wrap+.wrap{margin-top:10px}.site-rev{display:block;font:500 11px var(--f-mono);letter-spacing:.08em;color:var(--ink-3);opacity:.8}}
+@media (min-width:1025px){footer .wrap+.wrap{margin-top:10px}.site-rev{display:block;font:500 11px var(--f-mono);letter-spacing:.08em;color:var(--ink-3)}}
 
 /* share your story dialog */
 button.pill{cursor:pointer;background:transparent;color:inherit}
@@ -230,8 +232,8 @@ mark{color:inherit;background:linear-gradient(transparent 58%,rgba(232,119,34,.4
 .q mark{transition-delay:.5s}
 /* ---------- light mode (same switch and colors as the rest of the site) ---------- */
 html[data-mode="light"]{color-scheme:light;
-  --paper:#EDF0F3; --paper-2:#E2E7EC; --card:#FFFFFF; --ink:#0C1B2E; --ink-2:#43536A; --ink-3:#66778C;
-  --line:rgba(12,35,64,.13); --line-2:rgba(12,35,64,.24); --orange:#9A460C; --orange-2:#E87722}
+  --paper:#EDF0F3; --paper-2:#E2E7EC; --card:#FFFFFF; --ink:#0C1B2E; --ink-2:#26313F; --ink-3:#26313F;
+  --line:rgba(12,35,64,.13); --line-2:rgba(12,35,64,.24); --orange:#5A2603; --orange-2:#FBB574}
 html[data-mode="light"] body{background:radial-gradient(1200px 700px at 85% -10%,rgba(232,119,34,.08),transparent 60%),var(--paper)}
 html[data-mode="light"] body::before{opacity:.25}
 html[data-mode="light"] .top{background:rgba(237,240,243,.85)}
@@ -248,9 +250,9 @@ html[data-mode="light"] .share .err{color:#B42318}
 html[data-mode="light"] .share .done .ok{color:#1C7A55}
 @media (prefers-reduced-motion:reduce){mark{transition:none;background-size:100% 100%}.q{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
 </style>
-<script src="i18n-dict.js?v=d57b8ea6" defer></script>
-<script src="i18n.js?v=187c5957" defer></script>
-<script src="feedback.js?v=9e340c4a" defer></script>
+<script src="i18n-dict.js?v=34d62658" defer></script>
+<script src="i18n.js?v=9012fe60" defer></script>
+<script src="feedback.js?v=1e628075" defer></script>
 </head>
 <body>
 <header class="top">
@@ -352,7 +354,7 @@ html[data-mode="light"] .share .done .ok{color:#1C7A55}
     <a href="/">tigermotorslean.com</a>
     <button type="button" class="fbk-open" data-feedback>We want to hear your feedback</button>
   </div>
-  <div class="wrap"><p class="site-rev">Last updated November 2, 2026 · Revision 118</p></div>
+  <div class="wrap"><p class="site-rev">Last updated November 2, 2026 · Revision 119</p></div>
 </footer>
 
 <script>
