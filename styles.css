@@ -863,6 +863,7 @@ html{-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
 @media (max-width:1100px),(pointer:coarse){
   *,*::before,*::after,::backdrop{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
   .glass{background:rgba(16,34,56,.82)}
+  html[data-mode="light"] .glass{background:rgba(255,255,255,.94)}
   .nav.scrolled{background:rgba(7,18,31,.94)}
   .pdlg-in{background:rgba(14,30,50,.97)}
   .intro-top .facts{background:rgba(var(--bg-rgb),.78)}
@@ -1321,3 +1322,73 @@ html[data-mode="light"] .panel .p-arrow{background:#fff;box-shadow:0 6px 16px -1
   .panel .pa-next{right:10px}
   .panel .p-head{padding:0 40px}
 }
+
+/* ===== Lean House section: readability rules (text never under 12px, contrast at least 9.5:1) ===== */
+.house-sec{--text-2:#D6DFE9;--text-3:#D6DFE9;--orange-2:#FFC99E}
+html[data-mode="light"] .house-sec{--text-2:#2A3646;--text-3:#2A3646;--orange-2:#6A2E04;--orange-ink:#6A2E04}
+.house-sec .eyebrow{color:var(--orange-2)}
+.house-sec .btn-primary{background:#FBB574;color:#1A0C02}
+.house-sec .btn-primary:hover{background:#FCC28C}
+.house-sec .step-chip{color:var(--text-2)}
+.house-sec .step-chip b{font-size:12px;font-weight:600}
+.house-sec .step-chip[aria-pressed="true"] b{background:#FBB574;border-color:#FBB574}
+.house-sec .chip-prog{font-size:12px}
+.house-sec .step-chip.chip-done .chip-prog{color:#9BEAC8}
+html[data-mode="light"] .house-sec .step-chip.chip-done .chip-prog{color:#083D2A}
+.house-sec .step-arrow{color:var(--text-2)}
+.house-sec .p-kicker{font-size:12px}
+.house-sec .ab-k{font-size:12px;color:#FFD5AD}
+.house-sec .acct-banner p:not(.ab-k){color:#DCE5EF}
+/* resource bubbles: the step number comes first and stands out */
+.house-sec .mini small{font-size:12px;color:var(--text-2)}
+.house-sec .mini .m-step{display:inline-block;margin-bottom:5px;padding:2px 9px;border-radius:999px;background:transparent;border:1px solid rgba(255,192,143,.55);font:700 12px/1.4 var(--f-mono);font-style:normal;letter-spacing:.1em;text-transform:uppercase;color:var(--orange-2)}
+html[data-mode="light"] .house-sec .mini .m-step{background:transparent;border-color:rgba(106,46,4,.45);color:#5A2603}
+html[data-mode="light"] .house-sec .hz text.pdca-l,html[data-mode="light"] .house-sec .hz.on text.pdca-l:not(.num):not(.sm){fill:#6A2E04}
+.house-sec .mini.is-done .m-step{color:#9BEAC8;background:rgba(63,182,139,.14);border-color:rgba(63,182,139,.5)}
+html[data-mode="light"] .house-sec .mini.is-done .m-step{color:#083D2A}
+.house-sec .mini .go{color:var(--text-2)}
+.house-sec .placeholder{font-size:12px}
+/* the house drawing: labels are sized from its real width (--u = 12px on screen), with stronger fills behind them */
+#house{--u:13px}
+.house-sec .hz .sh{fill:rgba(16,34,56,.7)}
+.house-sec .hz:hover .sh,.house-sec .hz:focus-visible .sh{fill:rgba(20,40,64,.9)}
+.house-sec .hz.on .sh{fill:rgba(232,119,34,.07)}
+.house-sec .hz text.sm{font-size:calc(var(--u) * 1.05);letter-spacing:.1em;fill:var(--text-2)}
+.house-sec .hz text.num{font-size:max(18px, calc(var(--u) * 1.05))}
+.house-sec .hz text.pdca-l,.house-sec .hz.on text.pdca-l:not(.num):not(.sm){font-size:min(calc(var(--u) * 1.05), 18px);fill:var(--orange-2)}
+html[data-mode="light"] .house-sec .hz .sh{fill:rgba(255,255,255,.85)}
+html[data-mode="light"] .house-sec .hz.on .sh{fill:rgba(232,119,34,.06)}
+@media (max-width:560px){
+  .house-sec .hz text.sq-sub{display:none}
+  .house-sec .hz text.sq-l{transform:translateY(7px)}
+  .house-sec .hz .pdca{transform:translate(300px,334px) scale(1.2)}
+  .house-sec .hz text.num{letter-spacing:.02em}
+  .house-sec .hz text.pdca-l,.house-sec .hz.on text.pdca-l:not(.num):not(.sm){font-size:17px}
+}
+/* completed modules turn the house green, and the whole house once everything is done */
+.hz.hz-done .sh,#house.house-done .hz .sh{fill:rgba(63,182,139,.10);stroke:#3FB68B;stroke-width:1.6}
+.hz.hz-done text.num,#house.house-done .hz text.num{fill:#9BEAC8}
+.hz.hz-done.on .sh,#house.house-done .hz.on .sh{fill:rgba(63,182,139,.15);stroke:#9BEAC8;stroke-width:2.2}
+#house.house-done .sq-cell{fill:rgba(63,182,139,.12);stroke:rgba(126,224,184,.5)}
+#house.house-done .sh.roof{fill:rgba(63,182,139,.2)}
+html[data-mode="light"] .hz.hz-done .sh,html[data-mode="light"] #house.house-done .hz .sh{fill:rgba(63,182,139,.10);stroke:#1F8A63}
+html[data-mode="light"] .hz.hz-done text.num,html[data-mode="light"] #house.house-done .hz text.num{fill:#083D2A}
+
+/* plant layout: AS/RS and SMED light up their definition in the legend on hover */
+.pdef{padding:2px 8px;margin-left:-8px;border-radius:6px;transition:background .25s,color .25s}
+.pdef.lit{background:rgba(232,119,34,.16);color:var(--text)}
+.smed-tag{cursor:help}
+.smed-tag.def-lit rect{stroke:#FF9B4D;stroke-width:1.6;fill:rgba(232,119,34,.35)}
+.pcell[data-def].def-lit .pl-lab{fill:#FF9B4D}
+html[data-mode="light"] .pdef.lit{background:rgba(232,119,34,.14);color:#0C1B2E}
+
+/* Lean House tour: outlined arrow keys showing the tour can be driven from the keyboard (keyboard and mouse devices only) */
+.tour-keys{display:none}
+@media (hover:hover) and (pointer:fine){
+  .tour-keys{display:flex;align-items:center;gap:8px;margin-top:16px;font:500 12px var(--f-mono);letter-spacing:.08em;color:#C9D6E4}
+  .tour-keys .tk{width:30px;height:28px;display:grid;place-items:center;border:1.5px solid rgba(201,214,228,.55);border-bottom-width:3px;border-radius:7px;color:#E9EEF4;animation:tkPress 2.4s ease-in-out infinite}
+  .tour-keys .tk-r{animation-delay:1.2s}
+  .tour-keys .tk-t{margin-left:6px}
+}
+@keyframes tkPress{0%,30%,100%{transform:none;border-color:rgba(201,214,228,.55);border-bottom-width:3px;color:#E9EEF4}12%{transform:translateY(2px);border-color:#FF9B4D;border-bottom-width:1.5px;color:#FF9B4D}}
+@media (prefers-reduced-motion:reduce){.tour-keys .tk{animation:none}}

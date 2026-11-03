@@ -251,6 +251,13 @@ function paintChips(){
     var txt = ms.pct === 100 ? '✓' : ms.done + '/' + ms.total; if(tag.textContent !== txt) tag.textContent = txt;
     ch.classList.toggle('chip-done', ms.pct === 100);
   });
+  // the house turns green part by part as modules are completed, and all green once everything is done
+  var house = $('#house'); if(!house) return;
+  $$('#house .hz[data-k]').forEach(function(g){
+    var k = g.getAttribute('data-k'); if((TM.SEQ || []).indexOf(k) < 0) return;
+    g.classList.toggle('hz-done', moduleStats(k).pct === 100);
+  });
+  var all = stats(); house.classList.toggle('house-done', all.total > 0 && all.pct === 100);
 }
 
 /* ---------- events ---------- */

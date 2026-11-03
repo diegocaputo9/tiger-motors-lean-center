@@ -10,7 +10,7 @@ rev = int(subprocess.run(['git', 'rev-list', '--count', 'HEAD'], capture_output=
 today = datetime.date.today()
 stamp = 'Last updated %s %d, %d · Revision %d' % (today.strftime('%B'), today.day, today.year, rev)
 
-ASSETS = ['styles.css', 'auth.js', 'i18n.js', 'i18n-dict.js', 'modules-data.js']
+ASSETS = ['styles.css', 'auth.js', 'i18n.js', 'i18n-dict.js', 'modules-data.js', 'feedback.js']
 ver = {a: hashlib.sha1(open(a, 'rb').read()).hexdigest()[:8] for a in ASSETS}
 for page in glob.glob('*.html'):
     s = open(page, encoding='utf-8').read()

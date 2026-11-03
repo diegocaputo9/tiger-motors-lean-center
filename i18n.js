@@ -1,10 +1,10 @@
-/* Site language: English is the page source (what search engines index); Spanish and German are swapped in here.
-   Translations live in i18n-dict.js as { "English text": ["Español", "Deutsch"] }. A text block that mixes text and
+/* Site language: English is the page source (what search engines index); Spanish, German and Italian are swapped in here.
+   Translations live in i18n-dict.js as { "English text": ["Español", "Deutsch", "Italiano"] }. A text block that mixes text and
    inline tags (links, bold) is translated as one unit, tags included. Keys starting with "re:" are patterns for text
    with numbers or names in it ($1, $2 ... are the captured parts). Anything inside [data-i18n-skip] stays English. */
 (function(){
 'use strict';
-var LANGS = ['en','es','de'], IDX = { es: 0, de: 1 };
+var LANGS = ['en','es','de','it'], IDX = { es: 0, de: 1, it: 2 };
 var KEY = 'tm-lang';
 var INLINE = { A:1, B:1, STRONG:1, EM:1, I:1, SPAN:1, BR:1, SMALL:1, SUP:1, SUB:1, CODE:1, U:1, MARK:1 };
 var SKIP = { SCRIPT:1, STYLE:1, NOSCRIPT:1, TEMPLATE:1, TEXTAREA:1, INPUT:1, SELECT:1, OPTION:1, IMG:1, IFRAME:1, VIDEO:1, CANVAS:1 };
@@ -119,9 +119,10 @@ function setLang(l){
 var FLAGS = {
   en: '<svg viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="40" fill="#B22234"/><g fill="#fff"><rect y="3.08" width="60" height="3.08"/><rect y="9.23" width="60" height="3.08"/><rect y="15.38" width="60" height="3.08"/><rect y="21.54" width="60" height="3.08"/><rect y="27.69" width="60" height="3.08"/><rect y="33.85" width="60" height="3.08"/></g><rect width="26" height="21.54" fill="#3C3B6E"/><g fill="#fff" opacity=".9"><circle cx="4" cy="4" r="1"/><circle cx="10" cy="4" r="1"/><circle cx="16" cy="4" r="1"/><circle cx="22" cy="4" r="1"/><circle cx="7" cy="8" r="1"/><circle cx="13" cy="8" r="1"/><circle cx="19" cy="8" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="10" cy="12" r="1"/><circle cx="16" cy="12" r="1"/><circle cx="22" cy="12" r="1"/><circle cx="7" cy="16" r="1"/><circle cx="13" cy="16" r="1"/><circle cx="19" cy="16" r="1"/></g></svg>',
   es: '<svg viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="40" fill="#AA151B"/><rect y="10" width="60" height="20" fill="#F1BF00"/></svg>',
-  de: '<svg viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="13.34" fill="#000"/><rect y="13.33" width="60" height="13.34" fill="#DD0000"/><rect y="26.66" width="60" height="13.34" fill="#FFCE00"/></svg>'
+  de: '<svg viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="13.34" fill="#000"/><rect y="13.33" width="60" height="13.34" fill="#DD0000"/><rect y="26.66" width="60" height="13.34" fill="#FFCE00"/></svg>',
+  it: '<svg viewBox="0 0 60 40" aria-hidden="true"><rect width="20" height="40" fill="#008C45"/><rect x="20" width="20" height="40" fill="#F4F5F0"/><rect x="40" width="20" height="40" fill="#CD212A"/></svg>'
 };
-var NAMES = { en: 'English', es: 'Español', de: 'Deutsch' };
+var NAMES = { en: 'English', es: 'Español', de: 'Deutsch', it: 'Italiano' };
 function opt(l){ return '<button type="button" class="ls-opt" data-lang="' + l + '" lang="' + l + '" aria-label="' + NAMES[l] + '" title="' + NAMES[l] + '"><span class="ls-flag">' + FLAGS[l] + '</span><b>' + l.toUpperCase() + '</b></button>'; }
 function paintSwitch(){
   document.querySelectorAll('[data-lang-switch]').forEach(function(sw){
@@ -146,8 +147,8 @@ document.addEventListener('keydown', function(e){ if(e.key === 'Escape') documen
 /* ---------- switch styles (shared by every page) ---------- */
 var CSS = '.lang-sw{position:relative;width:42px;height:42px;flex:none;z-index:5}' +
   '.ls-menu{position:absolute;top:0;left:0;width:42px;max-height:42px;display:grid;overflow:hidden;border-radius:21px;border:1px solid var(--line-2,rgba(160,185,212,.32));background:rgba(20,40,64,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:max-height .45s cubic-bezier(.65,0,.35,1),box-shadow .3s}' +
-  '.lang-sw.open .ls-menu{max-height:130px;box-shadow:0 18px 36px -16px rgba(0,0,0,.6)}' +
-  '@media (hover:hover){.lang-sw:hover .ls-menu{max-height:130px;box-shadow:0 18px 36px -16px rgba(0,0,0,.6)}}' +
+  '.lang-sw.open .ls-menu{max-height:175px;box-shadow:0 18px 36px -16px rgba(0,0,0,.6)}' +
+  '@media (hover:hover){.lang-sw:hover .ls-menu{max-height:175px;box-shadow:0 18px 36px -16px rgba(0,0,0,.6)}}' +
   '.ls-opt{width:40px;height:42px;flex:none;display:grid;place-items:center;align-content:center;gap:2px;padding:0;border:0;background:transparent;color:var(--text,#E9EEF4);cursor:pointer;font:700 9.5px/1 "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.06em;transition:background .2s}' +
   '.ls-opt+.ls-opt{border-top:1px solid var(--line,rgba(160,185,212,.16))}' +
   '.ls-opt:hover,.ls-opt:focus-visible{background:rgba(232,119,34,.18)}' +
