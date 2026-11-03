@@ -31,9 +31,17 @@ function build(){
   dlg.querySelector('form').addEventListener('submit', send);
 }
 
-function open(){
+var TEXT = {
+  site: { h: 'We want to hear your feedback', sub: 'Suggestions, ideas, or something that did not work. Every message is read by the Lean Team.', ph: 'What could we improve?' },
+  course: { h: 'You finished the course! Help us improve it', sub: 'Tell the Lean Team what to improve on the website, the platform or the materials, which topics you would like added to the course, or anything else you want to share.', ph: 'What should we improve or add?' }
+};
+var kind = 'site';
+function open(k){
   if(!dlg) build();
+  kind = TEXT[k] ? k : 'site';
   var f = dlg.querySelector('form'), done = dlg.querySelector('.fbk-done');
+  dlg.querySelector('#fbk-h').textContent = TEXT[kind].h; dlg.querySelector('.fbk-form .fbk-sub').textContent = TEXT[kind].sub; f.message.placeholder = TEXT[kind].ph;
+  var u = window.TMAuth && TMAuth.state && TMAuth.state.user; if(u && u.email && !f.email.value) f.email.value = u.email;
   f.hidden = false; done.hidden = true; f.querySelector('.fbk-err').hidden = true;
   dlg.showModal();
   f.querySelector('textarea').focus();
@@ -50,7 +58,7 @@ function send(e){
   fetch(SB_URL + '/rest/v1/rpc/submit_feedback', {
     method: 'POST',
     headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ p_message: msg, p_email: mail, p_page: location.pathname, p_lang: document.documentElement.lang || 'en', p_website: f.website.value })
+    body: JSON.stringify({ p_message: msg, p_email: mail, p_page: location.pathname + (kind === 'course' ? ' (completed the course)' : ''), p_lang: document.documentElement.lang || 'en', p_website: f.website.value })
   }).then(function(r){
     if(r.ok){ f.reset(); f.hidden = true; dlg.querySelector('.fbk-done').hidden = false; return; }
     return r.json().then(function(j){ fail((j && j.message) || 'We could not send your feedback. Please check your connection and try again.'); });
@@ -58,7 +66,7 @@ function send(e){
     .then(function(){ btn.disabled = false; btn.textContent = t('Send feedback'); });
 }
 
-document.addEventListener('click', function(e){ var b = e.target.closest && e.target.closest('[data-feedback]'); if(b){ e.preventDefault(); open(); } });
+document.addEventListener('click', function(e){ var b = e.target.closest && e.target.closest('[data-feedback]'); if(b){ e.preventDefault(); open(b.getAttribute('data-feedback')); } });
 document.querySelectorAll('[data-feedback]').forEach(function(b){ if(!b.querySelector('svg')) b.insertAdjacentHTML('afterbegin', ICON); });
 
 var css = document.createElement('style');

@@ -1000,7 +1000,7 @@ html[data-mode="light"] .acct-menu{background:rgba(255,255,255,.98);box-shadow:0
 .ab-act{display:grid;gap:8px;justify-items:start}
 .acct-banner:not(.in) .ab-act{justify-items:center;text-align:center}
 .ab-link{background:none;border:0;padding:4px 0;color:#FFB877;font:600 12.5px var(--f-mono);letter-spacing:.06em;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
-.ab-lock{font-size:13px!important;color:#9FB0C4!important;max-width:28ch}
+.ab-lock{font-size:13px!important;color:#DCE5EF!important;max-width:28ch}
 .ab-mods{list-style:none;margin:10px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px 18px}
 .ab-mods li{display:grid;grid-template-columns:1fr auto;gap:4px 8px;font-size:13px;color:#DCE5EF}
 .ab-mods li b{font:600 12px var(--f-mono);color:#fff}
@@ -1402,3 +1402,11 @@ html[data-mode="light"] .grant figcaption{background:rgba(7,18,31,.92);color:#E9
 .plan-svg .kb-n{transform:scale(1.45)}
 @media (max-width:1240px){.plan-svg{min-width:1100px}}
 @media (max-width:900px){.portal-vis .pv-small{display:none}}
+
+/* free-account banner: how much material the course holds */
+.ab-stats{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;margin:12px 0 0!important;font-size:13px!important;line-height:1.45;color:#DCE5EF!important}
+.ab-stats b{font:600 14px var(--f-body);color:#fff}
+.ab-stats span{display:flex;flex-wrap:wrap;gap:2px 0;font:500 12px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:#DCE5EF}
+.ab-stats i{font-style:normal;white-space:nowrap}
+.ab-stats i:not(:last-child)::after{content:"·";margin:0 8px}
+.pn-fb{margin-top:2px;flex-basis:100%;text-align:left}

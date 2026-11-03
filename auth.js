@@ -160,6 +160,16 @@ function paintNav(){
     '<button type="button" role="menuitem" data-acct="signout">Sign out</button></div>';
 }
 
+// how much material the course holds: lectures average about 35 minutes and 3DVista lab activities about 30
+var MINUTES = { lecture: 35, lab: 30 };
+function contentHTML(){
+  var c = {}, min = 0;
+  Object.keys(TM.BYK || {}).forEach(function(k){ (TM.BYK[k].items || []).forEach(function(it){ if(!it.url) return; c[it.type] = (c[it.type] || 0) + 1; min += MINUTES[it.type] || 0; }); });
+  var n = function(v, one, many){ return v ? v + ' ' + (v === 1 ? one : many) : ''; };
+  var parts = [n(c.lecture, 'lecture', 'lectures'), n(c.lab, 'lab activity', 'lab activities'), n(c.reading, 'reading', 'readings'), n(c.podcast, 'podcast', 'podcasts'), n(c.video360, '360° video', '360° videos')].filter(Boolean);
+  return '<p class="ab-stats"><b>About ' + Math.round(min / 60) + ' hours of lectures and lab activities</b><span>' + parts.map(function(t){ return '<i>' + t + '</i>'; }).join('') + '</span></p>';
+}
+var FEEDBACK = '<button type="button" class="ab-link" data-feedback="course">Share feedback on the course</button>';
 function bannerHTML(){
   var s = stats();
   if(!state.user){
@@ -167,8 +177,8 @@ function bannerHTML(){
     return '<div class="ab-ico" aria-hidden="true">' + ring(s.pct, 54) + '<b>' + s.pct + '%</b></div>' +
       '<div class="ab-txt"><p class="ab-k">Free account</p><h3>Create a free account to track your progress' + (CFG.certificates ? ' and earn a certificate of completion' : '') + '</h3>' +
       '<p>Every lecture, reading and lab you open is checked off automatically' + (CFG.certificates ? ', and when you complete all the Lean House modules you get a certificate of completion' : '') + '. Your progress is saved to your account, so you can pick up on any device.' +
-      (local ? ' <b>You have already opened ' + local + ' resource' + (local > 1 ? 's' : '') + ' on this device. Create an account to keep ' + (local > 1 ? 'them' : 'it') + '.</b>' : '') + '</p></div>' +
-      '<div class="ab-act"><button type="button" class="btn btn-primary" data-acct="signup">Create free account</button><button type="button" class="ab-link" data-acct="signin">I already have an account</button></div>';
+      (local ? ' <b>You have already opened ' + local + ' resource' + (local > 1 ? 's' : '') + ' on this device. Create an account to keep ' + (local > 1 ? 'them' : 'it') + '.</b>' : '') + '</p>' + contentHTML() + '</div>' +
+      '<div class="ab-act"><button type="button" class="btn btn-primary" data-acct="signup">Create free account</button><button type="button" class="ab-link" data-acct="signin">I already have an account</button>' + (s.pct === 100 ? FEEDBACK : '') + '</div>';
   }
   var name = firstName();
   var mods = (TM.SEQ || []).map(function(k){
@@ -181,8 +191,8 @@ function bannerHTML(){
       : (s.pct === 100 ? '<button type="button" class="btn btn-primary" data-acct="cert">Get my certificate</button>' : '<p class="ab-lock">Your certificate unlocks when you complete all ' + s.total + ' resources.</p>');
   }
   return '<div class="ab-ico" aria-hidden="true">' + ring(s.pct, 54) + '<b>' + s.pct + '%</b></div>' +
-    '<div class="ab-txt"><p class="ab-k">Your progress</p><h3>' + (name ? 'Hi ' + esc(name) + ', ' : '') + 'you have completed ' + s.done + ' of ' + s.total + ' resources</h3><ul class="ab-mods">' + mods + '</ul></div>' +
-    '<div class="ab-act">' + cert + '</div>';
+    '<div class="ab-txt"><p class="ab-k">Your progress</p><h3>' + (name ? 'Hi ' + esc(name) + ', ' : '') + 'you have completed ' + s.done + ' of ' + s.total + ' resources</h3><ul class="ab-mods">' + mods + '</ul>' + contentHTML() + '</div>' +
+    '<div class="ab-act">' + cert + (s.pct === 100 ? FEEDBACK : '') + '</div>';
 }
 // the box above the Lean House folds into a slim bar and opens again; it starts open, and folding is
 // remembered on this device (separately for the signed-in progress box and the signed-out invite)

@@ -3164,5 +3164,30 @@ window.TM_I18N = {
 "¿Quieres la experiencia 360° completa? Ábrelo en YouTube para mirar a tu alrededor y elegir lo que ves, y cambia la calidad a 4K.",
 "Sie möchten das volle 360°-Erlebnis? Öffnen Sie es auf YouTube, um sich umzusehen und selbst zu wählen, was Sie sehen, und stellen Sie die Qualität auf 4K.",
 "Vuoi l’esperienza 360° completa? Aprilo su YouTube per guardarti intorno e scegliere cosa vedere, e imposta la qualità su 4K."
+],
+"re:^About (\\d+) hours of lectures and lab activities$": [
+"Unas $1 horas de clases y actividades de laboratorio",
+"Etwa $1 Stunden Vorlesungen und Laborübungen",
+"Circa $1 ore di lezioni e attività di laboratorio"
+],
+"Share feedback on the course": [
+"Comparte tu opinión sobre el curso",
+"Feedback zum Kurs geben",
+"Lascia un feedback sul corso"
+],
+"You finished the course! Help us improve it": [
+"¡Terminaste el curso! Ayúdanos a mejorarlo",
+"Sie haben den Kurs abgeschlossen! Helfen Sie uns, ihn zu verbessern",
+"Hai finito il corso! Aiutaci a migliorarlo"
+],
+"Tell the Lean Team what to improve on the website, the platform or the materials, which topics you would like added to the course, or anything else you want to share.": [
+"Cuéntale al equipo Lean qué mejorar en el sitio web, la plataforma o los materiales, qué temas te gustaría que agregáramos al curso, o cualquier otra cosa que quieras compartir.",
+"Sagen Sie dem Lean Team, was an der Website, der Plattform oder den Materialien verbessert werden sollte, welche Themen Sie sich für den Kurs wünschen oder was Sie sonst teilen möchten.",
+"Racconta al team Lean cosa migliorare nel sito, nella piattaforma o nei materiali, quali argomenti vorresti aggiungere al corso o qualsiasi altra cosa tu voglia condividere."
+],
+"What should we improve or add?": [
+"¿Qué deberíamos mejorar o agregar?",
+"Was sollten wir verbessern oder ergänzen?",
+"Cosa dovremmo migliorare o aggiungere?"
 ]
 };
