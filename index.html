@@ -742,7 +742,7 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
       <a href="#lab">Explore the Lab</a><a href="#lean-house">Lean House</a><a href="modules">Modules</a><a href="#project">About</a><a href="testimonials">Testimonials</a><a href="#contact">Contact</a>
     </div>
   </div>
-  <div class="wrap"><p class="site-rev">Last updated November 3, 2026 · Revision 125</p></div>
+  <div class="wrap"><p class="site-rev">Last updated November 3, 2026 · Revision 126</p></div>
 </footer>
 
 <dialog class="bdlg" id="bioDlg" aria-labelledby="bdlg-h">
@@ -990,6 +990,66 @@ document.addEventListener('click', function(e){
   for(var i=0;i<4;i++){ var a=path[i], b=path[(i+1)%4], l=Math.abs(b[0]-a[0])+Math.abs(b[1]-a[1]); segs.push([a,b,l,L]); L+=l; }
   function at(d){ d=((d%L)+L)%L; for(var i=0;i<4;i++){ var s=segs[i]; if(d<=s[3]+s[2]){ var f=(d-s[3])/s[2]; return [s[0][0]+(s[1][0]-s[0][0])*f, s[0][1]+(s[1][1]-s[0][1])*f]; } } return path[0]; }
   var NP = 16, amberIdx=-1, amberUntil=0, nextAmber=3000;
+  /* LEGO cars on the line: pallets alternate speedster / SUV (mixed-model line). The first station puts the chassis on
+     the pallet, each next station adds parts, and the last station takes the finished car off; the empty pallet returns
+     along the left side. Parts are [stage, u0,u1, v0,v1, z0,z1, colour] in car units: u along the car (+ = front),
+     v across it, z above the pallet. */
+  var STOP = [1.9,5.5,9.1,14.6,17.4,21.9,25.5,29.1];   // station centres measured along the loop
+  function sh(t,r,l){ return {t:t, r:r, l:l}; }
+  var RED = sh('#E3262C','#B8171D','#901116'), WHT = sh('#F5F7F9','#D5DBE1','#B4BCC6'), BLK = sh('#33373D','#1F2226','#15171A'),
+      GRY = sh('#8C949E','#6D747D','#575D65'), GLS = sh('rgba(178,214,238,.7)','rgba(120,160,190,.62)','rgba(92,128,156,.62)'),
+      AMB = sh('#FFB060','#E87722','#C45F12');
+  var SPEEDSTER = { r:.12, wu:.33, parts:[
+    [0,-.52,.52,-.22,.22,.08,.14,BLK],
+    [1,-.55,.55,-.26,.26,.14,.30,RED],
+    [2,.12,.56,-.25,.25,.30,.36,RED],[2,.12,.56,.06,.12,.36,.38,WHT],[2,.12,.56,-.12,-.06,.36,.38,WHT],[2,-.56,-.18,-.25,.25,.30,.38,RED],
+    [3,-.18,.14,-.22,.22,.30,.46,GLS],
+    [4,-.16,.08,-.21,.21,.46,.50,BLK],
+    [5,.53,.58,.13,.22,.22,.29,WHT],[5,.53,.58,-.22,-.13,.22,.29,WHT],[5,-.58,-.55,.14,.22,.23,.28,AMB],[5,-.58,-.55,-.22,-.14,.23,.28,AMB],
+    [6,-.52,-.47,.12,.17,.38,.47,BLK],[6,-.52,-.47,-.17,-.12,.38,.47,BLK],[6,-.6,-.43,-.27,.27,.47,.5,RED]
+  ]};
+  var SUV = { r:.15, wu:.3, parts:[
+    [0,-.48,.48,-.22,.22,.10,.18,BLK],
+    [1,-.5,.5,-.26,.26,.18,.22,BLK],[1,-.5,.5,-.26,.26,.22,.32,RED],
+    [2,-.5,.04,-.26,.26,.32,.39,WHT],[2,.18,.5,-.26,.26,.32,.42,RED],[2,.5,.54,-.21,.21,.2,.38,GRY],
+    [3,-.5,-.02,-.26,.26,.39,.6,RED],[3,-.02,.18,-.24,.24,.32,.6,GLS],
+    [4,-.52,.2,-.26,.26,.6,.64,RED],
+    [5,.25,.38,-.08,.08,.42,.45,GRY],[5,.52,.56,.14,.23,.3,.37,WHT],[5,.52,.56,-.23,-.14,.3,.37,WHT],[5,.04,.18,.255,.27,.24,.4,WHT],[5,.04,.18,-.27,-.255,.24,.4,WHT],
+    [6,-.56,-.46,-.27,.27,.64,.68,BLK],[6,-.3,-.06,-.12,.12,.64,.66,WHT]
+  ]};
+  var PALLET = [-.62,.62,-.36,.36];
+  // an oriented box: only the faces turned toward the viewer (+x/+y) are drawn
+  function obox(cx,cy,co,si,u0,u1,v0,v1,z0,z1,c){
+    var k=[[u0,v0],[u1,v0],[u1,v1],[u0,v1]].map(function(a){ return [cx+a[0]*co-a[1]*si, cy+a[0]*si+a[1]*co]; });
+    for(var i=0;i<4;i++){ var a=k[i], b=k[(i+1)%4], nx=b[1]-a[1], ny=a[0]-b[0];
+      if((v1-v0)*(u1-u0)<0){ nx=-nx; ny=-ny; }
+      if(nx+ny>0) poly([[a[0],a[1],z0],[b[0],b[1],z0],[b[0],b[1],z1],[a[0],a[1],z1]], nx>ny?c.r:c.l); }
+    poly(k.map(function(a){ return [a[0],a[1],z1]; }), c.t);
+  }
+  function wheel(cx,cy,co,si,u,v,z,r){
+    var c=P(cx+u*co-v*si, cy+u*si+v*co, z), f=P(cx+(u+1)*co-v*si, cy+(u+1)*si+v*co, z);
+    ctx.save(); ctx.transform(f[0]-c[0], f[1]-c[1], 0, -S, c[0], c[1]);
+    ctx.fillStyle='#121417'; ctx.beginPath(); ctx.arc(0,0,r,0,Math.PI*2); ctx.fill();
+    ctx.fillStyle='#A3ABB4'; ctx.beginPath(); ctx.arc(0,0,r*.5,0,Math.PI*2); ctx.fill();
+    ctx.restore();
+  }
+  function car(q, d, M){
+    var a=at(d-.4), b=at(d+.4), ang=Math.atan2(b[1]-a[1], b[0]-a[0]), co=Math.cos(ang), si=Math.sin(ang);   // turns smoothly through the corners
+    obox(q[0],q[1],co,si,PALLET[0],PALLET[1],PALLET[2],PALLET[3],.3,.4,PART);
+    if(d < STOP[0]-.5 || d > STOP[7]) return;   // empty pallet
+    var out = d > STOP[7]-.6 ? (STOP[7]-d)/.6 : 1;   // last station: the finished car is taken off the line
+    ctx.globalAlpha = Math.max(0, out);
+    var stage=-1, drop=1; for(var s=0;s<7;s++){ if(d >= STOP[s]-.5){ stage=s; drop=Math.min(1,(d-(STOP[s]-.5))/.5); } }
+    var Z=.4, vis=co-si>0?1:-1, list=[];   // vis: which side of the car faces the viewer
+    M.parts.forEach(function(pt){ if(pt[0]>stage) return;
+      var lift = pt[0]===stage ? (1-drop)*(1-drop)*.6 : 0, uc=(pt[1]+pt[2])/2, vc=(pt[3]+pt[4])/2;
+      list.push({k: uc*(co+si)+vc*(co-si) + (pt[5]+pt[6])/2, pt:pt, lift:lift}); });
+    list.sort(function(x,y){ return x.k-y.k; });
+    list.forEach(function(o){ var pt=o.pt; obox(q[0],q[1],co,si,pt[1],pt[2],pt[3],pt[4],Z+pt[5]+o.lift,Z+pt[6]+o.lift,pt[7]); });
+    var wl = stage===0 ? (1-drop)*(1-drop)*.6 : 0;   // wheels come with the chassis
+    wheel(q[0],q[1],co,si, M.wu, vis*.27, Z+M.r+wl, M.r); wheel(q[0],q[1],co,si, -M.wu, vis*.27, Z+M.r+wl, M.r);
+    ctx.globalAlpha = 1;
+  }
   function draw(t){
     ctx.clearRect(0,0,W,H);
     // floor grid
@@ -1016,8 +1076,7 @@ document.addEventListener('click', function(e){
       ctx.beginPath(); ctx.arc(up[0],up[1],Math.max(2.2,S*.09),0,Math.PI*2); ctx.fill(); ctx.shadowBlur=0;
     }}); });
     var speed = reduce?0:0.0011;
-    for(var p=0;p<NP;p++){ (function(p){ var q=at(p*(L/NP)+t*speed); objs.push({z:q[0]+q[1]+0.01, f:function(){
-      ctx.shadowColor='rgba(232,119,34,.8)'; ctx.shadowBlur=8; box(q[0]-.22,q[1]-.22,.44,.44,.72,PART); ctx.shadowBlur=0; }}); })(p); }
+    for(var p=0;p<NP;p++){ (function(p){ var d=(((p*(L/NP)+t*speed)%L)+L)%L, q=at(d); objs.push({z:q[0]+q[1]+0.01, f:function(){ car(q, d, p%2?SUV:SPEEDSTER); }}); })(p); }
     objs.sort(function(a,b){return a.z-b.z;}); objs.forEach(function(o){o.f();});
     // labels
     if(!reduce){
