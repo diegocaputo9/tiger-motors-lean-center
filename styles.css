@@ -1381,7 +1381,9 @@ html[data-mode="light"] .pdef.lit{background:rgba(232,119,34,.14);color:#0C1B2E}
 /* Lean House tour: outlined arrow keys showing the tour can be driven from the keyboard (keyboard and mouse devices only) */
 .tour-keys{display:none}
 @media (hover:hover) and (pointer:fine){
-  .tour-keys{display:flex;align-items:center;gap:8px;margin-top:16px;font:500 12px var(--f-mono);letter-spacing:.08em;color:#DCE5EF}
+  .tour-keys{display:flex;align-items:center;gap:8px;position:absolute;left:50%;top:calc(100% + 12px);transform:translateX(-50%);white-space:nowrap;padding:7px 16px 7px 8px;border-radius:999px;background:rgba(11,25,43,.96);border:1px solid rgba(255,255,255,.18);box-shadow:0 16px 36px -16px rgba(0,0,0,.7);font:500 12px var(--f-mono);letter-spacing:.08em;color:#DCE5EF;transition:opacity .6s ease,transform .6s ease}
+  .tour-card.keys-up .tour-keys{top:auto;bottom:calc(100% + 12px)}
+  .tour-card.keys-gone .tour-keys{opacity:0;transform:translateX(-50%) translateY(6px);pointer-events:none}
   .tour-keys .tk{width:30px;height:28px;display:grid;place-items:center;border:1.5px solid rgba(201,214,228,.55);border-bottom-width:3px;border-radius:7px;color:#E9EEF4;animation:tkPress 2.4s ease-in-out infinite}
   .tour-keys .tk-r{animation-delay:1.2s}
   .tour-keys .tk-t{margin-left:6px}

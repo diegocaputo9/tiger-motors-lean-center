@@ -33,7 +33,7 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="styles.css?v=a6ce3f0a">
+<link rel="stylesheet" href="styles.css?v=10b8d869">
 
 <script src="i18n-dict.js?v=34d62658" defer></script>
 <script src="i18n.js?v=3a5d34c9" defer></script>
@@ -387,7 +387,7 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
         <g id="kbn-sm10" class="kb-sm"><rect x="499" y="388" width="26" height="11" rx="2"/><text x="512" y="396.5" text-anchor="middle">SUPERMKT</text></g>
         <g id="kbn-sm6" class="kb-sm"><rect x="579" y="388" width="26" height="11" rx="2"/><text x="592" y="396.5" text-anchor="middle">SUPERMKT</text></g>
         <g class="kb-sm smed-tag" data-def="smed"><rect x="558" y="336" width="26" height="11" rx="2"/><text x="571" y="344.5" text-anchor="middle">SMED</text></g>
-        <g class="kb-lab kb-sup"><text x="862" y="203">Tier 1 Raw</text><text x="862" y="217">Material Supplier</text></g>
+        <g class="kb-lab kb-sup" text-anchor="middle"><text x="932" y="196">Tier 1 Raw</text><text x="932" y="212">Material Supplier</text></g>
         <g class="kb-fg"><rect x="258" y="306" width="30" height="24" rx="3"/><text x="273" y="321" text-anchor="middle">FG</text><text x="273" y="344" class="kb-lab" text-anchor="middle">Finished goods</text></g>
         <!-- information flow: kanban layer (shown in the Information flow view) -->
         <g class="kb" id="kb">
@@ -742,7 +742,7 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
       <a href="#lab">Explore the Lab</a><a href="#lean-house">Lean House</a><a href="modules">Modules</a><a href="#project">About</a><a href="testimonials">Testimonials</a><a href="#contact">Contact</a>
     </div>
   </div>
-  <div class="wrap"><p class="site-rev">Last updated November 3, 2026 · Revision 120</p></div>
+  <div class="wrap"><p class="site-rev">Last updated November 3, 2026 · Revision 121</p></div>
 </footer>
 
 <dialog class="bdlg" id="bioDlg" aria-labelledby="bdlg-h">
@@ -1225,7 +1225,7 @@ if('IntersectionObserver' in window && !reduce){
     {k:'The goal · The roof', t:'Customer Satisfaction', sel:'cs', tg:[Z('cs')], p:'The roof is the reason the house exists. People, standards, pillars and improvement are all there to deliver value to the customer.'},
     {k:'You are ready', t:'Now explore the house', tg:['.house-wrap'], p:'Foundation, floor, pillars, improvement, then the roof. Select any element to open its materials, and follow the modules 1 to 5 in order.', last:true, next:'Finish'}
   ];
-  var layer,spot,card,idx=0,openT=false,opener=null,timer=0,els={};
+  var layer,spot,card,idx=0,openT=false,opener=null,timer=0,els={},moves=0;
   var HELLO=STEPS[0], WELCOME={k:'Welcome', t:'Your account is ready', p:'Take the one-minute tour of the Lean House to see how the learning path works: where to start, where the materials are, and how to move from module to module. Already know your way around? Skip it.', first:true, next:'Take the tour', exit:'I know my way around'};
 
   function build(){
@@ -1272,6 +1272,7 @@ if('IntersectionObserver' in window && !reduce){
     }
     if(first){ card.classList.add('jump'); }
     card.style.transform='translate('+Math.round(cx)+'px,'+Math.round(cy)+'px)';
+    card.classList.toggle('keys-up', cy+ch+70 > vh);   // the arrow-key hint sits under the card, or above it when the card is low
     if(first){ void card.offsetWidth; card.classList.remove('jump'); }
     spot.classList.toggle('click',!!s.click);
   }
@@ -1289,7 +1290,8 @@ if('IntersectionObserver' in window && !reduce){
     clearTimeout(timer);
     timer=setTimeout(function(){ place(first); els.next.focus({preventScroll:true}); }, s.sel?90:20);
   }
-  function go(i){ idx=Math.max(0,Math.min(STEPS.length-1,i)); render(false); }
+  // the arrow-key hint fades away once the learner has moved a couple of times (buttons or keys)
+  function go(i){ idx=Math.max(0,Math.min(STEPS.length-1,i)); if(++moves>=2) card.classList.add('keys-gone'); render(false); }
   function next(){ if(STEPS[idx].last) close(); else go(idx+1); }
   function back(){ go(idx-1); }
   function onKey(e){
@@ -1307,10 +1309,10 @@ if('IntersectionObserver' in window && !reduce){
   var rzT=0;
   function onResize(){ if(!openT) return; clearTimeout(rzT); rzT=setTimeout(function(){place(false);},120); }
   function open(welcome){
-    if(openT) return; openT=true; opener=document.activeElement; idx=0;
+    if(openT) return; openT=true; opener=document.activeElement; idx=0; moves=0;
     STEPS[0] = welcome===true ? WELCOME : HELLO;
     if(!layer) build();
-    layer.style.display=''; spot.style.display=''; card.style.display='';
+    layer.style.display=''; spot.style.display=''; card.style.display=''; card.classList.remove('keys-gone');
     var house=document.getElementById('lean-house'); if(house) house.scrollIntoView({block:'start',behavior:'auto'});
     var p=document.querySelector(Z('people')); if(p) p.dispatchEvent(new MouseEvent('click',{bubbles:true}));
     spot.style.transition='none'; render(true);
