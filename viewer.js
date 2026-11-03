@@ -43,16 +43,17 @@ function build(){
   dlg.innerHTML =
     '<div class="vw-bar"><div class="vw-t"><span class="vw-k"></span><b id="vw-h"></b></div>' +
     '<a class="vw-out" target="_blank" rel="noopener"><span></span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a>' +
-    '<a class="vw-hint" target="_blank" rel="noopener" hidden>Want the full 360° experience? Open it on YouTube to look around and choose what you see.</a>' +
+    '<div class="vw-hint" hidden><a class="vw-hint-a" target="_blank" rel="noopener">Want the full 360° experience? Open it on YouTube to look around and choose what you see, and change the quality to 4K.</a><button type="button" class="vw-hint-x" aria-label="Close"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>' +
     '<button type="button" class="vw-x" aria-label="Close"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>' +
     '<div class="vw-body"><div class="vw-load" aria-hidden="true"><i></i></div></div>';
   document.body.appendChild(dlg);
-  els.k = dlg.querySelector('.vw-k'); els.h = dlg.querySelector('#vw-h'); els.out = dlg.querySelector('.vw-out'); els.body = dlg.querySelector('.vw-body'); els.hint = dlg.querySelector('.vw-hint');
+  els.k = dlg.querySelector('.vw-k'); els.h = dlg.querySelector('#vw-h'); els.out = dlg.querySelector('.vw-out'); els.body = dlg.querySelector('.vw-body'); els.hint = dlg.querySelector('.vw-hint'); els.hintA = dlg.querySelector('.vw-hint-a');
   dlg.querySelector('.vw-x').addEventListener('click', close);
   dlg.addEventListener('click', function(e){ if(e.target === dlg) close(); });
   dlg.addEventListener('close', function(){ if(frame){ frame.remove(); frame = null; } document.documentElement.classList.remove('vw-open'); });
   els.out.addEventListener('click', function(){ close(); });
-  els.hint.addEventListener('click', function(){ close(); });
+  els.hintA.addEventListener('click', function(){ close(); });
+  dlg.querySelector('.vw-hint-x').addEventListener('click', function(){ els.hint.hidden = true; });
 }
 
 function open(a, p){
@@ -62,7 +63,7 @@ function open(a, p){
   els.k.textContent = KIND[p.kind];
   els.h.textContent = titleOf(a);
   els.out.href = a.href; els.out.querySelector('span').textContent = p.open;
-  els.hint.href = a.href; els.hint.hidden = !p.v360; dlg.classList.toggle('vw-360', !!p.v360);
+  els.hintA.href = a.href; els.hint.hidden = !p.v360; dlg.classList.toggle('vw-360', !!p.v360);
   if(frame) frame.remove();
   frame = document.createElement('iframe');
   frame.title = titleOf(a);
@@ -104,9 +105,11 @@ css.textContent =
   '.vw-out{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:999px;border:1px solid rgba(201,214,228,.45);color:#EAF0F7;text-decoration:none;font:600 13px "IBM Plex Sans",system-ui,sans-serif;white-space:nowrap}' +
   '.vw-out:hover,.vw-out:focus-visible{border-color:#FF9B4D;color:#FF9B4D}' +
   '.vw-bar{position:relative}' +
-  '.vw-hint{position:absolute;top:calc(100% + 10px);right:62px;z-index:3;max-width:300px;padding:11px 14px;border-radius:12px;background:rgba(255,255,255,.96);color:#0C1B2E;font:500 13px/1.45 "IBM Plex Sans",system-ui,sans-serif;text-decoration:none;box-shadow:0 14px 34px -12px rgba(0,0,0,.6);opacity:0;transform:translateY(-4px);animation:vwHint .6s ease .9s forwards}' +
+  '.vw-hint{position:absolute;top:calc(100% + 10px);right:62px;z-index:3;max-width:320px;padding:11px 38px 11px 14px;border-radius:12px;background:rgba(255,255,255,.96);color:#0C1B2E;font:500 13px/1.45 "IBM Plex Sans",system-ui,sans-serif;text-decoration:none;box-shadow:0 14px 34px -12px rgba(0,0,0,.6);opacity:0;transform:translateY(-4px);animation:vwHint .6s ease .9s forwards}' +
   '.vw-hint::before{content:"";position:absolute;top:-6px;right:52px;width:12px;height:12px;background:inherit;transform:rotate(45deg);border-radius:2px}' +
-  '.vw-hint:hover{background:#fff;text-decoration:underline}' +
+  '.vw-hint-a{color:inherit;text-decoration:none}.vw-hint-a:hover,.vw-hint-a:focus-visible{text-decoration:underline}' +
+  '.vw-hint-x{position:absolute;top:6px;right:6px;width:26px;height:26px;border-radius:50%;border:0;background:transparent;color:#26313F;display:grid;place-items:center;cursor:pointer}' +
+  '.vw-hint-x:hover,.vw-hint-x:focus-visible{background:rgba(12,27,46,.08)}' +
   '@keyframes vwHint{to{opacity:1;transform:none}}' +
   '.vw-x{flex:none;width:42px;height:42px;border-radius:50%;border:1px solid rgba(201,214,228,.45);background:transparent;color:#EAF0F7;display:grid;place-items:center;cursor:pointer}' +
   '.vw-x:hover,.vw-x:focus-visible{border-color:#FF9B4D;color:#FF9B4D}' +

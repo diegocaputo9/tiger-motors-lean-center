@@ -3160,9 +3160,9 @@ window.TM_I18N = {
 "In neuem Tab öffnen",
 "Apri in una nuova scheda"
 ],
-"Want the full 360° experience? Open it on YouTube to look around and choose what you see.": [
-"¿Quieres la experiencia 360° completa? Ábrelo en YouTube para mirar a tu alrededor y elegir lo que ves.",
-"Sie möchten das volle 360°-Erlebnis? Öffnen Sie es auf YouTube, um sich umzusehen und selbst zu wählen, was Sie sehen.",
-"Vuoi l’esperienza 360° completa? Aprilo su YouTube per guardarti intorno e scegliere cosa vedere."
+"Want the full 360° experience? Open it on YouTube to look around and choose what you see, and change the quality to 4K.": [
+"¿Quieres la experiencia 360° completa? Ábrelo en YouTube para mirar a tu alrededor y elegir lo que ves, y cambia la calidad a 4K.",
+"Sie möchten das volle 360°-Erlebnis? Öffnen Sie es auf YouTube, um sich umzusehen und selbst zu wählen, was Sie sehen, und stellen Sie die Qualität auf 4K.",
+"Vuoi l’esperienza 360° completa? Aprilo su YouTube per guardarti intorno e scegliere cosa vedere, e imposta la qualità su 4K."
 ]
 };
