@@ -160,14 +160,17 @@ function paintNav(){
     '<button type="button" role="menuitem" data-acct="signout">Sign out</button></div>';
 }
 
-// how much material the course holds: lectures average about 35 minutes and 3DVista lab activities about 30
-var MINUTES = { lecture: 35, lab: 30 };
+// how much material the course holds, from average lengths: lecture 35 min, 3DVista lab activity 30, podcast 60, reading 15, 360° video 5.
+// Hidden for now at the owner's request: set SHOW_SIZE to true to show it in the free-account banner again.
+var SHOW_SIZE = false;
+var MINUTES = { lecture: 35, lab: 30, podcast: 60, reading: 15, video360: 5 };
 function contentHTML(){
+  if(!SHOW_SIZE) return '';
   var c = {}, min = 0;
   Object.keys(TM.BYK || {}).forEach(function(k){ (TM.BYK[k].items || []).forEach(function(it){ if(!it.url) return; c[it.type] = (c[it.type] || 0) + 1; min += MINUTES[it.type] || 0; }); });
   var n = function(v, one, many){ return v ? v + ' ' + (v === 1 ? one : many) : ''; };
   var parts = [n(c.lecture, 'lecture', 'lectures'), n(c.lab, 'lab activity', 'lab activities'), n(c.reading, 'reading', 'readings'), n(c.podcast, 'podcast', 'podcasts'), n(c.video360, '360° video', '360° videos')].filter(Boolean);
-  return '<p class="ab-stats"><b>About ' + Math.round(min / 60) + ' hours of lectures and lab activities</b><span>' + parts.map(function(t){ return '<i>' + t + '</i>'; }).join('') + '</span></p>';
+  return '<p class="ab-stats"><b>About ' + Math.round(min / 60) + ' hours of learning material</b><span>' + parts.map(function(t){ return '<i>' + t + '</i>'; }).join('') + '</span></p>';
 }
 var FEEDBACK = '<button type="button" class="ab-link" data-feedback="course">Share feedback on the course</button>';
 function bannerHTML(){

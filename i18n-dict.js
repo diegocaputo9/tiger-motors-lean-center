@@ -3165,10 +3165,10 @@ window.TM_I18N = {
 "Sie möchten das volle 360°-Erlebnis? Öffnen Sie es auf YouTube, um sich umzusehen und selbst zu wählen, was Sie sehen, und stellen Sie die Qualität auf 4K.",
 "Vuoi l’esperienza 360° completa? Aprilo su YouTube per guardarti intorno e scegliere cosa vedere, e imposta la qualità su 4K."
 ],
-"re:^About (\\d+) hours of lectures and lab activities$": [
-"Unas $1 horas de clases y actividades de laboratorio",
-"Etwa $1 Stunden Vorlesungen und Laborübungen",
-"Circa $1 ore di lezioni e attività di laboratorio"
+"re:^About (\\d+) hours of learning material$": [
+"Unas $1 horas de material de aprendizaje",
+"Etwa $1 Stunden Lernmaterial",
+"Circa $1 ore di materiale didattico"
 ],
 "Share feedback on the course": [
 "Comparte tu opinión sobre el curso",
