@@ -1397,7 +1397,7 @@ html[data-mode="light"] .grant figcaption{background:rgba(7,18,31,.92);color:#E9
 
 /* 12px minimum in the floor plan: small tags grow together with their boxes; the drawing keeps its desktop size and scrolls sideways on smaller screens */
 .plan-svg .kb-sm,.plan-svg .kb-n{transform-box:fill-box;transform-origin:center}
-.plan-svg .kb-sm{transform:scale(2.1)}
+.plan-svg .kb-sm{transform:scale(1.6)}   /* SMED and SUPERMKT tags: smaller by choice so they do not cover the stations */
 .plan-svg .mc-st text,.plan-svg .we-sub{font-family:var(--f-body);letter-spacing:0}
 .plan-svg .kb-n{transform:scale(1.45)}
 @media (max-width:1240px){.plan-svg{min-width:1100px}}

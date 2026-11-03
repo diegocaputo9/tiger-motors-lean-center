@@ -3159,5 +3159,10 @@ window.TM_I18N = {
 "Abrir en una pestaña nueva",
 "In neuem Tab öffnen",
 "Apri in una nuova scheda"
+],
+"Want the full 360° experience? Open it on YouTube to look around and choose what you see.": [
+"¿Quieres la experiencia 360° completa? Ábrelo en YouTube para mirar a tu alrededor y elegir lo que ves.",
+"Sie möchten das volle 360°-Erlebnis? Öffnen Sie es auf YouTube, um sich umzusehen und selbst zu wählen, was Sie sehen.",
+"Vuoi l’esperienza 360° completa? Aprilo su YouTube per guardarti intorno e scegliere cosa vedere."
 ]
 };
