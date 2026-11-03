@@ -32,12 +32,12 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="styles.css?v=9e015501">
-<style>.back-link{display:inline-flex;align-items:center;gap:8px;font:600 12px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:#5A2603;text-decoration:none;margin-bottom:6px}.back-link:hover{color:var(--ink)}main>.sec:first-child{padding-top:calc(var(--nav-h) + 44px)}</style>
+<link rel="stylesheet" href="styles.css?v=a6ce3f0a">
+<style>.back-link{display:inline-flex;align-items:center;gap:8px;font:600 12px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:#9A460C;text-decoration:none;margin-bottom:6px}.back-link:hover{color:var(--ink)}main>.sec:first-child{padding-top:calc(var(--nav-h) + 44px)}</style>
 <script src="i18n-dict.js?v=34d62658" defer></script>
-<script src="i18n.js?v=9012fe60" defer></script>
-<script src="feedback.js?v=1e628075" defer></script>
-<script src="viewer.js?v=6cb00f4d" defer></script>
+<script src="i18n.js?v=3a5d34c9" defer></script>
+<script src="feedback.js?v=638a2a2d" defer></script>
+<script src="viewer.js?v=45364b2c" defer></script>
 </head>
 <body>
 <script>try{var m=localStorage.getItem('tm-mode');if(m==='light')document.documentElement.setAttribute('data-mode','light');}catch(e){}</script>
@@ -141,7 +141,7 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
       <a href="/#lab">Explore the Lab</a><a href="/#lean-house">Lean House</a><a href="modules">Modules</a><a href="/#project">About</a><a href="testimonials">Testimonials</a><a href="/#contact">Contact</a>
     </div>
   </div>
-  <div class="wrap"><p class="site-rev">Last updated November 2, 2026 · Revision 119</p></div>
+  <div class="wrap"><p class="site-rev">Last updated November 3, 2026 · Revision 120</p></div>
 </footer>
 <div class="toast" id="toast" role="status"><i></i><span>Opening 360° experience</span></div>
 <script src="modules-data.js?v=a0518003"></script>
@@ -159,7 +159,7 @@ function card(it, total){
   var top = '<div class="rc-top"><span class="badge t-'+it.type+'">'+icon(it.type)+esc(t.label)+'</span>'+
             (it.step?'<span class="rc-step">'+String(it.step).padStart(2,'0')+' / '+String(total).padStart(2,'0')+'</span>':'<span class="verb">'+VERBS[it.verb].t+'</span>')+'</div>';
   var mid = '<div><h4>'+esc(it.title)+'</h4><p>'+esc(it.src)+'</p></div>';
-  if(!it.url) return '<article class="rc none" data-type="'+it.type+'">'+top+mid+'<span class="placeholder" style="justify-self:start;font-size:11px;color:var(--ink-3)">'+esc(it.pending)+'</span></article>';
+  if(!it.url) return '<article class="rc none" data-type="'+it.type+'">'+top+mid+'<span class="placeholder" style="justify-self:start;font-size:12px;color:var(--ink-3)">'+esc(it.pending)+'</span></article>';
   return '<article class="rc" data-type="'+it.type+'" data-item="'+esc(it.id)+'">'+top+mid+
          '<a class="rc-act'+(isLaunch(it.type)?' launch':'')+'" data-item="'+esc(it.id)+'" '+ext(it.url)+' aria-label="'+esc(t.act+': '+it.title)+'">'+esc(t.act)+icon('out')+'</a></article>';
 }
@@ -184,7 +184,7 @@ function jidokaLoop(){
     '<circle id="jdot" r="6" fill="#FF9B4D"/>'+
     '<g transform="translate(130 130)"><rect x="-22" y="-40" width="44" height="80" rx="10" fill="rgba(7,18,31,.8)" stroke="rgba(160,185,212,.4)"/>'+
     '<circle id="jl-g" cy="-20" r="9" fill="#3FB68B"/><circle id="jl-a" cy="0" r="9" fill="rgba(242,178,51,.18)"/><circle id="jl-r" cy="20" r="9" fill="rgba(229,72,77,.18)"/></g>'+
-    pos.map(function(p,i){return '<circle cx="'+p[0]+'" cy="'+p[1]+'" r="11" fill="#0C2340" stroke="rgba(160,185,212,.55)" class="jn" data-i="'+i+'"/><text x="'+p[0]+'" y="'+(p[1]+4)+'" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="#E9EEF4">'+(i+1)+'</text>';}).join('')+
+    pos.map(function(p,i){return '<circle cx="'+p[0]+'" cy="'+p[1]+'" r="13" fill="#0C2340" stroke="rgba(160,185,212,.55)" class="jn" data-i="'+i+'"/><text x="'+p[0]+'" y="'+(p[1]+4.5)+'" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12.5" fill="#E9EEF4">'+(i+1)+'</text>';}).join('')+
     '</svg>';
   return '<div class="jloop">'+svg+'<div><h5>How Jidoka connects to the system</h5><p>An interactive view of the relationship between the production system, abnormality detection, response and quality. Watch the andon signal as the loop runs.</p>'+
     '<ol class="jl-steps">'+nodes.map(function(n,i){return '<li data-i="'+i+'">'+(i+1)+' · '+n+'</li>';}).join('')+'</ol></div></div>';
@@ -213,7 +213,7 @@ lib.innerHTML = LIB_ORDER.map(function(k){
   var counts = {}; m.items.forEach(function(it){var l=TYPES[it.type].label; counts[l]=(counts[l]||0)+1;});
   return '<div class="mod" id="mod-'+k+'" data-k="'+k+'"><div class="mod-side"><span class="mod-num">'+(m.n?'MODULE '+(+m.n):'SYSTEM LEVEL')+'</span><h3>'+esc(m.name)+'</h3><p>'+esc(m.role)+'</p>'+
     '<div class="counts">'+Object.keys(counts).map(function(l){return '<span>'+counts[l]+' × '+esc(l)+'</span>';}).join('')+'</div>'+
-    '<button class="linkline" style="background:none;border:0;padding:0;cursor:pointer;justify-self:start;color:#5A2603" data-house="'+k+'">View in Lean House →</button></div>'+
+    '<button class="linkline" style="background:none;border:0;padding:0;cursor:pointer;justify-self:start;color:#9A460C" data-house="'+k+'">View in Lean House →</button></div>'+
     '<div class="mod-main">'+vis+'<div class="cards">'+cards.join('')+'</div></div></div>';
 }).join('');
 

@@ -12,7 +12,7 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="styles.css?v=9e015501">
+<link rel="stylesheet" href="styles.css?v=a6ce3f0a">
 <style>
 body{background:#EDF0F3;color:#0C1B2E}
 .ad-top{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid #E2E7EC}
@@ -25,7 +25,7 @@ body{background:#EDF0F3;color:#0C1B2E}
 .dash h1{font:800 clamp(28px,3.4vw,40px)/1.05 var(--f-display);font-stretch:108%}
 .dash .sub{color:#26313F;font-size:15px}
 .card{background:#fff;border:1px solid #E2E7EC;border-radius:18px;padding:20px 22px}
-.card h2{font:700 13px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:#5A2603;margin-bottom:14px}
+.card h2{font:700 13px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:#9A460C;margin-bottom:14px}
 .kpis{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
 .kpi{background:#fff;border:1px solid #E2E7EC;border-radius:16px;padding:16px 18px;display:grid;gap:4px}
 .kpi b{font:800 30px/1 var(--f-display);color:#0C1B2E}
@@ -111,7 +111,7 @@ td.p i em{display:block;height:100%;background:#E87722}
     var tops=top.length?top.map(function(i){ return '<div class="bar"><span title="'+esc(titles[i]||i)+'" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(titles[i]||i)+'</span><i><em style="width:'+cnt[i]/tmx*100+'%"></em></i><b>'+cnt[i]+'</b></div>'; }).join(''):'<p class="muted">No activity yet.</p>';
     var ping=meta&&meta.last_ping?new Date(meta.last_ping):null, pingAge=ping?Math.round((Date.now()-ping)/864e5*10)/10:null;
     app.innerHTML='<div class="dash">'+
-      '<div><h1>Learner dashboard</h1><p class="sub">Free accounts, progress through the Lean House ('+REQ.length+' required resources) and certificates. Signed in as '+esc(A.state.user.email)+' · <button class="ab-link" style="color:#5A2603" type="button" data-acct="signout">Sign out</button></p></div>'+
+      '<div><h1>Learner dashboard</h1><p class="sub">Free accounts, progress through the Lean House ('+REQ.length+' required resources) and certificates. Signed in as '+esc(A.state.user.email)+' · <button class="ab-link" style="color:#9A460C" type="button" data-acct="signout">Sign out</button></p></div>'+
       '<div class="kpis">'+
         k(n,'Accounts created','Submitted the sign-up form')+k(conf,'Confirmed emails','Clicked their magic link')+k(started,'Started learning','Opened at least one resource')+
         k(avg+'%','Average progress','Across all accounts')+k(certs,'Certificates issued','Completed every resource')+k(opt,'Want certification news','Opted in to updates')+k(active,'Signed in last 7 days','New sign-in links used')+

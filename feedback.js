@@ -84,6 +84,6 @@ css.textContent =
   'html[data-mode="light"] .fbk-dlg{background:#fff;color:#0C1B2E;border-color:rgba(12,35,64,.14)}' +
   'html[data-mode="light"] .fbk-sub,html[data-mode="light"] .fbk-l small{color:#26313F}' +
   'html[data-mode="light"] .fbk-l textarea,html[data-mode="light"] .fbk-l input{background:#F4F6F9;border-color:rgba(12,35,64,.18)}' +
-  'html[data-mode="light"] .fbk-open{color:#0C1B2E;border-color:rgba(12,35,64,.22)}html[data-mode="light"] .fbk-kicker{color:#5A2603}html[data-mode="light"] .fbk-err{color:#B42318}';
+  'html[data-mode="light"] .fbk-open{color:#0C1B2E;border-color:rgba(12,35,64,.22)}html[data-mode="light"] .fbk-kicker{color:#B65410}html[data-mode="light"] .fbk-err{color:#B42318}';
 document.head.appendChild(css);
 })();
