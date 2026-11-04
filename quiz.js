@@ -43,7 +43,7 @@ function status(k){
 function cardHTML(k, mini){
   var s = status(k), title = 'Module ' + (+s.m.n) + ' quiz', line, act, cls;
   if(!s.open){
-    cls = 'q-lock'; line = 'Complete all ' + s.of + ' resources to unlock';
+    cls = 'q-lock'; line = s.of === 2 ? 'Complete both resources to unlock' : 'Complete all ' + s.of + ' resources to unlock';
     act = mini ? '<span class="q-count">' + LOCK + '<b>' + s.n + '/' + s.of + '</b></span>'
                : '<span class="rc-act q-act" aria-disabled="true"><span>Locked</span>' + LOCK + '</span>';
   } else {

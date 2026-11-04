@@ -3839,5 +3839,245 @@ window.TM_I18N = {
 "La idea de las “buenas ovejas” del profesor es que es natural que las personas se desvíen de un estándar, así que nunca es culpa de ellas. Sostener las 5S requiere un liderazgo que trate cada desviación, incluso un bote de basura fuera de su cuadro, como una oportunidad de enseñar. Unos dos meses de liderazgo intenso después de la implementación suelen hacer que el sistema funcione solo. Sin eso, el sistema se desmorona y es muy difícil reiniciarlo.",
 "Die Idee der „guten Schafe“ des Dozenten besagt, dass es natürlich ist, wenn Menschen vom Standard abdriften, und es deshalb nie die Schuld der Menschen ist. Um 5S aufrechtzuerhalten, braucht es eine Führung, die jede Abweichung, selbst einen Mülleimer außerhalb seiner Markierung, als Lerngelegenheit nutzt. Etwa zwei Monate intensive Führung nach der Einführung sorgen meist dafür, dass das System von selbst läuft. Ohne sie zerfällt das System und lässt sich nur sehr schwer neu starten.",
 "L’idea delle “brave pecore” del docente è che per le persone è naturale allontanarsi da uno standard, quindi non è mai colpa loro. Sostenere le 5S richiede una leadership che tratti ogni deviazione, anche un cestino fuori dal suo riquadro, come un’occasione per insegnare. Circa due mesi di leadership intensa dopo l’implementazione di solito fanno sì che il sistema vada avanti da solo. Senza, il sistema crolla ed è molto difficile farlo ripartire."
+],
+"Detection → Procedural → Mistake proofing → Error proofing": [
+"Detección → Procedimental → Mistake proofing → Error proofing",
+"Erkennung → Prozedural → Mistake Proofing → Error Proofing",
+"Rilevamento → Procedurale → Mistake proofing → Error proofing"
+],
+"Error proofing → Mistake proofing → Detection → Procedural": [
+"Error proofing → Mistake proofing → Detección → Procedimental",
+"Error Proofing → Mistake Proofing → Erkennung → Prozedural",
+"Error proofing → Mistake proofing → Rilevamento → Procedurale"
+],
+"Mistake proofing → Error proofing → Procedural → Detection": [
+"Mistake proofing → Error proofing → Procedimental → Detección",
+"Mistake Proofing → Error Proofing → Prozedural → Erkennung",
+"Mistake proofing → Error proofing → Procedurale → Rilevamento"
+],
+"Procedural → Detection → Error proofing → Mistake proofing": [
+"Procedimental → Detección → Error proofing → Mistake proofing",
+"Prozedural → Erkennung → Error Proofing → Mistake Proofing",
+"Procedurale → Rilevamento → Error proofing → Mistake proofing"
+],
+"Error proofing": [
+"Error proofing",
+"Error Proofing",
+"Error proofing"
+],
+"Detection": [
+"Detección",
+"Erkennung",
+"Rilevamento"
+],
+"Procedural": [
+"Procedimental",
+"Prozedural",
+"Procedurale"
+],
+"Warning": [
+"Advertencia",
+"Warnung",
+"Avviso"
+],
+"Operational": [
+"Operativo",
+"Operativ",
+"Operativo"
+],
+"Control": [
+"Control",
+"Kontrolle",
+"Controllo"
+],
+"Mistake proofing: warning": [
+"Mistake proofing: advertencia",
+"Mistake Proofing: Warnung",
+"Mistake proofing: avviso"
+],
+"Mistake proofing: control": [
+"Mistake proofing: control",
+"Mistake Proofing: Kontrolle",
+"Mistake proofing: controllo"
+],
+"Error proofing through product design": [
+"Error proofing mediante el diseño del producto",
+"Error Proofing durch Produktdesign",
+"Error proofing tramite la progettazione del prodotto"
+],
+"What is the difference between error proofing and mistake proofing?": [
+"¿Cuál es la diferencia entre el error proofing y el mistake proofing?",
+"Was ist der Unterschied zwischen Error Proofing und Mistake Proofing?",
+"Qual è la differenza tra error proofing e mistake proofing?"
+],
+"They mean the same thing": [
+"Significan lo mismo",
+"Sie bedeuten dasselbe",
+"Significano la stessa cosa"
+],
+"Error proofing makes the defect impossible to make; mistake proofing lets the defect happen but exposes it in the station": [
+"El error proofing hace imposible cometer el defecto; el mistake proofing deja que el defecto ocurra, pero lo pone en evidencia en la estación",
+"Error Proofing macht den Fehler unmöglich; Mistake Proofing lässt den Fehler zu, macht ihn aber an der Station sichtbar",
+"L’error proofing rende impossibile commettere il difetto; il mistake proofing lascia che il difetto si verifichi, ma lo rende evidente nella stazione"
+],
+"Error proofing uses inspectors; mistake proofing uses machines": [
+"El error proofing usa inspectores; el mistake proofing usa máquinas",
+"Error Proofing setzt Prüfer ein; Mistake Proofing setzt Maschinen ein",
+"L’error proofing usa ispettori; il mistake proofing usa macchine"
+],
+"Mistake proofing makes the defect impossible; error proofing only warns the operator": [
+"El mistake proofing hace imposible el defecto; el error proofing solo advierte al operador",
+"Mistake Proofing macht den Fehler unmöglich; Error Proofing warnt den Bediener nur",
+"Il mistake proofing rende impossibile il difetto; l’error proofing avvisa solo l’operatore"
+],
+"Error proofing redesigns the product or process so the failure can never happen again. Mistake proofing doesn’t stop the defect from being made, but it makes the defect obvious in the station where it happened, so it isn’t passed forward. Both count as jidoka. Error proofing is the higher level.": [
+"El error proofing rediseña el producto o el proceso para que la falla no pueda volver a ocurrir. El mistake proofing no impide que se produzca el defecto, pero lo hace evidente en la estación donde ocurrió, para que no pase adelante. Ambos cuentan como jidoka. El error proofing es el nivel más alto.",
+"Error Proofing gestaltet das Produkt oder den Prozess so um, dass der Fehler nie wieder auftreten kann. Mistake Proofing verhindert nicht, dass der Fehler entsteht, macht ihn aber an der Station sichtbar, an der er passiert ist, sodass er nicht weitergegeben wird. Beides zählt als Jidoka. Error Proofing ist die höhere Stufe.",
+"L’error proofing riprogetta il prodotto o il processo in modo che il guasto non possa più ripetersi. Il mistake proofing non impedisce che il difetto venga prodotto, ma lo rende evidente nella stazione in cui si è verificato, così non passa avanti. Entrambi rientrano nel jidoka. L’error proofing è il livello più alto."
+],
+"The lecturer’s plant manager, Bob Bowers, would ask, “Why did the defect occur?” The only answer he accepted was: “Because ________.”": [
+"Bob Bowers, el gerente de planta del profesor, solía preguntar: “¿Por qué ocurrió el defecto?”. La única respuesta que aceptaba era: “Porque ________”.",
+"Bob Bowers, der Werksleiter des Dozenten, fragte immer: „Warum ist der Fehler aufgetreten?“ Die einzige Antwort, die er akzeptierte, war: „Weil ________.“",
+"Bob Bowers, il direttore di stabilimento del docente, chiedeva: “Perché si è verificato il difetto?” L’unica risposta che accettava era: “Perché ________.”"
+],
+"The operator wasn’t careful": [
+"El operador no tuvo cuidado",
+"Der Bediener nicht aufgepasst hat",
+"L’operatore non è stato attento"
+],
+"It can": [
+"Puede ocurrir",
+"Er auftreten kann",
+"Può succedere"
+],
+"The work instruction was unclear": [
+"La instrucción de trabajo no era clara",
+"Die Arbeitsanweisung unklar war",
+"L’istruzione di lavoro non era chiara"
+],
+"The machine was old": [
+"La máquina era vieja",
+"Die Maschine alt war",
+"La macchina era vecchia"
+],
+"If a defect is possible, it will eventually happen. The answer isn’t to tell operators to “be careful.” It’s to change the product or process so the defect can’t happen, or so it shows itself right away. As the lecture puts it, you wouldn’t run a surgery on “please be careful.”": [
+"Si un defecto es posible, tarde o temprano ocurrirá. La solución no es decirles a los operadores que “tengan cuidado”. Es cambiar el producto o el proceso para que el defecto no pueda ocurrir, o para que se haga visible de inmediato. Como dice la clase, nadie haría una cirugía confiando en un “por favor, tenga cuidado”.",
+"Wenn ein Fehler möglich ist, wird er irgendwann auftreten. Die Lösung ist nicht, den Bedienern zu sagen, sie sollen „vorsichtig sein“, sondern das Produkt oder den Prozess so zu ändern, dass der Fehler nicht auftreten kann oder sich sofort zeigt. Wie es in der Vorlesung heißt: Eine Operation würde man auch nicht auf „bitte seien Sie vorsichtig“ aufbauen.",
+"Se un difetto è possibile, prima o poi si verificherà. La soluzione non è dire agli operatori di “fare attenzione”. È cambiare il prodotto o il processo in modo che il difetto non possa verificarsi, o che si manifesti subito. Come dice la lezione, nessuno farebbe un intervento chirurgico affidandosi a un “per favore, fai attenzione”."
+],
+"Which list puts quality control methods in order from most to least effective?": [
+"¿Qué lista ordena los métodos de control de calidad del más al menos eficaz?",
+"Welche Liste ordnet die Methoden der Qualitätskontrolle von der wirksamsten zur am wenigsten wirksamen?",
+"Quale elenco ordina i metodi di controllo qualità dal più al meno efficace?"
+],
+"Error proofing and mistake proofing are jidoka: quality is controlled in the station.": [
+"El error proofing y el mistake proofing son jidoka: la calidad se controla en la estación.",
+"Error Proofing und Mistake Proofing sind Jidoka: Die Qualität wird an der Station kontrolliert.",
+"Error proofing e mistake proofing sono jidoka: la qualità è controllata nella stazione."
+],
+"Detection, such as inspection (manual or automatic), happens after the failure, so many defective units may already be in the system.": [
+"La detección, como la inspección (manual o automática), ocurre después de la falla, así que puede haber ya muchas unidades defectuosas en el sistema.",
+"Erkennung, etwa durch Prüfung (manuell oder automatisch), erfolgt erst nach dem Fehler, sodass sich bereits viele fehlerhafte Einheiten im System befinden können.",
+"Il rilevamento, come l’ispezione (manuale o automatica), avviene dopo il guasto, quindi molte unità difettose potrebbero essere già nel sistema."
+],
+"Procedural control (standard work instructions) is the weakest, though it’s still necessary for a consistent process.": [
+"El control procedimental (instrucciones de trabajo estándar) es el más débil, aunque sigue siendo necesario para un proceso consistente.",
+"Die prozedurale Kontrolle (Standard-Arbeitsanweisungen) ist die schwächste, für einen einheitlichen Prozess aber trotzdem notwendig.",
+"Il controllo procedurale (istruzioni di lavoro standard) è il più debole, anche se resta necessario per un processo coerente."
+],
+"On a Continental Motors engine, the oil sump could be installed backwards. Engineering added a pin that physically blocks it from going on the wrong way. What kind of control is this?": [
+"En un motor de Continental Motors, el cárter de aceite podía instalarse al revés. Ingeniería añadió un perno que impide físicamente montarlo en la posición incorrecta. ¿Qué tipo de control es este?",
+"Bei einem Motor von Continental Motors konnte die Ölwanne verkehrt herum montiert werden. Die Konstruktion fügte einen Stift hinzu, der die falsche Montage physisch verhindert. Welche Art von Kontrolle ist das?",
+"Su un motore Continental Motors, la coppa dell’olio poteva essere montata al contrario. L’ingegneria aggiunse un perno che impedisce fisicamente di montarla nel verso sbagliato. Che tipo di controllo è questo?"
+],
+"The pin makes it impossible to install the sump backwards, so the defect can never happen again. That’s error proofing, done by changing the product’s design. The lecture’s bearing example is error proofing too, but there the process was changed (a plate on the chute) and the part wasn’t.": [
+"El perno hace imposible instalar el cárter al revés, así que el defecto nunca puede volver a ocurrir. Eso es error proofing, logrado cambiando el diseño del producto. El ejemplo del rodamiento en la clase también es error proofing, pero ahí se cambió el proceso (una placa en la rampa) y no la pieza.",
+"Der Stift macht es unmöglich, die Ölwanne verkehrt herum zu montieren, sodass der Fehler nie wieder auftreten kann. Das ist Error Proofing durch eine Änderung des Produktdesigns. Das Lager-Beispiel aus der Vorlesung ist ebenfalls Error Proofing, dort wurde aber der Prozess geändert (eine Platte an der Rutsche) und nicht das Teil.",
+"Il perno rende impossibile montare la coppa al contrario, quindi il difetto non può più verificarsi. È error proofing, ottenuto cambiando la progettazione del prodotto. Anche l’esempio del cuscinetto nella lezione è error proofing, ma lì è stato modificato il processo (una piastra sullo scivolo) e non il pezzo."
+],
+"Sakichi Toyoda’s 1926 automatic loom shut itself down the moment a thread broke. This is an example of mistake proofing at the ________ level.": [
+"El telar automático de Sakichi Toyoda de 1926 se detenía solo en el momento en que se rompía un hilo. Es un ejemplo de mistake proofing de nivel ________.",
+"Sakichi Toyodas automatischer Webstuhl von 1926 schaltete sich ab, sobald ein Faden riss. Das ist ein Beispiel für Mistake Proofing auf der Stufe ________.",
+"Il telaio automatico di Sakichi Toyoda del 1926 si fermava da solo nel momento in cui un filo si rompeva. È un esempio di mistake proofing di livello ________."
+],
+"Control-level mistake proofing automatically stops the operation when a defect happens. The defect is still made, but it’s caught and fixed in the station instead of passed forward. The lecturer says this idea has been in Toyota’s “DNA” since the family made fabric, not cars.": [
+"El mistake proofing de nivel de control detiene automáticamente la operación cuando ocurre un defecto. El defecto se produce igual, pero se detecta y se corrige en la estación en lugar de pasar adelante. El profesor dice que esta idea está en el “ADN” de Toyota desde que la familia fabricaba telas, no autos.",
+"Mistake Proofing auf der Kontrollstufe stoppt den Arbeitsgang automatisch, wenn ein Fehler auftritt. Der Fehler entsteht zwar, wird aber an der Station erkannt und behoben, statt weitergegeben zu werden. Laut dem Dozenten steckt diese Idee in der „DNA“ von Toyota, seit die Familie Stoffe herstellte und keine Autos.",
+"Il mistake proofing di livello controllo ferma automaticamente l’operazione quando si verifica un difetto. Il difetto viene comunque prodotto, ma è individuato e corretto nella stazione invece di passare avanti. Il docente dice che questa idea è nel “DNA” di Toyota da quando la famiglia produceva tessuti, non auto."
+],
+"A torque tool reports each reading to a screen, and the screen turns red if the torque is out of spec. The operator could still ignore it and pass the part forward. What kind of control is this?": [
+"Una herramienta de torque envía cada lectura a una pantalla, y la pantalla se pone roja si el torque está fuera de especificación. Aun así, el operador podría ignorarla y pasar la pieza adelante. ¿Qué tipo de control es este?",
+"Ein Drehmomentwerkzeug meldet jeden Messwert an einen Bildschirm, der rot wird, wenn das Drehmoment außerhalb der Spezifikation liegt. Der Bediener könnte das trotzdem ignorieren und das Teil weitergeben. Welche Art von Kontrolle ist das?",
+"Un avvitatore dinamometrico invia ogni lettura a uno schermo, che diventa rosso se la coppia è fuori specifica. L’operatore potrebbe comunque ignorarlo e far passare avanti il pezzo. Che tipo di controllo è questo?"
+],
+"The red screen clearly alerts the operator, but nothing stops the part from moving on, so it’s a warning. To make it a control, the fixture would keep the part locked in place until it read the correct torque.": [
+"La pantalla roja alerta claramente al operador, pero nada impide que la pieza siga adelante, así que es una advertencia. Para que fuera un control, el dispositivo tendría que mantener la pieza bloqueada hasta registrar el torque correcto.",
+"Der rote Bildschirm warnt den Bediener deutlich, aber nichts hindert das Teil am Weiterlaufen, also ist es eine Warnung. Damit es eine Kontrolle wird, müsste die Vorrichtung das Teil festhalten, bis das richtige Drehmoment gemessen wird.",
+"Lo schermo rosso avvisa chiaramente l’operatore, ma niente impedisce al pezzo di andare avanti, quindi è un avviso. Per renderlo un controllo, l’attrezzatura dovrebbe tenere il pezzo bloccato finché non rileva la coppia corretta."
+],
+"When a vehicle enters a station, lights show the operator exactly which bins to pick from, because some parts look alike but differ by engine size or options. What kind of mistake proofing is this?": [
+"Cuando un vehículo entra en una estación, unas luces le indican al operador exactamente de qué contenedores tomar las piezas, porque algunas se parecen pero varían según el tamaño del motor o las opciones. ¿Qué tipo de mistake proofing es este?",
+"Wenn ein Fahrzeug in eine Station einfährt, zeigen Leuchten dem Bediener genau, aus welchen Behältern er entnehmen muss, weil manche Teile ähnlich aussehen, sich aber je nach Motorgröße oder Ausstattung unterscheiden. Welche Art von Mistake Proofing ist das?",
+"Quando un veicolo entra in una stazione, delle luci indicano all’operatore esattamente da quali contenitori prelevare, perché alcuni pezzi si somigliano ma cambiano in base alla cilindrata o agli optional. Che tipo di mistake proofing è questo?"
+],
+"Operational mistake proofing helps the operator do the job right, here by taking the “which part?” decision away from them. The lecturer stresses that people will always make mistakes, so engineers and managers must design processes that don’t depend on the operator choosing correctly.": [
+"El mistake proofing operativo ayuda al operador a hacer bien el trabajo, en este caso quitándole la decisión de “¿qué pieza?”. El profesor insiste en que las personas siempre cometerán errores, así que los ingenieros y gerentes deben diseñar procesos que no dependan de que el operador elija bien.",
+"Operatives Mistake Proofing hilft dem Bediener, die Arbeit richtig zu machen, hier, indem es ihm die Entscheidung „Welches Teil?“ abnimmt. Der Dozent betont, dass Menschen immer Fehler machen werden. Deshalb müssen Ingenieure und Führungskräfte Prozesse gestalten, die nicht davon abhängen, dass der Bediener richtig wählt.",
+"Il mistake proofing operativo aiuta l’operatore a fare bene il lavoro, qui togliendogli la decisione “quale pezzo?”. Il docente sottolinea che le persone sbaglieranno sempre, quindi ingegneri e manager devono progettare processi che non dipendano dalla scelta corretta dell’operatore."
+],
+"A light beam that detects a missing oil pan at the station where the engine is joined to the body, and then shuts down the line, is an example of jidoka.": [
+"Un haz de luz que detecta la falta del cárter de aceite en la estación donde el motor se une a la carrocería, y que luego detiene la línea, es un ejemplo de jidoka.",
+"Eine Lichtschranke, die an der Station, an der Motor und Karosserie verbunden werden, eine fehlende Ölwanne erkennt und dann die Linie stoppt, ist ein Beispiel für Jidoka.",
+"Una fotocellula che rileva la mancanza della coppa dell’olio nella stazione in cui il motore viene unito alla scocca, e poi ferma la linea, è un esempio di jidoka."
+],
+"This is automated detection, not jidoka, because the oil pan was left off in an earlier zone and the defect traveled downstream before it was caught. It does protect the customer, but other defective units may already be in the system. The goal is to control the defect back at the station where the part is installed.": [
+"Esto es detección automatizada, no jidoka, porque el cárter se omitió en una zona anterior y el defecto avanzó por la línea antes de detectarse. Sí protege al cliente, pero puede haber otras unidades defectuosas en el sistema. El objetivo es controlar el defecto en la estación donde se instala la pieza.",
+"Das ist automatisierte Erkennung, kein Jidoka, denn die Ölwanne wurde in einer früheren Zone vergessen, und der Fehler ist weitergewandert, bevor er erkannt wurde. Das schützt zwar den Kunden, aber es können sich bereits weitere fehlerhafte Einheiten im System befinden. Ziel ist es, den Fehler an der Station zu kontrollieren, an der das Teil montiert wird.",
+"Questo è rilevamento automatico, non jidoka, perché la coppa dell’olio è stata dimenticata in una zona precedente e il difetto è andato avanti prima di essere individuato. Protegge il cliente, ma altre unità difettose potrebbero essere già nel sistema. L’obiettivo è controllare il difetto nella stazione in cui il pezzo viene montato."
+],
+"Visual inspection by people is a reliable form of quality control, because the human mind is very good at making sense of what it sees.": [
+"La inspección visual hecha por personas es una forma confiable de control de calidad, porque la mente humana es muy buena para darle sentido a lo que ve.",
+"Die Sichtprüfung durch Menschen ist eine zuverlässige Form der Qualitätskontrolle, weil der menschliche Verstand sehr gut darin ist, dem Gesehenen einen Sinn zu geben.",
+"L’ispezione visiva da parte delle persone è una forma affidabile di controllo qualità, perché la mente umana è molto brava a dare un senso a ciò che vede."
+],
+"The scrambled-words paragraph shows that the brain sees what it expects to see. That’s useful in everyday life but bad for inspection, because people overlook defects. The lecturer calls inspection a weak form of control and uses the Boeing door incident as an example of relying on people for something too critical.": [
+"El párrafo con las palabras desordenadas muestra que el cerebro ve lo que espera ver. Eso es útil en la vida diaria pero malo para inspeccionar, porque las personas pasan por alto los defectos. El profesor considera la inspección una forma débil de control y usa el incidente de la puerta de Boeing como ejemplo de depender de las personas para algo demasiado crítico.",
+"Der Absatz mit den vertauschten Buchstaben zeigt, dass das Gehirn sieht, was es zu sehen erwartet. Im Alltag ist das nützlich, bei der Prüfung aber schlecht, weil Menschen Fehler übersehen. Der Dozent nennt die Prüfung eine schwache Form der Kontrolle und führt den Boeing-Türvorfall als Beispiel dafür an, sich bei etwas zu Kritischem auf Menschen zu verlassen.",
+"Il paragrafo con le parole scombinate mostra che il cervello vede ciò che si aspetta di vedere. È utile nella vita di tutti i giorni ma dannoso per l’ispezione, perché le persone non notano i difetti. Il docente definisce l’ispezione una forma debole di controllo e cita l’incidente della porta del Boeing come esempio di affidarsi alle persone per qualcosa di troppo critico."
+],
+"When does an organization have the best opportunity to error proof a product or process?": [
+"¿Cuándo tiene una organización la mejor oportunidad de aplicar error proofing a un producto o proceso?",
+"Wann hat ein Unternehmen die beste Gelegenheit, ein Produkt oder einen Prozess per Error Proofing abzusichern?",
+"Quando un’organizzazione ha la migliore occasione per applicare l’error proofing a un prodotto o a un processo?"
+],
+"After customers start reporting defects": [
+"Cuando los clientes empiezan a reportar defectos",
+"Wenn Kunden anfangen, Fehler zu melden",
+"Quando i clienti iniziano a segnalare difetti"
+],
+"During the earliest stages of development, before production, mainly through engineering": [
+"En las primeras etapas del desarrollo, antes de la producción, sobre todo a través de ingeniería",
+"In den frühesten Phasen der Entwicklung, vor der Produktion, vor allem durch die Konstruktion",
+"Nelle prime fasi dello sviluppo, prima della produzione, soprattutto tramite l’ingegneria"
+],
+"Once the product is in full production, through manufacturing fixes": [
+"Cuando el producto ya está en plena producción, mediante soluciones de manufactura",
+"Wenn das Produkt in voller Serienproduktion ist, durch Korrekturen in der Fertigung",
+"Quando il prodotto è in piena produzione, tramite correzioni in produzione"
+],
+"At final inspection": [
+"En la inspección final",
+"Bei der Endprüfung",
+"All’ispezione finale"
+],
+"Engineering has the most power to design defects out before launch. Once a product is in production, changes get much harder, and teams have to rely on manufacturing fixes. That’s why companies use tools like DFMEA and PFMEA, with risk priority numbers, to decide where to focus before production starts.": [
+"Ingeniería tiene el mayor poder para eliminar los defectos desde el diseño antes del lanzamiento. Una vez que el producto está en producción, los cambios se vuelven mucho más difíciles y los equipos tienen que depender de soluciones de manufactura. Por eso las empresas usan herramientas como DFMEA y PFMEA, con números de prioridad de riesgo, para decidir dónde enfocarse antes de iniciar la producción.",
+"Die Konstruktion hat den größten Einfluss darauf, Fehler schon vor dem Serienstart herauszukonstruieren. Ist ein Produkt erst in der Produktion, werden Änderungen viel schwieriger, und die Teams müssen sich auf Korrekturen in der Fertigung verlassen. Deshalb nutzen Unternehmen Werkzeuge wie DFMEA und PFMEA mit Risikoprioritätszahlen, um vor Produktionsbeginn zu entscheiden, worauf sie sich konzentrieren.",
+"L’ingegneria ha il potere maggiore di eliminare i difetti in fase di progettazione, prima del lancio. Una volta che il prodotto è in produzione, le modifiche diventano molto più difficili e i team devono affidarsi a correzioni in produzione. Per questo le aziende usano strumenti come DFMEA e PFMEA, con gli indici di priorità del rischio, per decidere dove concentrarsi prima dell’avvio della produzione."
+],
+"Complete both resources to unlock": [
+"Completa los dos recursos para desbloquearlo",
+"Schließen Sie beide Ressourcen ab, um es freizuschalten",
+"Completa entrambe le risorse per sbloccarlo"
 ]
 };
