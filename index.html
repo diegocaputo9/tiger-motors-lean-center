@@ -33,7 +33,7 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="styles.css?v=b7521f82">
+<link rel="stylesheet" href="styles.css?v=470078d7">
 
 <script src="i18n-dict.js?v=d20b8fa8" defer></script>
 <script src="i18n.js?v=3a5d34c9" defer></script>
@@ -751,7 +751,7 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
       <a href="#lab">Explore the Lab</a><a href="#lean-house">Lean House</a><a href="modules">Modules</a><a href="#project">About</a><a href="testimonials">Testimonials</a><a href="#contact">Contact</a>
     </div>
   </div>
-  <div class="wrap"><p class="site-rev">Last updated November 4, 2026 · Revision 140</p></div>
+  <div class="wrap"><p class="site-rev">Last updated November 4, 2026 · Revision 141</p></div>
 </footer>
 
 <dialog class="bdlg" id="bioDlg" aria-labelledby="bdlg-h">
@@ -1418,73 +1418,6 @@ if('IntersectionObserver' in window && !reduce){
       setTimeout(function(){ open(true); }, 1200);
     });
   })();
-})();
-
-/* ---- nav: liquid glass lens on the current tab; it leans toward a hovered tab and springs over on click, stretching on the way ---- */
-(function(){
-  var nav=document.querySelector('.nav-links'); if(!nav||!window.requestAnimationFrame) return;
-  var rm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var tabs=[].slice.call(nav.querySelectorAll(':scope > a, :scope > .nav-dd > a'));
-  var lens=document.createElement('span'); lens.className='nav-glass'; lens.setAttribute('aria-hidden','true'); nav.appendChild(lens); nav.classList.add('has-glass');
-  // refraction map for Chromium's backdrop-filter: red/green push the backdrop outward near the edges, like a thick lens
-  (function(){
-    var c=document.createElement('canvas'), W=160, H=48; c.width=W; c.height=H; var g=c.getContext('2d'), im=g.createImageData(W,H), r=H/2;
-    for(var y=0;y<H;y++) for(var x=0;x<W;x++){
-      var dx=x<r?x-r:x>W-r?x-(W-r):0, dy=y-r, d=Math.sqrt(dx*dx+dy*dy)/r, f=d>1?0:Math.pow(d,3), i=(y*W+x)*4;
-      im.data[i]=128-(d?dx/(d*r):0)*f*127; im.data[i+1]=128-(d?dy/(d*r):0)*f*127; im.data[i+2]=128; im.data[i+3]=255;
-    }
-    g.putImageData(im,0,0);
-    var svg='<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="navLens" filterUnits="userSpaceOnUse" primitiveUnits="userSpaceOnUse" x="0" y="0" width="100" height="40" color-interpolation-filters="sRGB"><feImage href="'+c.toDataURL()+'" x="0" y="0" width="100" height="40" preserveAspectRatio="none" result="m"/><feDisplacementMap in="SourceGraphic" in2="m" scale="14" xChannelSelector="R" yChannelSelector="G"/></filter></svg>';
-    document.body.insertAdjacentHTML('beforeend',svg);
-  })();
-  var L=0,R=0,vL=0,vR=0,tL=0,tR=0,run=false,last=0,shown=false,fl=null,fi=null,fw=0;
-  function box(a){ var n=nav.getBoundingClientRect(), b=a.getBoundingClientRect(); return [b.left-n.left, b.right-n.left]; }
-  function current(){ for(var i=0;i<tabs.length;i++) if(tabs[i].classList.contains('active')) return tabs[i]; return null; }
-  function paint(){
-    var v=(vL+vR)/2, squash=Math.min(.16,Math.abs(v)/5000);
-    var w=Math.max(1,R-L); lens.style.width=w+'px';
-    // the refraction map has to cover exactly the lens, in pixels
-    if(!fl){ fl=document.getElementById('navLens'); fi=fl&&fl.querySelector('feImage'); }
-    if(fl&&Math.abs(w-fw)>.5){ fw=w; var h=lens.offsetHeight||36; [fl,fi].forEach(function(n){ n.setAttribute('width',w.toFixed(1)); n.setAttribute('height',h); }); }
-    lens.style.transform='translateX('+L+'px) scaleY('+(1-squash).toFixed(3)+')';
-  }
-  function frame(t){
-    var dt=Math.min(1/30,(t-(last||t))/1000)||1/60; last=t;
-    var dir=Math.sign((tL+tR)-(L+R));
-    // the edge in front moves on a stiffer spring than the one behind, which stretches the lens while it travels
-    function step(x,v,tg,lead){ var k=lead?520:210, c=lead?34:23; v+=(k*(tg-x)-c*v)*dt; return [x+v*dt,v]; }
-    var a=step(L,vL,tL,dir<0), b=step(R,vR,tR,dir>0); L=a[0]; vL=a[1]; R=b[0]; vR=b[1];
-    paint();
-    if(Math.abs(tL-L)+Math.abs(tR-R)+Math.abs(vL)+Math.abs(vR)>.4){ requestAnimationFrame(frame); } else { L=tL; R=tR; vL=vR=0; paint(); run=false; }
-  }
-  function go(a){
-    if(!a){ lens.classList.remove('on'); shown=false; return; }
-    var p=box(a); tL=p[0]; tR=p[1];
-    if(!shown||rm){ L=tL; R=tR; vL=vR=0; paint(); lens.classList.add('on'); shown=true; return; }
-    if(!run){ run=true; last=0; requestAnimationFrame(frame); }
-  }
-  // hovering another tab only leans the lens a little toward it; a click moves it there
-  var sel=null;
-  function home(){ return sel||current(); }
-  function lean(a){
-    var h=home(); if(!h||!shown){ go(a); return; }
-    var p=box(h); tL=p[0]; tR=p[1];
-    if(a!==h){ var q=box(a), pull=Math.min(16,Math.max(8,(q[1]-q[0])*.22)); if(q[0]>p[0]) tR+=pull; else tL-=pull; }
-    if(rm){ L=tL; R=tR; paint(); return; }
-    if(!run){ run=true; last=0; requestAnimationFrame(frame); }
-  }
-  tabs.forEach(function(a){
-    a.addEventListener('mouseenter',function(){ lean(a); });
-    a.addEventListener('focus',function(){ lean(a); });
-    a.addEventListener('click',function(){ sel=a; go(a); });
-  });
-  nav.addEventListener('mouseleave',function(){ sel=null; go(current()); });
-  nav.addEventListener('pointerdown',function(){ lens.classList.add('press'); });
-  window.addEventListener('pointerup',function(){ lens.classList.remove('press'); });
-  // follow the scroll-spy when the current section changes
-  new MutationObserver(function(){ if(!nav.matches(':hover')) go(current()); }).observe(nav,{subtree:true,attributes:true,attributeFilter:['class']});
-  window.addEventListener('resize',function(){ var c=current(); if(c){ var p=box(c); L=tL=p[0]; R=tR=p[1]; paint(); } });
-  setTimeout(function(){ go(current()); },300);
 })();
 
 /* ---- lab video: muted 30s loop, loaded only when scrolled into view ---- */

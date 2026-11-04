@@ -1527,20 +1527,5 @@ html[data-mode="light"] .cta-note{color:#8A3E0A}
 .mh-z.on>*{fill:#E87722;stroke:#9A460C}
 .mh span{font:500 12px/1.35 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
 @media (min-width:481px){.cta-stack{position:relative}.cta-note{position:absolute;left:0;right:0;top:calc(100% + 9px);justify-content:center;text-align:left;padding-left:0}.hero-cta{padding-bottom:42px;row-gap:56px}}
-
-/* nav: liquid glass lens over the tabs (index.html script); Chromium adds real refraction through #navLens, other browsers keep the frosted glass */
-.nav-links.has-glass{position:relative}
-.nav-links.has-glass>a.active,.nav-links.has-glass>.nav-dd>a.active{background:transparent}
-/* the lens marks the current page, so the orange dot is hidden while the glass is on (removing the lens brings the dot back) */
-.nav-links.has-glass>a.active::after,.nav-links.has-glass>.nav-dd>a.active::after{display:none}
-.nav-glass{position:absolute;left:0;top:5px;bottom:5px;width:0;border-radius:999px;pointer-events:none;z-index:2;opacity:0;transform-origin:center;transition:opacity .25s,scale .35s cubic-bezier(.3,1.6,.5,1);
-  background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,.05) 55%,rgba(255,255,255,.1));
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 -1px 0 rgba(255,255,255,.18),inset 0 0 0 1px rgba(255,255,255,.14),0 6px 18px -8px rgba(0,0,0,.6);
-  -webkit-backdrop-filter:blur(1.5px) saturate(1.7) brightness(1.12);backdrop-filter:blur(1.5px) saturate(1.7) brightness(1.12);
-  backdrop-filter:url(#navLens) saturate(1.7) brightness(1.12)}
-.nav-glass.on{opacity:1}
-.nav-glass.press{scale:1.08}
-html[data-mode="light"] .nav-glass{background:linear-gradient(180deg,rgba(255,255,255,.45),rgba(255,255,255,.12) 55%,rgba(255,255,255,.3));box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(12,35,64,.1),0 6px 16px -8px rgba(12,35,64,.35)}
-@media (prefers-reduced-motion:reduce){.nav-glass{transition:opacity .2s}}
 .taa-track img{flex:none;width:64px;height:80px;border-radius:9px;object-fit:cover;background:#16365A}
 @media (max-width:640px){.taa-track img{width:52px;height:66px}}
