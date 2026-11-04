@@ -182,3 +182,4 @@ html[data-mode="light"] .ta-c.blank .bar{background:#E2E7EC}
 html[data-mode="light"] .prof{box-shadow:0 40px 80px -30px rgba(12,35,64,.45)}
 html[data-mode="light"] .prof::backdrop{background:rgba(12,27,46,.45)}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.ta-c{transition:none}}
+.drop.bad{border-color:var(--err)}

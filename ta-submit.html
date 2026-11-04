@@ -26,8 +26,8 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..500;1,9..144,400&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="ta-pages.css?v=64396ff2">
-<script src="i18n-dict.js?v=3efc4689" defer></script>
+<link rel="stylesheet" href="ta-pages.css?v=49f315c3">
+<script src="i18n-dict.js?v=8d064632" defer></script>
 <script src="i18n.js?v=3a5d34c9" defer></script>
 <script src="feedback.js?v=812720da" defer></script>
 </head>
@@ -76,9 +76,9 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
     </fieldset>
 
     <fieldset class="fs">
-      <legend><span class="n">3</span><b>Photos</b><small>Optional</small></legend>
-      <p class="hint">A headshot gives you a face on the page. Photos of you in the Lego lab, with your projects, or at work (if it is related to Lean or manufacturing) help tell your story.</p>
-      <div class="fl">Headshot <em>No headshot handy? Leave this empty and we can use your LinkedIn profile photo.</em>
+      <legend><span class="n">3</span><b>Photos</b></legend>
+      <p class="hint">Your headshot gives you a face on the page. Other photos of you in the Lego lab, with your projects, or at work (if it is related to Lean or manufacturing) help tell your story.</p>
+      <div class="fl">Headshot <span class="req">*</span>
         <label class="drop" id="dropHead"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0116 0"/></svg><span><b>Choose a headshot</b> or drop it here</span><input type="file" id="headIn" accept="image/*,.heic,.heif" aria-label="Choose a headshot"></label>
         <div class="thumbs" id="headThumbs"></div>
       </div>
@@ -112,7 +112,7 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
     <a href="/">tigermotorslean.com</a>
     <button type="button" class="fbk-open" data-feedback>We want to hear your feedback</button>
   </div>
-  <div class="wrap"><p class="site-rev">Last updated November 4, 2026 · Revision 135</p></div>
+  <div class="wrap"><p class="site-rev">Last updated November 4, 2026 · Revision 136</p></div>
 </footer>
 <script>
 (function(){
@@ -145,7 +145,7 @@ function isImg(f){ return /^image\//.test(f.type) || /\.(heic|heif)$/i.test(f.na
 function add(files, multi){
   err.textContent = '';
   files = [].filter.call(files, isImg);
-  if(!multi){ head = files.slice(0, 1); }
+  if(!multi){ head = files.slice(0, 1); document.getElementById('dropHead').classList.remove('bad'); }
   else { var room = MAX_PICS - pics.length; if(files.length > room) err.textContent = T('You can add up to 8 photos.'); pics = pics.concat(files.slice(0, room)); }
   render();
 }
@@ -169,7 +169,7 @@ function shrink(f, max){
   }).catch(function(){ return f; }); // a format the browser cannot open (HEIC in Chrome) is sent as it is
 }
 
-/* required fields: name, email, years, LinkedIn and permission */
+/* required fields: name, email, years, LinkedIn, headshot and permission */
 function bad(el, msg){ el.classList.add('bad'); el.focus && el.focus(); err.textContent = T(msg); return false; }
 function check(){
   [].forEach.call(form.querySelectorAll('.bad'), function(e){ e.classList.remove('bad'); });
@@ -179,6 +179,7 @@ function check(){
   if(!/^[^@\s<>,;]+@[^@\s<>,;]+\.[a-z]{2,}$/i.test(f.email.value.trim())) return bad(f.email, 'Please enter a valid email address.');
   if(!f.years.value.trim()) return bad(f.years, 'Please tell us when you were a TA.');
   if(!/^(https?:\/\/)?([a-z0-9-]+\.)*linkedin\.com\/\S+$/i.test(f.linkedin.value.trim())) return bad(f.linkedin, 'Please paste the link to your LinkedIn profile.');
+  if(!head.length){ var d = document.getElementById('dropHead'); d.classList.add('bad'); d.scrollIntoView({ block: 'center' }); err.textContent = T('Please add a headshot.'); return false; }
   if(!f.consent.checked){ document.getElementById('consentRow').classList.add('bad'); f.consent.focus(); err.textContent = T('Please confirm that we may feature your information on the website.'); return false; }
   return true;
 }

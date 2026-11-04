@@ -4875,10 +4875,10 @@ window.TM_I18N = {
 "Portfolio, Instagram, eine Projektseite, einer pro Zeile",
 "Portfolio, Instagram, una pagina di progetto, uno per riga"
 ],
-"A headshot gives you a face on the page. Photos of you in the Lego lab, with your projects, or at work (if it is related to Lean or manufacturing) help tell your story.": [
-"Una foto de perfil te da un rostro en la página. Las fotos tuyas en el laboratorio de Lego, con tus proyectos o en tu trabajo (si está relacionado con Lean o la manufactura) ayudan a contar tu historia.",
-"Ein Porträtfoto gibt dir ein Gesicht auf der Seite. Fotos von dir im Lego-Labor, mit deinen Projekten oder bei der Arbeit (wenn sie mit Lean oder Fertigung zu tun hat) helfen, deine Geschichte zu erzählen.",
-"Una foto ritratto ti dà un volto sulla pagina. Le foto di te nel laboratorio Lego, con i tuoi progetti o al lavoro (se legato al Lean o alla produzione) aiutano a raccontare la tua storia."
+"Your headshot gives you a face on the page. Other photos of you in the Lego lab, with your projects, or at work (if it is related to Lean or manufacturing) help tell your story.": [
+"Tu foto de perfil te da un rostro en la página. Otras fotos tuyas en el laboratorio de Lego, con tus proyectos o en tu trabajo (si está relacionado con Lean o la manufactura) ayudan a contar tu historia.",
+"Dein Porträtfoto gibt dir ein Gesicht auf der Seite. Weitere Fotos von dir im Lego-Labor, mit deinen Projekten oder bei der Arbeit (wenn sie mit Lean oder Fertigung zu tun hat) helfen, deine Geschichte zu erzählen.",
+"La tua foto ritratto ti dà un volto sulla pagina. Altre foto di te nel laboratorio Lego, con i tuoi progetti o al lavoro (se legato al Lean o alla produzione) aiutano a raccontare la tua storia."
 ],
 "Headshot": [
 "Foto de perfil",
@@ -5050,14 +5050,14 @@ window.TM_I18N = {
 "Warst du TA? <a href=\"ta-submit\">Lass dich auf der Website vorstellen</a>",
 "Sei stato TA? <a href=\"ta-submit\">Fatti conoscere sul sito</a>"
 ],
-"No headshot handy? Leave this empty and we can use your LinkedIn profile photo.": [
-"¿No tienes una foto de perfil a mano? Déjalo vacío y podemos usar tu foto de LinkedIn.",
-"Kein Porträtfoto zur Hand? Lass das Feld leer, dann können wir dein LinkedIn-Profilbild verwenden.",
-"Non hai una foto ritratto a portata di mano? Lascia vuoto e possiamo usare la tua foto profilo di LinkedIn."
-],
 "Auburn Engineering news": [
 "Noticias de Auburn Engineering",
 "Auburn Engineering News",
 "Notizie di Auburn Engineering"
+],
+"Please add a headshot.": [
+"Añade una foto de perfil.",
+"Bitte füge ein Porträtfoto hinzu.",
+"Aggiungi una foto ritratto."
 ]
 };

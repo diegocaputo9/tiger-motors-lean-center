@@ -44,6 +44,7 @@ Deno.serve(async (req) => {
 
   const files: { file: File; kind: string }[] = [];
   for (const [k, val] of fd.entries()) if ((k === "headshot" || k === "photos") && val instanceof File && val.size > 0) files.push({ file: val, kind: k });
+  if (!files.some((f) => f.kind === "headshot")) return fail("Please add a headshot.");
   if (files.length > MAX_PHOTOS) return fail("Please send at most " + MAX_PHOTOS + " photos.");
   let total = 0;
   for (const f of files) {
