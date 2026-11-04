@@ -4369,5 +4369,295 @@ window.TM_I18N = {
 "los supermercados mantienen el pull donde aún no es posible el flujo de una pieza, y la mejora continua los reduce con el tiempo",
 "Supermärkte halten den Pull dort aufrecht, wo One-Piece-Flow noch nicht möglich ist, und kontinuierliche Verbesserung verkleinert sie mit der Zeit",
 "i supermarket mantengono il pull dove il one-piece flow non è ancora possibile, e il miglioramento continuo li riduce nel tempo"
+],
+"The name “TIM WOOD” is a memory aid for the seven wastes. Which list matches it?": [
+"El nombre “TIM WOOD” es una regla mnemotécnica en inglés para los siete desperdicios. ¿Qué lista le corresponde?",
+"Der Name „TIM WOOD“ ist eine englische Eselsbrücke für die sieben Verschwendungsarten. Welche Liste passt dazu?",
+"Il nome “TIM WOOD” è un promemoria in inglese per i sette sprechi. Quale elenco gli corrisponde?"
+],
+"Time, Inventory, Material, Waiting, Output, Overtime, Delays": [
+"Tiempo, Inventario, Material, Espera, Producción, Horas extra, Retrasos",
+"Zeit, Bestand, Material, Warten, Ausstoß, Überstunden, Verzögerungen",
+"Tempo, Scorte, Materiale, Attesa, Output, Straordinari, Ritardi"
+],
+"Transportation, Inventory, Motion, Waiting, Overproduction, Overprocessing, Defects": [
+"Transporte, Inventario, Movimiento, Espera, Sobreproducción, Sobreprocesamiento, Defectos",
+"Transport, Bestand, Bewegung, Warten, Überproduktion, Überbearbeitung, Fehler",
+"Trasporto, Scorte, Movimento, Attesa, Sovrapproduzione, Sovraelaborazione, Difetti"
+],
+"Transportation, Inspection, Maintenance, Waiting, Overtime, Organization, Downtime": [
+"Transporte, Inspección, Mantenimiento, Espera, Horas extra, Organización, Tiempo muerto",
+"Transport, Prüfung, Instandhaltung, Warten, Überstunden, Organisation, Stillstand",
+"Trasporto, Ispezione, Manutenzione, Attesa, Straordinari, Organizzazione, Fermi macchina"
+],
+"Tools, Inventory, Motion, Workload, Overproduction, Operators, Defects": [
+"Herramientas, Inventario, Movimiento, Carga de trabajo, Sobreproducción, Operadores, Defectos",
+"Werkzeuge, Bestand, Bewegung, Arbeitslast, Überproduktion, Bediener, Fehler",
+"Utensili, Scorte, Movimento, Carico di lavoro, Sovrapproduzione, Operatori, Difetti"
+],
+"Taiichi Ohno created seven “buckets” that every non-value-added activity can be sorted into. None of these activities positively transforms the product, and the customer isn’t willing to pay for them. Once you can name a waste, you can go after it: eliminate it if possible, or minimize it if you can’t.": [
+"Taiichi Ohno creó siete “cubetas” en las que se puede clasificar toda actividad que no agrega valor. Ninguna de esas actividades transforma positivamente el producto, y el cliente no está dispuesto a pagar por ellas. Cuando puedes nombrar un desperdicio, puedes atacarlo: eliminarlo si es posible o minimizarlo si no lo es.",
+"Taiichi Ohno schuf sieben „Schubladen“, in die sich jede nicht wertschöpfende Tätigkeit einordnen lässt. Keine dieser Tätigkeiten verändert das Produkt positiv, und der Kunde ist nicht bereit, dafür zu bezahlen. Sobald man eine Verschwendung benennen kann, kann man sie angehen: beseitigen, wenn möglich, oder minimieren, wenn nicht.",
+"Taiichi Ohno creò sette “contenitori” in cui si può classificare ogni attività che non aggiunge valore. Nessuna di queste attività trasforma positivamente il prodotto, e il cliente non è disposto a pagarle. Quando sai dare un nome a uno spreco, puoi affrontarlo: eliminarlo se possibile, o ridurlo al minimo se non lo è."
+],
+"Continental Motors polished the paint on its engines and re-measured every part it received from suppliers. The customer said they didn’t need either one. Which waste is this?": [
+"Continental Motors pulía la pintura de sus motores y volvía a medir cada pieza que recibía de los proveedores. El cliente dijo que no necesitaba ninguna de las dos cosas. ¿Qué desperdicio es este?",
+"Continental Motors polierte den Lack seiner Motoren und vermaß jedes von Lieferanten erhaltene Teil erneut. Der Kunde sagte, er brauche beides nicht. Welche Verschwendung ist das?",
+"Continental Motors lucidava la vernice dei suoi motori e rimisurava ogni pezzo ricevuto dai fornitori. Il cliente disse che non gli serviva né l’una né l’altra cosa. Di quale spreco si tratta?"
+],
+"Overprocessing": [
+"Sobreprocesamiento",
+"Überbearbeitung",
+"Sovraelaborazione"
+],
+"Defects": [
+"Defectos",
+"Fehler",
+"Difetti"
+],
+"Overprocessing means doing more to a product than the customer needs. Other examples from the lecture:": [
+"El sobreprocesamiento significa hacerle a un producto más de lo que el cliente necesita. Otros ejemplos de la clase:",
+"Überbearbeitung bedeutet, mehr an einem Produkt zu tun, als der Kunde braucht. Weitere Beispiele aus der Vorlesung:",
+"La sovraelaborazione significa fare su un prodotto più di quanto serva al cliente. Altri esempi dalla lezione:"
+],
+"buying equipment that is more precise or faster than necessary": [
+"comprar equipos más precisos o más rápidos de lo necesario",
+"Anlagen kaufen, die präziser oder schneller sind als nötig",
+"acquistare attrezzature più precise o più veloci del necessario"
+],
+"“bulletproofing” a design": [
+"hacer un diseño “a prueba de balas”",
+"ein Design „kugelsicher“ machen",
+"rendere un progetto “a prova di proiettile”"
+],
+"adding features nobody asked for, like seats that heat themselves automatically": [
+"añadir funciones que nadie pidió, como asientos que se calientan solos",
+"Funktionen hinzufügen, nach denen niemand gefragt hat, etwa Sitze, die sich automatisch selbst beheizen",
+"aggiungere funzioni che nessuno ha chiesto, come sedili che si riscaldano da soli"
+],
+"unneeded approval steps": [
+"pasos de aprobación innecesarios",
+"unnötige Freigabeschritte",
+"passaggi di approvazione inutili"
+],
+"quality checks that should be built into the process": [
+"controles de calidad que deberían estar integrados en el proceso",
+"Qualitätsprüfungen, die in den Prozess eingebaut sein sollten",
+"controlli di qualità che dovrebbero essere integrati nel processo"
+],
+"Shigeo Shingo said that the most dangerous kind of waste is the waste we don’t recognize.": [
+"Shigeo Shingo dijo que el tipo de desperdicio más peligroso es el que no reconocemos.",
+"Shigeo Shingo sagte, die gefährlichste Art von Verschwendung sei die, die wir nicht erkennen.",
+"Shigeo Shingo disse che il tipo di spreco più pericoloso è quello che non riconosciamo."
+],
+"You can’t remove a waste you can’t see. That’s why excess inventory is so harmful. In the ship analogy, high inventory is water that hides the “rocks”: long setups, unreliable machines, supplier problems, rejects. The company floats along without seeing them. The rocks have to be removed before the water level (inventory) can safely come down.": [
+"No puedes eliminar un desperdicio que no ves. Por eso el exceso de inventario es tan dañino. En la analogía del barco, un inventario alto es el agua que oculta las “rocas”: cambios largos, máquinas poco confiables, problemas con proveedores, rechazos. La empresa navega sin verlas. Hay que quitar las rocas antes de que el nivel del agua (el inventario) pueda bajar sin peligro.",
+"Eine Verschwendung, die man nicht sieht, kann man nicht beseitigen. Deshalb sind überhöhte Bestände so schädlich. In der Schiffsanalogie ist ein hoher Bestand das Wasser, das die „Felsen“ verdeckt: lange Rüstzeiten, unzuverlässige Maschinen, Lieferantenprobleme, Ausschuss. Das Unternehmen treibt dahin, ohne sie zu sehen. Die Felsen müssen beseitigt werden, bevor der Wasserstand (der Bestand) gefahrlos sinken kann.",
+"Non puoi eliminare uno spreco che non vedi. Ecco perché le scorte in eccesso sono così dannose. Nell’analogia della nave, le scorte elevate sono l’acqua che nasconde gli “scogli”: attrezzaggi lunghi, macchine inaffidabili, problemi con i fornitori, scarti. L’azienda galleggia senza vederli. Gli scogli vanno rimossi prima che il livello dell’acqua (le scorte) possa scendere senza rischi."
+],
+"In the Undercover Boss clips, Waste Management’s CEO works alongside a few employees and fixes their problems. Why does the lecturer call this a poor approach to continuous improvement?": [
+"En los clips de Undercover Boss, el director general de Waste Management trabaja junto a algunos empleados y les resuelve sus problemas. ¿Por qué el profesor dice que es un mal enfoque de mejora continua?",
+"In den Ausschnitten aus Undercover Boss arbeitet der CEO von Waste Management mit einigen Mitarbeitern zusammen und löst ihre Probleme. Warum nennt der Dozent das einen schlechten Ansatz für kontinuierliche Verbesserung?",
+"Negli spezzoni di Undercover Boss, l’amministratore delegato di Waste Management lavora accanto ad alcuni dipendenti e risolve i loro problemi. Perché il docente lo considera un pessimo approccio al miglioramento continuo?"
+],
+"The CEO should have stayed in his office and used data": [
+"El director general debió quedarse en su oficina y usar datos",
+"Der CEO hätte in seinem Büro bleiben und Daten nutzen sollen",
+"L’amministratore delegato sarebbe dovuto restare in ufficio e usare i dati"
+],
+"The company had about 45,000 employees, but only a handful got their problems solved; there was no structured system connecting all workers to problem solving": [
+"La empresa tenía unos 45,000 empleados, pero solo a unos pocos les resolvieron sus problemas; no había un sistema estructurado que conectara a todos los trabajadores con la resolución de problemas",
+"Das Unternehmen hatte rund 45.000 Mitarbeiter, aber nur eine Handvoll bekam ihre Probleme gelöst; es gab kein strukturiertes System, das alle Mitarbeiter in die Problemlösung einbindet",
+"L’azienda aveva circa 45.000 dipendenti, ma solo una manciata ha visto risolti i propri problemi; non c’era un sistema strutturato che collegasse tutti i lavoratori alla soluzione dei problemi"
+],
+"The employees’ problems weren’t real": [
+"Los problemas de los empleados no eran reales",
+"Die Probleme der Mitarbeiter waren nicht echt",
+"I problemi dei dipendenti non erano reali"
+],
+"Continuous improvement should only be done by engineers": [
+"La mejora continua solo deberían hacerla los ingenieros",
+"Kontinuierliche Verbesserung sollte nur von Ingenieuren betrieben werden",
+"Il miglioramento continuo dovrebbero farlo solo gli ingegneri"
+],
+"Nearly every employee the CEO met had problems with their job, which is true in most operations. Fixing a few of them left about 44,995 people’s problems untouched. After he went back to the office, nothing had changed, because there was no standardized system to collect and solve problems from the people doing the work.": [
+"Casi todos los empleados con los que se encontró el director general tenían problemas en su trabajo, como pasa en la mayoría de las operaciones. Resolver unos pocos dejó intactos los problemas de unas 44,995 personas. Cuando volvió a su oficina, nada había cambiado, porque no existía un sistema estandarizado para recoger y resolver los problemas de quienes hacen el trabajo.",
+"Fast jeder Mitarbeiter, den der CEO traf, hatte Probleme bei seiner Arbeit, wie in den meisten Betrieben. Ein paar davon zu lösen, ließ die Probleme von rund 44.995 Menschen unberührt. Als er ins Büro zurückkehrte, hatte sich nichts geändert, weil es kein standardisiertes System gab, um die Probleme der Menschen, die die Arbeit machen, zu sammeln und zu lösen.",
+"Quasi ogni dipendente incontrato dall’amministratore delegato aveva problemi nel proprio lavoro, come accade nella maggior parte delle attività. Risolverne alcuni ha lasciato intatti i problemi di circa 44.995 persone. Quando è tornato in ufficio non era cambiato nulla, perché non c’era un sistema standardizzato per raccogliere e risolvere i problemi di chi svolge il lavoro."
+],
+"On the continuous improvement board, what is acceptable in the “Responsibility” column?": [
+"En el tablero de mejora continua, ¿qué es aceptable en la columna “Responsable”?",
+"Was ist auf der Tafel für kontinuierliche Verbesserung in der Spalte „Verantwortlich“ zulässig?",
+"Sulla lavagna del miglioramento continuo, che cosa è accettabile nella colonna “Responsabile”?"
+],
+"A department name, such as “Maintenance”": [
+"El nombre de un departamento, como “Mantenimiento”",
+"Der Name einer Abteilung, etwa „Instandhaltung“",
+"Il nome di un reparto, come “Manutenzione”"
+],
+"“TBD” until someone volunteers": [
+"“Por definir” hasta que alguien se ofrezca",
+"„Offen“, bis sich jemand freiwillig meldet",
+"“Da definire” finché qualcuno non si offre"
+],
+"Only a single person’s name": [
+"Solo el nombre de una persona",
+"Nur der Name einer einzelnen Person",
+"Solo il nome di una singola persona"
+],
+"The supervisor’s name for every issue": [
+"El nombre del supervisor para cada tema",
+"Für jedes Thema der Name des Vorgesetzten",
+"Il nome del supervisore per ogni problema"
+],
+"If a department is responsible, no one really is. One named person must stand at the board at each review and speak to the issue. The lecture backs this up with a former Chrysler manager who credited his success to a lesson from plant manager Bob Bowers: assign one person to “move each needle,” and things get done.": [
+"Si un departamento es el responsable, en realidad no lo es nadie. Una persona con nombre debe estar frente al tablero en cada revisión y hablar del tema. La clase lo respalda con un exgerente de Chrysler que atribuía su éxito a una lección del gerente de planta Bob Bowers: asignar a una persona para “mover cada aguja”, y las cosas se hacen.",
+"Wenn eine Abteilung verantwortlich ist, ist es in Wirklichkeit niemand. Bei jeder Besprechung muss eine namentlich genannte Person an der Tafel stehen und zum Thema berichten. Die Vorlesung untermauert das mit einem ehemaligen Chrysler-Manager, der seinen Erfolg einer Lektion von Werksleiter Bob Bowers zuschrieb: Eine Person dafür einsetzen, „jeden Zeiger zu bewegen“, und die Dinge werden erledigt.",
+"Se il responsabile è un reparto, in realtà non lo è nessuno. A ogni revisione una persona con nome e cognome deve stare davanti alla lavagna e parlare del problema. La lezione lo conferma con un ex manager Chrysler che attribuiva il suo successo a una lezione del direttore di stabilimento Bob Bowers: affidare a una persona il compito di “muovere ogni lancetta”, e le cose si fanno."
+],
+"Once a target date is set for an issue on the board, the responsible person can push it back if they need more time.": [
+"Una vez fijada la fecha objetivo de un tema en el tablero, el responsable puede aplazarla si necesita más tiempo.",
+"Sobald für ein Thema auf der Tafel ein Zieldatum festgelegt ist, kann der Verantwortliche es verschieben, wenn er mehr Zeit braucht.",
+"Una volta fissata la data obiettivo di un problema sulla lavagna, il responsabile può rimandarla se ha bisogno di più tempo."
+],
+"Once set, a target date can never change. If dates could be moved, people would quietly reset late items to yellow before the plant manager’s review. The other rules:": [
+"Una vez fijada, la fecha objetivo nunca puede cambiar. Si las fechas pudieran moverse, la gente volvería a poner en amarillo, discretamente, los temas atrasados antes de la revisión del gerente de planta. Las otras reglas:",
+"Ein einmal festgelegtes Zieldatum kann nie mehr geändert werden. Ließen sich Termine verschieben, würden Leute überfällige Punkte vor der Besprechung mit dem Werksleiter stillschweigend wieder auf Gelb setzen. Die weiteren Regeln:",
+"Una volta fissata, la data obiettivo non può mai cambiare. Se le date si potessero spostare, le persone riporterebbero di nascosto al giallo i punti in ritardo prima della revisione del direttore di stabilimento. Le altre regole:"
+],
+"the team member who raised the issue negotiates the date and is the only one who can close it": [
+"el miembro del equipo que planteó el tema negocia la fecha y es el único que puede cerrarlo",
+"das Teammitglied, das das Thema eingebracht hat, verhandelt den Termin und ist das Einzige, das es schließen darf",
+"il membro del team che ha sollevato il problema negozia la data ed è l’unico che può chiuderlo"
+],
+"if no date is agreed, the item turns red right away": [
+"si no se acuerda una fecha, el tema pasa a rojo de inmediato",
+"wird kein Termin vereinbart, wird der Punkt sofort rot",
+"se non si concorda una data, il punto diventa subito rosso"
+],
+"only the plant site leader can remove an issue without the team’s agreement": [
+"solo el líder de la planta puede quitar un tema sin el acuerdo del equipo",
+"nur der Standortleiter des Werks kann ein Thema ohne Zustimmung des Teams entfernen",
+"solo il responsabile dello stabilimento può eliminare un problema senza l’accordo del team"
+],
+"Kaoru Ishikawa said it takes about ________ of small improvements (kaizens) before you see a significant impact on an operation.": [
+"Kaoru Ishikawa dijo que hacen falta alrededor de ________ de pequeñas mejoras (kaizens) para ver un impacto significativo en una operación.",
+"Kaoru Ishikawa sagte, es brauche etwa ________ kleiner Verbesserungen (Kaizens), bis man eine deutliche Wirkung auf einen Betrieb sieht.",
+"Kaoru Ishikawa disse che servono circa ________ di piccoli miglioramenti (kaizen) prima di vedere un impatto significativo su un’attività."
+],
+"Six months": [
+"Seis meses",
+"Sechs Monate",
+"Sei mesi"
+],
+"One year": [
+"Un año",
+"Ein Jahr",
+"Un anno"
+],
+"Three years": [
+"Tres años",
+"Drei Jahre",
+"Tre anni"
+],
+"Ten years": [
+"Diez años",
+"Zehn Jahre",
+"Dieci anni"
+],
+"Like small, regular deposits in a 401(k), many small improvements build up until the curve turns exponential. Three years after Chrysler’s Sterling Heights plant started this system, it had its first perfect build in 40 years: a full 8-hour shift without one lost unit. At Continental Motors, labor and revenue began to separate at the same three-year mark.": [
+"Como los depósitos pequeños y regulares en un plan de retiro 401(k), muchas pequeñas mejoras se acumulan hasta que la curva se vuelve exponencial. Tres años después de que la planta de Chrysler en Sterling Heights adoptara este sistema, logró su primera producción perfecta en 40 años: un turno completo de 8 horas sin perder una sola unidad. En Continental Motors, la mano de obra y los ingresos empezaron a separarse en esa misma marca de tres años.",
+"Wie kleine, regelmäßige Einzahlungen in einen 401(k)-Altersvorsorgeplan summieren sich viele kleine Verbesserungen, bis die Kurve exponentiell wird. Drei Jahre nachdem Chryslers Werk in Sterling Heights mit diesem System begonnen hatte, gelang ihm der erste perfekte Produktionslauf seit 40 Jahren: eine volle 8-Stunden-Schicht ohne eine einzige verlorene Einheit. Bei Continental Motors begannen sich Arbeitsaufwand und Umsatz an derselben Drei-Jahres-Marke voneinander zu lösen.",
+"Come piccoli versamenti regolari in un piano pensionistico 401(k), tanti piccoli miglioramenti si accumulano finché la curva diventa esponenziale. Tre anni dopo che lo stabilimento Chrysler di Sterling Heights aveva avviato questo sistema, ottenne la prima produzione perfetta in 40 anni: un intero turno di 8 ore senza perdere una sola unità. Alla Continental Motors, manodopera e ricavi iniziarono a separarsi allo stesso traguardo dei tre anni."
+],
+"The lecturer’s leadership formula is: Empathy + Trust + ________ = Respect for People.": [
+"La fórmula de liderazgo del profesor es: Empatía + Confianza + ________ = Respeto por las personas.",
+"Die Führungsformel des Dozenten lautet: Empathie + Vertrauen + ________ = Respekt vor den Menschen.",
+"La formula di leadership del docente è: Empatia + Fiducia + ________ = Rispetto per le persone."
+],
+"Pride": [
+"Orgullo",
+"Stolz",
+"Orgoglio"
+],
+"Confidence": [
+"Seguridad en sí mismo",
+"Selbstvertrauen",
+"Sicurezza di sé"
+],
+"Humility": [
+"Humildad",
+"Demut",
+"Umiltà"
+],
+"Authority": [
+"Autoridad",
+"Autorität",
+"Autorità"
+],
+"Respect for people is one of the two pillars of the Toyota Way, and the lecturer argues you can’t lead without it. He calls humility the key ingredient. Pride and arrogance get in the way: as Tolstoy put it, an arrogant person thinks they’re already perfect and so stops getting better. His advice: if you know you aren’t humble, don’t take a leadership position.": [
+"El respeto por las personas es uno de los dos pilares de The Toyota Way, y el profesor sostiene que no se puede liderar sin él. Considera la humildad el ingrediente clave. El orgullo y la arrogancia estorban: como dijo Tolstói, una persona arrogante cree que ya es perfecta y por eso deja de mejorar. Su consejo: si sabes que no eres humilde, no aceptes un puesto de liderazgo.",
+"Respekt vor den Menschen ist eine der beiden Säulen von The Toyota Way, und der Dozent meint, ohne ihn könne man nicht führen. Demut nennt er die entscheidende Zutat. Stolz und Arroganz stehen im Weg: Wie Tolstoi sagte, hält sich ein arroganter Mensch schon für perfekt und hört deshalb auf, besser zu werden. Sein Rat: Wenn Sie wissen, dass Sie nicht demütig sind, übernehmen Sie keine Führungsposition.",
+"Il rispetto per le persone è uno dei due pilastri di The Toyota Way, e il docente sostiene che senza di esso non si può guidare. Considera l’umiltà l’ingrediente chiave. Orgoglio e arroganza sono d’ostacolo: come disse Tolstoj, una persona arrogante crede di essere già perfetta e quindi smette di migliorare. Il suo consiglio: se sai di non essere umile, non accettare un ruolo di leadership."
+],
+"Auburn and the University of North Carolina had the same mask policy for basketball games during COVID, in the same region at the same time. At Auburn almost nobody wore a mask; at UNC almost everyone did. What made the difference?": [
+"Durante el COVID, Auburn y la Universidad de Carolina del Norte tenían la misma política de mascarillas para los partidos de baloncesto, en la misma región y al mismo tiempo. En Auburn casi nadie usaba mascarilla; en UNC casi todos. ¿Qué marcó la diferencia?",
+"Während der COVID-Pandemie hatten Auburn und die University of North Carolina für Basketballspiele dieselbe Maskenregel, in derselben Region und zur selben Zeit. In Auburn trug fast niemand eine Maske, an der UNC fast alle. Was machte den Unterschied?",
+"Durante il COVID, Auburn e la University of North Carolina avevano la stessa regola sulle mascherine per le partite di basket, nella stessa regione e nello stesso periodo. A Auburn quasi nessuno indossava la mascherina; alla UNC quasi tutti. Che cosa ha fatto la differenza?"
+],
+"The fans’ personal beliefs": [
+"Las creencias personales de los aficionados",
+"Die persönlichen Überzeugungen der Fans",
+"Le convinzioni personali dei tifosi"
+],
+"The size of the arena": [
+"El tamaño del estadio",
+"Die Größe der Halle",
+"Le dimensioni del palazzetto"
+],
+"Leadership: UNC actively enforced the standard and reminded fans to follow it": [
+"El liderazgo: UNC hacía cumplir activamente el estándar y recordaba a los aficionados que lo siguieran",
+"Führung: Die UNC setzte den Standard aktiv durch und erinnerte die Fans daran, ihn einzuhalten",
+"La leadership: la UNC faceva rispettare attivamente lo standard e ricordava ai tifosi di seguirlo"
+],
+"Ticket prices": [
+"El precio de las entradas",
+"Die Ticketpreise",
+"Il prezzo dei biglietti"
+],
+"It’s the same standard with opposite results, just like two plants with identical work instructions where one follows them and the other doesn’t. People are “good sheep” and naturally drift from a standard unless leaders guide them back. Leaders also have to follow the standard themselves. The lecturer’s example is a football coach who didn’t wear a mask at a game, showing he didn’t care about the rule.": [
+"Es el mismo estándar con resultados opuestos, igual que dos plantas con instrucciones de trabajo idénticas donde una las sigue y la otra no. Las personas son “buenas ovejas” y se desvían de forma natural de un estándar a menos que los líderes las guíen de vuelta. Los líderes también tienen que seguir el estándar. El ejemplo del profesor es un entrenador de fútbol americano que no usó mascarilla en un partido, lo que mostraba que la regla no le importaba.",
+"Es ist derselbe Standard mit gegensätzlichen Ergebnissen, genau wie bei zwei Werken mit identischen Arbeitsanweisungen, von denen eines sie befolgt und das andere nicht. Menschen sind „gute Schafe“ und weichen ganz natürlich vom Standard ab, wenn Führungskräfte sie nicht zurückführen. Führungskräfte müssen den Standard auch selbst einhalten. Das Beispiel des Dozenten ist ein Football-Trainer, der bei einem Spiel keine Maske trug und damit zeigte, dass ihm die Regel egal war.",
+"È lo stesso standard con risultati opposti, proprio come due stabilimenti con istruzioni di lavoro identiche in cui uno le segue e l’altro no. Le persone sono “brave pecore” e si allontanano naturalmente da uno standard, a meno che i leader non le riportino sulla strada giusta. Anche i leader devono rispettare lo standard. L’esempio del docente è un allenatore di football americano che a una partita non indossava la mascherina, dimostrando che la regola non gli importava."
+],
+"According to W. Edwards Deming, and reflected in how Ohno treated his managers, what is the main job of leadership?": [
+"Según W. Edwards Deming, y como se refleja en cómo Ohno trataba a sus gerentes, ¿cuál es la tarea principal del liderazgo?",
+"Was ist laut W. Edwards Deming die Hauptaufgabe von Führung, wie sie sich auch darin zeigt, wie Ohno seine Führungskräfte behandelte?",
+"Secondo W. Edwards Deming, e come si vede da come Ohno trattava i suoi manager, qual è il compito principale della leadership?"
+],
+"To supervise workers closely and correct their mistakes": [
+"Supervisar de cerca a los trabajadores y corregir sus errores",
+"Die Mitarbeiter eng überwachen und ihre Fehler korrigieren",
+"Sorvegliare da vicino i lavoratori e correggere i loro errori"
+],
+"To help people do a better job": [
+"Ayudar a las personas a hacer mejor su trabajo",
+"Den Menschen helfen, ihre Arbeit besser zu machen",
+"Aiutare le persone a lavorare meglio"
+],
+"To set targets and cost-cutting goals from the office": [
+"Fijar metas y objetivos de reducción de costos desde la oficina",
+"Vom Büro aus Ziele und Sparvorgaben festlegen",
+"Fissare dall’ufficio obiettivi e traguardi di riduzione dei costi"
+],
+"To get “buy-in” from employees for management’s ideas": [
+"Conseguir que los empleados “acepten” las ideas de la gerencia",
+"Bei den Mitarbeitern „Zustimmung“ für die Ideen des Managements gewinnen",
+"Ottenere il “consenso” dei dipendenti sulle idee della direzione"
+],
+"Deming said supervision should be replaced by leadership, and that leadership’s job is to help people. Ohno was very tough on managers but not on operators. He expected managers to understand why things fail and get people what they need. Operators are involved because they’re the only ones who can “hear the process,” not as a goodwill gesture or to win buy-in.": [
+"Deming decía que la supervisión debe sustituirse por liderazgo, y que la tarea del liderazgo es ayudar a las personas. Ohno era muy exigente con los gerentes, pero no con los operadores. Esperaba que los gerentes entendieran por qué fallan las cosas y consiguieran a la gente lo que necesita. Los operadores participan porque son los únicos que pueden “escuchar el proceso”, no como un gesto de buena voluntad ni para ganarse su aceptación.",
+"Deming sagte, Überwachung solle durch Führung ersetzt werden, und die Aufgabe von Führung sei es, Menschen zu helfen. Ohno war sehr streng mit Führungskräften, aber nicht mit Bedienern. Er erwartete von Führungskräften, zu verstehen, warum Dinge scheitern, und den Menschen zu besorgen, was sie brauchen. Bediener werden einbezogen, weil nur sie „den Prozess hören“ können, nicht als Geste des guten Willens oder um Zustimmung zu gewinnen.",
+"Deming diceva che la supervisione va sostituita dalla leadership, e che il compito della leadership è aiutare le persone. Ohno era molto duro con i manager, ma non con gli operatori. Si aspettava che i manager capissero perché le cose non funzionano e procurassero alle persone ciò di cui hanno bisogno. Gli operatori vengono coinvolti perché sono gli unici in grado di “ascoltare il processo”, non come gesto di buona volontà o per ottenere il loro consenso."
 ]
 };
