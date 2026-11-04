@@ -2905,11 +2905,6 @@ window.TM_I18N = {
 "Prüflink kopieren",
 "Copia il link di verifica"
 ],
-"Link copied": [
-"Enlace copiado",
-"Link kopiert",
-"Link copiato"
-],
 "Add to LinkedIn": [
 "Agregar a LinkedIn",
 "Zu LinkedIn hinzufügen",
@@ -4695,16 +4690,6 @@ window.TM_I18N = {
 "Mitmachen",
 "Partecipa"
 ],
-"Copy the link for a fellow TA": [
-"Copiar el enlace para otro TA",
-"Link für andere TAs kopieren",
-"Copia il link per un altro TA"
-],
-"Copy this link:": [
-"Copia este enlace:",
-"Diesen Link kopieren:",
-"Copia questo link:"
-],
 "TA alumni": [
 "Antiguos TA",
 "TA-Alumni",
@@ -4860,10 +4845,10 @@ window.TM_I18N = {
 "Projekte, die du im Labor entwickelt oder umgesetzt hast",
 "Progetti che hai sviluppato o realizzato in laboratorio"
 ],
-"e.g. a kanban system for the door line, check pieces for final inspection, a new SMED cart": [
-"p. ej., un sistema kanban para la línea de puertas, piezas de control para la inspección final, un nuevo carro SMED",
-"z. B. ein Kanban-System für die Türlinie, Prüfteile für die Endkontrolle, ein neuer SMED-Wagen",
-"es. un sistema kanban per la linea delle porte, pezzi di controllo per l’ispezione finale, un nuovo carrello SMED"
+"e.g. a kanban system for 2-part bin replenishment, check pieces for cell 3, a new SMED system for station 5": [
+"p. ej., un sistema kanban para la reposición con contenedores de 2 piezas, piezas de control para la celda 3, un nuevo sistema SMED para la estación 5",
+"z. B. ein Kanban-System für den Nachschub mit 2-Teile-Behältern, Prüfteile für Zelle 3, ein neues SMED-System für Station 5",
+"es. un sistema kanban per il rifornimento con contenitori da 2 pezzi, pezzi di controllo per la cella 3, un nuovo sistema SMED per la stazione 5"
 ],
 "How did being part of the lab change you?": [
 "¿Cómo te cambió formar parte del laboratorio?",
@@ -5064,5 +5049,15 @@ window.TM_I18N = {
 "¿Fuiste TA? <a href=\"ta-submit\">Aparece en el sitio web</a>",
 "Warst du TA? <a href=\"ta-submit\">Lass dich auf der Website vorstellen</a>",
 "Sei stato TA? <a href=\"ta-submit\">Fatti conoscere sul sito</a>"
+],
+"No headshot handy? Leave this empty and we can use your LinkedIn profile photo.": [
+"¿No tienes una foto de perfil a mano? Déjalo vacío y podemos usar tu foto de LinkedIn.",
+"Kein Porträtfoto zur Hand? Lass das Feld leer, dann können wir dein LinkedIn-Profilbild verwenden.",
+"Non hai una foto ritratto a portata di mano? Lascia vuoto e possiamo usare la tua foto profilo di LinkedIn."
+],
+"Auburn Engineering news": [
+"Noticias de Auburn Engineering",
+"Auburn Engineering News",
+"Notizie di Auburn Engineering"
 ]
 };

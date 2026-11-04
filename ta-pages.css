@@ -53,7 +53,6 @@ html[data-mode="light"] .mode .i-moon{display:block}
 .spot h2 em{font-style:italic;color:var(--orange)}
 .spot p{margin-top:10px;line-height:1.6;color:var(--ink-2);max-width:62ch}
 .spot .acts{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end}
-.spot .copied{color:var(--ok)}
 @media (max-width:760px){.spot{grid-template-columns:1fr}.spot .acts{justify-content:flex-start}}
 
 .alumni{padding:clamp(28px,4vw,44px) 0 clamp(56px,7vw,90px)}

@@ -17,4 +17,19 @@
    }
 */
 window.TM_PAST_TAS = [
+  // started from the home page photo and public sources; to be completed when they send the spotlight form
+  {
+    name: 'Carly Walker',
+    now: 'Graduate student, Industrial and Systems Engineering, Auburn University',
+    photo: 'past-tas/carly-walker.jpg',
+    linkedin: 'https://www.linkedin.com/in/carly-walker-14a0a527b/',
+    links: [{ t: 'Auburn Engineering news', u: 'https://eng.auburn.edu/news/2025/10/graduate-student-named-2025-jt-black-lean-engineering-student-of-the-year' }],
+    story: 'I never thought I would want to work in manufacturing, but being so hands-on and involved in the lab opened that passion for me. I’ve learned how to lead, solve problems and communicate solutions effectively.',
+    bio: ['Carly is from New Jersey and chose industrial and systems engineering because it blends her two favorite subjects, math and business, with Auburn’s Business-Engineering-Technology minor. As a graduate student she works in the Tiger Motors Lab and on the team behind the National Science Foundation grant that takes this experiential training beyond the lab. She was named the 2025 JT Black Lean Engineering Student of the Year, and hopes to keep working in manufacturing before moving into a managerial role.']
+  },
+  {
+    name: 'Carlos Rabat',
+    photo: 'past-tas/carlos-rabat.jpg',
+    linkedin: 'https://www.linkedin.com/in/carlos-rabat-a535aa221/'
+  }
 ];
