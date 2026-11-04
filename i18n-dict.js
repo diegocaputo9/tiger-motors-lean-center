@@ -5060,10 +5060,10 @@ window.TM_I18N = {
 "Bitte füge ein Porträtfoto hinzu.",
 "Aggiungi una foto ritratto."
 ],
-"Earn a free certificate when you finish": [
-"Obtén un certificado gratis al terminar",
-"Erhalte nach Abschluss ein kostenloses Zertifikat",
-"Ottieni un certificato gratuito al termine"
+"Earn a free certificate<br>when you finish": [
+"Obtén un certificado gratis<br>al terminar",
+"Kostenloses Zertifikat<br>nach Abschluss",
+"Ottieni un certificato gratuito<br>al termine"
 ],
 "View in Lean House": [
 "Ver en la Casa Lean",
