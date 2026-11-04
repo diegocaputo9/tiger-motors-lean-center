@@ -50,6 +50,7 @@ function stats(){
 function moduleStats(k){
   var m = TM.BYK && TM.BYK[k]; if(!m) return { done: 0, total: 0, pct: 0 };
   var ids = (m.items || []).filter(function(it){ return it.url && it.id && !it.optional; }).map(function(it){ return it.id; });
+  if(m.quiz) ids.push(m.quiz.id);   // the module quiz counts once it is passed
   var done = ids.filter(function(id){ return state.done[id]; }).length;
   return { done: done, total: ids.length, pct: ids.length ? Math.round(done * 100 / ids.length) : 0 };
 }

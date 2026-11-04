@@ -22,7 +22,40 @@ var M = [
     {id:'people.podcast.nummi', step:2, verb:'explore', type:'podcast', title:'NUMMI', src:'Podcast · This American Life', url:'https://www.thisamericanlife.org/561/nummi-2015'},
     {id:'people.lab.mass-system-no-lean-tools', step:3, verb:'apply',   type:'lab',     title:'Mass System (No Lean Tools)', src:'Lab activity · 360° environment', url:'https://storage.net-fs.com/hosting/8253122/2/'},
     {id:'people.video360.mass-production-run', step:4, verb:'experience', type:'video360', title:'Mass Production Run', src:'360° video with students · YouTube', url:'https://www.youtube.com/watch?v=21cAO-YCuek'}
-  ]},
+  ],
+  // end-of-module quiz (quiz.js): unlocks once every resource above is done; passing counts as a required item
+  quiz:{id:'people.quiz', pass:8, q:[
+    {t:'mc', q:'What are the three generations of manufacturing, in order?',
+     o:['Mass production → Job shop → Lean production','Job shop → Mass production → Lean production','Job shop → Lean production → Mass production','Craft guilds → Job shop → Mass production'], a:1,
+     e:'The first factory design was the job shop, where water-wheel-driven shafts ran all the machines on belts. The second was mass production, Henry Ford’s Model T line. The third is lean production, the Toyota Production System (TPS).'},
+    {t:'mc', q:'What inspired Taiichi Ohno’s “pull” system and kanban?',
+     o:['Ford’s moving assembly line','Chicago meatpacking plants','The American supermarket','Japanese textile mills'], a:2,
+     e:'On a visit to the US, Ohno saw that when a customer takes a gallon of milk off the shelf, it gets replaced, setting off a chain reaction “back to the cow” with almost no inventory in the system. Supermarkets worked this way because food spoils. Ohno used the same idea to pull material through Toyota.'},
+    {t:'mc', q:'According to the lecture, what really made mass production possible?',
+     o:['The moving conveyor','Interchangeable parts','Vertical integration','Immigrant labor'], a:1,
+     e:'Pre-hardened metal cutting tools made parts to near-exact specifications, so workers no longer had to file parts to fit each car. Most people credit the moving conveyor, but it had already been used in Chicago meatpacking before Ford. The lecturer calls it less important than interchangeable parts.'},
+    {t:'tf', q:'In Ford’s mass production system, workers were encouraged to stop the line and help solve quality problems.',
+     o:['True','False'], a:1,
+     e:'Ford’s system was designed so workers didn’t need to communicate. They couldn’t stop the line and had no role in problem solving. Defective units went to the end of the line, and mass producers used 20–25% of their labor offline just to repair them.'},
+    {t:'blank', q:'Sakichi Toyoda’s automatic loom stopped itself as soon as a thread broke, so a defect could never be passed forward. This principle of building error detection into the process is called ________.',
+     o:['Kanban','Jidoka','Kaizen','Muda'], a:1,
+     e:'Jidoka means error-proofing at the station, in the process. The lecturer calls it part of Toyota’s “DNA,” dating back to when the Toyoda family made fabric, not cars. If the process stops when a defect happens and the problem is fixed permanently, quality keeps getting better over time.'},
+    {t:'mc', q:'Shigeo Shingo developed SMED (Single-Minute Exchange of Die). What does “single minute” actually mean?',
+     o:['Exactly 60 seconds','A changeover of under 10 minutes (a single-digit number of minutes)','One minute of downtime per shift','One operator doing the change in one step'], a:1,
+     e:'“Single minute” means a single-digit number of minutes, so anything under 10. Detroit could take a full day to change a die. Toyota got it down to about three minutes, running die changes like a pit crew. That let a few presses build many different models.'},
+    {t:'mc', q:'After the 1949 strike, Toyota agreed to lifetime employment. What did Ohno expect from employees in return?',
+     o:['Lower wages','Strict job classifications','Flexibility in work assignments and active problem solving','Working longer shifts'], a:2,
+     e:'Ohno said that if Toyota was taking people on for life, they had to do the jobs that needed doing and help solve problems. Employees became “fixed assets” to be maintained, the way you’d maintain a machine. That is the opposite of Ford’s rigid job classifications, where an electrician couldn’t do a millwright’s job.'},
+    {t:'mc', q:'How does Toyota’s andon cord work?',
+     o:['Pulling it stops the line immediately, every time','It calls a team leader, and the line stops only if help doesn’t arrive in time (for example, about 60 seconds)','It sends the defective car to an offline repair area','It is only for supervisors to use'], a:1,
+     e:'The operator pulls the cord, a timer starts and the line keeps moving while a team leader comes to help. If no one arrives in time, the line stops. Defects get fixed in the process instead of at the end of the line, and problems have to be solved for good, because Toyota can’t keep stopping the line.'},
+    {t:'tf', q:'The NUMMI joint venture showed that GM’s quality problems came mainly from a lazy, undisciplined workforce.',
+     o:['True','False'], a:1,
+     e:'At NUMMI, most of the same “troublesome” GM workers were rehired and trained in the Toyota Production System. The plant soon matched Japanese defect levels and became GM’s best-performing plant. The problem was the mass production system, not the people.'},
+    {t:'blank', q:'The Toyota Way names two things that make Toyota special: respect for people and ________.',
+     o:['Vertical integration','Mass production','Continuous improvement','Lifetime employment'], a:2,
+     e:'The lecturer stresses that respect for people isn’t about feeling good. It’s practical: the people closest to the process are the only ones who really understand its many failures. Continuous improvement is how Toyota helps them remove the problems they find.'}
+  ]}},
   {k:'std', n:'02', name:'Standardization', role:'Foundation', hide:['experience'], items:[
     {id:'std.lecture.standardization', step:1, verb:'learn',   type:'lecture', title:'Standardization', src:'Video lecture · YouTube', url:'https://youtu.be/n2_illFaVDQ'},
     {id:'std.lecture.5s', step:2, verb:'learn',   type:'lecture', title:'5S', src:'Video lecture · YouTube', url:'https://youtu.be/K9ojM534fco'},
@@ -64,8 +97,8 @@ function icon(id,cls){return '<svg'+(cls?' class="'+cls+'"':'')+' aria-hidden="t
 function ext(u){return 'href="'+esc(u)+'" target="_blank" rel="noopener"';}
 function isLaunch(t){return t==='lab'||t==='immersive';}
 // Resources that count toward the Lean House certificate of completion:
-// every linked resource in the five Lean House elements, except items marked optional:true
-var REQUIRED = []; SEQ.forEach(function(k){ (BYK[k].items||[]).forEach(function(it){ if(it.url && it.id && !it.optional) REQUIRED.push(it.id); }); });
+// every linked resource in the five Lean House elements (except items marked optional:true), plus each module quiz
+var REQUIRED = []; SEQ.forEach(function(k){ (BYK[k].items||[]).forEach(function(it){ if(it.url && it.id && !it.optional) REQUIRED.push(it.id); }); if(BYK[k].quiz) REQUIRED.push(BYK[k].quiz.id); });
 var SQ = [['S','SAFETY'],['Q','QUALITY'],['D','DELIVERY'],['C','COST'],['M','MORALE']];
 return {TYPES:TYPES, VERBS:VERBS, M:M, BYK:BYK, SEQ:SEQ, SQ:SQ, REQUIRED:REQUIRED, esc:esc, icon:icon, ext:ext, isLaunch:isLaunch};
 })();

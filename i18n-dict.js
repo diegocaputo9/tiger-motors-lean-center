@@ -3189,5 +3189,385 @@ window.TM_I18N = {
 "¿Qué deberíamos mejorar o agregar?",
 "Was sollten wir verbessern oder ergänzen?",
 "Cosa dovremmo migliorare o aggiungere?"
+],
+"Quiz": [
+"Cuestionario",
+"Quiz",
+"Quiz"
+],
+"QUIZ": [
+"CUESTIONARIO",
+"QUIZ",
+"QUIZ"
+],
+"re:^Module (\\d+) quiz$": [
+"Cuestionario del módulo $1",
+"Quiz zu Modul $1",
+"Quiz del modulo $1"
+],
+"re:^Complete all (\\d+) resources to unlock$": [
+"Completa los $1 recursos para desbloquearlo",
+"Schließen Sie alle $1 Ressourcen ab, um es freizuschalten",
+"Completa tutte le $1 risorse per sbloccarlo"
+],
+"Locked": [
+"Bloqueado",
+"Gesperrt",
+"Bloccato"
+],
+"Take the quiz": [
+"Hacer el cuestionario",
+"Quiz starten",
+"Fai il quiz"
+],
+"Retake quiz": [
+"Repetir el cuestionario",
+"Quiz wiederholen",
+"Ripeti il quiz"
+],
+"Try again": [
+"Intentar de nuevo",
+"Erneut versuchen",
+"Riprova"
+],
+"re:^Passed · best (\\d+)/(\\d+)$": [
+"Aprobado · mejor resultado $1/$2",
+"Bestanden · bestes Ergebnis $1/$2",
+"Superato · miglior risultato $1/$2"
+],
+"Passed": [
+"Aprobado",
+"Bestanden",
+"Superato"
+],
+"re:^Best (\\d+)/(\\d+) · (\\d+) needed to pass$": [
+"Mejor resultado $1/$2 · necesitas $3 para aprobar",
+"Bestes Ergebnis $1/$2 · $3 zum Bestehen nötig",
+"Miglior risultato $1/$2 · ne servono $3 per superarlo"
+],
+"re:^(\\d+) questions · (\\d+) of (\\d+) to pass$": [
+"$1 preguntas · $2 de $3 para aprobar",
+"$1 Fragen · $2 von $3 zum Bestehen",
+"$1 domande · $2 su $3 per superarlo"
+],
+"re:^Question (\\d+) of (\\d+)$": [
+"Pregunta $1 de $2",
+"Frage $1 von $2",
+"Domanda $1 di $2"
+],
+"Multiple choice": [
+"Opción múltiple",
+"Multiple Choice",
+"Scelta multipla"
+],
+"True or false": [
+"Verdadero o falso",
+"Wahr oder falsch",
+"Vero o falso"
+],
+"Fill in the blank": [
+"Completa el espacio en blanco",
+"Lückentext",
+"Completa la frase"
+],
+"True": [
+"Verdadero",
+"Wahr",
+"Vero"
+],
+"False": [
+"Falso",
+"Falsch",
+"Falso"
+],
+"Correct": [
+"Correcto",
+"Richtig",
+"Corretto"
+],
+"Not quite": [
+"No exactamente",
+"Nicht ganz",
+"Non proprio"
+],
+"Next question": [
+"Siguiente pregunta",
+"Nächste Frage",
+"Domanda successiva"
+],
+"See your result": [
+"Ver tu resultado",
+"Ergebnis anzeigen",
+"Vedi il risultato"
+],
+"You passed!": [
+"¡Aprobaste!",
+"Bestanden!",
+"Hai superato il quiz!"
+],
+"Not passed yet": [
+"Aún no aprobado",
+"Noch nicht bestanden",
+"Non ancora superato"
+],
+"re:^You scored (\\d+) out of (\\d+)\\.$": [
+"Obtuviste $1 de $2.",
+"Sie haben $1 von $2 Punkten erreicht.",
+"Hai ottenuto $1 su $2."
+],
+"This module now counts as complete.": [
+"Este módulo ya cuenta como completado.",
+"Dieses Modul gilt jetzt als abgeschlossen.",
+"Ora questo modulo risulta completato."
+],
+"re:^You need at least (\\d+) of (\\d+) to pass\\. Read the explanations and try again as many times as you like\\.$": [
+"Necesitas al menos $1 de $2 para aprobar. Lee las explicaciones e inténtalo de nuevo todas las veces que quieras.",
+"Zum Bestehen brauchen Sie mindestens $1 von $2. Lesen Sie die Erklärungen und versuchen Sie es so oft erneut, wie Sie möchten.",
+"Per superarlo servono almeno $1 risposte corrette su $2. Leggi le spiegazioni e riprova tutte le volte che vuoi."
+],
+"Close quiz": [
+"Cerrar el cuestionario",
+"Quiz schließen",
+"Chiudi il quiz"
+],
+"Complete all the resources in this module to unlock the quiz": [
+"Completa todos los recursos de este módulo para desbloquear el cuestionario",
+"Schließen Sie alle Ressourcen dieses Moduls ab, um das Quiz freizuschalten",
+"Completa tutte le risorse di questo modulo per sbloccare il quiz"
+],
+"What are the three generations of manufacturing, in order?": [
+"¿Cuáles son las tres generaciones de la manufactura, en orden?",
+"Welches sind die drei Generationen der Fertigung, in der richtigen Reihenfolge?",
+"Quali sono le tre generazioni della produzione industriale, in ordine?"
+],
+"Mass production → Job shop → Lean production": [
+"Producción en masa → Job shop → Producción lean",
+"Massenproduktion → Werkstattfertigung → Lean Production",
+"Produzione di massa → Job shop → Lean production"
+],
+"Job shop → Mass production → Lean production": [
+"Job shop → Producción en masa → Producción lean",
+"Werkstattfertigung → Massenproduktion → Lean Production",
+"Job shop → Produzione di massa → Lean production"
+],
+"Job shop → Lean production → Mass production": [
+"Job shop → Producción lean → Producción en masa",
+"Werkstattfertigung → Lean Production → Massenproduktion",
+"Job shop → Lean production → Produzione di massa"
+],
+"Craft guilds → Job shop → Mass production": [
+"Gremios artesanales → Job shop → Producción en masa",
+"Handwerkszünfte → Werkstattfertigung → Massenproduktion",
+"Corporazioni artigiane → Job shop → Produzione di massa"
+],
+"The first factory design was the job shop, where water-wheel-driven shafts ran all the machines on belts. The second was mass production, Henry Ford’s Model T line. The third is lean production, the Toyota Production System (TPS).": [
+"El primer diseño de fábrica fue el job shop, donde ejes movidos por una rueda hidráulica accionaban todas las máquinas mediante correas. El segundo fue la producción en masa, la línea del Modelo T de Henry Ford. El tercero es la producción lean, el Sistema de Producción Toyota (TPS).",
+"Die erste Fabrikform war die Werkstattfertigung: Von einem Wasserrad angetriebene Wellen bewegten alle Maschinen über Riemen. Die zweite war die Massenproduktion, Henry Fords Model-T-Linie. Die dritte ist Lean Production, das Toyota-Produktionssystem (TPS).",
+"Il primo modello di fabbrica fu il job shop, dove alberi mossi da una ruota idraulica azionavano tutte le macchine tramite cinghie. Il secondo fu la produzione di massa, la linea della Model T di Henry Ford. Il terzo è la lean production, il Toyota Production System (TPS)."
+],
+"What inspired Taiichi Ohno’s “pull” system and kanban?": [
+"¿Qué inspiró el sistema “pull” y el kanban de Taiichi Ohno?",
+"Was inspirierte Taiichi Ohnos „Pull“-System und Kanban?",
+"Che cosa ha ispirato il sistema “pull” e il kanban di Taiichi Ohno?"
+],
+"Ford’s moving assembly line": [
+"La línea de ensamblaje móvil de Ford",
+"Fords Fließband",
+"La catena di montaggio mobile di Ford"
+],
+"Chicago meatpacking plants": [
+"Las empacadoras de carne de Chicago",
+"Die Fleischverarbeitungsbetriebe in Chicago",
+"I macelli industriali di Chicago"
+],
+"The American supermarket": [
+"El supermercado estadounidense",
+"Der amerikanische Supermarkt",
+"Il supermercato americano"
+],
+"Japanese textile mills": [
+"Las fábricas textiles japonesas",
+"Japanische Textilfabriken",
+"Le fabbriche tessili giapponesi"
+],
+"On a visit to the US, Ohno saw that when a customer takes a gallon of milk off the shelf, it gets replaced, setting off a chain reaction “back to the cow” with almost no inventory in the system. Supermarkets worked this way because food spoils. Ohno used the same idea to pull material through Toyota.": [
+"En una visita a EE. UU., Ohno vio que cuando un cliente toma un galón de leche del estante, se repone, lo que desata una reacción en cadena “hasta la vaca” casi sin inventario en el sistema. Los supermercados funcionaban así porque los alimentos se echan a perder. Ohno usó la misma idea para jalar el material a través de Toyota.",
+"Bei einem Besuch in den USA sah Ohno, dass eine Gallone Milch, die ein Kunde aus dem Regal nimmt, ersetzt wird. Das löst eine Kettenreaktion „zurück bis zur Kuh“ aus, fast ohne Bestand im System. Supermärkte arbeiteten so, weil Lebensmittel verderben. Ohno nutzte dieselbe Idee, um Material durch Toyota zu ziehen.",
+"Durante una visita negli Stati Uniti, Ohno vide che quando un cliente prende un gallone di latte dallo scaffale, questo viene rimpiazzato, innescando una reazione a catena “fino alla mucca” quasi senza scorte nel sistema. I supermercati funzionavano così perché il cibo si deteriora. Ohno usò la stessa idea per tirare il materiale attraverso Toyota."
+],
+"According to the lecture, what really made mass production possible?": [
+"Según la clase, ¿qué hizo realmente posible la producción en masa?",
+"Was hat laut der Vorlesung die Massenproduktion wirklich möglich gemacht?",
+"Secondo la lezione, che cosa ha reso davvero possibile la produzione di massa?"
+],
+"The moving conveyor": [
+"La cinta transportadora móvil",
+"Das bewegte Förderband",
+"Il nastro trasportatore mobile"
+],
+"Interchangeable parts": [
+"Las piezas intercambiables",
+"Austauschbare Teile",
+"I pezzi intercambiabili"
+],
+"Vertical integration": [
+"La integración vertical",
+"Vertikale Integration",
+"L’integrazione verticale"
+],
+"Immigrant labor": [
+"La mano de obra inmigrante",
+"Eingewanderte Arbeitskräfte",
+"La manodopera immigrata"
+],
+"Pre-hardened metal cutting tools made parts to near-exact specifications, so workers no longer had to file parts to fit each car. Most people credit the moving conveyor, but it had already been used in Chicago meatpacking before Ford. The lecturer calls it less important than interchangeable parts.": [
+"Las herramientas de corte de metal preendurecido fabricaban piezas casi exactas a la especificación, así que los trabajadores ya no tenían que limar las piezas para que encajaran en cada auto. La mayoría atribuye el mérito a la cinta transportadora, pero ya se usaba en las empacadoras de carne de Chicago antes de Ford. El profesor la considera menos importante que las piezas intercambiables.",
+"Vorgehärtete Schneidwerkzeuge für Metall fertigten Teile nahezu exakt nach Spezifikation, sodass die Arbeiter die Teile nicht mehr für jedes Auto passend feilen mussten. Die meisten schreiben es dem Förderband zu, doch das wurde schon vor Ford in der Fleischverarbeitung in Chicago eingesetzt. Der Dozent hält es für weniger wichtig als austauschbare Teile.",
+"Gli utensili da taglio in metallo pre-temprato producevano pezzi quasi esattamente a specifica, così gli operai non dovevano più limare i pezzi per adattarli a ogni auto. Molti ne attribuiscono il merito al nastro trasportatore, ma era già usato nei macelli di Chicago prima di Ford. Il docente lo considera meno importante dei pezzi intercambiabili."
+],
+"In Ford’s mass production system, workers were encouraged to stop the line and help solve quality problems.": [
+"En el sistema de producción en masa de Ford, se animaba a los trabajadores a detener la línea y ayudar a resolver problemas de calidad.",
+"In Fords Massenproduktionssystem wurden die Arbeiter ermutigt, die Linie anzuhalten und bei der Lösung von Qualitätsproblemen zu helfen.",
+"Nel sistema di produzione di massa di Ford, gli operai erano incoraggiati a fermare la linea e ad aiutare a risolvere i problemi di qualità."
+],
+"Ford’s system was designed so workers didn’t need to communicate. They couldn’t stop the line and had no role in problem solving. Defective units went to the end of the line, and mass producers used 20–25% of their labor offline just to repair them.": [
+"El sistema de Ford estaba diseñado para que los trabajadores no necesitaran comunicarse. No podían detener la línea ni tenían ningún papel en la resolución de problemas. Las unidades defectuosas iban al final de la línea, y los productores en masa usaban entre el 20 y el 25 % de su mano de obra fuera de línea solo para repararlas.",
+"Fords System war so angelegt, dass die Arbeiter nicht miteinander kommunizieren mussten. Sie konnten die Linie nicht anhalten und spielten bei der Problemlösung keine Rolle. Fehlerhafte Einheiten liefen bis zum Ende der Linie, und Massenproduzenten setzten 20–25 % ihrer Arbeitskräfte außerhalb der Linie nur für die Nacharbeit ein.",
+"Il sistema di Ford era pensato in modo che gli operai non dovessero comunicare. Non potevano fermare la linea e non avevano alcun ruolo nella soluzione dei problemi. Le unità difettose arrivavano a fine linea, e i produttori di massa impiegavano il 20–25% della manodopera fuori linea solo per ripararle."
+],
+"Sakichi Toyoda’s automatic loom stopped itself as soon as a thread broke, so a defect could never be passed forward. This principle of building error detection into the process is called ________.": [
+"El telar automático de Sakichi Toyoda se detenía solo en cuanto se rompía un hilo, de modo que un defecto nunca pasaba adelante. Este principio de incorporar la detección de errores al proceso se llama ________.",
+"Sakichi Toyodas automatischer Webstuhl hielt von selbst an, sobald ein Faden riss, sodass ein Fehler nie weitergegeben werden konnte. Dieses Prinzip, die Fehlererkennung in den Prozess einzubauen, heißt ________.",
+"Il telaio automatico di Sakichi Toyoda si fermava da solo appena un filo si rompeva, così un difetto non poteva mai passare avanti. Questo principio di integrare il rilevamento degli errori nel processo si chiama ________."
+],
+"Jidoka means error-proofing at the station, in the process. The lecturer calls it part of Toyota’s “DNA,” dating back to when the Toyoda family made fabric, not cars. If the process stops when a defect happens and the problem is fixed permanently, quality keeps getting better over time.": [
+"Jidoka significa prevenir errores en la estación, dentro del proceso. El profesor lo llama parte del “ADN” de Toyota, que viene de cuando la familia Toyoda fabricaba telas, no autos. Si el proceso se detiene cuando ocurre un defecto y el problema se corrige de forma permanente, la calidad mejora cada vez más con el tiempo.",
+"Jidoka bedeutet Fehlervermeidung an der Station, im Prozess selbst. Der Dozent nennt es einen Teil der „DNA“ von Toyota, die auf die Zeit zurückgeht, als die Familie Toyoda Stoffe herstellte und keine Autos. Wenn der Prozess bei einem Fehler anhält und das Problem dauerhaft behoben wird, wird die Qualität mit der Zeit immer besser.",
+"Jidoka significa prevenire gli errori alla stazione, nel processo. Il docente lo definisce parte del “DNA” di Toyota, risalente a quando la famiglia Toyoda produceva tessuti, non auto. Se il processo si ferma quando si verifica un difetto e il problema viene risolto in modo definitivo, la qualità continua a migliorare nel tempo."
+],
+"Shigeo Shingo developed SMED (Single-Minute Exchange of Die). What does “single minute” actually mean?": [
+"Shigeo Shingo desarrolló SMED (Single-Minute Exchange of Die). ¿Qué significa realmente “single minute”?",
+"Shigeo Shingo entwickelte SMED (Single-Minute Exchange of Die). Was bedeutet „Single Minute“ eigentlich?",
+"Shigeo Shingo ha sviluppato lo SMED (Single-Minute Exchange of Die). Che cosa significa davvero “single minute”?"
+],
+"Exactly 60 seconds": [
+"Exactamente 60 segundos",
+"Genau 60 Sekunden",
+"Esattamente 60 secondi"
+],
+"A changeover of under 10 minutes (a single-digit number of minutes)": [
+"Un cambio de menos de 10 minutos (un número de minutos de un solo dígito)",
+"Ein Rüstvorgang unter 10 Minuten (eine einstellige Minutenzahl)",
+"Un cambio formato in meno di 10 minuti (un numero di minuti a una sola cifra)"
+],
+"One minute of downtime per shift": [
+"Un minuto de paro por turno",
+"Eine Minute Stillstand pro Schicht",
+"Un minuto di fermo per turno"
+],
+"One operator doing the change in one step": [
+"Un solo operador haciendo el cambio en un solo paso",
+"Ein Bediener erledigt den Wechsel in einem Schritt",
+"Un solo operatore che esegue il cambio in un solo passaggio"
+],
+"“Single minute” means a single-digit number of minutes, so anything under 10. Detroit could take a full day to change a die. Toyota got it down to about three minutes, running die changes like a pit crew. That let a few presses build many different models.": [
+"“Single minute” significa un número de minutos de un solo dígito, es decir, menos de 10. En Detroit, cambiar un troquel podía llevar un día entero. Toyota lo redujo a unos tres minutos, haciendo los cambios de troquel como un equipo de pits. Así, unas pocas prensas podían fabricar muchos modelos distintos.",
+"„Single Minute“ bedeutet eine einstellige Minutenzahl, also alles unter 10. In Detroit konnte ein Werkzeugwechsel einen ganzen Tag dauern. Toyota brachte ihn auf etwa drei Minuten und wechselte Werkzeuge wie eine Boxencrew. So konnten wenige Pressen viele verschiedene Modelle fertigen.",
+"“Single minute” significa un numero di minuti a una sola cifra, quindi meno di 10. A Detroit cambiare uno stampo poteva richiedere un giorno intero. Toyota lo ridusse a circa tre minuti, eseguendo i cambi stampo come una squadra ai box. Così poche presse potevano produrre molti modelli diversi."
+],
+"After the 1949 strike, Toyota agreed to lifetime employment. What did Ohno expect from employees in return?": [
+"Tras la huelga de 1949, Toyota aceptó el empleo de por vida. ¿Qué esperaba Ohno de los empleados a cambio?",
+"Nach dem Streik von 1949 sagte Toyota eine Beschäftigung auf Lebenszeit zu. Was erwartete Ohno im Gegenzug von den Mitarbeitern?",
+"Dopo lo sciopero del 1949, Toyota accettò l’impiego a vita. Che cosa si aspettava Ohno in cambio dai dipendenti?"
+],
+"Lower wages": [
+"Salarios más bajos",
+"Niedrigere Löhne",
+"Salari più bassi"
+],
+"Strict job classifications": [
+"Clasificaciones de puestos estrictas",
+"Strenge Tätigkeitsklassifizierungen",
+"Rigide classificazioni delle mansioni"
+],
+"Flexibility in work assignments and active problem solving": [
+"Flexibilidad en las tareas asignadas y participación activa en la resolución de problemas",
+"Flexibilität beim Arbeitseinsatz und aktive Problemlösung",
+"Flessibilità nelle mansioni e partecipazione attiva alla soluzione dei problemi"
+],
+"Working longer shifts": [
+"Trabajar turnos más largos",
+"Längere Schichten",
+"Turni di lavoro più lunghi"
+],
+"Ohno said that if Toyota was taking people on for life, they had to do the jobs that needed doing and help solve problems. Employees became “fixed assets” to be maintained, the way you’d maintain a machine. That is the opposite of Ford’s rigid job classifications, where an electrician couldn’t do a millwright’s job.": [
+"Ohno dijo que, si Toyota contrataba a las personas de por vida, estas debían hacer los trabajos que hicieran falta y ayudar a resolver problemas. Los empleados pasaron a ser “activos fijos” que había que mantener, como se mantiene una máquina. Es lo contrario de las rígidas clasificaciones de puestos de Ford, donde un electricista no podía hacer el trabajo de un mecánico montador.",
+"Ohno sagte: Wenn Toyota Menschen auf Lebenszeit einstellt, müssen sie die Arbeit erledigen, die anfällt, und bei der Problemlösung helfen. Die Mitarbeiter wurden zu „Anlagevermögen“, das gepflegt wird, so wie man eine Maschine wartet. Das ist das Gegenteil von Fords starren Tätigkeitsklassifizierungen, bei denen ein Elektriker nicht die Arbeit eines Industriemechanikers übernehmen durfte.",
+"Ohno disse che, se Toyota assumeva le persone a vita, queste dovevano fare i lavori necessari e aiutare a risolvere i problemi. I dipendenti divennero “immobilizzazioni” da mantenere, come si fa con una macchina. È l’opposto delle rigide classificazioni delle mansioni di Ford, dove un elettricista non poteva fare il lavoro di un manutentore meccanico."
+],
+"How does Toyota’s andon cord work?": [
+"¿Cómo funciona la cuerda andon de Toyota?",
+"Wie funktioniert die Andon-Reißleine bei Toyota?",
+"Come funziona la corda andon di Toyota?"
+],
+"Pulling it stops the line immediately, every time": [
+"Al tirar de ella, la línea se detiene de inmediato, siempre",
+"Wer daran zieht, hält die Linie jedes Mal sofort an",
+"Tirarla ferma subito la linea, ogni volta"
+],
+"It calls a team leader, and the line stops only if help doesn’t arrive in time (for example, about 60 seconds)": [
+"Llama a un líder de equipo, y la línea solo se detiene si la ayuda no llega a tiempo (por ejemplo, unos 60 segundos)",
+"Sie ruft einen Teamleiter, und die Linie hält nur an, wenn die Hilfe nicht rechtzeitig kommt (zum Beispiel nach etwa 60 Sekunden)",
+"Chiama un team leader, e la linea si ferma solo se l’aiuto non arriva in tempo (per esempio, circa 60 secondi)"
+],
+"It sends the defective car to an offline repair area": [
+"Envía el auto defectuoso a un área de reparación fuera de línea",
+"Sie schickt das fehlerhafte Auto in einen Nacharbeitsbereich außerhalb der Linie",
+"Manda l’auto difettosa in un’area di riparazione fuori linea"
+],
+"It is only for supervisors to use": [
+"Solo la pueden usar los supervisores",
+"Nur Vorgesetzte dürfen sie benutzen",
+"Possono usarla solo i supervisori"
+],
+"The operator pulls the cord, a timer starts and the line keeps moving while a team leader comes to help. If no one arrives in time, the line stops. Defects get fixed in the process instead of at the end of the line, and problems have to be solved for good, because Toyota can’t keep stopping the line.": [
+"El operador tira de la cuerda, arranca un temporizador y la línea sigue avanzando mientras un líder de equipo acude a ayudar. Si nadie llega a tiempo, la línea se detiene. Los defectos se corrigen en el proceso en lugar de al final de la línea, y los problemas tienen que resolverse para siempre, porque Toyota no puede estar deteniendo la línea.",
+"Der Bediener zieht an der Leine, ein Timer startet und die Linie läuft weiter, während ein Teamleiter zu Hilfe kommt. Kommt niemand rechtzeitig, hält die Linie an. Fehler werden im Prozess behoben statt am Ende der Linie, und Probleme müssen dauerhaft gelöst werden, weil Toyota die Linie nicht ständig anhalten kann.",
+"L’operatore tira la corda, parte un timer e la linea continua ad avanzare mentre un team leader arriva ad aiutare. Se nessuno arriva in tempo, la linea si ferma. I difetti vengono corretti nel processo invece che a fine linea, e i problemi devono essere risolti per sempre, perché Toyota non può continuare a fermare la linea."
+],
+"The NUMMI joint venture showed that GM’s quality problems came mainly from a lazy, undisciplined workforce.": [
+"La empresa conjunta NUMMI demostró que los problemas de calidad de GM venían sobre todo de una plantilla perezosa e indisciplinada.",
+"Das Joint Venture NUMMI zeigte, dass die Qualitätsprobleme von GM hauptsächlich von einer faulen, undisziplinierten Belegschaft kamen.",
+"La joint venture NUMMI dimostrò che i problemi di qualità di GM derivavano soprattutto da una forza lavoro pigra e indisciplinata."
+],
+"At NUMMI, most of the same “troublesome” GM workers were rehired and trained in the Toyota Production System. The plant soon matched Japanese defect levels and became GM’s best-performing plant. The problem was the mass production system, not the people.": [
+"En NUMMI se volvió a contratar a la mayoría de los mismos trabajadores “problemáticos” de GM y se les formó en el Sistema de Producción Toyota. La planta pronto igualó los niveles de defectos japoneses y se convirtió en la de mejor desempeño de GM. El problema era el sistema de producción en masa, no las personas.",
+"Bei NUMMI wurden die meisten derselben „schwierigen“ GM-Arbeiter wieder eingestellt und im Toyota-Produktionssystem geschult. Das Werk erreichte bald japanische Fehlerquoten und wurde zum leistungsstärksten Werk von GM. Das Problem war das Massenproduktionssystem, nicht die Menschen.",
+"A NUMMI la maggior parte degli stessi operai GM “problematici” fu riassunta e formata sul Toyota Production System. Lo stabilimento raggiunse presto i livelli di difettosità giapponesi e divenne il migliore di GM. Il problema era il sistema di produzione di massa, non le persone."
+],
+"The Toyota Way names two things that make Toyota special: respect for people and ________.": [
+"The Toyota Way nombra dos cosas que hacen especial a Toyota: el respeto por las personas y ________.",
+"The Toyota Way nennt zwei Dinge, die Toyota besonders machen: Respekt vor den Menschen und ________.",
+"The Toyota Way indica due cose che rendono speciale Toyota: il rispetto per le persone e ________."
+],
+"Mass production": [
+"La producción en masa",
+"Massenproduktion",
+"La produzione di massa"
+],
+"Continuous improvement": [
+"La mejora continua",
+"Kontinuierliche Verbesserung",
+"Il miglioramento continuo"
+],
+"Lifetime employment": [
+"El empleo de por vida",
+"Beschäftigung auf Lebenszeit",
+"L’impiego a vita"
+],
+"The lecturer stresses that respect for people isn’t about feeling good. It’s practical: the people closest to the process are the only ones who really understand its many failures. Continuous improvement is how Toyota helps them remove the problems they find.": [
+"El profesor insiste en que el respeto por las personas no se trata de sentirse bien. Es práctico: las personas más cercanas al proceso son las únicas que entienden de verdad sus muchas fallas. La mejora continua es la forma en que Toyota las ayuda a eliminar los problemas que encuentran.",
+"Der Dozent betont, dass es beim Respekt vor den Menschen nicht um ein gutes Gefühl geht. Er ist praktisch: Die Menschen, die dem Prozess am nächsten sind, sind die Einzigen, die seine vielen Schwächen wirklich verstehen. Kontinuierliche Verbesserung ist der Weg, auf dem Toyota ihnen hilft, die gefundenen Probleme zu beseitigen.",
+"Il docente sottolinea che il rispetto per le persone non serve a sentirsi bene. È pratico: le persone più vicine al processo sono le uniche a capirne davvero i tanti difetti. Il miglioramento continuo è il modo in cui Toyota le aiuta a eliminare i problemi che trovano."
 ]
 };
