@@ -4079,5 +4079,295 @@ window.TM_I18N = {
 "Completa los dos recursos para desbloquearlo",
 "Schließen Sie beide Ressourcen ab, um es freizuschalten",
 "Completa entrambe le risorse per sbloccarlo"
+],
+"What is takt time?": [
+"¿Qué es el takt time?",
+"Was ist die Taktzeit?",
+"Che cos’è il takt time?"
+],
+"The time it takes an operator to finish all their work elements": [
+"El tiempo que tarda un operador en terminar todos sus elementos de trabajo",
+"Die Zeit, die ein Bediener für alle seine Arbeitselemente braucht",
+"Il tempo che un operatore impiega per completare tutti i suoi elementi di lavoro"
+],
+"The rate at which the customer pulls product from the facility": [
+"El ritmo al que el cliente retira producto de la planta",
+"Das Tempo, mit dem der Kunde Produkte aus dem Werk abruft",
+"Il ritmo con cui il cliente preleva prodotto dallo stabilimento"
+],
+"The time it takes one part to travel through the entire value stream": [
+"El tiempo que tarda una pieza en recorrer toda la cadena de valor",
+"Die Zeit, die ein Teil für den gesamten Wertstrom braucht",
+"Il tempo che un pezzo impiega ad attraversare l’intero flusso di valore"
+],
+"The time between the last good part and the first good part during a changeover": [
+"El tiempo entre la última pieza buena y la primera pieza buena durante un cambio",
+"Die Zeit zwischen dem letzten Gutteil und dem ersten Gutteil bei einem Rüstvorgang",
+"Il tempo tra l’ultimo pezzo buono e il primo pezzo buono durante un cambio formato"
+],
+"Takt time represents customer demand. Cycle time (A) is how long an operator takes to complete their work, and it’s usually faster than takt because companies try to run as fast as they can. Lead time (C) is how long one part takes to flow through all the inventory to the truck. Option D is the definition of changeover time.": [
+"El takt time representa la demanda del cliente. El tiempo de ciclo (A) es lo que tarda un operador en completar su trabajo, y suele ser más rápido que el takt porque las empresas intentan producir lo más rápido posible. El lead time (C) es lo que tarda una pieza en fluir por todo el inventario hasta el camión. La opción D es la definición del tiempo de cambio.",
+"Die Taktzeit steht für den Kundenbedarf. Die Zykluszeit (A) ist die Zeit, die ein Bediener für seine Arbeit braucht, und sie ist meist kürzer als der Takt, weil Unternehmen so schnell wie möglich produzieren wollen. Die Durchlaufzeit (C) ist die Zeit, die ein Teil durch alle Bestände bis zum Lkw braucht. Option D ist die Definition der Rüstzeit.",
+"Il takt time rappresenta la domanda del cliente. Il tempo ciclo (A) è il tempo che un operatore impiega per completare il suo lavoro, ed è di solito più rapido del takt perché le aziende cercano di produrre il più velocemente possibile. Il lead time (C) è il tempo che un pezzo impiega a scorrere attraverso tutte le scorte fino al camion. L’opzione D è la definizione del tempo di cambio formato."
+],
+"In a lean production culture, you should run cycle times as fast as possible, well beyond takt time, because faster production means more profit.": [
+"En una cultura de producción lean, hay que trabajar con tiempos de ciclo lo más rápidos posible, muy por encima del takt time, porque producir más rápido significa más ganancias.",
+"In einer Lean-Production-Kultur sollte man die Zykluszeiten so kurz wie möglich halten, weit unter der Taktzeit, weil schnellere Produktion mehr Gewinn bedeutet.",
+"In una cultura di lean production, i tempi ciclo vanno tenuti il più rapidi possibile, ben oltre il takt time, perché produrre più in fretta significa più profitto."
+],
+"“Faster is cheaper” is the mass production mindset, where managers are rewarded for efficiency even when nobody ordered the parts. Producing faster than demand fills the system with inventory and stretches lead time. Lean does the opposite: slow cycle time toward takt time, build only what the customer pulls, and remove waste.": [
+"“Más rápido es más barato” es la mentalidad de la producción en masa, donde se premia a los gerentes por la eficiencia aunque nadie haya pedido las piezas. Producir más rápido que la demanda llena el sistema de inventario y alarga el lead time. Lean hace lo contrario: acercar el tiempo de ciclo al takt time, fabricar solo lo que el cliente jala y eliminar el desperdicio.",
+"„Schneller ist billiger“ ist die Denkweise der Massenproduktion, in der Führungskräfte für Effizienz belohnt werden, selbst wenn niemand die Teile bestellt hat. Schneller als der Bedarf zu produzieren, füllt das System mit Beständen und verlängert die Durchlaufzeit. Lean macht das Gegenteil: die Zykluszeit an die Taktzeit annähern, nur das fertigen, was der Kunde abruft, und Verschwendung beseitigen.",
+"“Più veloce è più economico” è la mentalità della produzione di massa, in cui i manager vengono premiati per l’efficienza anche quando nessuno ha ordinato i pezzi. Produrre più in fretta della domanda riempie il sistema di scorte e allunga il lead time. Il lean fa il contrario: rallentare il tempo ciclo verso il takt time, produrre solo ciò che il cliente tira ed eliminare gli sprechi."
+],
+"There are 7,000 units of work-in-process between stamping and Weld 1. The weld operation’s cycle time is 39 seconds, and customer demand is 920 units per day. What is the lead time for this inventory?": [
+"Hay 7,000 unidades de trabajo en proceso entre el estampado y Soldadura 1. El tiempo de ciclo de la soldadura es de 39 segundos y la demanda del cliente es de 920 unidades por día. ¿Cuál es el lead time de este inventario?",
+"Zwischen dem Pressen und Schweißen 1 liegen 7.000 Einheiten Umlaufbestand. Die Zykluszeit des Schweißens beträgt 39 Sekunden, der Kundenbedarf 920 Einheiten pro Tag. Wie hoch ist die Durchlaufzeit dieses Bestands?",
+"Tra lo stampaggio e la Saldatura 1 ci sono 7.000 unità di semilavorati. Il tempo ciclo della saldatura è di 39 secondi e la domanda del cliente è di 920 unità al giorno. Qual è il lead time di queste scorte?"
+],
+"About 4.9 days (7,000 × the 39-second cycle time)": [
+"Unos 4.9 días (7,000 × el tiempo de ciclo de 39 segundos)",
+"Etwa 4,9 Tage (7.000 × die Zykluszeit von 39 Sekunden)",
+"Circa 4,9 giorni (7.000 × il tempo ciclo di 39 secondi)"
+],
+"About 7.6 days (7,000 ÷ 920 units per day)": [
+"Unos 7.6 días (7,000 ÷ 920 unidades por día)",
+"Etwa 7,6 Tage (7.000 ÷ 920 Einheiten pro Tag)",
+"Circa 7,6 giorni (7.000 ÷ 920 unità al giorno)"
+],
+"About 0.13 days (920 ÷ 7,000)": [
+"Unos 0.13 días (920 ÷ 7,000)",
+"Etwa 0,13 Tage (920 ÷ 7.000)",
+"Circa 0,13 giorni (920 ÷ 7.000)"
+],
+"39 seconds, the cycle time": [
+"39 segundos, el tiempo de ciclo",
+"39 Sekunden, die Zykluszeit",
+"39 secondi, il tempo ciclo"
+],
+"Lead time is based on takt time, the rate at which the customer actually takes product, not on how fast the machines run. Running faster than takt just moves parts from one pile to the next. Inventory only goes down at the rate the customer removes it. In the lecture’s full example, total lead time was 23.6 days, compared with a total cycle time of only 188 seconds.": [
+"El lead time se basa en el takt time, el ritmo al que el cliente realmente retira el producto, no en lo rápido que trabajan las máquinas. Trabajar más rápido que el takt solo mueve piezas de una pila a la siguiente. El inventario solo baja al ritmo en que el cliente lo retira. En el ejemplo completo de la clase, el lead time total fue de 23.6 días, frente a un tiempo de ciclo total de solo 188 segundos.",
+"Die Durchlaufzeit richtet sich nach der Taktzeit, also dem Tempo, mit dem der Kunde tatsächlich Produkte abnimmt, und nicht danach, wie schnell die Maschinen laufen. Schneller als im Takt zu arbeiten, verschiebt Teile nur von einem Stapel zum nächsten. Der Bestand sinkt nur in dem Tempo, in dem der Kunde ihn abnimmt. Im vollständigen Beispiel der Vorlesung betrug die gesamte Durchlaufzeit 23,6 Tage, die gesamte Zykluszeit dagegen nur 188 Sekunden.",
+"Il lead time si basa sul takt time, il ritmo con cui il cliente preleva effettivamente il prodotto, non su quanto velocemente girano le macchine. Produrre più veloce del takt sposta solo i pezzi da una pila all’altra. Le scorte diminuiscono solo al ritmo con cui il cliente le preleva. Nell’esempio completo della lezione, il lead time totale era di 23,6 giorni, contro un tempo ciclo totale di soli 188 secondi."
+],
+"When an MRP computer schedule tells each process what to build, instead of the next process downstream signaling what it needs, the factory is running a ________ system.": [
+"Cuando un programa de MRP en computadora le dice a cada proceso qué fabricar, en lugar de que el siguiente proceso aguas abajo indique lo que necesita, la fábrica funciona con un sistema ________.",
+"Wenn ein MRP-Computerplan jedem Prozess vorgibt, was er fertigen soll, statt dass der nachgelagerte Prozess signalisiert, was er braucht, arbeitet die Fabrik mit einem ________-System.",
+"Quando un programma MRP al computer dice a ogni processo cosa produrre, invece che sia il processo a valle a segnalare ciò di cui ha bisogno, la fabbrica funziona con un sistema ________."
+],
+"One-piece-flow": [
+"De flujo de una pieza",
+"One-Piece-Flow",
+"One-piece flow"
+],
+"With MRP, each process works like an island, following a forecast schedule that starts going wrong the moment it reaches the floor. Orders change, machines break down, people are absent and inventory counts are off, which is why plants employ expediters. In a pull system, the customer’s withdrawal sets off a chain reaction of replenishment back through the supply chain.": [
+"Con MRP, cada proceso funciona como una isla y sigue un programa basado en pronósticos que empieza a fallar en cuanto llega a la planta. Los pedidos cambian, las máquinas se averían, falta gente y los conteos de inventario no cuadran, por eso las plantas emplean expediters (agilizadores). En un sistema pull, el retiro del cliente desata una reacción en cadena de reposición hacia atrás por toda la cadena de suministro.",
+"Mit MRP arbeitet jeder Prozess wie eine Insel und folgt einem Prognoseplan, der schon falsch wird, sobald er in der Halle ankommt. Aufträge ändern sich, Maschinen fallen aus, Mitarbeiter fehlen und Bestandszahlen stimmen nicht, weshalb Werke Expediter (Terminjäger) beschäftigen. In einem Pull-System löst die Entnahme durch den Kunden eine Kettenreaktion der Nachversorgung rückwärts durch die Lieferkette aus.",
+"Con l’MRP ogni processo lavora come un’isola, seguendo un programma basato sulle previsioni che inizia a sbagliare appena arriva in reparto. Gli ordini cambiano, le macchine si guastano, le persone sono assenti e le giacenze non tornano, ed è per questo che gli stabilimenti impiegano gli expediter (sollecitatori). In un sistema pull, il prelievo del cliente innesca una reazione a catena di rifornimento lungo tutta la supply chain."
+],
+"According to Taiichi Ohno, which of the seven wastes is the most significant?": [
+"Según Taiichi Ohno, ¿cuál de los siete desperdicios es el más importante?",
+"Welche der sieben Verschwendungsarten ist laut Taiichi Ohno die bedeutendste?",
+"Secondo Taiichi Ohno, quale dei sette sprechi è il più importante?"
+],
+"Motion": [
+"Movimiento",
+"Bewegung",
+"Movimento"
+],
+"Waiting": [
+"Espera",
+"Warten",
+"Attesa"
+],
+"Overproduction": [
+"Sobreproducción",
+"Überproduktion",
+"Sovrapproduzione"
+],
+"Transportation": [
+"Transporte",
+"Transport",
+"Trasporto"
+],
+"Overproduction creates many other wastes:": [
+"La sobreproducción genera muchos otros desperdicios:",
+"Überproduktion verursacht viele weitere Verschwendungen:",
+"La sovrapproduzione genera molti altri sprechi:"
+],
+"batches that need storage space": [
+"lotes que necesitan espacio de almacenamiento",
+"Lose, die Lagerfläche brauchen",
+"lotti che richiedono spazio di stoccaggio"
+],
+"people and equipment to handle them": [
+"personas y equipos para manejarlos",
+"Personal und Geräte, um sie zu handhaben",
+"persone e attrezzature per movimentarli"
+],
+"quality problems that mean sorting, rework or scrap": [
+"problemas de calidad que implican seleccionar, retrabajar o desechar",
+"Qualitätsprobleme, die Sortieren, Nacharbeit oder Ausschuss bedeuten",
+"problemi di qualità che comportano selezione, rilavorazione o scarto"
+],
+"extra operators and equipment to run faster than demand": [
+"operadores y equipos adicionales para producir más rápido que la demanda",
+"zusätzliche Bediener und Anlagen, um schneller als der Bedarf zu produzieren",
+"operatori e attrezzature in più per produrre più veloce della domanda"
+],
+"All of that lengthens lead time and makes it harder to respond to the customer.": [
+"Todo eso alarga el lead time y hace más difícil responder al cliente.",
+"All das verlängert die Durchlaufzeit und erschwert es, auf den Kunden zu reagieren.",
+"Tutto questo allunga il lead time e rende più difficile rispondere al cliente."
+],
+"In SMED, what are “internal” elements of a changeover, and what is the key improvement step?": [
+"En SMED, ¿qué son los elementos “internos” de un cambio y cuál es el paso clave de mejora?",
+"Was sind bei SMED die „internen“ Elemente eines Rüstvorgangs, und was ist der entscheidende Verbesserungsschritt?",
+"Nello SMED, che cosa sono gli elementi “interni” di un cambio formato e qual è il passo chiave di miglioramento?"
+],
+"Steps done while the machine is running; eliminate them completely": [
+"Pasos que se hacen con la máquina en marcha; eliminarlos por completo",
+"Schritte, die bei laufender Maschine erfolgen; sie ganz beseitigen",
+"Passi svolti a macchina in funzione; eliminarli completamente"
+],
+"Steps that can only be done while the machine is stopped; convert as many as possible to external so they’re done before shutdown": [
+"Pasos que solo pueden hacerse con la máquina detenida; convertir en externos todos los posibles para hacerlos antes del paro",
+"Schritte, die nur bei stillstehender Maschine möglich sind; möglichst viele in externe umwandeln, damit sie vor dem Stillstand erledigt werden",
+"Passi che si possono fare solo a macchina ferma; convertirne il più possibile in esterni, così da svolgerli prima del fermo"
+],
+"Steps done by outside contractors; bring them in-house": [
+"Pasos que hacen contratistas externos; traerlos a la empresa",
+"Schritte, die externe Dienstleister erledigen; sie ins eigene Haus holen",
+"Passi svolti da fornitori esterni; internalizzarli"
+],
+"Steps related to paperwork; automate them": [
+"Pasos relacionados con papeleo; automatizarlos",
+"Schritte mit Papierkram; sie automatisieren",
+"Passi legati alle pratiche burocratiche; automatizzarli"
+],
+"SMED’s four steps:": [
+"Los cuatro pasos del SMED:",
+"Die vier Schritte von SMED:",
+"I quattro passi dello SMED:"
+],
+"Identify every element of the current setup.": [
+"Identificar cada elemento del cambio actual.",
+"Jedes Element des aktuellen Rüstvorgangs erfassen.",
+"Identificare ogni elemento dell’attrezzaggio attuale."
+],
+"Separate internal elements (machine stopped) from external elements (machine running).": [
+"Separar los elementos internos (máquina detenida) de los externos (máquina en marcha).",
+"Interne Elemente (Maschine steht) von externen Elementen (Maschine läuft) trennen.",
+"Separare gli elementi interni (macchina ferma) da quelli esterni (macchina in funzione)."
+],
+"Convert internal elements to external.": [
+"Convertir elementos internos en externos.",
+"Interne Elemente in externe umwandeln.",
+"Convertire gli elementi interni in esterni."
+],
+"Optimize what’s left, especially the internal elements.": [
+"Optimizar lo que queda, sobre todo los elementos internos.",
+"Das Verbleibende optimieren, besonders die internen Elemente.",
+"Ottimizzare ciò che resta, soprattutto gli elementi interni."
+],
+"It’s how an Indy pit crew works: everything possible is ready before the car stops. The goal is a changeover under 10 minutes.": [
+"Así trabaja un equipo de pits de IndyCar: todo lo posible está listo antes de que el auto se detenga. El objetivo es un cambio de menos de 10 minutos.",
+"So arbeitet eine IndyCar-Boxencrew: Alles, was möglich ist, ist vorbereitet, bevor das Auto anhält. Ziel ist ein Rüstvorgang unter 10 Minuten.",
+"È così che lavora una squadra ai box della IndyCar: tutto il possibile è pronto prima che l’auto si fermi. L’obiettivo è un cambio formato in meno di 10 minuti."
+],
+"After cutting changeover time with SMED, a plant should use the freed-up time to run larger batches and boost its performance numbers.": [
+"Después de reducir el tiempo de cambio con SMED, una planta debería usar el tiempo liberado para producir lotes más grandes y mejorar sus indicadores de desempeño.",
+"Nachdem ein Werk die Rüstzeit mit SMED verkürzt hat, sollte es die gewonnene Zeit für größere Lose nutzen und so seine Leistungskennzahlen steigern.",
+"Dopo aver ridotto il tempo di cambio formato con lo SMED, uno stabilimento dovrebbe usare il tempo liberato per produrre lotti più grandi e migliorare i propri indicatori di prestazione."
+],
+"This is a common mistake. Companies take the savings as cost per unit, building more WIP and inventory, which increases lead time and goes the wrong way. The real purpose of SMED is to change over more often (moving “every part every…” closer to every part every one) so batches shrink, inventory drops and lead time goes down.": [
+"Es un error común. Las empresas aprovechan el ahorro como costo por unidad y generan más WIP e inventario, lo que aumenta el lead time y va en la dirección equivocada. El verdadero propósito del SMED es hacer cambios con más frecuencia (llevar el “every part every…” más cerca de cada pieza en cada ciclo), para que los lotes se reduzcan, el inventario baje y el lead time disminuya.",
+"Das ist ein häufiger Fehler. Unternehmen verbuchen die Einsparung als Stückkosten und bauen mehr Umlaufbestand und Lager auf. Das erhöht die Durchlaufzeit und geht in die falsche Richtung. Der eigentliche Zweck von SMED ist, häufiger umzurüsten (das „Every Part Every …“ näher an „jedes Teil in jedem Zyklus“ zu bringen), damit die Lose kleiner werden, der Bestand sinkt und die Durchlaufzeit kürzer wird.",
+"È un errore comune. Le aziende sfruttano il risparmio come costo per unità, accumulando più WIP e scorte, il che aumenta il lead time e va nella direzione sbagliata. Il vero scopo dello SMED è cambiare formato più spesso (portare l’“every part every…” più vicino a ogni pezzo a ogni ciclo), così i lotti si riducono, le scorte calano e il lead time diminuisce."
+],
+"What is a key feature of a subassembly cell, compared with a manufacturing cell?": [
+"¿Cuál es una característica clave de una celda de subensamble, en comparación con una celda de manufactura?",
+"Was ist ein zentrales Merkmal einer Vormontagezelle im Vergleich zu einer Fertigungszelle?",
+"Qual è una caratteristica chiave di una cella di sottoassemblaggio rispetto a una cella di produzione?"
+],
+"The operator only loads, unloads and moves parts while machines do the work": [
+"El operador solo carga, descarga y mueve piezas mientras las máquinas hacen el trabajo",
+"Der Bediener belädt, entlädt und bewegt nur Teile, während die Maschinen die Arbeit machen",
+"L’operatore si limita a caricare, scaricare e spostare pezzi mentre le macchine fanno il lavoro"
+],
+"It is self-balancing through operator handoff points and can flex with volume by adding or removing operators": [
+"Se autoequilibra mediante puntos de relevo entre operadores y se adapta al volumen añadiendo o quitando operadores",
+"Sie gleicht sich über Übergabepunkte zwischen den Bedienern selbst aus und passt sich dem Volumen an, indem man Bediener hinzufügt oder abzieht",
+"Si autobilancia grazie ai punti di passaggio tra operatori e si adatta ai volumi aggiungendo o togliendo operatori"
+],
+"It requires large WIP buffers between stations": [
+"Requiere grandes inventarios intermedios entre estaciones",
+"Sie braucht große Pufferbestände zwischen den Stationen",
+"Richiede grandi buffer di WIP tra le stazioni"
+],
+"Every station must have exactly the same cycle time": [
+"Cada estación debe tener exactamente el mismo tiempo de ciclo",
+"Jede Station muss genau dieselbe Zykluszeit haben",
+"Ogni stazione deve avere esattamente lo stesso tempo ciclo"
+],
+"In a manufacturing cell, the machines add the value and the operator just moves parts from station to station. In a subassembly cell, operators add value and hand work off to each other. The handoff points balance the cell even when station times differ, and the cell can run with 5, 4, 3, 2 or 1 operators as demand changes. It also supports teamwork, cross-training and ergonomics.": [
+"En una celda de manufactura, las máquinas agregan el valor y el operador solo mueve piezas de una estación a otra. En una celda de subensamble, los operadores agregan valor y se pasan el trabajo entre sí. Los puntos de relevo equilibran la celda aunque los tiempos de las estaciones sean distintos, y la celda puede funcionar con 5, 4, 3, 2 o 1 operadores según cambie la demanda. También favorece el trabajo en equipo, la formación cruzada y la ergonomía.",
+"In einer Fertigungszelle schaffen die Maschinen den Mehrwert, und der Bediener bewegt nur Teile von Station zu Station. In einer Vormontagezelle schaffen die Bediener den Mehrwert und übergeben einander die Arbeit. Die Übergabepunkte gleichen die Zelle aus, auch wenn die Stationszeiten unterschiedlich sind, und die Zelle kann je nach Bedarf mit 5, 4, 3, 2 oder 1 Bediener laufen. Außerdem fördert sie Teamarbeit, Mehrfachqualifikation und Ergonomie.",
+"In una cella di produzione sono le macchine ad aggiungere valore e l’operatore si limita a spostare i pezzi da una stazione all’altra. In una cella di sottoassemblaggio sono gli operatori ad aggiungere valore e si passano il lavoro tra loro. I punti di passaggio bilanciano la cella anche quando i tempi delle stazioni sono diversi, e la cella può funzionare con 5, 4, 3, 2 o 1 operatore al variare della domanda. Favorisce anche il lavoro di squadra, la polivalenza e l’ergonomia."
+],
+"When demand drops, the best response for a vehicle assembly plant is to slow down the assembly line.": [
+"Cuando la demanda baja, la mejor respuesta para una planta de ensamble de vehículos es reducir la velocidad de la línea de ensamble.",
+"Wenn die Nachfrage sinkt, ist es für ein Fahrzeugmontagewerk am besten, das Montageband zu verlangsamen.",
+"Quando la domanda cala, la risposta migliore per uno stabilimento di assemblaggio di veicoli è rallentare la linea di montaggio."
+],
+"An assembly line can’t flex with demand. When Chrysler slowed a line, about 200 jobs had to be redistributed and the operation fell apart. Instead, plants keep line speed steady for the life of the product. They boost demand with incentives (cash back, 0% financing) or adjust with down weeks, shift changes and overtime.": [
+"Una línea de ensamble no puede adaptarse a la demanda. Cuando Chrysler redujo la velocidad de una línea, hubo que redistribuir unos 200 puestos y la operación se vino abajo. En cambio, las plantas mantienen constante la velocidad de la línea durante toda la vida del producto. Impulsan la demanda con incentivos (reembolsos, financiamiento al 0 %) o se ajustan con semanas de paro, cambios de turno y horas extra.",
+"Ein Montageband kann sich nicht an die Nachfrage anpassen. Als Chrysler ein Band verlangsamte, mussten etwa 200 Arbeitsplätze neu verteilt werden, und der Betrieb brach zusammen. Stattdessen halten Werke die Bandgeschwindigkeit über die gesamte Lebensdauer des Produkts konstant. Sie kurbeln die Nachfrage mit Anreizen an (Cashback, 0-%-Finanzierung) oder passen sich mit Stillstandswochen, Schichtänderungen und Überstunden an.",
+"Una linea di montaggio non può adattarsi alla domanda. Quando Chrysler rallentò una linea, circa 200 postazioni dovettero essere ridistribuite e l’operazione andò in pezzi. Gli stabilimenti mantengono invece costante la velocità della linea per tutta la vita del prodotto. Stimolano la domanda con incentivi (rimborsi, finanziamenti a tasso zero) o si adattano con settimane di fermo, cambi di turno e straordinari."
+],
+"In a future state value stream map, the customer schedule is sent to only one point in the system, usually near the end of the line. This is called the ________ process.": [
+"En un mapa de la cadena de valor del estado futuro, el programa del cliente se envía a un solo punto del sistema, normalmente cerca del final de la línea. Esto se llama el proceso ________.",
+"In einer Soll-Wertstromkarte (Future State) wird der Kundenplan nur an eine Stelle im System geschickt, meist nahe dem Ende der Linie. Das nennt man den ________-Prozess.",
+"In una mappa del flusso di valore dello stato futuro, il programma del cliente viene inviato a un solo punto del sistema, di solito verso la fine della linea. Questo si chiama processo ________."
+],
+"Bottleneck": [
+"Cuello de botella",
+"Engpass",
+"Collo di bottiglia"
+],
+"Pacemaker": [
+"Marcapasos (pacemaker)",
+"Schrittmacher",
+"Pacemaker"
+],
+"Supermarket": [
+"Supermercado",
+"Supermarkt",
+"Supermarket"
+],
+"Expediter": [
+"Expediter (agilizador)",
+"Expediter",
+"Expediter"
+],
+"Scheduling only the pacemaker replaces MRP schedules sent to every department. At the pacemaker:": [
+"Programar solo el proceso marcapasos sustituye a los programas de MRP enviados a cada departamento. En el marcapasos:",
+"Nur den Schrittmacherprozess zu planen, ersetzt die MRP-Pläne, die an jede Abteilung gehen. Am Schrittmacher:",
+"Programmare solo il pacemaker sostituisce i programmi MRP inviati a ogni reparto. Al pacemaker:"
+],
+"heijunka levels both the volume (paced to takt) and the mix (matching how customers buy)": [
+"el heijunka nivela tanto el volumen (al ritmo del takt) como la mezcla (según cómo compran los clientes)",
+"Heijunka glättet sowohl das Volumen (im Takt) als auch den Mix (passend zum Kaufverhalten der Kunden)",
+"l’heijunka livella sia il volume (al ritmo del takt) sia il mix (in linea con come acquistano i clienti)"
+],
+"kanban cards send pull signals back upstream": [
+"las tarjetas kanban envían señales de pull aguas arriba",
+"Kanban-Karten senden Pull-Signale stromaufwärts zurück",
+"i cartellini kanban inviano segnali pull a monte"
+],
+"supermarkets keep the pull going where one-piece flow isn’t possible yet, and continuous improvement shrinks them over time": [
+"los supermercados mantienen el pull donde aún no es posible el flujo de una pieza, y la mejora continua los reduce con el tiempo",
+"Supermärkte halten den Pull dort aufrecht, wo One-Piece-Flow noch nicht möglich ist, und kontinuierliche Verbesserung verkleinert sie mit der Zeit",
+"i supermarket mantengono il pull dove il one-piece flow non è ancora possibile, e il miglioramento continuo li riduce nel tempo"
 ]
 };

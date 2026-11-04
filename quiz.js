@@ -123,11 +123,11 @@ function answer(j){
   setProg(run.i + 1);
   var last = run.i === run.qz.q.length - 1, fb = dlg.querySelector('.qz-fb');
   fb.innerHTML = '<p class="qz-v ' + (ok ? 'ok' : 'bad') + '">' + (ok ? CHECK : '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M7 7l10 10M17 7L7 17"/></svg>') + '<b>' + (ok ? 'Correct' : 'Not quite') + '</b></p>' +
-    (q.e ? '<p class="qz-e">' + esc(q.e) + '</p>' : '') + explList(q) + '<button type="button" class="btn btn-primary qz-next" data-next>' + '<span>' + (last ? 'See your result' : 'Next question') + '</span>' + ARROW + '</button>';
+    (q.e ? '<p class="qz-e">' + esc(q.e) + '</p>' : '') + explList(q) + (q.e2 ? '<p class="qz-e">' + esc(q.e2) + '</p>' : '') + '<button type="button" class="btn btn-primary qz-next" data-next>' + '<span>' + (last ? 'See your result' : 'Next question') + '</span>' + ARROW + '</button>';
   fb.hidden = false;
   var nx = fb.querySelector('[data-next]'); setTimeout(function(){ nx.focus({ preventScroll: true }); fb.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }, 30);
 }
-// optional list under the explanation: q.l = [items], q.ol = true for a numbered list
+// optional list under the explanation: q.l = [items], q.ol = true for a numbered list, q.e2 = text after the list
 function explList(q){
   if(!q.l) return '';
   var tag = q.ol ? 'ol' : 'ul';
