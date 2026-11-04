@@ -33,9 +33,9 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="styles.css?v=c7ead7ab">
+<link rel="stylesheet" href="styles.css?v=ea8c5c7f">
 
-<script src="i18n-dict.js?v=8d064632" defer></script>
+<script src="i18n-dict.js?v=e244f12d" defer></script>
 <script src="i18n.js?v=3a5d34c9" defer></script>
 <script src="feedback.js?v=812720da" defer></script>
 <script src="viewer.js?v=4f2ff2da" defer></script>
@@ -119,7 +119,7 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
     <p class="hero-sub rise d3"><span>Experience Lean Manufacturing.</span><span>Explore the System.</span><span>Improve the Process.</span></p>
     <p class="hero-copy rise d4">An immersive digital learning environment developed at Auburn University to extend experiential Lean Manufacturing education beyond the physical laboratory.</p>
     <div class="hero-cta rise d5">
-      <a class="btn btn-primary" href="#lean-house">Go to Lean Training <svg><use href="#i-arrow"/></svg></a>
+      <span class="cta-stack"><a class="btn btn-primary" href="#lean-house">Go to Lean Training <svg><use href="#i-arrow"/></svg></a><small class="cta-note"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M8.5 13.8 7 22l5-3 5 3-1.5-8.2"/></svg>Earn a free certificate when you finish</small></span>
       <a class="btn btn-ghost" href="#lab">Explore the Lab <svg><use href="#i-arrow"/></svg></a>
       <a class="btn btn-ghost" href="testimonials">Testimonials <svg><use href="#i-arrow"/></svg></a>
     </div>
@@ -384,15 +384,15 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
         </g>
         <!-- shown in both views -->
         <!-- supermarkets between Cell 1 and Cell 2 (stations 10 and 6) -->
-        <g id="kbn-sm10" class="kb-sm"><rect x="499" y="388" width="26" height="11" rx="2"/><text x="512" y="396.5" text-anchor="middle">SUPERMKT</text></g>
-        <g id="kbn-sm6" class="kb-sm"><rect x="579" y="388" width="26" height="11" rx="2"/><text x="592" y="396.5" text-anchor="middle">SUPERMKT</text></g>
-        <g class="kb-sm smed-tag" data-def="smed"><rect x="558" y="336" width="26" height="11" rx="2"/><text x="571" y="344.5" text-anchor="middle">SMED</text></g>
+        <g id="kbn-sm10" class="kb-sm"><rect x="504" y="384.5" width="30" height="11" rx="2"/><text x="519" y="393" text-anchor="middle">SUPERMKT</text></g>
+        <g id="kbn-sm6" class="kb-sm"><rect x="570" y="384.5" width="30" height="11" rx="2"/><text x="585" y="393" text-anchor="middle">SUPERMKT</text></g>
+        <g class="kb-sm smed-tag" data-def="smed"><rect x="570" y="340.5" width="26" height="11" rx="2"/><text x="583" y="349" text-anchor="middle">SMED</text></g>
         <g class="kb-lab kb-sup" text-anchor="middle"><text x="932" y="196">Tier 1 Raw</text><text x="932" y="212">Material Supplier</text></g>
         <g class="kb-fg"><rect x="258" y="306" width="30" height="24" rx="3"/><text x="273" y="321" text-anchor="middle">FG</text><text x="273" y="344" class="kb-lab" text-anchor="middle">Finished goods</text></g>
         <!-- information flow: kanban layer (shown in the Information flow view) -->
         <g class="kb" id="kb">
           <g class="kb-paths" fill="none" stroke="rgba(233,238,244,.55)" stroke-width="1.5" stroke-dasharray="4 5" stroke-linecap="round">
-            <path id="kbl1" d="M443 318H480V393.5H506"/><path id="kbl2" d="M532 393.5H550V417H577.5"/><path id="kbl3" d="M585 409.5V399"/><path id="kbl4" d="M585 388V362H517V325.5"/>
+            <path id="kbl1" d="M443 318H480V390H495"/><path id="kbl2" d="M543 390H550V417H577.5"/><path id="kbl3" d="M585 409.5V399"/><path id="kbl4" d="M585 381V364H517V325.5"/>
           </g>
           <g class="kb-st"><g id="kbn-s1" class="kb-n"><circle cx="517" cy="318" r="7.5"/><text x="517" y="321" text-anchor="middle">1</text></g><g id="kbn-s2" class="kb-n"><circle cx="517" cy="283" r="7.5"/><text x="517" y="286" text-anchor="middle">2</text></g><g id="kbn-s3" class="kb-n"><circle cx="552" cy="258" r="7.5"/><text x="552" y="261" text-anchor="middle">3</text></g><g id="kbn-s4" class="kb-n"><circle cx="583" cy="283" r="7.5"/><text x="583" y="286" text-anchor="middle">4</text></g><g id="kbn-s5" class="kb-n"><circle cx="583" cy="318" r="7.5"/><text x="583" y="321" text-anchor="middle">5</text></g><g id="kbn-s6" class="kb-n"><circle cx="585" cy="417" r="7.5"/><text x="585" y="420" text-anchor="middle">6</text></g><g id="kbn-s7" class="kb-n"><circle cx="585" cy="452" r="7.5"/><text x="585" y="455" text-anchor="middle">7</text></g><g id="kbn-s8" class="kb-n"><circle cx="550" cy="474" r="7.5"/><text x="550" y="477" text-anchor="middle">8</text></g><g id="kbn-s9" class="kb-n"><circle cx="519" cy="452" r="7.5"/><text x="519" y="455" text-anchor="middle">9</text></g><g id="kbn-s10" class="kb-n"><circle cx="519" cy="417" r="7.5"/><text x="519" y="420" text-anchor="middle">10</text></g><g id="kbn-s11" class="kb-n"><circle cx="435" cy="318" r="7.5"/><text x="435" y="321" text-anchor="middle">11</text></g><g id="kbn-s12" class="kb-n"><circle cx="402" cy="318" r="7.5"/><text x="402" y="321" text-anchor="middle">12</text></g><g id="kbn-s13" class="kb-n"><circle cx="369" cy="318" r="7.5"/><text x="369" y="321" text-anchor="middle">13</text></g><g id="kbn-s14" class="kb-n"><circle cx="336" cy="318" r="7.5"/><text x="336" y="321" text-anchor="middle">14</text></g><g id="kbn-s15" class="kb-n"><circle cx="303" cy="318" r="7.5"/><text x="303" y="321" text-anchor="middle">15</text></g></g>
           <g id="kbn-h" class="kb-box"><rect x="398" y="372" width="70" height="22" rx="3"/><line x1="408.0" y1="372" x2="408.0" y2="394"/><line x1="418.0" y1="372" x2="418.0" y2="394"/><line x1="428.0" y1="372" x2="428.0" y2="394"/><line x1="438.0" y1="372" x2="438.0" y2="394"/><line x1="448.0" y1="372" x2="448.0" y2="394"/><line x1="458.0" y1="372" x2="458.0" y2="394"/></g>
@@ -751,7 +751,7 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
       <a href="#lab">Explore the Lab</a><a href="#lean-house">Lean House</a><a href="modules">Modules</a><a href="#project">About</a><a href="testimonials">Testimonials</a><a href="#contact">Contact</a>
     </div>
   </div>
-  <div class="wrap"><p class="site-rev">Last updated November 4, 2026 · Revision 136</p></div>
+  <div class="wrap"><p class="site-rev">Last updated November 4, 2026 · Revision 137</p></div>
 </footer>
 
 <dialog class="bdlg" id="bioDlg" aria-labelledby="bdlg-h">
@@ -1446,7 +1446,7 @@ if('IntersectionObserver' in window && !reduce){
   var title=document.getElementById('planTitle'), capR=document.getElementById('planCapR'), legend=document.getElementById('kbLegend'), cardsG=document.getElementById('kbCards');
   var T={material:'Material flows from Cell 1 to Cell 2 to Cell 3', info:'Kanban cards flow with the product, pulled from the Heijunka box'};
   var C={material:'AS/RS feeds raw stock · Raw Stock delivers material to Cells 1, 2 and 3 · product flows Cell 1 → Cell 2 → Cell 3', info:''};
-  var P={FG:[273,318],SM10:[519,393.5],SM6:[585,393.5],
+  var P={FG:[273,318],SM10:[519,390],SM6:[585,390],
     1:[517,318],2:[517,283],3:[552,258],4:[583,283],5:[583,318],
     6:[585,417],7:[585,452],8:[550,474],9:[519,452],10:[519,417],
     11:[435,318],12:[402,318],13:[369,318],14:[336,318],15:[303,318]};
@@ -1496,10 +1496,10 @@ if('IntersectionObserver' in window && !reduce){
     if(k!=='w') tok({fill:fill,step:true,pts:[s0,P[11],P[12],P[13],P[14],P[15],P.FG],ids:[null,'11','12','13','14','15',null],dur:steps(6),start:S,appear:0,keep:true,idx:i});
     // station 11 -> supermarket at station 10 pulls a card, posted at station 6, moves 6..10
     var SB=S+TICK;
-    tok({fill:fill,step:true,pts:[P.SM10,P[6],P[7],P[8],P[9],P[10]],ids:['sm10','6','7','8','9','10'],dur:steps(5),start:SB,appear:S+MOVE,fade:350,via:{0:[[550,393.5],[550,417]]}});
+    tok({fill:fill,step:true,pts:[P.SM10,P[6],P[7],P[8],P[9],P[10]],ids:['sm10','6','7','8','9','10'],dur:steps(5),start:SB,appear:S+MOVE,fade:350,via:{0:[[550,390],[550,417]]}});
     // station 6 pulls from the supermarket at station 6, posted at station 1, moves 1..5
     var SC=SB+TICK;
-    tok({fill:fill,step:true,pts:[P.SM6,P[1],P[2],P[3],P[4],P[5]],ids:['sm6','1','2','3','4','5'],dur:steps(5),start:SC,appear:SB+MOVE,fade:350,via:{0:[[585,362],[517,362]]}});
+    tok({fill:fill,step:true,pts:[P.SM6,P[1],P[2],P[3],P[4],P[5]],ids:['sm6','1','2','3','4','5'],dur:steps(5),start:SC,appear:SB+MOVE,fade:350,via:{0:[[585,364],[517,364]]}});
     lit('kbl1',S+MOVE,S+TICK+MOVE); lit('kbl2',SB,SB+MOVE+250); lit('kbl3',SB+MOVE,SC+MOVE); lit('kbl4',SC,SC+MOVE+250);
     // two-bin replenishment: Cell 1 signals Raw Stock, Raw Stock signals the AS/RS
     var SD=SC+5*TICK;

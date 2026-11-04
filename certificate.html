@@ -66,6 +66,20 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 .b.pri{background:var(--orange);border-color:var(--orange);color:#1A0C02}
 .b:hover{border-color:var(--orange)}
 .note{max-width:1000px;margin:14px auto 0;font-size:13px;color:#26313F}
+.share{max-width:1000px;margin:22px auto 0;padding:16px 18px;border-radius:14px;background:#fff;border:1px solid var(--line);display:grid;gap:10px}
+.sh-k{font:600 12px "IBM Plex Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--navy)}
+.sh-row{display:flex;flex-wrap:wrap;gap:10px}
+.sh-b{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--navy);display:grid;place-items:center;cursor:pointer;transition:transform .2s,border-color .2s,color .2s,background .2s}
+.sh-b svg{width:22px;height:22px}
+.sh-b:hover{transform:translateY(-2px)}
+.sh-b[data-net=linkedin]:hover{color:#fff;background:#0A66C2;border-color:#0A66C2}
+.sh-b[data-net=facebook]:hover{color:#fff;background:#1877F2;border-color:#1877F2}
+.sh-b[data-net=instagram]:hover{color:#fff;background:#C13584;border-color:#C13584}
+.sh-b[data-net=x]:hover{color:#fff;background:#000;border-color:#000}
+.sh-b.sh-dl:hover{border-color:var(--orange);color:#9A460C}
+.sh-b:focus-visible{outline:2px solid var(--orange);outline-offset:3px}
+.sh-msg{font-size:14px;color:#26313F;min-height:1.2em}
+.sh-msg:empty{display:none}
 .empty{max-width:640px;margin:60px auto;text-align:center;display:grid;gap:12px}
 .empty h1{font:800 32px "Archivo",sans-serif;color:var(--navy)}
 /* paper look on screen: warm white, fine grain, faint fibers and slightly darker edges (the PDF stays plain white) */
@@ -75,13 +89,13 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 @media print{
   @page{size:landscape;margin:0}
   body{background:#fff;padding:0}
-  .top,.status,.acts,.note{display:none!important}
+  .top,.status,.acts,.note,.share{display:none!important}
   html,body{width:100%;height:100%}body{display:grid;place-items:center}#out{width:100%}
   .cert-box{max-width:none;width:min(100vw,141.4vh);margin:0 auto}
   .cert-box>.cert{position:static;width:100%;transform:none;box-shadow:none;border-radius:0;background:#fff!important}
 }
 </style>
-<script src="i18n-dict.js?v=8d064632" defer></script>
+<script src="i18n-dict.js?v=e244f12d" defer></script>
 <script src="i18n.js?v=3a5d34c9" defer></script>
 </head>
 <body>
@@ -96,24 +110,34 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
   var id=(new URLSearchParams(location.search).get('id')||'').trim().toUpperCase();
   function esc(t){return String(t||'').replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
   function notFound(msg){ out.innerHTML='<div class="empty"><h1>Certificate not found</h1><p>'+esc(msg)+'</p><p><a href="/">Go to the Tiger Motors Lean Education Center</a></p></div>'; }
+  /* share buttons, shown only to the certificate's owner */
+  var SHARE=[
+    {k:'linkedin',name:'LinkedIn',icon:'<svg viewBox="0 0 24 24"><path fill="currentColor" d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>'},
+    {k:'facebook',name:'Facebook',icon:'<svg viewBox="0 0 24 24"><path fill="currentColor" d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg>'},
+    {k:'instagram',name:'Instagram',icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.3"/><circle cx="17.6" cy="6.4" r="1.2" fill="currentColor" stroke="none"/></svg>'},
+    {k:'x',name:'X',icon:'<svg viewBox="0 0 24 24"><path fill="currentColor" d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.41l-5.8-7.58-6.64 7.58H.47l8.6-9.83L0 1.15h7.59l5.24 6.93 6.07-6.93zm-1.29 19.5h2.04L6.49 3.24H4.3l13.31 17.41z"/></svg>'}
+  ];
   if(!id){ notFound('This link does not include a certificate ID.'); return; }
   var sb=window.TMAuth&&window.TMAuth.client; if(!sb){ notFound('Verification is temporarily unavailable. Please try again later.'); return; }
   /* Download PDF: one landscape page, Letter in the US and A4 elsewhere, drawn from a full-size copy of the
      certificate so the result is the same on phones and computers. */
   function load(src){ return new Promise(function(ok,no){ var t=document.createElement('script'); t.src=src; t.onload=ok; t.onerror=no; document.head.appendChild(t); }); }
-  function makePdf(btn, c){
-    var label=btn.textContent; btn.disabled=true; btn.textContent='Preparing PDF…';
-    var libs=window.html2canvas&&window.jspdf?Promise.resolve():Promise.all([
-      load('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js'),
-      load('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js')]);
+  function loadCanvas(){ return window.html2canvas?Promise.resolve():load('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js'); }
+  /* draws a full-size copy of the certificate (same result on phones and computers) */
+  function renderCanvas(scale){
     var stage=document.createElement('div');
     stage.style.cssText='position:fixed;left:-10000px;top:0;width:1000px;pointer-events:none';
     var copy=document.querySelector('.cert').cloneNode(true);
     copy.style.cssText='position:relative;transform:none;max-width:none;width:1000px;margin:0;border-radius:0;box-shadow:none;background:#fff';
     stage.appendChild(copy); document.body.appendChild(stage);
-    libs.then(function(){ return (document.fonts&&document.fonts.ready)||null; }).then(function(){
-      return window.html2canvas(copy,{scale:3.4,backgroundColor:'#ffffff',useCORS:true,logging:false});
-    }).then(function(canvas){
+    return Promise.resolve((document.fonts&&document.fonts.ready)||null).then(function(){
+      return window.html2canvas(copy,{scale:scale,backgroundColor:'#ffffff',useCORS:true,logging:false});
+    }).then(function(cv){ stage.remove(); return cv; },function(e){ stage.remove(); throw e; });
+  }
+  function makePdf(btn, c){
+    var label=btn.textContent; btn.disabled=true; btn.textContent='Preparing PDF…';
+    var libs=Promise.all([loadCanvas(), window.jspdf?null:load('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js')]);
+    libs.then(function(){ return renderCanvas(3.4); }).then(function(canvas){
       var letter=/^en-(US|CA)$|^(es-(US|MX)|fr-CA)$/i.test(navigator.language||'');
       var fmt=letter?'letter':'a4', pdf=new window.jspdf.jsPDF({orientation:'landscape',unit:'mm',format:fmt});
       var pw=pdf.internal.pageSize.getWidth(), ph=pdf.internal.pageSize.getHeight(), r=canvas.width/canvas.height;
@@ -121,7 +145,7 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
       pdf.addImage(canvas.toDataURL('image/jpeg',0.95),'JPEG',(pw-w)/2,(ph-h)/2,w,h);
       pdf.save('Tiger-Motors-Certificate-'+c.id+'.pdf');
     }).catch(function(){ window.print(); }).then(function(){
-      stage.remove(); btn.disabled=false; btn.textContent=label;
+      btn.disabled=false; btn.textContent=label;
     });
   }
   sb.rpc('verify_certificate',{p_id:id}).then(function(r){
@@ -144,6 +168,10 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
         '<div class="c-foot"><div><b>Issued</b>'+esc(date)+'</div><div><b>Certificate ID</b>'+esc(c.id)+'</div><div><b>Verify at</b>tigermotorslean.com/certificate</div></div>'+
       '</div></section></div>'+
       '<div class="acts"><button class="b pri" type="button" id="pdf">Download PDF</button><button class="b" type="button" id="copy">Copy verification link</button><a class="b" href="'+esc(li)+'" target="_blank" rel="noopener">Add to LinkedIn</a></div>'+
+      '<div class="share" id="share" hidden><p class="sh-k">Share your achievement</p><div class="sh-row">'+
+        SHARE.map(function(n){ return '<button type="button" class="sh-b" data-net="'+n.k+'" aria-label="Share on '+n.name+'" title="Share on '+n.name+'">'+n.icon+'</button>'; }).join('')+
+        '<button type="button" class="sh-b sh-dl" data-net="image" aria-label="Download the image" title="Download the image"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m-5-5 5 5 5-5M5 20h14"/></svg></button>'+
+      '</div><p class="sh-msg" id="shMsg" role="status"></p></div>'+
       '<p class="note">The PDF is a single landscape page (Letter or A4), ready to print on your own paper. Anyone with the verification link can confirm this certificate is real.</p>';
     document.title=c.full_name+' · Certificate of Completion · Tiger Motors Lean Education Center';
     var box=document.querySelector('.cert-box');
@@ -151,6 +179,41 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
     fit(); if(window.ResizeObserver) new ResizeObserver(fit).observe(box); else window.addEventListener('resize',fit);
     document.getElementById('pdf').addEventListener('click',function(e){ makePdf(e.currentTarget, c); });
     document.getElementById('copy').addEventListener('click',function(e){ var b=e.currentTarget; (navigator.clipboard?navigator.clipboard.writeText(url):Promise.reject()).then(function(){ b.textContent='Link copied'; },function(){ prompt('Copy this link',url); }); });
+    /* owner only: a ready-made image of the certificate plus a short post, so one tap opens the network with everything prepared.
+       Phones use the share sheet (image and text go straight into the app); computers download the image, copy the text and open the site. */
+    if(window.TMAuth) TMAuth.onChange(function(st){
+      if(!st.cert||st.cert.id!==c.id||document.getElementById('share').dataset.on) return;
+      var box2=document.getElementById('share'), msg=document.getElementById('shMsg'); box2.dataset.on='1'; box2.hidden=false;
+      var site='https://tigermotorslean.com';
+      var T=function(x){ return window.TMI18n?TMI18n.t(x):x; };
+      function blurb(){ return T('I just earned my Lean House Fundamentals certificate from the Tiger Motors Lean Education Center at Auburn University! People, Standardization, Jidoka, Just in Time and Continuous Improvement, learned in an immersive digital twin of a Lean lab. The course is free, so you can earn yours too:')+' '+site+' #Lean #LeanManufacturing #ContinuousImprovement'; }
+      var file=null;
+      loadCanvas().then(function(){ return renderCanvas(2); }).then(function(cv){
+        cv.toBlob(function(bl){ if(bl) file=new File([bl],'Tiger-Motors-Lean-Certificate.jpg',{type:'image/jpeg'}); },'image/jpeg',.92);
+      }).catch(function(){});
+      function say(t){ msg.textContent=T(t); }
+      function download(){ var a=document.createElement('a'); a.href=URL.createObjectURL(file); a.download=file.name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function(){ URL.revokeObjectURL(a.href); },4000); }
+      var NAMES={linkedin:'LinkedIn',facebook:'Facebook',instagram:'Instagram',x:'X'};
+      box2.addEventListener('click',function(e){
+        var bt=e.target.closest('[data-net]'); if(!bt) return;
+        var n=bt.getAttribute('data-net'), text=blurb();
+        if(!file){ say('Your certificate image is still being prepared. Try again in a moment.'); return; }
+        if(navigator.clipboard) navigator.clipboard.writeText(text).catch(function(){});
+        if(n==='image'){ download(); say('Image downloaded and post text copied.'); return; }
+        var phone=matchMedia('(pointer:coarse)').matches&&navigator.canShare&&navigator.canShare({files:[file]});
+        if(phone){
+          navigator.share({files:[file],text:text}).then(function(){ say('Shared. Thank you for spreading the word!'); },function(){});
+          say('Choose '+NAMES[n]+' in the share menu. Your post text is also copied, in case the app leaves it out.');
+          return;
+        }
+        var url={linkedin:'https://www.linkedin.com/feed/?shareActive=true&text='+encodeURIComponent(text),
+                 facebook:'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(site),
+                 instagram:'https://www.instagram.com/',
+                 x:'https://x.com/intent/post?text='+encodeURIComponent(text)}[n];
+        download(); window.open(url,'_blank','noopener');
+        say('Your certificate image was downloaded and your post text is copied. In '+NAMES[n]+', paste the text and add the image.');
+      });
+    });
   });
 })();
 </script>

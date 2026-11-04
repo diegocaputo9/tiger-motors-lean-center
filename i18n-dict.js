@@ -5059,5 +5059,90 @@ window.TM_I18N = {
 "Añade una foto de perfil.",
 "Bitte füge ein Porträtfoto hinzu.",
 "Aggiungi una foto ritratto."
+],
+"Earn a free certificate when you finish": [
+"Obtén un certificado gratis al terminar",
+"Erhalte nach Abschluss ein kostenloses Zertifikat",
+"Ottieni un certificato gratuito al termine"
+],
+"View in Lean House": [
+"Ver en la Casa Lean",
+"Im Lean House ansehen",
+"Vedi nella Lean House"
+],
+"Foundation of the Lean House": [
+"Base de la Casa Lean",
+"Fundament des Lean House",
+"Fondamenta della Lean House"
+],
+"Base layer of the Lean House": [
+"Capa base de la Casa Lean",
+"Basisschicht des Lean House",
+"Strato di base della Lean House"
+],
+"Left pillar of the Lean House": [
+"Pilar izquierdo de la Casa Lean",
+"Linke Säule des Lean House",
+"Pilastro sinistro della Lean House"
+],
+"Right pillar of the Lean House": [
+"Pilar derecho de la Casa Lean",
+"Rechte Säule des Lean House",
+"Pilastro destro della Lean House"
+],
+"Center pillar of the Lean House": [
+"Pilar central de la Casa Lean",
+"Mittlere Säule des Lean House",
+"Pilastro centrale della Lean House"
+],
+"The beam of the Lean House": [
+"La viga de la Casa Lean",
+"Der Querbalken des Lean House",
+"La trave della Lean House"
+],
+"Share your achievement": [
+"Comparte tu logro",
+"Teile deinen Erfolg",
+"Condividi il tuo traguardo"
+],
+"re:^Share on (.+)$": [
+"Compartir en $1",
+"Auf $1 teilen",
+"Condividi su $1"
+],
+"Download the image": [
+"Descargar la imagen",
+"Bild herunterladen",
+"Scarica l’immagine"
+],
+"I just earned my Lean House Fundamentals certificate from the Tiger Motors Lean Education Center at Auburn University! People, Standardization, Jidoka, Just in Time and Continuous Improvement, learned in an immersive digital twin of a Lean lab. The course is free, so you can earn yours too:": [
+"¡Acabo de obtener mi certificado Lean House Fundamentals del Tiger Motors Lean Education Center de Auburn University! Personas, Estandarización, Jidoka, Just in Time y Mejora Continua, aprendidos en un gemelo digital inmersivo de un laboratorio Lean. El curso es gratuito, así que tú también puedes obtener el tuyo:",
+"Ich habe gerade mein Zertifikat Lean House Fundamentals vom Tiger Motors Lean Education Center der Auburn University erhalten! Menschen, Standardisierung, Jidoka, Just in Time und kontinuierliche Verbesserung, gelernt in einem immersiven digitalen Zwilling eines Lean-Labors. Der Kurs ist kostenlos, du kannst deins also auch bekommen:",
+"Ho appena ottenuto il mio certificato Lean House Fundamentals dal Tiger Motors Lean Education Center della Auburn University! Persone, Standardizzazione, Jidoka, Just in Time e Miglioramento Continuo, appresi in un gemello digitale immersivo di un laboratorio Lean. Il corso è gratuito, quindi puoi ottenere il tuo anche tu:"
+],
+"Your certificate image is still being prepared. Try again in a moment.": [
+"La imagen de tu certificado aún se está preparando. Inténtalo de nuevo en un momento.",
+"Das Bild deines Zertifikats wird noch vorbereitet. Versuche es gleich noch einmal.",
+"L’immagine del tuo certificato è ancora in preparazione. Riprova tra un momento."
+],
+"Image downloaded and post text copied.": [
+"Imagen descargada y texto de la publicación copiado.",
+"Bild heruntergeladen und Beitragstext kopiert.",
+"Immagine scaricata e testo del post copiato."
+],
+"Shared. Thank you for spreading the word!": [
+"Compartido. ¡Gracias por correr la voz!",
+"Geteilt. Danke, dass du es weitersagst!",
+"Condiviso. Grazie per aver diffuso la voce!"
+],
+"re:^Choose (.+) in the share menu\\. Your post text is also copied, in case the app leaves it out\\.$": [
+"Elige $1 en el menú para compartir. El texto de tu publicación también está copiado, por si la app no lo incluye.",
+"Wähle $1 im Teilen-Menü. Dein Beitragstext ist auch kopiert, falls die App ihn weglässt.",
+"Scegli $1 nel menu di condivisione. Anche il testo del post è copiato, nel caso l’app non lo includa."
+],
+"re:^Your certificate image was downloaded and your post text is copied\\. In (.+), paste the text and add the image\\.$": [
+"La imagen de tu certificado se descargó y el texto de la publicación está copiado. En $1, pega el texto y añade la imagen.",
+"Das Bild deines Zertifikats wurde heruntergeladen und dein Beitragstext kopiert. Füge in $1 den Text ein und hänge das Bild an.",
+"L’immagine del tuo certificato è stata scaricata e il testo del post è copiato. In $1, incolla il testo e aggiungi l’immagine."
 ]
 };
