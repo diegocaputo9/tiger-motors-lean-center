@@ -1,7 +1,7 @@
 /* End-of-module quizzes. The questions live in modules-data.js (module.quiz). A page puts an empty element with
    data-quiz="<module key>" where the quiz card goes; this script fills it in and keeps it up to date:
    locked and greyed out until every resource of the module is done, then "Take the quiz". Questions come one at a
-   time with the explanation after each answer. Passing (module.quiz.pass correct answers) marks the quiz done
+   time with the explanation (and an optional list, q.l) after each answer. Passing (module.quiz.pass correct answers) marks the quiz done
    through auth.js like any other resource, so it counts toward the module and the certificate. The best score is
    kept on this device and, when signed in, in the account. */
 (function(){
@@ -123,9 +123,15 @@ function answer(j){
   setProg(run.i + 1);
   var last = run.i === run.qz.q.length - 1, fb = dlg.querySelector('.qz-fb');
   fb.innerHTML = '<p class="qz-v ' + (ok ? 'ok' : 'bad') + '">' + (ok ? CHECK : '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M7 7l10 10M17 7L7 17"/></svg>') + '<b>' + (ok ? 'Correct' : 'Not quite') + '</b></p>' +
-    '<p class="qz-e">' + esc(q.e) + '</p><button type="button" class="btn btn-primary qz-next" data-next>' + '<span>' + (last ? 'See your result' : 'Next question') + '</span>' + ARROW + '</button>';
+    (q.e ? '<p class="qz-e">' + esc(q.e) + '</p>' : '') + explList(q) + '<button type="button" class="btn btn-primary qz-next" data-next>' + '<span>' + (last ? 'See your result' : 'Next question') + '</span>' + ARROW + '</button>';
   fb.hidden = false;
   var nx = fb.querySelector('[data-next]'); setTimeout(function(){ nx.focus({ preventScroll: true }); fb.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }, 30);
+}
+// optional list under the explanation: q.l = [items], q.ol = true for a numbered list
+function explList(q){
+  if(!q.l) return '';
+  var tag = q.ol ? 'ol' : 'ul';
+  return '<' + tag + ' class="qz-l">' + q.l.map(function(x){ return '<li>' + esc(x) + '</li>'; }).join('') + '</' + tag + '>';
 }
 function result(){
   var qz = run.qz, total = qz.q.length, pass = run.score >= qz.pass;

@@ -3569,5 +3569,275 @@ window.TM_I18N = {
 "El profesor insiste en que el respeto por las personas no se trata de sentirse bien. Es práctico: las personas más cercanas al proceso son las únicas que entienden de verdad sus muchas fallas. La mejora continua es la forma en que Toyota las ayuda a eliminar los problemas que encuentran.",
 "Der Dozent betont, dass es beim Respekt vor den Menschen nicht um ein gutes Gefühl geht. Er ist praktisch: Die Menschen, die dem Prozess am nächsten sind, sind die Einzigen, die seine vielen Schwächen wirklich verstehen. Kontinuierliche Verbesserung ist der Weg, auf dem Toyota ihnen hilft, die gefundenen Probleme zu beseitigen.",
 "Il docente sottolinea che il rispetto per le persone non serve a sentirsi bene. È pratico: le persone più vicine al processo sono le uniche a capirne davvero i tanti difetti. Il miglioramento continuo è il modo in cui Toyota le aiuta a eliminare i problemi che trovano."
+],
+"Shine → Sort → Set in order → Sustain → Standardize": [
+"Limpiar → Clasificar → Ordenar → Sostener → Estandarizar",
+"Säubern → Sortieren → Systematisieren → Selbstdisziplin → Standardisieren",
+"Pulire → Separare → Ordinare → Sostenere → Standardizzare"
+],
+"Sort → Set in order → Shine → Standardize → Sustain": [
+"Clasificar → Ordenar → Limpiar → Estandarizar → Sostener",
+"Sortieren → Systematisieren → Säubern → Standardisieren → Selbstdisziplin",
+"Separare → Ordinare → Pulire → Standardizzare → Sostenere"
+],
+"Set in order → Sort → Standardize → Shine → Sustain": [
+"Ordenar → Clasificar → Estandarizar → Limpiar → Sostener",
+"Systematisieren → Sortieren → Standardisieren → Säubern → Selbstdisziplin",
+"Ordinare → Separare → Standardizzare → Pulire → Sostenere"
+],
+"Sort → Shine → Set in order → Sustain → Standardize": [
+"Clasificar → Limpiar → Ordenar → Sostener → Estandarizar",
+"Sortieren → Säubern → Systematisieren → Selbstdisziplin → Standardisieren",
+"Separare → Pulire → Ordinare → Sostenere → Standardizzare"
+],
+"Taiichi Ohno said, “Where there is no standard, there can be no improvement.” What does the lecturer say Ohno really meant?": [
+"Taiichi Ohno dijo: “Donde no hay estándar, no puede haber mejora”. Según el profesor, ¿qué quería decir Ohno realmente?",
+"Taiichi Ohno sagte: „Wo es keinen Standard gibt, kann es keine Verbesserung geben.“ Was meinte Ohno laut dem Dozenten wirklich?",
+"Taiichi Ohno disse: “Dove non c’è uno standard, non può esserci miglioramento.” Secondo il docente, che cosa intendeva davvero Ohno?"
+],
+"Every operation needs a written work instruction posted at the station": [
+"Cada operación necesita una instrucción de trabajo escrita colocada en la estación",
+"Jeder Arbeitsgang braucht eine schriftliche Arbeitsanweisung an der Station",
+"Ogni operazione ha bisogno di un’istruzione di lavoro scritta affissa alla stazione"
+],
+"Without a consistent standard there is no “control group,” so you can’t test a change and trust the result": [
+"Sin un estándar consistente no hay “grupo de control”, así que no puedes probar un cambio y confiar en el resultado",
+"Ohne einen einheitlichen Standard gibt es keine „Kontrollgruppe“, also kann man eine Änderung nicht testen und dem Ergebnis vertrauen",
+"Senza uno standard coerente non esiste un “gruppo di controllo”, quindi non puoi testare un cambiamento e fidarti del risultato"
+],
+"Standards should be rewritten every time someone finds a better method": [
+"Los estándares deben reescribirse cada vez que alguien encuentra un método mejor",
+"Standards sollten jedes Mal neu geschrieben werden, wenn jemand eine bessere Methode findet",
+"Gli standard vanno riscritti ogni volta che qualcuno trova un metodo migliore"
+],
+"Only management can make improvements": [
+"Solo la gerencia puede hacer mejoras",
+"Nur das Management kann Verbesserungen vornehmen",
+"Solo la direzione può apportare miglioramenti"
+],
+"A valid experiment needs a control group. In a factory, the standard process plays that role. If people do the job differently from shift to shift or station to station, you can’t tell whether a change actually worked or whether the result was just random variation.": [
+"Un experimento válido necesita un grupo de control. En una fábrica, el proceso estándar cumple ese papel. Si las personas hacen el trabajo de forma distinta de un turno a otro o de una estación a otra, no puedes saber si un cambio funcionó de verdad o si el resultado fue solo variación aleatoria.",
+"Ein gültiges Experiment braucht eine Kontrollgruppe. In einer Fabrik übernimmt der Standardprozess diese Rolle. Wenn die Arbeit von Schicht zu Schicht oder von Station zu Station unterschiedlich erledigt wird, lässt sich nicht sagen, ob eine Änderung wirklich funktioniert hat oder ob das Ergebnis nur zufällige Streuung war.",
+"Un esperimento valido ha bisogno di un gruppo di controllo. In una fabbrica questo ruolo lo svolge il processo standard. Se le persone svolgono il lavoro in modo diverso da un turno all’altro o da una stazione all’altra, non puoi capire se un cambiamento ha funzionato davvero o se il risultato era solo variabilità casuale."
+],
+"Plan-Do-Check-Act (PDCA), the structured improvement cycle that follows the scientific method, is also known as the ________ cycle.": [
+"Plan-Do-Check-Act (PDCA), el ciclo estructurado de mejora que sigue el método científico, también se conoce como el ciclo de ________.",
+"Plan-Do-Check-Act (PDCA), der strukturierte Verbesserungszyklus nach der wissenschaftlichen Methode, ist auch als ________-Zyklus bekannt.",
+"Plan-Do-Check-Act (PDCA), il ciclo strutturato di miglioramento che segue il metodo scientifico, è noto anche come ciclo di ________."
+],
+"W. Edwards Deming, a famous statistician and management theorist, helped Japanese industry after World War II and developed PDCA. It lines up with the scientific method:": [
+"W. Edwards Deming, un famoso estadístico y teórico de la gestión, ayudó a la industria japonesa después de la Segunda Guerra Mundial y desarrolló el PDCA. Se corresponde con el método científico:",
+"W. Edwards Deming, ein berühmter Statistiker und Managementtheoretiker, half der japanischen Industrie nach dem Zweiten Weltkrieg und entwickelte PDCA. Es entspricht der wissenschaftlichen Methode:",
+"W. Edwards Deming, famoso statistico e teorico del management, aiutò l’industria giapponese dopo la Seconda guerra mondiale e sviluppò il PDCA. Corrisponde al metodo scientifico:"
+],
+"Plan: form a hypothesis": [
+"Plan (planificar): formular una hipótesis",
+"Plan: eine Hypothese aufstellen",
+"Plan: formulare un’ipotesi"
+],
+"Do: test it with an experiment": [
+"Do (hacer): ponerla a prueba con un experimento",
+"Do: sie mit einem Experiment testen",
+"Do: verificarla con un esperimento"
+],
+"Check: analyze the data and draw conclusions": [
+"Check (verificar): analizar los datos y sacar conclusiones",
+"Check: die Daten analysieren und Schlüsse ziehen",
+"Check: analizzare i dati e trarre conclusioni"
+],
+"Act: respond to what you found": [
+"Act (actuar): responder a lo que encontraste",
+"Act: auf die Ergebnisse reagieren",
+"Act: agire in base a ciò che hai scoperto"
+],
+"If an operator finds a faster or higher-quality way to do the job, they should start using it right away, even if it differs from the standard work.": [
+"Si un operador encuentra una forma más rápida o de mayor calidad de hacer el trabajo, debería empezar a usarla de inmediato, aunque sea distinta del trabajo estándar.",
+"Wenn ein Bediener einen schnelleren oder qualitativ besseren Weg findet, die Arbeit zu erledigen, sollte er ihn sofort anwenden, auch wenn er von der Standardarbeit abweicht.",
+"Se un operatore trova un modo più veloce o di qualità migliore per svolgere il lavoro, dovrebbe iniziare subito a usarlo, anche se è diverso dal lavoro standard."
+],
+"The lecturer says it’s better for the operator to follow the standard as written, even a weaker one. A new idea may not actually be better, and if everyone changes the method on their own, you lose control of the system. The right path is to suggest the idea. The organization then evaluates it, updates the standard and trains operators on every shift.": [
+"El profesor dice que es mejor que el operador siga el estándar tal como está escrito, aunque sea uno más débil. Una idea nueva puede no ser realmente mejor, y si cada uno cambia el método por su cuenta, se pierde el control del sistema. Lo correcto es proponer la idea. Luego la organización la evalúa, actualiza el estándar y capacita a los operadores de todos los turnos.",
+"Der Dozent sagt, es sei besser, wenn der Bediener den Standard so befolgt, wie er geschrieben ist, selbst einen schwächeren. Eine neue Idee ist vielleicht gar nicht besser, und wenn jeder die Methode eigenmächtig ändert, verliert man die Kontrolle über das System. Der richtige Weg ist, die Idee vorzuschlagen. Die Organisation bewertet sie dann, aktualisiert den Standard und schult die Bediener aller Schichten.",
+"Il docente dice che è meglio che l’operatore segua lo standard così com’è scritto, anche se è più debole. Una nuova idea potrebbe non essere davvero migliore, e se ognuno cambia il metodo per conto proprio, si perde il controllo del sistema. La strada giusta è proporre l’idea. L’organizzazione poi la valuta, aggiorna lo standard e forma gli operatori di tutti i turni."
+],
+"In the McDonald’s “tennis court” scene from The Founder, the team chalks out the kitchen and runs the staff through pretend orders over and over. What does the lecturer want you to take from it?": [
+"En la escena de la “cancha de tenis” de McDonald’s en la película The Founder, el equipo dibuja la cocina con tiza y hace que el personal practique pedidos simulados una y otra vez. ¿Qué quiere el profesor que aprendas de ella?",
+"In der „Tennisplatz“-Szene von McDonald’s aus dem Film The Founder zeichnet das Team die Küche mit Kreide auf und lässt das Personal immer wieder Probebestellungen durchspielen. Was sollen Sie laut dem Dozenten daraus mitnehmen?",
+"Nella scena del “campo da tennis” di McDonald’s nel film The Founder, il team disegna la cucina con il gesso e fa provare al personale ordini simulati più e più volte. Che cosa vuole il docente che tu ne tragga?"
+],
+"Fast food doesn’t need standards": [
+"La comida rápida no necesita estándares",
+"Fast Food braucht keine Standards",
+"Il fast food non ha bisogno di standard"
+],
+"Kitchen layout matters more than training": [
+"La distribución de la cocina importa más que la capacitación",
+"Die Küchenanordnung ist wichtiger als die Schulung",
+"La disposizione della cucina conta più della formazione"
+],
+"With a well-defined, disciplined standard, you can experiment with PDCA cycles and improve the system": [
+"Con un estándar bien definido y disciplinado, puedes experimentar con ciclos PDCA y mejorar el sistema",
+"Mit einem klar definierten, disziplinierten Standard kann man mit PDCA-Zyklen experimentieren und das System verbessern",
+"Con uno standard ben definito e disciplinato, puoi sperimentare con i cicli PDCA e migliorare il sistema"
+],
+"Improvement should be left to individual workers": [
+"La mejora debe dejarse en manos de cada trabajador",
+"Verbesserung sollte den einzelnen Arbeitern überlassen werden",
+"Il miglioramento va lasciato ai singoli lavoratori"
+],
+"McDonald’s already had a highly detailed standard, down to how people moved in the kitchen. That let them try a layout, check the outcome, adjust and repeat until it was “a symphony of efficiency.” The Smashburger example is the contrast: a weak standard full of variation (seasoning amounts, angles, missing tools), which makes real experiments impossible.": [
+"McDonald’s ya tenía un estándar muy detallado, hasta en cómo se movían las personas en la cocina. Eso les permitió probar una distribución, revisar el resultado, ajustar y repetir hasta lograr “una sinfonía de eficiencia”. El ejemplo de Smashburger es el contraste: un estándar débil lleno de variación (cantidades de condimento, ángulos, herramientas que faltan), que hace imposibles los experimentos reales.",
+"McDonald’s hatte bereits einen sehr detaillierten Standard, bis hin zu den Bewegungen der Mitarbeiter in der Küche. So konnten sie eine Anordnung ausprobieren, das Ergebnis prüfen, anpassen und wiederholen, bis daraus „eine Symphonie der Effizienz“ wurde. Das Beispiel Smashburger ist der Gegensatz: ein schwacher Standard voller Streuung (Gewürzmengen, Winkel, fehlende Werkzeuge), der echte Experimente unmöglich macht.",
+"McDonald’s aveva già uno standard molto dettagliato, fino a come le persone si muovevano in cucina. Questo permise di provare una disposizione, verificare il risultato, aggiustare e ripetere finché non diventò “una sinfonia di efficienza”. L’esempio di Smashburger è il contrario: uno standard debole e pieno di variabilità (quantità di condimento, angolazioni, attrezzi mancanti), che rende impossibili veri esperimenti."
+],
+"According to the lecture, what happens when you try to improve a system that has no standards?": [
+"Según la clase, ¿qué pasa cuando intentas mejorar un sistema que no tiene estándares?",
+"Was passiert laut der Vorlesung, wenn man ein System ohne Standards verbessern will?",
+"Secondo la lezione, che cosa succede quando cerchi di migliorare un sistema senza standard?"
+],
+"Improvement happens faster because people are free to innovate": [
+"La mejora ocurre más rápido porque las personas tienen libertad para innovar",
+"Verbesserung geht schneller, weil die Menschen frei innovieren können",
+"Il miglioramento è più rapido perché le persone sono libere di innovare"
+],
+"Any improvement will only be random, and you can’t tell what actually caused it": [
+"Cualquier mejora será solo aleatoria, y no puedes saber qué la causó realmente",
+"Jede Verbesserung ist nur zufällig, und man kann nicht sagen, was sie tatsächlich verursacht hat",
+"Qualsiasi miglioramento sarà solo casuale, e non puoi sapere che cosa lo ha davvero causato"
+],
+"Variation goes down on its own": [
+"La variación disminuye por sí sola",
+"Die Streuung nimmt von selbst ab",
+"La variabilità diminuisce da sola"
+],
+"Results are just as reliable, only slower to measure": [
+"Los resultados son igual de confiables, solo que más lentos de medir",
+"Die Ergebnisse sind genauso zuverlässig, nur langsamer zu messen",
+"I risultati sono altrettanto affidabili, solo più lenti da misurare"
+],
+"Without standards, a good result might come from your change or from some other source of variation, and the same goes for a bad result. There’s no control group, so it isn’t really an experiment. A disciplined standard removes the “wild variation” caused by people doing the job however they like and leaves only the process’s true variation.": [
+"Sin estándares, un buen resultado podría venir de tu cambio o de otra fuente de variación, y lo mismo pasa con un mal resultado. No hay grupo de control, así que en realidad no es un experimento. Un estándar disciplinado elimina la “variación descontrolada” que causan las personas al hacer el trabajo como quieren y deja solo la variación real del proceso.",
+"Ohne Standards kann ein gutes Ergebnis von Ihrer Änderung oder von einer anderen Streuungsquelle kommen, und dasselbe gilt für ein schlechtes Ergebnis. Es gibt keine Kontrollgruppe, also ist es eigentlich kein Experiment. Ein disziplinierter Standard beseitigt die „wilde Streuung“, die entsteht, wenn jeder die Arbeit so macht, wie er will, und lässt nur die echte Streuung des Prozesses übrig.",
+"Senza standard, un buon risultato potrebbe derivare dal tuo cambiamento o da un’altra fonte di variabilità, e lo stesso vale per un cattivo risultato. Non c’è un gruppo di controllo, quindi non è davvero un esperimento. Uno standard disciplinato elimina la “variabilità selvaggia” causata dalle persone che svolgono il lavoro come preferiscono e lascia solo la vera variabilità del processo."
+],
+"5S is mainly a housekeeping system for keeping the workplace clean and neat.": [
+"Las 5S son principalmente un sistema de limpieza para mantener el lugar de trabajo limpio y ordenado.",
+"5S ist hauptsächlich ein Ordnungssystem, um den Arbeitsplatz sauber und aufgeräumt zu halten.",
+"Le 5S sono soprattutto un sistema di pulizia per mantenere il posto di lavoro pulito e in ordine."
+],
+"The lecturer stresses this point twice: 5S is not a housekeeping system. Its purpose is to standardize the facility beyond the workstation and create a visual management system that makes any deviation from the standard obvious, so it gets corrected right away. A clean workplace is a side benefit.": [
+"El profesor lo recalca dos veces: las 5S no son un sistema de limpieza. Su propósito es estandarizar la planta más allá de la estación de trabajo y crear un sistema de gestión visual que haga evidente cualquier desviación del estándar, para que se corrija de inmediato. Un lugar de trabajo limpio es un beneficio adicional.",
+"Der Dozent betont es zweimal: 5S ist kein Ordnungssystem. Ziel ist es, die Anlage über den Arbeitsplatz hinaus zu standardisieren und ein visuelles Managementsystem zu schaffen, das jede Abweichung vom Standard sichtbar macht, damit sie sofort korrigiert wird. Ein sauberer Arbeitsplatz ist ein Nebeneffekt.",
+"Il docente lo ribadisce due volte: le 5S non sono un sistema di pulizia. Il loro scopo è standardizzare lo stabilimento oltre la postazione di lavoro e creare un sistema di gestione visiva che renda evidente ogni deviazione dallo standard, così da correggerla subito. Un posto di lavoro pulito è un beneficio secondario."
+],
+"What is the correct order for implementing 5S?": [
+"¿Cuál es el orden correcto para implementar las 5S?",
+"Was ist die richtige Reihenfolge bei der Einführung von 5S?",
+"Qual è l’ordine corretto per implementare le 5S?"
+],
+"Sort: remove what isn’t needed.": [
+"Clasificar: retirar lo que no se necesita.",
+"Sortieren: Nicht Benötigtes entfernen.",
+"Separare: eliminare ciò che non serve."
+],
+"Set in order: give everything a designated, marked location (footprints, labels, shadow boards).": [
+"Ordenar: dar a todo un lugar asignado y marcado (siluetas en el piso, etiquetas, tableros de sombras).",
+"Systematisieren: allem einen festen, markierten Platz geben (Bodenmarkierungen, Etiketten, Schattenbretter).",
+"Ordinare: dare a ogni cosa una posizione assegnata e segnata (sagome a terra, etichette, pannelli con le sagome degli attrezzi)."
+],
+"Shine: deep-clean so deviations stand out.": [
+"Limpiar: hacer una limpieza a fondo para que las desviaciones resalten.",
+"Säubern: gründlich reinigen, damit Abweichungen auffallen.",
+"Pulire: pulire a fondo perché le deviazioni risaltino."
+],
+"Standardize: document the rules, metrics and maintenance plans.": [
+"Estandarizar: documentar las reglas, las métricas y los planes de mantenimiento.",
+"Standardisieren: Regeln, Kennzahlen und Wartungspläne dokumentieren.",
+"Standardizzare: documentare regole, metriche e piani di manutenzione."
+],
+"Sustain: keep it going through goals, measurement and leadership.": [
+"Sostener: mantenerlo con metas, medición y liderazgo.",
+"Selbstdisziplin: es durch Ziele, Messung und Führung am Laufen halten.",
+"Sostenere: mantenerlo nel tempo con obiettivi, misurazione e leadership."
+],
+"During the Sort step, what does a yellow tag mean?": [
+"En el paso de Clasificar, ¿qué significa una etiqueta amarilla?",
+"Was bedeutet beim Schritt Sortieren ein gelbes Etikett?",
+"Nella fase di Separare, che cosa significa un’etichetta gialla?"
+],
+"The item is not needed and must be permanently removed": [
+"El artículo no se necesita y debe retirarse definitivamente",
+"Der Gegenstand wird nicht benötigt und muss dauerhaft entfernt werden",
+"L’oggetto non serve e va rimosso definitivamente"
+],
+"The item is used every cycle at the workstation": [
+"El artículo se usa en cada ciclo en la estación de trabajo",
+"Der Gegenstand wird in jedem Zyklus am Arbeitsplatz verwendet",
+"L’oggetto si usa a ogni ciclo nella postazione"
+],
+"The item is needed, but not every cycle, so it belongs in a secondary location": [
+"El artículo se necesita, pero no en cada ciclo, así que va en una ubicación secundaria",
+"Der Gegenstand wird benötigt, aber nicht in jedem Zyklus, und gehört deshalb an einen sekundären Ort",
+"L’oggetto serve, ma non a ogni ciclo, quindi va in una posizione secondaria"
+],
+"The item is damaged and needs repair": [
+"El artículo está dañado y necesita reparación",
+"Der Gegenstand ist beschädigt und muss repariert werden",
+"L’oggetto è danneggiato e va riparato"
+],
+"Red tags mark items that aren’t needed and get permanently removed. Yellow tags mark items that are needed but not every cycle, like a calibration kit used once a month, so they move out of the workstation to a secondary spot. Green tags (optional) mark items used every cycle, so anything left without a tag clearly hasn’t been reviewed yet.": [
+"Las etiquetas rojas marcan los artículos que no se necesitan y se retiran definitivamente. Las amarillas marcan los que se necesitan pero no en cada ciclo, como un kit de calibración que se usa una vez al mes, así que salen de la estación de trabajo a un lugar secundario. Las verdes (opcionales) marcan los que se usan en cada ciclo, de modo que todo lo que quede sin etiqueta claramente aún no se ha revisado.",
+"Rote Etiketten kennzeichnen Gegenstände, die nicht benötigt werden und dauerhaft entfernt werden. Gelbe Etiketten kennzeichnen Gegenstände, die benötigt werden, aber nicht in jedem Zyklus, etwa ein Kalibrierset, das einmal im Monat gebraucht wird. Sie kommen vom Arbeitsplatz an einen sekundären Ort. Grüne Etiketten (optional) kennzeichnen Gegenstände, die in jedem Zyklus verwendet werden, sodass alles ohne Etikett offensichtlich noch nicht geprüft wurde.",
+"Le etichette rosse indicano gli oggetti che non servono e vengono rimossi definitivamente. Le gialle indicano gli oggetti che servono ma non a ogni ciclo, come un kit di calibrazione usato una volta al mese, quindi lasciano la postazione per una posizione secondaria. Le verdi (facoltative) indicano gli oggetti usati a ogni ciclo, così tutto ciò che resta senza etichetta chiaramente non è ancora stato esaminato."
+],
+"In the Shine step, cleaning equipment and machinery is the first step in ________, because oil leaks and other problems become easy to spot.": [
+"En el paso de Limpiar, limpiar los equipos y la maquinaria es el primer paso del ________, porque las fugas de aceite y otros problemas se vuelven fáciles de detectar.",
+"Beim Schritt Säubern ist das Reinigen von Anlagen und Maschinen der erste Schritt zu ________, weil Ölleckagen und andere Probleme so leicht zu erkennen sind.",
+"Nella fase di Pulire, la pulizia di attrezzature e macchinari è il primo passo verso ________, perché perdite d’olio e altri problemi diventano facili da individuare."
+],
+"Total productive maintenance (TPM)": [
+"Mantenimiento productivo total (TPM)",
+"Total Productive Maintenance (TPM)",
+"Manutenzione produttiva totale (TPM)"
+],
+"Value stream mapping": [
+"Mapeo de la cadena de valor",
+"Wertstromanalyse",
+"Mappatura del flusso di valore"
+],
+"A spotless machine shows a deviation like an oil leak right away. The lecturer’s Continental Motors story makes the point: he wanted to replace a filthy cylinder-honing machine, and the CEO asked why they didn’t just clean it up and maintain it. After a deep clean, a new coat of paint, sight glasses for oil and maintenance instructions, the machine was like new.": [
+"Una máquina impecable muestra de inmediato una desviación como una fuga de aceite. La historia del profesor en Continental Motors lo ilustra: quería reemplazar una bruñidora de cilindros muy sucia, y el director general le preguntó por qué no la limpiaban y le daban mantenimiento. Tras una limpieza a fondo, una nueva capa de pintura, mirillas para el aceite e instrucciones de mantenimiento, la máquina quedó como nueva.",
+"An einer blitzsauberen Maschine fällt eine Abweichung wie ein Ölleck sofort auf. Die Geschichte des Dozenten bei Continental Motors zeigt das: Er wollte eine völlig verschmutzte Zylinderhonmaschine ersetzen, und der CEO fragte, warum man sie nicht einfach reinigt und wartet. Nach einer Grundreinigung, einem neuen Anstrich, Schaugläsern für das Öl und Wartungsanweisungen war die Maschine wie neu.",
+"Una macchina perfettamente pulita mostra subito una deviazione come una perdita d’olio. La storia del docente alla Continental Motors lo dimostra: voleva sostituire una levigatrice per cilindri sporchissima, e l’amministratore delegato gli chiese perché non la pulissero e non la mantenessero. Dopo una pulizia a fondo, una nuova mano di vernice, spie di livello per l’olio e istruzioni di manutenzione, la macchina era come nuova."
+],
+"Sustain is often called the hardest part of 5S. According to the lecturer, what does it really depend on?": [
+"Sostener suele considerarse la parte más difícil de las 5S. Según el profesor, ¿de qué depende realmente?",
+"Selbstdisziplin gilt oft als der schwierigste Teil von 5S. Wovon hängt sie laut dem Dozenten wirklich ab?",
+"Sostenere è spesso considerata la parte più difficile delle 5S. Secondo il docente, da che cosa dipende davvero?"
+],
+"Buying better storage and labeling equipment": [
+"Comprar mejores equipos de almacenamiento y etiquetado",
+"Besseres Lager- und Beschriftungsmaterial kaufen",
+"Acquistare attrezzature migliori per lo stoccaggio e l’etichettatura"
+],
+"Hiring more careful employees": [
+"Contratar empleados más cuidadosos",
+"Sorgfältigere Mitarbeiter einstellen",
+"Assumere dipendenti più attenti"
+],
+"Strong leadership: never walking by a deviation, especially in the first couple of months": [
+"Un liderazgo fuerte: nunca pasar de largo ante una desviación, sobre todo en los primeros dos meses",
+"Starke Führung: nie an einer Abweichung vorbeigehen, besonders in den ersten paar Monaten",
+"Una leadership forte: non passare mai oltre davanti a una deviazione, soprattutto nei primi due mesi"
+],
+"Doing a full 5S audit only once a year": [
+"Hacer una auditoría 5S completa solo una vez al año",
+"Nur einmal im Jahr ein vollständiges 5S-Audit durchführen",
+"Fare un audit 5S completo solo una volta all’anno"
+],
+"The lecturer’s “good sheep” idea is that it’s natural for people to drift from a standard, so it’s never the people’s fault. Sustaining 5S takes leadership that treats every deviation, even a trash can outside its square, as a teaching moment. About two months of intense leadership after implementation usually makes the system run itself. Without it, the system falls apart and is very hard to restart.": [
+"La idea de las “buenas ovejas” del profesor es que es natural que las personas se desvíen de un estándar, así que nunca es culpa de ellas. Sostener las 5S requiere un liderazgo que trate cada desviación, incluso un bote de basura fuera de su cuadro, como una oportunidad de enseñar. Unos dos meses de liderazgo intenso después de la implementación suelen hacer que el sistema funcione solo. Sin eso, el sistema se desmorona y es muy difícil reiniciarlo.",
+"Die Idee der „guten Schafe“ des Dozenten besagt, dass es natürlich ist, wenn Menschen vom Standard abdriften, und es deshalb nie die Schuld der Menschen ist. Um 5S aufrechtzuerhalten, braucht es eine Führung, die jede Abweichung, selbst einen Mülleimer außerhalb seiner Markierung, als Lerngelegenheit nutzt. Etwa zwei Monate intensive Führung nach der Einführung sorgen meist dafür, dass das System von selbst läuft. Ohne sie zerfällt das System und lässt sich nur sehr schwer neu starten.",
+"L’idea delle “brave pecore” del docente è che per le persone è naturale allontanarsi da uno standard, quindi non è mai colpa loro. Sostenere le 5S richiede una leadership che tratti ogni deviazione, anche un cestino fuori dal suo riquadro, come un’occasione per insegnare. Circa due mesi di leadership intensa dopo l’implementazione di solito fanno sì che il sistema vada avanti da solo. Senza, il sistema crolla ed è molto difficile farlo ripartire."
 ]
 };

@@ -1466,6 +1466,8 @@ html.qz-open{overflow:hidden}
 .qz-v{display:flex;align-items:center;gap:8px;margin:0 0 8px;font:700 13px "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase}
 .qz-v.ok{color:#7FE0B8}.qz-v.bad{color:#FFB0B2}
 .qz-e{margin:0 0 16px;font:400 15px/1.6 "IBM Plex Sans",system-ui,sans-serif;color:#D6DFE9}
+.qz-l{margin:-6px 0 16px;padding-left:22px;display:grid;gap:6px;font:400 15px/1.55 "IBM Plex Sans",system-ui,sans-serif;color:#D6DFE9}
+.qz-l li::marker{color:#FF9B4D;font-weight:700}
 .qz-next{justify-content:center}
 .qz-res{display:grid;justify-items:center;text-align:center;gap:6px;padding:8px 0 4px;animation:qzIn .4s ease}
 .qz-score{width:112px;height:112px;border-radius:50%;display:grid;place-items:center;border:4px solid #E5484D;margin-bottom:10px}
