@@ -751,7 +751,7 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
       <a href="#lab">Explore the Lab</a><a href="#lean-house">Lean House</a><a href="modules">Modules</a><a href="#project">About</a><a href="testimonials">Testimonials</a><a href="#contact">Contact</a>
     </div>
   </div>
-  <div class="wrap"><p class="site-rev">Last updated November 4, 2026 · Revision 138</p></div>
+  <div class="wrap"><p class="site-rev">Last updated November 4, 2026 · Revision 139</p></div>
 </footer>
 
 <dialog class="bdlg" id="bioDlg" aria-labelledby="bdlg-h">
@@ -1420,7 +1420,7 @@ if('IntersectionObserver' in window && !reduce){
   })();
 })();
 
-/* ---- nav: liquid glass lens that springs to the hovered tab and stretches on the way (back to the current section on leave) ---- */
+/* ---- nav: liquid glass lens on the current tab; it leans toward a hovered tab and springs over on click, stretching on the way ---- */
 (function(){
   var nav=document.querySelector('.nav-links'); if(!nav||!window.requestAnimationFrame) return;
   var rm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1463,11 +1463,22 @@ if('IntersectionObserver' in window && !reduce){
     if(!shown||rm){ L=tL; R=tR; vL=vR=0; paint(); lens.classList.add('on'); shown=true; return; }
     if(!run){ run=true; last=0; requestAnimationFrame(frame); }
   }
+  // hovering another tab only leans the lens a little toward it; a click moves it there
+  var sel=null;
+  function home(){ return sel||current(); }
+  function lean(a){
+    var h=home(); if(!h||!shown){ go(a); return; }
+    var p=box(h); tL=p[0]; tR=p[1];
+    if(a!==h){ var q=box(a), pull=Math.min(16,Math.max(8,(q[1]-q[0])*.22)); if(q[0]>p[0]) tR+=pull; else tL-=pull; }
+    if(rm){ L=tL; R=tR; paint(); return; }
+    if(!run){ run=true; last=0; requestAnimationFrame(frame); }
+  }
   tabs.forEach(function(a){
-    a.addEventListener('mouseenter',function(){ go(a); });
-    a.addEventListener('focus',function(){ go(a); });
+    a.addEventListener('mouseenter',function(){ lean(a); });
+    a.addEventListener('focus',function(){ lean(a); });
+    a.addEventListener('click',function(){ sel=a; go(a); });
   });
-  nav.addEventListener('mouseleave',function(){ go(current()); });
+  nav.addEventListener('mouseleave',function(){ sel=null; go(current()); });
   nav.addEventListener('pointerdown',function(){ lens.classList.add('press'); });
   window.addEventListener('pointerup',function(){ lens.classList.remove('press'); });
   // follow the scroll-spy when the current section changes
