@@ -1481,3 +1481,26 @@ html.qz-open{overflow:hidden}
 @keyframes qzIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 @media (max-width:640px){.qz{width:100vw;max-height:100dvh;height:100dvh;margin:0;border-radius:0;border:0}.qz-in{max-height:100dvh}.qz-q{font-size:19px}.qz-opts.qz-tf{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){.qz-fb,.qz-res{animation:none}.qz-prog i{transition:none}}
+
+/* ---------- past TAs card in the team section (links to /past-tas; the strip is CSS only, no images) ---------- */
+.ta-alumni{margin-top:14px;display:grid;gap:10px}
+.taa-main{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"strip strip" "txt go";gap:16px 20px;align-items:end;padding:14px 14px 18px;border-radius:14px;background:var(--navy);color:#fff;text-decoration:none;overflow:hidden;transition:transform .3s var(--ease),box-shadow .3s}
+.taa-main:hover{transform:translateY(-2px);box-shadow:0 18px 36px -20px rgba(12,35,64,.7)}
+.taa-main:focus-visible{outline:2px solid var(--orange);outline-offset:3px}
+.taa-strip{grid-area:strip;display:block;overflow:hidden;border-radius:10px;-webkit-mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.taa-track{display:flex;gap:8px;width:max-content;animation:taa-roll 60s linear infinite}
+.taa-main:hover .taa-track{animation-play-state:paused}
+.taa-track i{flex:none;width:64px;height:80px;border-radius:9px;background:radial-gradient(circle at 50% 38%,rgba(255,255,255,.22) 0 13px,transparent 14px),radial-gradient(ellipse 26px 22px at 50% 100%,rgba(255,255,255,.22) 0 98%,transparent),#16365A}
+.taa-track i:nth-child(3n+2){background-color:#1D4370}
+.taa-track i:nth-child(5n+4){background-color:#5A3518}
+@keyframes taa-roll{to{transform:translateX(calc(-50% - 4px))}}
+.taa-txt{grid-area:txt;display:grid;gap:4px;padding-left:4px}
+.taa-txt small{font:500 12px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:#FFB877}
+.taa-txt b{font:700 20px/1.2 var(--f-display)}
+.taa-txt span{font-size:15px;line-height:1.5;color:#E2E9F1}
+.taa-go{grid-area:go;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;background:var(--orange);color:#1A0C02;font:600 12px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+.taa-go svg{width:15px;height:15px}
+.taa-cta{font-size:15px;color:var(--ink-2);padding-left:4px}
+.taa-cta a{color:#003A73;font-weight:600}
+@media (max-width:640px){.taa-main{grid-template-areas:"strip" "txt" "go";grid-template-columns:1fr;gap:12px}.taa-go{justify-self:start}.taa-track i{width:52px;height:66px}}
+@media (prefers-reduced-motion:reduce){.taa-track{animation:none}}

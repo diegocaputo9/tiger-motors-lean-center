@@ -4659,5 +4659,410 @@ window.TM_I18N = {
 "Deming decía que la supervisión debe sustituirse por liderazgo, y que la tarea del liderazgo es ayudar a las personas. Ohno era muy exigente con los gerentes, pero no con los operadores. Esperaba que los gerentes entendieran por qué fallan las cosas y consiguieran a la gente lo que necesita. Los operadores participan porque son los únicos que pueden “escuchar el proceso”, no como un gesto de buena voluntad ni para ganarse su aceptación.",
 "Deming sagte, Überwachung solle durch Führung ersetzt werden, und die Aufgabe von Führung sei es, Menschen zu helfen. Ohno war sehr streng mit Führungskräften, aber nicht mit Bedienern. Er erwartete von Führungskräften, zu verstehen, warum Dinge scheitern, und den Menschen zu besorgen, was sie brauchen. Bediener werden einbezogen, weil nur sie „den Prozess hören“ können, nicht als Geste des guten Willens oder um Zustimmung zu gewinnen.",
 "Deming diceva che la supervisione va sostituita dalla leadership, e che il compito della leadership è aiutare le persone. Ohno era molto duro con i manager, ma non con gli operatori. Si aspettava che i manager capissero perché le cose non funzionano e procurassero alle persone ciò di cui hanno bisogno. Gli operatori vengono coinvolti perché sono gli unici in grado di “ascoltare il processo”, non come gesto di buona volontà o per ottenere il loro consenso."
+],
+"Past Teaching Assistants · Tiger Motors Lean Education Center": [
+"Antiguos asistentes de docencia · Tiger Motors Lean Education Center",
+"Ehemalige Lehrassistenten · Tiger Motors Lean Education Center",
+"Ex assistenti alla didattica · Tiger Motors Lean Education Center"
+],
+"Past TA Spotlight · Tiger Motors Lean Education Center": [
+"Antiguos TA destacados · Tiger Motors Lean Education Center",
+"Ehemalige TAs im Rampenlicht · Tiger Motors Lean Education Center",
+"Ex TA in primo piano · Tiger Motors Lean Education Center"
+],
+"Our past <em>TAs</em>": [
+"Nuestros antiguos <em>TA</em>",
+"Unsere ehemaligen <em>TAs</em>",
+"I nostri ex <em>TA</em>"
+],
+"Every semester, teaching assistants keep the lab running. They set up the line, coach students through the simulations, and build tools we still use today. This page is our thank-you to each of them.": [
+"Cada semestre, los asistentes de docencia mantienen el laboratorio en marcha. Preparan la línea, guían a los estudiantes en las simulaciones y crean herramientas que todavía usamos hoy. Esta página es nuestro agradecimiento a cada uno de ellos.",
+"Jedes Semester halten Lehrassistenten das Labor am Laufen. Sie richten die Linie ein, begleiten die Studierenden durch die Simulationen und bauen Werkzeuge, die wir bis heute nutzen. Diese Seite ist unser Dankeschön an jeden Einzelnen von ihnen.",
+"Ogni semestre gli assistenti alla didattica mandano avanti il laboratorio. Preparano la linea, guidano gli studenti nelle simulazioni e realizzano strumenti che usiamo ancora oggi. Questa pagina è il nostro grazie a ciascuno di loro."
+],
+"Were you a TA at Tiger Motors? <em>We want to feature you.</em>": [
+"¿Fuiste TA en Tiger Motors? <em>Queremos destacarte.</em>",
+"Warst du TA bei Tiger Motors? <em>Wir möchten dich vorstellen.</em>",
+"Sei stato TA a Tiger Motors? <em>Vogliamo metterti in primo piano.</em>"
+],
+"Tell us what you built in the lab, how it shaped you and where Lean has taken you since. It takes about five minutes, and only a few fields are required.": [
+"Cuéntanos qué construiste en el laboratorio, cómo te marcó y adónde te ha llevado Lean desde entonces. Toma unos cinco minutos y solo unos pocos campos son obligatorios.",
+"Erzähl uns, was du im Labor gebaut hast, wie es dich geprägt hat und wohin Lean dich seitdem geführt hat. Es dauert etwa fünf Minuten, und nur wenige Felder sind Pflicht.",
+"Raccontaci cosa hai costruito in laboratorio, come ti ha segnato e dove ti ha portato il Lean da allora. Bastano circa cinque minuti e solo pochi campi sono obbligatori."
+],
+"Get featured": [
+"Quiero aparecer",
+"Mitmachen",
+"Partecipa"
+],
+"Copy the link for a fellow TA": [
+"Copiar el enlace para otro TA",
+"Link für andere TAs kopieren",
+"Copia il link per un altro TA"
+],
+"Copy this link:": [
+"Copia este enlace:",
+"Diesen Link kopieren:",
+"Copia questo link:"
+],
+"TA alumni": [
+"Antiguos TA",
+"TA-Alumni",
+"Ex TA"
+],
+"Profiles are on the way": [
+"Los perfiles están en camino",
+"Die Profile folgen in Kürze",
+"I profili sono in arrivo"
+],
+"1 teaching assistant": [
+"1 asistente de docencia",
+"1 Lehrassistent",
+"1 assistente alla didattica"
+],
+"re:^(\\d+) teaching assistants$": [
+"$1 asistentes de docencia",
+"$1 Lehrassistenten",
+"$1 assistenti alla didattica"
+],
+"Is this you?": [
+"¿Eres tú?",
+"Bist du das?",
+"Sei tu?"
+],
+"Send us your photo, projects and story, and we will add you here.": [
+"Envíanos tu foto, tus proyectos y tu historia, y te añadiremos aquí.",
+"Schick uns dein Foto, deine Projekte und deine Geschichte, und wir nehmen dich hier auf.",
+"Inviaci la tua foto, i tuoi progetti e la tua storia e ti aggiungeremo qui."
+],
+"Get featured →": [
+"Quiero aparecer →",
+"Mitmachen →",
+"Partecipa →"
+],
+"How the lab changed me": [
+"Cómo me cambió el laboratorio",
+"Wie das Labor mich verändert hat",
+"Come mi ha cambiato il laboratorio"
+],
+"Projects in the lab": [
+"Proyectos en el laboratorio",
+"Projekte im Labor",
+"Progetti in laboratorio"
+],
+"Bio": [
+"Biografía",
+"Kurzbiografie",
+"Biografia"
+],
+"Photos": [
+"Fotos",
+"Fotos",
+"Foto"
+],
+"Past TAs": [
+"Antiguos TA",
+"Ehemalige TAs",
+"Ex TA"
+],
+"Past TA spotlight": [
+"Antiguos TA destacados",
+"Ehemalige TAs im Rampenlicht",
+"Ex TA in primo piano"
+],
+"You helped build <em>the lab</em>": [
+"Ayudaste a construir <em>el laboratorio</em>",
+"Du hast <em>das Labor</em> mit aufgebaut",
+"Hai contribuito a costruire <em>il laboratorio</em>"
+],
+"Teaching assistants are the reason Tiger Motors works. We want every one of you to have a place on the website, so students can see what you built and where Lean took you. Tell us your story and we will feature it.": [
+"Los asistentes de docencia son la razón por la que Tiger Motors funciona. Queremos que cada uno de ustedes tenga un lugar en el sitio web, para que los estudiantes vean lo que construyeron y adónde los llevó Lean. Cuéntanos tu historia y la publicaremos.",
+"Lehrassistenten sind der Grund, warum Tiger Motors funktioniert. Wir möchten, dass jeder von euch einen Platz auf der Website bekommt, damit Studierende sehen, was ihr gebaut habt und wohin Lean euch geführt hat. Erzähl uns deine Geschichte, und wir stellen sie vor.",
+"Gli assistenti alla didattica sono il motivo per cui Tiger Motors funziona. Vogliamo che ognuno di voi abbia un posto sul sito, così gli studenti possono vedere cosa avete costruito e dove vi ha portato il Lean. Raccontaci la tua storia e la pubblicheremo."
+],
+"<b>5 min</b> to fill out": [
+"<b>5 min</b> para completarlo",
+"<b>5 Min.</b> zum Ausfüllen",
+"<b>5 min</b> per compilarlo"
+],
+"<b>*</b> marks the only required fields": [
+"<b>*</b> marca los únicos campos obligatorios",
+"<b>*</b> kennzeichnet die einzigen Pflichtfelder",
+"<b>*</b> indica gli unici campi obbligatori"
+],
+"Goes straight to Dr. Tom Devall and Diego Caputo": [
+"Llega directamente al Dr. Tom Devall y a Diego Caputo",
+"Geht direkt an Dr. Tom Devall und Diego Caputo",
+"Arriva direttamente al Dr. Tom Devall e a Diego Caputo"
+],
+"About you": [
+"Sobre ti",
+"Über dich",
+"Su di te"
+],
+"Required": [
+"Obligatorio",
+"Pflicht",
+"Obbligatorio"
+],
+"Optional": [
+"Opcional",
+"Optional",
+"Facoltativo"
+],
+"Only so we can contact you. It is never shown on the website.": [
+"Solo para poder contactarte. Nunca se muestra en el sitio web.",
+"Nur damit wir dich kontaktieren können. Sie wird nie auf der Website angezeigt.",
+"Solo per poterti contattare. Non viene mai mostrata sul sito."
+],
+"When were you a TA?": [
+"¿Cuándo fuiste TA?",
+"Wann warst du TA?",
+"Quando sei stato TA?"
+],
+"e.g. Fall 2019 – Spring 2021": [
+"p. ej., otoño 2019 – primavera 2021",
+"z. B. Herbst 2019 – Frühjahr 2021",
+"es. autunno 2019 – primavera 2021"
+],
+"LinkedIn profile": [
+"Perfil de LinkedIn",
+"LinkedIn-Profil",
+"Profilo LinkedIn"
+],
+"linkedin.com/in/your-name": [
+"linkedin.com/in/tu-nombre",
+"linkedin.com/in/dein-name",
+"linkedin.com/in/tuo-nome"
+],
+"Your time in the lab": [
+"Tu tiempo en el laboratorio",
+"Deine Zeit im Labor",
+"Il tuo periodo in laboratorio"
+],
+"Fill in whatever you like. A sentence or two is plenty.": [
+"Completa lo que quieras. Una o dos frases son suficientes.",
+"Füll aus, was du möchtest. Ein oder zwei Sätze reichen völlig.",
+"Compila quello che vuoi. Bastano una o due frasi."
+],
+"Where are you now?": [
+"¿Dónde estás ahora?",
+"Wo bist du heute?",
+"Dove sei adesso?"
+],
+"e.g. Process Engineer at Mercedes-Benz": [
+"p. ej., ingeniera de procesos en Mercedes-Benz",
+"z. B. Prozessingenieur bei Mercedes-Benz",
+"es. ingegnere di processo in Mercedes-Benz"
+],
+"Projects you developed or implemented in the lab": [
+"Proyectos que desarrollaste o implementaste en el laboratorio",
+"Projekte, die du im Labor entwickelt oder umgesetzt hast",
+"Progetti che hai sviluppato o realizzato in laboratorio"
+],
+"e.g. a kanban system for the door line, check pieces for final inspection, a new SMED cart": [
+"p. ej., un sistema kanban para la línea de puertas, piezas de control para la inspección final, un nuevo carro SMED",
+"z. B. ein Kanban-System für die Türlinie, Prüfteile für die Endkontrolle, ein neuer SMED-Wagen",
+"es. un sistema kanban per la linea delle porte, pezzi di controllo per l’ispezione finale, un nuovo carrello SMED"
+],
+"How did being part of the lab change you?": [
+"¿Cómo te cambió formar parte del laboratorio?",
+"Wie hat dich die Zeit im Labor verändert?",
+"Come ti ha cambiato far parte del laboratorio?"
+],
+"Short bio": [
+"Biografía breve",
+"Kurze Biografie",
+"Breve biografia"
+],
+"A few lines about you, in the third person if you like": [
+"Unas líneas sobre ti, en tercera persona si lo prefieres",
+"Ein paar Zeilen über dich, gern in der dritten Person",
+"Qualche riga su di te, in terza persona se preferisci"
+],
+"Other links or socials": [
+"Otros enlaces o redes sociales",
+"Weitere Links oder soziale Netzwerke",
+"Altri link o social"
+],
+"Portfolio, Instagram, a project page, one per line": [
+"Portafolio, Instagram, una página de proyecto, uno por línea",
+"Portfolio, Instagram, eine Projektseite, einer pro Zeile",
+"Portfolio, Instagram, una pagina di progetto, uno per riga"
+],
+"A headshot gives you a face on the page. Photos of you in the Lego lab, with your projects, or at work (if it is related to Lean or manufacturing) help tell your story.": [
+"Una foto de perfil te da un rostro en la página. Las fotos tuyas en el laboratorio de Lego, con tus proyectos o en tu trabajo (si está relacionado con Lean o la manufactura) ayudan a contar tu historia.",
+"Ein Porträtfoto gibt dir ein Gesicht auf der Seite. Fotos von dir im Lego-Labor, mit deinen Projekten oder bei der Arbeit (wenn sie mit Lean oder Fertigung zu tun hat) helfen, deine Geschichte zu erzählen.",
+"Una foto ritratto ti dà un volto sulla pagina. Le foto di te nel laboratorio Lego, con i tuoi progetti o al lavoro (se legato al Lean o alla produzione) aiutano a raccontare la tua storia."
+],
+"Headshot": [
+"Foto de perfil",
+"Porträtfoto",
+"Foto ritratto"
+],
+"<b>Choose a headshot</b> or drop it here": [
+"<b>Elige una foto de perfil</b> o suéltala aquí",
+"<b>Porträtfoto auswählen</b> oder hier ablegen",
+"<b>Scegli una foto ritratto</b> o trascinala qui"
+],
+"Choose a headshot": [
+"Elegir una foto de perfil",
+"Porträtfoto auswählen",
+"Scegli una foto ritratto"
+],
+"More photos": [
+"Más fotos",
+"Weitere Fotos",
+"Altre foto"
+],
+"Up to 8: in the lab, with your projects, or at work": [
+"Hasta 8: en el laboratorio, con tus proyectos o en el trabajo",
+"Bis zu 8: im Labor, mit deinen Projekten oder bei der Arbeit",
+"Fino a 8: in laboratorio, con i tuoi progetti o al lavoro"
+],
+"<b>Choose photos</b> or drop them here": [
+"<b>Elige fotos</b> o suéltalas aquí",
+"<b>Fotos auswählen</b> oder hier ablegen",
+"<b>Scegli le foto</b> o trascinale qui"
+],
+"Choose photos": [
+"Elegir fotos",
+"Fotos auswählen",
+"Scegli le foto"
+],
+"What is in the photos?": [
+"¿Qué aparece en las fotos?",
+"Was ist auf den Fotos zu sehen?",
+"Cosa c’è nelle foto?"
+],
+"e.g. Me running the final assembly station in 2020": [
+"p. ej., yo en la estación de ensamblaje final en 2020",
+"z. B. ich an der Endmontage-Station im Jahr 2020",
+"es. io alla stazione di assemblaggio finale nel 2020"
+],
+"Remove photo": [
+"Quitar foto",
+"Foto entfernen",
+"Rimuovi foto"
+],
+"You can add up to 8 photos.": [
+"Puedes añadir hasta 8 fotos.",
+"Du kannst bis zu 8 Fotos hinzufügen.",
+"Puoi aggiungere fino a 8 foto."
+],
+"I agree that the Tiger Motors Lean Education Center may feature this information and these photos on tigermotorslean.com. <span class=\"req\">*</span>": [
+"Acepto que el Tiger Motors Lean Education Center publique esta información y estas fotos en tigermotorslean.com. <span class=\"req\">*</span>",
+"Ich bin einverstanden, dass das Tiger Motors Lean Education Center diese Angaben und Fotos auf tigermotorslean.com veröffentlicht. <span class=\"req\">*</span>",
+"Acconsento che il Tiger Motors Lean Education Center pubblichi queste informazioni e queste foto su tigermotorslean.com. <span class=\"req\">*</span>"
+],
+"The team reviews every profile before it is posted.": [
+"El equipo revisa cada perfil antes de publicarlo.",
+"Das Team prüft jedes Profil, bevor es veröffentlicht wird.",
+"Il team controlla ogni profilo prima di pubblicarlo."
+],
+"Send my information": [
+"Enviar mi información",
+"Meine Angaben senden",
+"Invia le mie informazioni"
+],
+"Preparing photos…": [
+"Preparando fotos…",
+"Fotos werden vorbereitet…",
+"Preparazione delle foto…"
+],
+"Tom and Diego received your information. We will review it, reach out if we have questions, and let you know when your spotlight is live.": [
+"Tom y Diego recibieron tu información. La revisaremos, te escribiremos si tenemos preguntas y te avisaremos cuando tu perfil esté publicado.",
+"Tom und Diego haben deine Angaben erhalten. Wir sehen sie uns an, melden uns bei Fragen und sagen dir Bescheid, sobald dein Profil online ist.",
+"Tom e Diego hanno ricevuto le tue informazioni. Le esamineremo, ti contatteremo se avremo domande e ti avviseremo quando il tuo profilo sarà online."
+],
+"See the past TAs": [
+"Ver a los antiguos TA",
+"Ehemalige TAs ansehen",
+"Vedi gli ex TA"
+],
+"Visit the website": [
+"Visitar el sitio web",
+"Zur Website",
+"Visita il sito"
+],
+"Please tell us when you were a TA.": [
+"Indícanos cuándo fuiste TA.",
+"Bitte gib an, wann du TA warst.",
+"Indicaci quando sei stato TA."
+],
+"Please paste the link to your LinkedIn profile.": [
+"Pega el enlace a tu perfil de LinkedIn.",
+"Bitte füge den Link zu deinem LinkedIn-Profil ein.",
+"Incolla il link al tuo profilo LinkedIn."
+],
+"Please confirm that we may feature your information on the website.": [
+"Confirma que podemos publicar tu información en el sitio web.",
+"Bitte bestätige, dass wir deine Angaben auf der Website veröffentlichen dürfen.",
+"Conferma che possiamo pubblicare le tue informazioni sul sito."
+],
+"We could not send your information. Please check your connection and try again.": [
+"No pudimos enviar tu información. Revisa tu conexión e inténtalo de nuevo.",
+"Wir konnten deine Angaben nicht senden. Bitte prüfe deine Verbindung und versuche es erneut.",
+"Non siamo riusciti a inviare le tue informazioni. Controlla la connessione e riprova."
+],
+"We could not read the form. Please try again.": [
+"No pudimos leer el formulario. Inténtalo de nuevo.",
+"Wir konnten das Formular nicht lesen. Bitte versuche es erneut.",
+"Non siamo riusciti a leggere il modulo. Riprova."
+],
+"Only photos can be attached.": [
+"Solo se pueden adjuntar fotos.",
+"Es können nur Fotos angehängt werden.",
+"Si possono allegare solo foto."
+],
+"Each photo must be under 15 MB.": [
+"Cada foto debe pesar menos de 15 MB.",
+"Jedes Foto muss kleiner als 15 MB sein.",
+"Ogni foto deve pesare meno di 15 MB."
+],
+"Your photos are too large together. Please send fewer or smaller photos.": [
+"Tus fotos son demasiado grandes en conjunto. Envía menos fotos o más pequeñas.",
+"Deine Fotos sind zusammen zu groß. Bitte sende weniger oder kleinere Fotos.",
+"Le tue foto sono troppo grandi nel complesso. Invia meno foto o foto più piccole."
+],
+"re:^Please send at most (\\d+) photos\\.$": [
+"Envía como máximo $1 fotos.",
+"Bitte sende höchstens $1 Fotos.",
+"Invia al massimo $1 foto."
+],
+"Thank you! We already received your information today.": [
+"¡Gracias! Ya recibimos tu información hoy.",
+"Danke! Wir haben deine Angaben heute bereits erhalten.",
+"Grazie! Abbiamo già ricevuto le tue informazioni oggi."
+],
+"We are receiving a lot of submissions right now. Please try again later.": [
+"Estamos recibiendo muchos envíos en este momento. Inténtalo más tarde.",
+"Wir erhalten gerade sehr viele Einsendungen. Bitte versuche es später erneut.",
+"Stiamo ricevendo molti invii in questo momento. Riprova più tardi."
+],
+"We could not save your information. Please try again.": [
+"No pudimos guardar tu información. Inténtalo de nuevo.",
+"Wir konnten deine Angaben nicht speichern. Bitte versuche es erneut.",
+"Non siamo riusciti a salvare le tue informazioni. Riprova."
+],
+"Past teaching assistants": [
+"Antiguos asistentes de docencia",
+"Ehemalige Lehrassistenten",
+"Ex assistenti alla didattica"
+],
+"The TAs who built the lab, the projects they left behind, and where Lean took them.": [
+"Los TA que construyeron el laboratorio, los proyectos que dejaron y adónde los llevó Lean.",
+"Die TAs, die das Labor aufgebaut haben, die Projekte, die sie hinterlassen haben, und wohin Lean sie geführt hat.",
+"I TA che hanno costruito il laboratorio, i progetti che hanno lasciato e dove li ha portati il Lean."
+],
+"Meet them": [
+"Conócelos",
+"Lerne sie kennen",
+"Scoprili"
+],
+"Were you a TA? <a href=\"ta-submit\">Get featured on the website</a>": [
+"¿Fuiste TA? <a href=\"ta-submit\">Aparece en el sitio web</a>",
+"Warst du TA? <a href=\"ta-submit\">Lass dich auf der Website vorstellen</a>",
+"Sei stato TA? <a href=\"ta-submit\">Fatti conoscere sul sito</a>"
 ]
 };
