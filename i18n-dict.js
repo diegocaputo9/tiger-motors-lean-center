@@ -5144,5 +5144,110 @@ window.TM_I18N = {
 "La imagen de tu certificado se descargó y el texto de la publicación está copiado. En $1, pega el texto y añade la imagen.",
 "Das Bild deines Zertifikats wurde heruntergeladen und dein Beitragstext kopiert. Füge in $1 den Text ein und hänge das Bild an.",
 "L’immagine del tuo certificato è stata scaricata e il testo del post è copiato. In $1, incolla il testo e aggiungi l’immagine."
+],
+"Install the app": [
+"Instalar la app",
+"App installieren",
+"Installa l’app"
+],
+"Free": [
+"Gratis",
+"Kostenlos",
+"Gratis"
+],
+"No app store": [
+"Sin tienda de apps",
+"Ohne App Store",
+"Senza app store"
+],
+"Device": [
+"Dispositivo",
+"Gerät",
+"Dispositivo"
+],
+"Add Tiger Motors to your home screen or desktop. It opens full screen, like an app.": [
+"Añade Tiger Motors a tu pantalla de inicio o a tu escritorio. Se abre en pantalla completa, como una app.",
+"Füge Tiger Motors zu deinem Home-Bildschirm oder Desktop hinzu. Es öffnet sich im Vollbild, wie eine App.",
+"Aggiungi Tiger Motors alla schermata Home o alla scrivania. Si apre a schermo intero, come un’app."
+],
+"Install now": [
+"Instalar ahora",
+"Jetzt installieren",
+"Installa ora"
+],
+"Your browser can install it in one click.": [
+"Tu navegador puede instalarla con un clic.",
+"Dein Browser kann sie mit einem Klick installieren.",
+"Il tuo browser può installarla con un clic."
+],
+"Open <b>tigermotorslean.com</b> in <b>Safari</b>.": [
+"Abre <b>tigermotorslean.com</b> en <b>Safari</b>.",
+"Öffne <b>tigermotorslean.com</b> in <b>Safari</b>.",
+"Apri <b>tigermotorslean.com</b> in <b>Safari</b>."
+],
+"Tap the <b>Share</b> button. On newer iPhones it is inside the <b>•••</b> menu.": [
+"Toca el botón <b>Compartir</b>. En los iPhone más recientes está dentro del menú <b>•••</b>.",
+"Tippe auf die Taste <b>Teilen</b>. Auf neueren iPhones ist sie im Menü <b>•••</b>.",
+"Tocca il pulsante <b>Condividi</b>. Sugli iPhone più recenti è nel menu <b>•••</b>."
+],
+"Scroll down and choose <b>Add to Home Screen</b>.": [
+"Desplázate hacia abajo y elige <b>Añadir a pantalla de inicio</b>.",
+"Scrolle nach unten und wähle <b>Zum Home-Bildschirm</b>.",
+"Scorri in basso e scegli <b>Aggiungi alla schermata Home</b>."
+],
+"Tap <b>Add</b>, then <b>Done</b>. The Tiger Motors icon is now on your home screen.": [
+"Toca <b>Añadir</b> y luego <b>OK</b>. El icono de Tiger Motors ya está en tu pantalla de inicio.",
+"Tippe auf <b>Hinzufügen</b> und dann auf <b>Fertig</b>. Das Tiger Motors Symbol ist jetzt auf deinem Home-Bildschirm.",
+"Tocca <b>Aggiungi</b>, poi <b>Fine</b>. L’icona di Tiger Motors è ora nella schermata Home."
+],
+"Open <b>tigermotorslean.com</b> in <b>Chrome</b>.": [
+"Abre <b>tigermotorslean.com</b> en <b>Chrome</b>.",
+"Öffne <b>tigermotorslean.com</b> in <b>Chrome</b>.",
+"Apri <b>tigermotorslean.com</b> in <b>Chrome</b>."
+],
+"Tap the <b>three-dot menu</b> in the top right corner.": [
+"Toca el <b>menú de tres puntos</b> en la esquina superior derecha.",
+"Tippe oben rechts auf das <b>Drei-Punkte-Menü</b>.",
+"Tocca il <b>menu con tre puntini</b> in alto a destra."
+],
+"Choose <b>Add to Home screen</b>, then <b>Install</b>.": [
+"Elige <b>Añadir a pantalla de inicio</b> y luego <b>Instalar</b>.",
+"Wähle <b>Zum Startbildschirm hinzufügen</b> und dann <b>Installieren</b>.",
+"Scegli <b>Aggiungi a schermata Home</b>, poi <b>Installa</b>."
+],
+"Tap <b>Install</b> again to confirm. The Tiger Motors icon is now on your home screen.": [
+"Toca <b>Instalar</b> otra vez para confirmar. El icono de Tiger Motors ya está en tu pantalla de inicio.",
+"Tippe zur Bestätigung erneut auf <b>Installieren</b>. Das Tiger Motors Symbol ist jetzt auf deinem Startbildschirm.",
+"Tocca di nuovo <b>Installa</b> per confermare. L’icona di Tiger Motors è ora nella schermata Home."
+],
+"Open <b>tigermotorslean.com</b> in <b>Chrome</b> or <b>Edge</b>.": [
+"Abre <b>tigermotorslean.com</b> en <b>Chrome</b> o <b>Edge</b>.",
+"Öffne <b>tigermotorslean.com</b> in <b>Chrome</b> oder <b>Edge</b>.",
+"Apri <b>tigermotorslean.com</b> in <b>Chrome</b> o <b>Edge</b>."
+],
+"Click the <b>install</b> icon at the right end of the address bar, or open the <b>three-dot menu</b> and choose <b>Install page as app</b>.": [
+"Haz clic en el icono de <b>instalar</b> al final de la barra de direcciones, o abre el <b>menú de tres puntos</b> y elige <b>Instalar página como app</b>.",
+"Klicke auf das <b>Installieren</b>-Symbol rechts in der Adressleiste oder öffne das <b>Drei-Punkte-Menü</b> und wähle <b>Seite als App installieren</b>.",
+"Fai clic sull’icona <b>installa</b> alla fine della barra degli indirizzi, oppure apri il <b>menu con tre puntini</b> e scegli <b>Installa pagina come app</b>."
+],
+"Click <b>Install</b>. Tiger Motors opens in its own window, like an app.": [
+"Haz clic en <b>Instalar</b>. Tiger Motors se abre en su propia ventana, como una app.",
+"Klicke auf <b>Installieren</b>. Tiger Motors öffnet sich in einem eigenen Fenster, wie eine App.",
+"Fai clic su <b>Installa</b>. Tiger Motors si apre in una finestra tutta sua, come un’app."
+],
+"To keep it close, right-click its icon and choose <b>Keep in Dock</b> or <b>Pin to taskbar</b>.": [
+"Para tenerla a mano, haz clic derecho en su icono y elige <b>Mantener en el Dock</b> o <b>Anclar a la barra de tareas</b>.",
+"Damit sie griffbereit ist, klicke mit rechts auf das Symbol und wähle <b>Im Dock behalten</b> oder <b>An Taskleiste anheften</b>.",
+"Per averla a portata di mano, fai clic destro sull’icona e scegli <b>Mantieni nel Dock</b> o <b>Aggiungi alla barra delle applicazioni</b>."
+],
+"On a Mac with Safari, choose <b>File</b>, then <b>Add to Dock</b>.": [
+"En un Mac con Safari, elige <b>Archivo</b> y luego <b>Añadir al Dock</b>.",
+"Auf einem Mac mit Safari wähle <b>Ablage</b> und dann <b>Zum Dock hinzufügen</b>.",
+"Su un Mac con Safari, scegli <b>File</b>, poi <b>Aggiungi al Dock</b>."
+],
+"Desktop": [
+"Ordenador",
+"Computer",
+"Computer"
 ]
 };

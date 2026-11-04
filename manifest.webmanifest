@@ -2,9 +2,10 @@
   "name": "Tiger Motors",
   "short_name": "Tiger Motors",
   "description": "Tiger Motors Lean Education Center at Auburn University",
+  "id": "/",
   "start_url": "/",
   "scope": "/",
-  "display": "browser",
+  "display": "standalone",
   "background_color": "#FFFFFF",
   "theme_color": "#0C2340",
   "icons": [

@@ -1529,3 +1529,27 @@ html[data-mode="light"] .cta-note{color:#8A3E0A}
 @media (min-width:481px){.cta-stack{position:relative}.cta-note{position:absolute;left:0;right:0;top:calc(100% + 9px);justify-content:center;text-align:left;padding-left:0}.hero-cta{padding-bottom:42px;row-gap:56px}}
 .taa-track img{flex:none;width:64px;height:80px;border-radius:9px;object-fit:cover;background:#16365A}
 @media (max-width:640px){.taa-track img{width:52px;height:66px}}
+
+/* install the app: mobile menu item, footer link and steps dialog (install.js) */
+.mnav a.mnav-inst svg{color:var(--orange)}
+.mnav a.mnav-inst svg{width:26px;height:26px;align-self:center}
+.foot .fl a.fl-inst{display:inline-flex;align-items:center;gap:6px}
+.foot .fl a.fl-inst svg{width:15px;height:15px}
+.idlg{max-width:min(560px,calc(100vw - 32px))}
+.idlg-tabs{display:flex;gap:6px;padding:4px;border-radius:999px;background:var(--paper);margin-bottom:18px}
+.idlg-tab{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:7px;border:0;background:transparent;color:var(--ink-2);font:600 13px var(--f-mono);letter-spacing:.06em;padding:10px 8px;border-radius:999px;cursor:pointer}
+.idlg-tab svg{width:17px;height:17px}
+.idlg-tab[aria-selected="true"]{background:#fff;color:var(--ink);box-shadow:0 2px 10px -4px rgba(12,27,46,.35)}
+.idlg-now{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin-bottom:18px}
+.idlg-now[hidden]{display:none}
+.idlg-now span{font-size:14px;color:var(--ink-2)}
+.idlg-steps{list-style:none;margin:0;padding:0;display:grid;gap:12px;counter-reset:st}
+.idlg-steps li{display:grid;grid-template-columns:28px 40px 1fr;align-items:center;gap:12px;font-size:16px;line-height:1.45;color:var(--ink-2);counter-increment:st}
+.idlg-steps li::before{content:counter(st);width:28px;height:28px;border-radius:50%;background:var(--ink);color:#fff;font:700 13px/28px var(--f-mono);text-align:center}
+.idlg-steps b{color:var(--ink)}
+.idlg-ic{width:40px;height:40px;border-radius:11px;background:var(--paper);color:#0A4C8C;display:grid;place-items:center}
+.idlg-ic svg{width:22px;height:22px}
+@media (max-width:480px){.idlg-steps li{grid-template-columns:24px 34px 1fr;gap:10px;font-size:15px}.idlg-steps li::before{width:24px;height:24px;line-height:24px}.idlg-ic{width:34px;height:34px}.idlg-tab{font-size:12px;gap:5px;padding:10px 4px}}
+@media (max-width:380px){.idlg-tab svg{display:none}}
+.mnav{overflow-y:auto;overscroll-behavior:contain}
+.idlg-note{margin-top:16px;padding-top:14px;border-top:1px solid var(--paper-line);font-size:14px;color:var(--ink-2)}
