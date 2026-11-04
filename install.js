@@ -15,6 +15,7 @@ var deferred = null, dlg = null;
 
 var I = {
   safari: '<circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/>',
+  page: '<path d="M5 7h14M5 12h14M5 17h10.5"/>',
   share: '<path d="M12 3.5v11M8.2 7.3L12 3.5l3.8 3.8"/><path d="M9 10.5H7a1.5 1.5 0 00-1.5 1.5v7A1.5 1.5 0 007 20.5h10a1.5 1.5 0 001.5-1.5v-7a1.5 1.5 0 00-1.5-1.5h-2"/>',
   add: '<rect x="4" y="4" width="16" height="16" rx="4"/><path d="M12 8.5v7M8.5 12h7"/>',
   check: '<circle cx="12" cy="12" r="9"/><path d="M8.2 12.3l2.6 2.6 5-5.4"/>',
@@ -31,7 +32,8 @@ var SITE = '<b>tigermotorslean.com</b>';
 var PANES = {
   ios: { tab: 'iPhone', icon: 'phone', steps: [
     ['safari', 'Open ' + SITE + ' in <b>Safari</b>.'],
-    ['share', 'Tap the <b>Share</b> button. On newer iPhones it is inside the <b>•••</b> menu.'],
+    ['page', 'Tap the <b>menu</b> button to the left of the address (three lines).'],
+    ['share', 'Tap <b>Share</b>.'],
     ['add', 'Scroll down and choose <b>Add to Home Screen</b>.'],
     ['check', 'Tap <b>Add</b>, then <b>Done</b>. The Tiger Motors icon is now on your home screen.']
   ]},

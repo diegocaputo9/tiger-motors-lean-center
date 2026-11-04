@@ -5185,10 +5185,15 @@ window.TM_I18N = {
 "Öffne <b>tigermotorslean.com</b> in <b>Safari</b>.",
 "Apri <b>tigermotorslean.com</b> in <b>Safari</b>."
 ],
-"Tap the <b>Share</b> button. On newer iPhones it is inside the <b>•••</b> menu.": [
-"Toca el botón <b>Compartir</b>. En los iPhone más recientes está dentro del menú <b>•••</b>.",
-"Tippe auf die Taste <b>Teilen</b>. Auf neueren iPhones ist sie im Menü <b>•••</b>.",
-"Tocca il pulsante <b>Condividi</b>. Sugli iPhone più recenti è nel menu <b>•••</b>."
+"Tap the <b>menu</b> button to the left of the address (three lines).": [
+"Toca el botón de <b>menú</b> a la izquierda de la dirección (tres líneas).",
+"Tippe links neben der Adresse auf die <b>Menü</b>-Taste (drei Linien).",
+"Tocca il pulsante <b>menu</b> a sinistra dell’indirizzo (tre linee)."
+],
+"Tap <b>Share</b>.": [
+"Toca <b>Compartir</b>.",
+"Tippe auf <b>Teilen</b>.",
+"Tocca <b>Condividi</b>."
 ],
 "Scroll down and choose <b>Add to Home Screen</b>.": [
 "Desplázate hacia abajo y elige <b>Añadir a pantalla de inicio</b>.",
