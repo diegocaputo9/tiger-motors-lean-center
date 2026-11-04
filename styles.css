@@ -1531,6 +1531,8 @@ html[data-mode="light"] .cta-note{color:#8A3E0A}
 /* nav: liquid glass lens over the tabs (index.html script); Chromium adds real refraction through #navLens, other browsers keep the frosted glass */
 .nav-links.has-glass{position:relative}
 .nav-links.has-glass>a.active,.nav-links.has-glass>.nav-dd>a.active{background:transparent}
+/* the lens marks the current page, so the orange dot is hidden while the glass is on (removing the lens brings the dot back) */
+.nav-links.has-glass>a.active::after,.nav-links.has-glass>.nav-dd>a.active::after{display:none}
 .nav-glass{position:absolute;left:0;top:5px;bottom:5px;width:0;border-radius:999px;pointer-events:none;z-index:2;opacity:0;transform-origin:center;transition:opacity .25s,scale .35s cubic-bezier(.3,1.6,.5,1);
   background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,.05) 55%,rgba(255,255,255,.1));
   box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 -1px 0 rgba(255,255,255,.18),inset 0 0 0 1px rgba(255,255,255,.14),0 6px 18px -8px rgba(0,0,0,.6);
