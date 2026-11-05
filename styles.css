@@ -817,7 +817,27 @@ html[data-mode="light"] .pdlg::backdrop{background:rgba(220,228,238,.5)}
 .plan-switch-label{display:flex;align-items:center;gap:8px;font:600 12px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--text-2);margin-bottom:10px}
 .plan-switch-label svg{color:var(--orange-2);flex:none}
 .plan-modes{display:inline-grid;grid-template-columns:1fr 1fr;border:1px solid var(--line-2);border-radius:16px;overflow:hidden;background:rgba(255,255,255,.03);max-width:100%}
-.pmode{display:grid;gap:3px;text-align:left;padding:12px 20px;border:0;background:transparent;color:var(--text-2);cursor:pointer;transition:color .2s,background .2s}
+.pmode{display:grid;grid-template-columns:auto minmax(0,1fr) auto;column-gap:12px;row-gap:3px;align-items:center;text-align:left;padding:12px 16px 12px 16px;border:0;background:transparent;color:var(--text-2);cursor:pointer;transition:color .2s,background .2s}
+.pmode b,.pmode small{grid-column:2}
+/* radio-style dot: which view is showing */
+.pm-dot{grid-column:1;grid-row:1/3;width:18px;height:18px;border-radius:50%;border:2px solid currentColor;opacity:.75;box-sizing:border-box;position:relative;transition:opacity .2s}
+.pm-dot::after{content:"";position:absolute;inset:3px;border-radius:50%;background:currentColor;transform:scale(0);transition:transform .25s var(--ease)}
+.pmode[aria-pressed="true"] .pm-dot{opacity:1}
+.pmode[aria-pressed="true"] .pm-dot::after{transform:scale(1)}
+/* arrow on the view that is not showing: click to switch to it */
+.pm-go{grid-column:3;grid-row:1/3;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line-2);color:var(--orange-2);transition:transform .25s var(--ease),border-color .2s,background .2s}
+.pm-go svg{width:15px;height:15px}
+.pmode:hover .pm-go{transform:translateX(3px);border-color:var(--orange-2);background:rgba(232,119,34,.12)}
+.pmode[aria-pressed="true"] .pm-go{visibility:hidden}
+.psl-how{text-transform:none;letter-spacing:.02em;color:var(--text-2);font-weight:500}
+.psl-how::before{content:"\00B7";margin-right:.55em}
+.psl-tap{display:none}
+@media (pointer:coarse){.psl-tap{display:inline}.psl-click{display:none}}
+.pm-nudge .pmode[aria-pressed="false"]{animation:pmNudge 1.6s ease-in-out .4s 3}
+.pm-nudge .pmode[aria-pressed="false"] .pm-go{animation:pmGo 1.6s ease-in-out .4s 3}
+@keyframes pmNudge{50%{background:rgba(232,119,34,.14);color:var(--text)}}
+@keyframes pmGo{50%{transform:translateX(4px);border-color:var(--orange-2)}}
+@media (prefers-reduced-motion:reduce){.pm-nudge .pmode[aria-pressed="false"],.pm-nudge .pmode[aria-pressed="false"] .pm-go{animation:none}}
 .pmode+.pmode{border-left:1px solid var(--line-2)}
 .pmode b{font:700 15px var(--f-body);color:inherit}
 .pmode small{font:400 12.5px var(--f-body);color:var(--text-3)}

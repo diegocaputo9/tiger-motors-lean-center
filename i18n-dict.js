@@ -5274,5 +5274,8 @@ window.TM_I18N = {
 "Your progress was reset.": ["Tu progreso se ha restablecido.", "Dein Fortschritt wurde zurückgesetzt.", "I tuoi progressi sono stati azzerati."],
 "Open on This American Life": ["Abrir en This American Life", "Auf This American Life öffnen", "Apri su This American Life"],
 "Audio courtesy of This American Life.": ["Audio cortesía de This American Life.", "Audio mit freundlicher Genehmigung von This American Life.", "Audio per gentile concessione di This American Life."],
-"The episode could not be loaded here. Use the button above to listen on This American Life.": ["No se pudo cargar el episodio aquí. Usa el botón de arriba para escucharlo en This American Life.", "Die Folge konnte hier nicht geladen werden. Nutze die Schaltfläche oben, um sie auf This American Life anzuhören.", "Non è stato possibile caricare l'episodio qui. Usa il pulsante in alto per ascoltarlo su This American Life."]
+"The episode could not be loaded here. Use the button above to listen on This American Life.": ["No se pudo cargar el episodio aquí. Usa el botón de arriba para escucharlo en This American Life.", "Die Folge konnte hier nicht geladen werden. Nutze die Schaltfläche oben, um sie auf This American Life anzuhören.", "Non è stato possibile caricare l'episodio qui. Usa il pulsante in alto per ascoltarlo su This American Life."],
+"Two views": ["Dos vistas", "Zwei Ansichten", "Due viste"],
+"click one to switch": ["haz clic en una para cambiar", "klicke auf eine, um zu wechseln", "fai clic su una per cambiare"],
+"tap one to switch": ["toca una para cambiar", "tippe auf eine, um zu wechseln", "tocca una per cambiare"]
 };
