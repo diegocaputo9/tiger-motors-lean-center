@@ -244,18 +244,29 @@ function paintBanners(){
   });
 }
 
+// lectures count only when watched to the end in the viewer (viewer.js), not on the click
+var LECT = null;
+function isLecture(id){
+  if(!LECT){ LECT = {}; Object.keys(TM.BYK || {}).forEach(function(k){ (TM.BYK[k].items || []).forEach(function(it){ if(it.type === 'lecture') LECT[it.id] = 1; }); }); }
+  return !!LECT[id] && !!window.TMViewer;
+}
 function paintChecks(){
   $$('[data-item]').forEach(function(el){
     var id = el.getAttribute('data-item'), on = !!state.done[id];
     el.classList.toggle('is-done', on);
+    if(el.matches('article.rc') && isLecture(id)){
+      var w = on ? 0 : TMViewer.watched(id), bar = $('.rc-watch', el);
+      if(w && !bar){ bar = document.createElement('div'); bar.className = 'rc-watch'; bar.innerHTML = '<i><em></em></i><span></span>'; el.insertBefore(bar, $('.rc-act', el)); }
+      if(bar){ bar.hidden = !w; $('em', bar).style.width = w + '%'; var txt = w + '% watched'; if($('span', bar).textContent !== txt) $('span', bar).textContent = txt; }
+    }
     if(el.matches('article.rc')){
       var tg = $('.tm-tg', el);
       if(!tg){ tg = document.createElement('button'); tg.type = 'button'; tg.className = 'tm-tg'; tg.setAttribute('data-tg', id); var top = $('.rc-top', el); if(top) top.appendChild(tg); }
+      var title = on ? 'Done. Click to mark as not done' : isLecture(id) ? 'Watch to the end to complete' : 'Mark as done';
+      if(tg.__en !== title){ tg.__en = title; tg.title = title; tg.setAttribute('aria-label', title); }
       if(tg.getAttribute('aria-pressed') === (on ? 'true' : 'false')) return;
       tg.setAttribute('aria-pressed', on ? 'true' : 'false');
       tg.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12.5l4 4L18 8" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-      tg.title = on ? 'Done. Click to mark as not done' : 'Mark as done';
-      tg.setAttribute('aria-label', tg.title);
     }
   });
 }
@@ -280,9 +291,15 @@ function paintChips(){
 document.addEventListener('click', function(e){
   if(!ON) return;
   var a = e.target.closest('a[data-item]');
-  if(a){ markDone(a.getAttribute('data-item')); }
+  if(a && !isLecture(a.getAttribute('data-item'))){ markDone(a.getAttribute('data-item')); }
   var tg = e.target.closest('[data-tg]');
-  if(tg){ e.preventDefault(); e.stopPropagation(); var id = tg.getAttribute('data-tg'); if(state.done[id]) unmark(id); else markDone(id); return; }
+  if(tg){
+    e.preventDefault(); e.stopPropagation(); var id = tg.getAttribute('data-tg');
+    if(state.done[id]) unmark(id);
+    else if(isLecture(id)){ var go = tg.closest('article.rc') && $('.rc-act', tg.closest('article.rc')); if(go) go.click(); }
+    else markDone(id);
+    return;
+  }
   var b = e.target.closest('[data-acct]');
   if(b){
     var act = b.getAttribute('data-acct');

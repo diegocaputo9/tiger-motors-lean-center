@@ -1020,6 +1020,11 @@ html[data-mode="light"] .acct-menu{background:rgba(255,255,255,.98);box-shadow:0
 .mini.is-done b::after,.vbox.is-done b::after{content:" ✓";color:#3FB68B;font-weight:800}
 .vbox.is-done{border-color:#3FB68B}
 article.rc.is-done{border-color:rgba(63,182,139,.6);box-shadow:inset 0 3px 0 #3FB68B}
+/* a lecture partly watched in the viewer: how far along it is */
+.rc-watch{display:flex;align-items:center;gap:10px;font:600 12px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:#26313F}
+.rc-watch i{flex:1;height:5px;border-radius:99px;background:#E6EBF1;overflow:hidden}
+.rc-watch em{display:block;height:100%;border-radius:inherit;background:var(--orange)}
+.rc-watch[hidden]{display:none}
 .tm-tg{position:relative;z-index:2;flex:none;width:28px;height:28px;border-radius:50%;border:1.5px solid #CBD5E1;background:#fff;color:transparent;display:grid;place-items:center;cursor:pointer;padding:0;transition:background .2s,border-color .2s,color .2s}
 .tm-tg svg{width:15px;height:15px}
 .tm-tg:hover{border-color:#3FB68B;color:#9ED9BF}

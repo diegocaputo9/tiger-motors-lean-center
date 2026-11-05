@@ -1,11 +1,15 @@
 /* In-page viewer: YouTube videos, 3DVista lab activities and readings from sites that allow it open in a large
    window over the page instead of a new tab. Sites that refuse to be shown inside another page (This American Life,
-   Auburn Box) keep opening in a new tab. Progress tracking is untouched: auth.js still sees the click on a[data-item]. */
+   Auburn Box) keep opening in a new tab. Progress tracking is untouched: auth.js still sees the click on a[data-item].
+   Lectures are the exception: they count as done only once watched to the end, with no skipping ahead, and they pause
+   when the tab is hidden. The furthest point watched is kept in localStorage (tm-watch) so a lecture picks up where it stopped. */
 (function(){
 'use strict';
 // hosts checked on 2026-11-02 to load inside a frame
 var PAGES = /^https:\/\/(cloud\.3dvista\.com|storage\.net-fs\.com|kaizen\.com|www\.6sigma\.us)\//i;
 var dlg, frame, els = {};
+var WKEY = 'tm-watch';
+var W = null;   // the lecture being watched: { id, a, player, max, dur, timer, ... }
 
 function ytId(u){
   var m = u.match(/^https:\/\/(?:www\.|m\.)?(?:youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|live\/)|youtu\.be\/)([\w-]{11})/i);
@@ -30,6 +34,108 @@ function plan(a){
   return null;
 }
 
+/* ---------- lecture watch tracking ---------- */
+function lectureId(a){
+  var id = a.getAttribute('data-item'), B = window.TM && TM.BYK; if(!id || !B) return null;
+  return Object.keys(B).some(function(k){ return (B[k].items || []).some(function(it){ return it.id === id && it.type === 'lecture'; }); }) ? id : null;
+}
+function loadW(){ try { return JSON.parse(localStorage.getItem(WKEY) || '{}') || {}; } catch(e){ return {}; } }
+function saveW(id, max, dur){
+  var all = loadW();
+  if(max == null) delete all[id]; else all[id] = { m: Math.round(max), d: Math.round(dur || 0) };
+  try { localStorage.setItem(WKEY, JSON.stringify(all)); } catch(e){}
+}
+function auth(){ return window.TMAuth && TMAuth.enabled ? TMAuth : null; }
+function isDone(id){ var A = auth(); return !!(A && A.state.done[id]); }
+
+var ytReady = null;
+function loadYT(){
+  if(ytReady) return ytReady;
+  ytReady = new Promise(function(res, rej){
+    if(window.YT && YT.Player) return res();
+    var prev = window.onYouTubeIframeAPIReady;
+    window.onYouTubeIframeAPIReady = function(){ if(prev) prev(); res(); };
+    var s = document.createElement('script'); s.src = 'https://www.youtube.com/iframe_api'; s.async = true;
+    s.onerror = function(){ ytReady = null; rej(); };
+    document.head.appendChild(s);
+    setTimeout(rej, 12000);
+  });
+  return ytReady;
+}
+
+function note(msg, ms){
+  els.note.textContent = msg; els.note.classList.add('show');
+  clearTimeout(els.note._h); els.note._h = setTimeout(function(){ els.note.classList.remove('show'); }, ms || 4200);
+}
+function paintW(){
+  if(!W) return;
+  var pct = W.done ? 100 : W.dur ? Math.min(100, Math.floor(W.max * 100 / W.dur)) : 0;
+  els.wFill.style.width = pct + '%';
+  els.wPct.textContent = pct + '%';
+  dlg.classList.toggle('vw-wdone', W.done);
+}
+function complete(){
+  if(W.done) return;
+  W.done = true; saveW(W.id, null);
+  var A = auth(); if(A) A.markDone(W.id);
+  paintW(); note('Lecture complete. It now counts toward your progress.', 5200);
+}
+function tick(){
+  var P = W && W.player; if(!P || !P.getCurrentTime) return;
+  var t = P.getCurrentTime() || 0, d = P.getDuration() || 0, now = Date.now();
+  var dt = (now - W.wall) / 1000; W.wall = now;
+  if(d) W.dur = d;
+  if(W.done){ return; }
+  // a jump past the furthest point watched is sent back there; going back to rewatch is fine
+  var room = Math.max(2, dt * (P.getPlaybackRate ? P.getPlaybackRate() : 1) * 1.5 + 1);
+  if(t > W.max + room){
+    P.seekTo(W.max, true);
+    note('Skipping ahead is off for lectures. You can go back, but not forward past what you have watched.');
+    return;
+  }
+  if(P.getPlayerState() === 1 && document.visibilityState === 'visible') W.max = Math.max(W.max, t);
+  if(W.dur && W.max >= W.dur - 2) complete();
+  if(now - W.saved > 5000){ W.saved = now; saveW(W.id, W.max, W.dur); }
+  paintW();
+}
+function startWatch(a, id){
+  var prev = loadW()[id] || {};
+  W = { id: id, a: a, player: null, max: prev.m || 0, dur: prev.d || 0, done: isDone(id), wall: Date.now(), saved: Date.now(), timer: 0 };
+  dlg.classList.add('vw-lec');
+  paintW();
+  var w = W;
+  loadYT().then(function(){
+    if(W !== w || !frame) return;
+    w.player = new YT.Player(frame, { events: {
+      onReady: function(){
+        if(W !== w) return;
+        if(!w.done && w.max > 5){ w.player.seekTo(Math.max(0, w.max - 3), true); note('Picking up where you left off.'); }
+        else if(!w.done) note('Watch to the end to complete this lecture. Skipping ahead is off, and it pauses if you leave this tab.', 6000);
+        w.timer = setInterval(tick, 500);
+      },
+      onStateChange: function(e){ if(W === w && e.data === 0 && !w.done && w.max >= (w.dur || 0) - 5) complete(); }
+    }});
+  }, function(){
+    // the YouTube player API did not load (blocked or offline): count the lecture on opening, as before
+    if(W === w){ var A = auth(); if(A) A.markDone(id); dlg.classList.remove('vw-lec'); }
+  });
+}
+function stopWatch(){
+  if(!W) return;
+  clearInterval(W.timer);
+  if(!W.done && W.player && W.max > 0) saveW(W.id, W.max, W.dur);
+  W = null;
+  dlg.classList.remove('vw-lec', 'vw-wdone');
+  if(window.TMAuth && TMAuth.repaint) TMAuth.repaint();
+}
+document.addEventListener('visibilitychange', function(){
+  if(document.visibilityState !== 'hidden' || !W || W.done || !W.player || !W.player.getPlayerState) return;
+  if(W.player.getPlayerState() === 1){ W.player.pauseVideo(); W.away = true; }
+});
+document.addEventListener('visibilitychange', function(){
+  if(document.visibilityState === 'visible' && W && W.away){ W.away = false; note('Paused while you were away. Press play to keep going.'); }
+});
+
 function titleOf(a){
   var t = a.getAttribute('data-title') || (a.querySelector('b') && a.querySelector('b').textContent) || a.getAttribute('aria-label') || a.textContent;
   t = (t || '').replace(/\s+/g, ' ').trim();
@@ -45,12 +151,16 @@ function build(){
     '<a class="vw-out" target="_blank" rel="noopener"><span></span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg></a>' +
     '<div class="vw-hint" hidden><a class="vw-hint-a" target="_blank" rel="noopener">Want the full 360° experience? Open it on YouTube to look around and choose what you see, and change the quality to 4K.</a><button type="button" class="vw-hint-x" aria-label="Close"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>' +
     '<button type="button" class="vw-x" aria-label="Close"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>' +
-    '<div class="vw-body"><div class="vw-load" aria-hidden="true"><i></i></div></div>';
+    '<div class="vw-wbar" aria-hidden="true"><i></i></div>' +
+    '<div class="vw-body"><div class="vw-load" aria-hidden="true"><i></i></div><p class="vw-note" role="status"></p></div>';
   document.body.appendChild(dlg);
-  els.k = dlg.querySelector('.vw-k'); els.h = dlg.querySelector('#vw-h'); els.out = dlg.querySelector('.vw-out'); els.body = dlg.querySelector('.vw-body'); els.hint = dlg.querySelector('.vw-hint'); els.hintA = dlg.querySelector('.vw-hint-a');
+  els.k = dlg.querySelector('.vw-k'); els.note = dlg.querySelector('.vw-note'); els.wFill = dlg.querySelector('.vw-wbar i');
+  els.w = document.createElement('span'); els.w.className = 'vw-w'; els.w.innerHTML = '<span class="vw-wl">Watched</span> <span class="vw-wp"></span><span class="vw-wok">Complete</span>';
+  els.k.after(els.w); els.wPct = els.w.querySelector('.vw-wp');
+   els.h = dlg.querySelector('#vw-h'); els.out = dlg.querySelector('.vw-out'); els.body = dlg.querySelector('.vw-body'); els.hint = dlg.querySelector('.vw-hint'); els.hintA = dlg.querySelector('.vw-hint-a');
   dlg.querySelector('.vw-x').addEventListener('click', close);
   dlg.addEventListener('click', function(e){ if(e.target === dlg) close(); });
-  dlg.addEventListener('close', function(){ if(frame){ frame.remove(); frame = null; } document.documentElement.classList.remove('vw-open'); });
+  dlg.addEventListener('close', function(){ stopWatch(); if(frame){ frame.remove(); frame = null; } document.documentElement.classList.remove('vw-open'); });
   els.out.addEventListener('click', function(){ close(); });
   els.hintA.addEventListener('click', function(){ close(); });
   dlg.querySelector('.vw-hint-x').addEventListener('click', function(){ els.hint.hidden = true; });
@@ -64,7 +174,10 @@ function open(a, p){
   els.h.textContent = titleOf(a);
   els.out.href = a.href; els.out.querySelector('span').textContent = p.open;
   els.hintA.href = a.href; els.hint.hidden = !p.v360; dlg.classList.toggle('vw-360', !!p.v360);
+  stopWatch();
   if(frame) frame.remove();
+  var lec = p.kind === 'video' && lectureId(a);
+  if(lec) p.src += '&enablejsapi=1&origin=' + encodeURIComponent(location.origin);
   frame = document.createElement('iframe');
   frame.title = titleOf(a);
   frame.src = p.src;
@@ -76,6 +189,7 @@ function open(a, p){
   els.body.appendChild(frame);
   document.documentElement.classList.add('vw-open');
   dlg.showModal();
+  if(lec) startWatch(a, lec);
 }
 function close(){ if(dlg && dlg.open) dlg.close(); }
 
@@ -87,7 +201,7 @@ document.addEventListener('click', function(e){
   open(a, p);
 });
 
-window.TMViewer = { handles: function(a){ return !!plan(a); }, close: close };
+window.TMViewer = { handles: function(a){ return !!plan(a); }, close: close, watched: function(id){ var w = loadW()[id]; return w && w.d && w.m > 0 ? Math.max(1, Math.min(99, Math.floor(w.m * 100 / w.d))) : 0; } };
 
 var css = document.createElement('style');
 css.textContent =
@@ -121,6 +235,18 @@ css.textContent =
   '.vw-load i{width:34px;height:34px;border-radius:50%;border:3px solid rgba(255,155,77,.25);border-top-color:#FF9B4D;animation:vwSpin .8s linear infinite}' +
   '.vw-ready .vw-load{display:none}' +
   '@keyframes vwSpin{to{transform:rotate(360deg)}}' +
+  '.vw-wbar{display:none;height:3px;background:rgba(160,185,212,.16)}' +
+  '.vw-wbar i{display:block;height:100%;width:0;background:#FF9B4D;transition:width .5s linear,background .3s}' +
+  '.vw.vw-lec[open]{grid-template-rows:auto auto auto}' +
+  '.vw.vw-lec .vw-wbar{display:block}' +
+  '.vw-wdone .vw-wbar i{background:#3FB68B}' +
+  '.vw-w{display:none;font:600 12px "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:#C9D6E4}' +
+  '.vw-lec .vw-w{display:inline}.vw-lec .vw-k{display:none}' +
+  '.vw-wok{display:none;color:#6FD6AE}.vw-wdone .vw-wl,.vw-wdone .vw-wp{display:none}.vw-wdone .vw-wok{display:inline}' +
+  '.vw-wok::before{content:"\\2713  "}' +
+  '.vw-note{position:absolute;left:50%;top:14px;z-index:3;margin:0;max-width:min(560px,calc(100% - 32px));width:max-content;padding:10px 16px;border-radius:12px;background:rgba(7,18,31,.94);border:1px solid rgba(160,185,212,.3);color:#EAF0F7;font:500 14px/1.45 "IBM Plex Sans",system-ui,sans-serif;text-align:center;box-shadow:0 14px 34px -12px rgba(0,0,0,.7);opacity:0;transform:translate(-50%,-6px);transition:opacity .3s,transform .3s;pointer-events:none}' +
+  '.vw-note.show{opacity:1;transform:translate(-50%,0)}' +
+  '@media (max-width:640px){.vw.vw-video.vw-lec[open]{grid-template-rows:auto auto minmax(0,1fr)}}' +
   '@media (max-width:640px){.vw,.vw.vw-video{width:100vw;height:100dvh;border-radius:0;border:0}.vw.vw-video[open]{grid-template-rows:auto minmax(0,1fr)}.vw.vw-video .vw-body{aspect-ratio:auto}.vw-out span{display:none}.vw-out{padding:0;width:42px;height:42px;justify-content:center}.vw-bar{padding-left:14px}}' +
   '@media (max-width:640px){.vw-hint{right:10px;left:10px;max-width:none}.vw-hint::before{right:68px}}' +
   '@media (prefers-reduced-motion:reduce){.vw-load i{animation:none}.vw-hint{animation:none;opacity:1;transform:none}}';

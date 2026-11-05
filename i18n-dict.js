@@ -5259,5 +5259,14 @@ window.TM_I18N = {
 "Supermercado: el inventario de reserva entre celdas",
 "Supermarkt: der Pufferbestand zwischen den Zellen",
 "Supermarket: le scorte cuscinetto tra le celle"
-]
+],
+"Watched": ["Visto", "Angesehen", "Visto"],
+"Complete": ["Completado", "Abgeschlossen", "Completato"],
+"re:^(\\d+)% watched$": ["$1% visto", "$1% angesehen", "$1% visto"],
+"Watch to the end to complete": ["Míralo hasta el final para completarlo", "Bis zum Ende ansehen, um abzuschließen", "Guardalo fino alla fine per completarlo"],
+"Lecture complete. It now counts toward your progress.": ["Clase completada. Ya cuenta para tu progreso.", "Vorlesung abgeschlossen. Sie zählt jetzt zu deinem Fortschritt.", "Lezione completata. Ora conta per i tuoi progressi."],
+"Skipping ahead is off for lectures. You can go back, but not forward past what you have watched.": ["En las clases no se puede adelantar. Puedes retroceder, pero no avanzar más allá de lo que has visto.", "Vorspulen ist bei Vorlesungen deaktiviert. Du kannst zurückspringen, aber nicht über das hinaus, was du gesehen hast.", "Nelle lezioni non si può andare avanti. Puoi tornare indietro, ma non oltre ciò che hai già visto."],
+"Picking up where you left off.": ["Continúas donde lo dejaste.", "Es geht dort weiter, wo du aufgehört hast.", "Riprendi da dove avevi lasciato."],
+"Watch to the end to complete this lecture. Skipping ahead is off, and it pauses if you leave this tab.": ["Mírala hasta el final para completar esta clase. No se puede adelantar y se pausa si sales de esta pestaña.", "Sieh dir die Vorlesung bis zum Ende an, um sie abzuschließen. Vorspulen ist deaktiviert, und sie pausiert, wenn du diesen Tab verlässt.", "Guardala fino alla fine per completare questa lezione. Non si può andare avanti e si mette in pausa se lasci questa scheda."],
+"Paused while you were away. Press play to keep going.": ["Se pausó mientras no estabas. Pulsa reproducir para continuar.", "Pausiert, während du weg warst. Drücke auf Wiedergabe, um weiterzumachen.", "In pausa mentre eri via. Premi play per continuare."]
 };
