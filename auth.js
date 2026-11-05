@@ -216,14 +216,16 @@ function toggleProgress(min){
   var els = $$('[data-acct-banner]').filter(function(el){ return !el.hidden; });
   // corner radius in px, capped at half the height so a pill does not balloon while it grows
   function rad(el, h){ return Math.min(parseFloat(getComputedStyle(el).borderTopLeftRadius) || 0, h / 2); }
-  var before = els.map(function(el){ var r = el.getBoundingClientRect(); return { w: r.width, h: r.height, rad: rad(el, r.height) }; });
+  // on big monitors the page is zoomed (styles.css, fit-wide): measured sizes are divided back to the box's own px
+  function zf(el, r){ return (el.offsetWidth && r.width / el.offsetWidth) || 1; }
+  var before = els.map(function(el){ var r = el.getBoundingClientRect(), z = zf(el, r); return { w: r.width / z, h: r.height / z, rad: rad(el, r.height / z) }; });
   setProgressMin(min); paintBanners();
   var f = $('[data-acct-banner] [data-acct="' + (min ? 'show' : 'min') + '-progress"]'); if(f) f.focus({ preventScroll: true });
   var still = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(still || !Element.prototype.animate) return;
   var ease = 'cubic-bezier(.65,0,.35,1)', soft = 'cubic-bezier(.22,1,.36,1)';
   els.forEach(function(el, i){
-    var r = el.getBoundingClientRect(), b = before[i], to = rad(el, r.height);
+    var r0 = el.getBoundingClientRect(), z = zf(el, r0), r = { width: r0.width / z, height: r0.height / z }, b = before[i], to = rad(el, r.height);
     el.style.overflow = 'hidden';
     var box = el.animate([{ width: b.w + 'px', height: b.h + 'px', borderRadius: b.rad + 'px' }, { width: r.width + 'px', height: r.height + 'px', borderRadius: to + 'px' }], { duration: 820, easing: ease });
     box.onfinish = box.oncancel = function(){ el.style.overflow = ''; };

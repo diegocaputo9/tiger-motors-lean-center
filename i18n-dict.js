@@ -5254,5 +5254,10 @@ window.TM_I18N = {
 "Ordenador",
 "Computer",
 "Computer"
+],
+"Supermarket: the buffer inventory between cells": [
+"Supermercado: el inventario de reserva entre celdas",
+"Supermarkt: der Pufferbestand zwischen den Zellen",
+"Supermarket: le scorte cuscinetto tra le celle"
 ]
 };

@@ -747,6 +747,11 @@ html[data-mode="light"] .pdlg::backdrop{background:rgba(220,228,238,.5)}
   transition:transform .45s cubic-bezier(.77,0,.175,1),width .45s cubic-bezier(.77,0,.175,1),height .45s cubic-bezier(.77,0,.175,1),opacity .25s ease}
 .tour-spot.empty{box-shadow:0 0 0 200vmax rgba(3,9,18,.5)}
 .tour-spot.click{pointer-events:auto;cursor:pointer}
+.tour-mid,.tour-hole{position:absolute;opacity:0;transition:opacity .3s ease;pointer-events:none}
+.tour-mid{inset:0;border-radius:inherit;background:rgba(3,9,18,.5)}
+.tour-hole{border-radius:16px;box-shadow:0 0 0 2px #FF9B4D,0 0 36px rgba(232,119,34,.4)}
+.tour-spot.split{box-shadow:0 0 0 200vmax rgba(3,9,18,.5)}
+.tour-spot.split .tour-mid,.tour-spot.split .tour-hole{opacity:1;transition-delay:.4s}
 .tour-spot.click::after{content:"";position:absolute;inset:-2px;border-radius:inherit;border:2px solid #FF9B4D;animation:tourPulse 1.6s cubic-bezier(.23,1,.32,1) infinite}
 @keyframes tourPulse{0%{opacity:.9;transform:scale(1)}70%,100%{opacity:0;transform:scale(1.07)}}
 .tour-card{position:fixed;left:0;top:0;z-index:9000;width:min(440px,calc(100vw - 24px));background:rgba(11,25,43,.98);color:#EAF0F7;border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:22px 22px 18px;box-shadow:0 30px 70px -20px rgba(0,0,0,.7);
@@ -1374,7 +1379,7 @@ html[data-mode="light"] .hz.hz-done text.num,html[data-mode="light"] #house.hous
 .pdef{padding:2px 8px;margin-left:-8px;border-radius:6px;transition:background .25s,color .25s}
 .pdef.lit{background:rgba(232,119,34,.16);color:var(--text)}
 .smed-tag{cursor:help}
-.smed-tag.def-lit rect{stroke:#FF9B4D;stroke-width:1.6;fill:rgba(232,119,34,.35)}
+.kb-sm.def-lit rect{stroke:#FF9B4D;stroke-width:1.6;fill:rgba(232,119,34,.35)}
 .pcell[data-def].def-lit .pl-lab{fill:#FF9B4D}
 html[data-mode="light"] .pdef.lit{background:rgba(232,119,34,.14);color:#0C1B2E}
 
@@ -1383,7 +1388,7 @@ html[data-mode="light"] .pdef.lit{background:rgba(232,119,34,.14);color:#0C1B2E}
 @media (hover:hover) and (pointer:fine){
   .tour-keys{display:flex;align-items:center;gap:8px;position:absolute;left:50%;top:calc(100% + 12px);transform:translateX(-50%);white-space:nowrap;padding:7px 16px 7px 8px;border-radius:999px;background:rgba(11,25,43,.96);border:1px solid rgba(255,255,255,.18);box-shadow:0 16px 36px -16px rgba(0,0,0,.7);font:500 12px var(--f-mono);letter-spacing:.08em;color:#DCE5EF;transition:opacity .6s ease,transform .6s ease}
   .tour-card.keys-up .tour-keys{top:auto;bottom:calc(100% + 12px)}
-  .tour-card.keys-gone .tour-keys{opacity:0;transform:translateX(-50%) translateY(6px);pointer-events:none}
+  .tour-card.keys-still .tour-keys .tk{animation:none}
   .tour-keys .tk{width:30px;height:28px;display:grid;place-items:center;border:1.5px solid rgba(201,214,228,.55);border-bottom-width:3px;border-radius:7px;color:#E9EEF4;animation:tkPress 2.4s ease-in-out infinite}
   .tour-keys .tk-r{animation-delay:1.2s}
   .tour-keys .tk-t{margin-left:6px}
@@ -1553,3 +1558,20 @@ html[data-mode="light"] .cta-note{color:#8A3E0A}
 @media (max-width:380px){.idlg-tab svg{display:none}}
 .mnav{overflow-y:auto;overscroll-behavior:contain}
 .idlg-note{margin-top:16px;padding-top:14px;border-top:1px solid var(--paper-line);font-size:14px;color:var(--ink-2)}
+
+/* big monitors: pages with html.fit-wide scale up like browser zoom, so the same design fills a 24-32" screen.
+   Only the page itself is zoomed; dialogs, the tour and toasts sit outside it and measure the zoomed page. */
+:root{--z:1}
+@media (min-width:1600px){:root{--z:1.1}}
+@media (min-width:1800px){:root{--z:1.2}}
+@media (min-width:2000px){:root{--z:1.3}}
+@media (min-width:2300px){:root{--z:1.45}}
+@media (min-width:2700px){:root{--z:1.65}}
+@media (min-width:3200px){:root{--z:1.9}}
+@media (min-width:1600px){
+  html.fit-wide>body>header,html.fit-wide>body>main,html.fit-wide>body>footer{zoom:var(--z)}
+  html.fit-wide{scroll-padding-top:calc(var(--nav-h)*var(--z) + 12px);--gut:max(24px,calc((100vw / var(--z) - 1240px)/2))}
+  html.fit-wide .hero{min-height:calc(92vh / var(--z))}
+  html.fit-wide .pdlg{max-width:min(1040px,calc(100vw / var(--z) - 32px));max-height:calc(100svh / var(--z) - 48px)}
+  html.fit-wide .pdlg-in{max-height:calc(100svh / var(--z) - 48px)}
+}

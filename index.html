@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="fit-wide">
 <head>
 <meta charset="utf-8">
 <title>Tiger Motors Lean Education Center</title>
@@ -33,9 +33,9 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="styles.css?v=827a25a8">
+<link rel="stylesheet" href="styles.css?v=2e030aa1">
 
-<script src="i18n-dict.js?v=4fd3ec86" defer></script>
+<script src="i18n-dict.js?v=9e683dbd" defer></script>
 <script src="i18n.js?v=3a5d34c9" defer></script>
 <script src="feedback.js?v=812720da" defer></script>
 <script src="install.js?v=cb9719a8" defer></script>
@@ -386,8 +386,8 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
         </g>
         <!-- shown in both views -->
         <!-- supermarkets between Cell 1 and Cell 2 (stations 10 and 6) -->
-        <g id="kbn-sm10" class="kb-sm"><rect x="504" y="384.5" width="30" height="11" rx="2"/><text x="519" y="389.7" text-anchor="middle" dominant-baseline="central">SUPERMKT</text></g>
-        <g id="kbn-sm6" class="kb-sm"><rect x="570" y="384.5" width="30" height="11" rx="2"/><text x="585" y="389.7" text-anchor="middle" dominant-baseline="central">SUPERMKT</text></g>
+        <g id="kbn-sm10" class="kb-sm" data-def="supermkt"><rect x="504" y="384.5" width="30" height="11" rx="2"/><text x="519" y="389.7" text-anchor="middle" dominant-baseline="central">SUPERMKT</text></g>
+        <g id="kbn-sm6" class="kb-sm" data-def="supermkt"><rect x="570" y="384.5" width="30" height="11" rx="2"/><text x="585" y="389.7" text-anchor="middle" dominant-baseline="central">SUPERMKT</text></g>
         <g class="kb-sm smed-tag" data-def="smed"><rect x="570" y="340.5" width="26" height="11" rx="2"/><text x="583" y="345.7" text-anchor="middle" dominant-baseline="central">SMED</text></g>
         <g class="kb-lab kb-sup" text-anchor="middle"><text x="932" y="196">Tier 1 Raw</text><text x="932" y="212">Material Supplier</text></g>
         <g class="kb-fg"><rect x="258" y="306" width="30" height="24" rx="3"/><text x="273" y="321" text-anchor="middle">FG</text><text x="273" y="344" class="kb-lab" text-anchor="middle">Finished goods</text></g>
@@ -418,7 +418,7 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
         <text x="392" y="218" class="pl-cell we-title" text-anchor="middle" style="font-size:15px">Tiger Motors · Assembly Plant</text>
       </svg>
       </div>
-      <figcaption class="plan-cap"><span class="plan-note"><span class="pdef" data-def-k="asrs">AS/RS: Automated Storage and Retrieval System</span><span class="pdef" data-def-k="smed">SMED: Single-Minute Exchange of Die</span></span><span id="planCapR">AS/RS feeds raw stock · Raw Stock delivers material to Cells 1, 2 and 3 · product flows Cell 1 → Cell 2 → Cell 3</span></figcaption>
+      <figcaption class="plan-cap"><span class="plan-note"><span class="pdef" data-def-k="asrs">AS/RS: Automated Storage and Retrieval System</span><span class="pdef" data-def-k="smed">SMED: Single-Minute Exchange of Die</span><span class="pdef" data-def-k="supermkt">Supermarket: the buffer inventory between cells</span></span><span id="planCapR">AS/RS feeds raw stock · Raw Stock delivers material to Cells 1, 2 and 3 · product flows Cell 1 → Cell 2 → Cell 3</span></figcaption>
       <div class="kb-legend" id="kbLegend" hidden>
         <span><i class="c-blue"></i>Blue card</span><span><i class="c-orange"></i>Orange card</span><span><i class="c-white"></i>White card · special order to War Eagle Inc.</span><span><i class="c-green"></i>Green card · material delivered back to Cell 1</span>
         <small>Each card color is a different product built in the lab. Pattern: 2 blue, 1 orange, 1 white, 2 blue, 1 orange. Cards leave the Heijunka box for station 11. A card then goes to the supermarket at station 10 and is posted at station 6, moves 6 to 10, and pulls from the supermarket at station 6, which posts at station 1 and moves 1 to 5. A second white card leaves station 11 for War Eagle Inc., circles it, and is delivered to station 15 together with the white card on the line.</small>
@@ -753,7 +753,7 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
       <a href="#lab">Explore the Lab</a><a href="#lean-house">Lean House</a><a href="modules">Modules</a><a href="#project">About</a><a href="testimonials">Testimonials</a><a href="#contact">Contact</a><a href="#install" class="fl-inst" data-install><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="12.5" rx="2"/><path d="M12 7.5v6M9.3 10.8L12 13.5l2.7-2.7M8.5 20.5h7"/></svg>Install the app</a>
     </div>
   </div>
-  <div class="wrap"><p class="site-rev">Last updated November 4, 2026 · Revision 144</p></div>
+  <div class="wrap"><p class="site-rev">Last updated November 4, 2026 · Revision 145</p></div>
 </footer>
 
 <dialog class="bdlg" id="bioDlg" aria-labelledby="bdlg-h">
@@ -1118,7 +1118,7 @@ if(reduce||LITE){var ps=document.querySelector('.plan-svg'); if(ps&&ps.pauseAnim
 /* ---------------- Facility plan: legend <-> cell highlight ---------------- */
 (function(){
   var plan=document.getElementById('plan'); if(!plan) return;
-  // hovering AS/RS or SMED (legend chip or the drawing) lights up its definition in the legend
+  // hovering AS/RS, SMED or a supermarket (legend chip or the drawing) lights up its definition in the legend
   function lightDef(e, on){
     var src = e.target.closest && e.target.closest('[data-def]'); if(!src || !plan.contains(src)) return;
     var k = src.getAttribute('data-def');
@@ -1300,7 +1300,7 @@ if('IntersectionObserver' in window && !reduce){
     {k:'Welcome', t:'Welcome to the Lean House', p:'This short guide shows you how to follow the learning sequence, from the foundation up. It takes about a minute, and you can leave at any time.', first:true, next:'Start', exit:'Not now'},
     {k:'Module 1 · The foundation', t:'Start with People', sel:'people', tg:[Z('people')], click:true, p:'Every house needs a foundation before anything else goes up, and the Lean House is no different. People are that foundation: every tool, standard and improvement depends on the people who use it.', next:'Open People'},
     {k:'Learning materials', t:'Everything for People, in order', tg:['#panel .p-groups'], p:'The box beside the house lists every resource for the element you picked, sequenced by step: Learn it, Explore it, then Apply it. Work through it from top to bottom.'},
-    {k:'Moving on', t:'Go to the next element', tg:['#panel .pa-prev','#panel .pa-next'], p:'When you finish a module, use the arrows on the sides of this box, or click the next element in the house, to keep climbing the structure.'},
+    {k:'Moving on', t:'Go to the next element', tg:['#panel .pa-prev','#panel .pa-next'], split:true, p:'When you finish a module, use the arrows on the sides of this box, or click the next element in the house, to keep climbing the structure.'},
     {k:'Module 2 · The floor', t:'Standardization', sel:'std', tg:[Z('std')], p:'Above the people sits the floor of the house: standard work. A stable, repeatable way of doing the job is what everything else is built on. You cannot improve a process that changes every time it runs.', q:'"Where there is no standard, there can be no kaizen."', qa:'Taiichi Ohno, father of the Toyota Production System'},
     {k:'Why a house?', t:'Each level carries the next', tg:['.house-wrap'], p:'That is why Lean is drawn as a house, not a list. The foundation supports the floor, the floor supports the pillars, and the pillars hold up the roof. Skip a level and everything above it is weaker.'},
     {k:'Module 3 · First pillar', t:'Jidoka: build quality in', sel:'jidoka', tg:[Z('jidoka')], p:'Pillars carry the load of the roof. Jidoka means stopping when something goes wrong so defects never move downstream. Quality is built in, not inspected in.'},
@@ -1323,12 +1323,26 @@ if('IntersectionObserver' in window && !reduce){
     els.next.addEventListener('click',next); els.back.addEventListener('click',back);
     els.exit.addEventListener('click',close); els.x.addEventListener('click',close);
     spot.addEventListener('click',function(){ if(spot.classList.contains('click')) next(); });
+    // split steps light each target in its own bubble: the area between them is dimmed again and each target gets a ring
+    spot.innerHTML='<i class="tour-mid"></i><i class="tour-hole"></i><i class="tour-hole"></i>';
   }
   function unionRect(sels){
     var L=1e9,T=1e9,R=-1e9,B=-1e9,sx=window.pageXOffset,sy=window.pageYOffset,ok=false;
     sels.forEach(function(q){var e=document.querySelector(q); if(!e) return; var r=e.getBoundingClientRect(); if(!r.width&&!r.height) return; ok=true;
       L=Math.min(L,r.left+sx);T=Math.min(T,r.top+sy);R=Math.max(R,r.right+sx);B=Math.max(B,r.bottom+sy);});
     return ok?{l:L,t:T,w:R-L,h:B-T}:null;
+  }
+  function splitHoles(s, r, pad){
+    var sx=window.pageXOffset, sy=window.pageYOffset, W=r.w+2*pad, H=r.h+2*pad, d='M0 0H'+W+'V'+H+'H0Z', holes=spot.querySelectorAll('.tour-hole');
+    var rs=s.split ? s.tg.map(function(q){ var e=document.querySelector(q), b=e&&e.getBoundingClientRect(); return b&&b.width ? {x:b.left+sx-r.l, y:b.top+sy-r.t, w:b.width+2*pad, h:b.height+2*pad} : null; }).filter(Boolean) : [];
+    spot.classList.toggle('split', rs.length===2);
+    if(rs.length!==2) return;
+    rs.forEach(function(h,i){
+      var k=Math.min(16,h.w/2,h.h/2);
+      d+='M'+(h.x+k)+' '+h.y+'H'+(h.x+h.w-k)+'A'+k+' '+k+' 0 0 1 '+(h.x+h.w)+' '+(h.y+k)+'V'+(h.y+h.h-k)+'A'+k+' '+k+' 0 0 1 '+(h.x+h.w-k)+' '+(h.y+h.h)+'H'+(h.x+k)+'A'+k+' '+k+' 0 0 1 '+h.x+' '+(h.y+h.h-k)+'V'+(h.y+k)+'A'+k+' '+k+' 0 0 1 '+(h.x+k)+' '+h.y+'Z';
+      holes[i].style.cssText='left:'+h.x+'px;top:'+h.y+'px;width:'+h.w+'px;height:'+h.h+'px';
+    });
+    spot.querySelector('.tour-mid').style.clipPath='path(evenodd,"'+d+'")';
   }
   function place(first){
     var s=STEPS[idx], r=s.tg?unionRect(s.tg):null, pad=10, vw=window.innerWidth, vh=window.innerHeight, sy=window.pageYOffset;
@@ -1340,7 +1354,9 @@ if('IntersectionObserver' in window && !reduce){
       spot.classList.remove('empty');
       spot.style.width=(r.w+2*pad)+'px'; spot.style.height=(r.h+2*pad)+'px';
       spot.style.transform='translate('+(r.l-pad)+'px,'+(r.t-pad)+'px)';
+      splitHoles(s, r, pad);
     } else {
+      spot.classList.remove('split');
       want=sy; spot.classList.add('empty');
       spot.style.width='0px'; spot.style.height='0px';
       spot.style.transform='translate('+(window.pageXOffset+vw/2)+'px,'+(sy+vh/2)+'px)';
@@ -1375,8 +1391,8 @@ if('IntersectionObserver' in window && !reduce){
     clearTimeout(timer);
     timer=setTimeout(function(){ place(first); els.next.focus({preventScroll:true}); }, s.sel?90:20);
   }
-  // the arrow-key hint fades away once the learner has moved a couple of times (buttons or keys)
-  function go(i){ idx=Math.max(0,Math.min(STEPS.length-1,i)); if(++moves>=2) card.classList.add('keys-gone'); render(false); }
+  // the arrow-key hint stays, but its keys stop animating once the learner has moved 4 times (buttons or keys)
+  function go(i){ idx=Math.max(0,Math.min(STEPS.length-1,i)); if(++moves>=4) card.classList.add('keys-still'); render(false); }
   function next(){ if(STEPS[idx].last) close(); else go(idx+1); }
   function back(){ go(idx-1); }
   function onKey(e){
@@ -1397,7 +1413,7 @@ if('IntersectionObserver' in window && !reduce){
     if(openT) return; openT=true; opener=document.activeElement; idx=0; moves=0;
     STEPS[0] = welcome===true ? WELCOME : HELLO;
     if(!layer) build();
-    layer.style.display=''; spot.style.display=''; card.style.display=''; card.classList.remove('keys-gone');
+    layer.style.display=''; spot.style.display=''; card.style.display=''; card.classList.remove('keys-still');
     var house=document.getElementById('lean-house'); if(house) house.scrollIntoView({block:'start',behavior:'auto'});
     var p=document.querySelector(Z('people')); if(p) p.dispatchEvent(new MouseEvent('click',{bubbles:true}));
     spot.style.transition='none'; render(true);
@@ -1653,7 +1669,7 @@ if('IntersectionObserver' in window && !reduce){
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
-<script src="auth.js?v=851205a7"></script>
+<script src="auth.js?v=59f82f94"></script>
 <script src="quiz.js?v=626f4fef"></script>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "7c29d6c7d06f4afba228776982c5e17a"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
