@@ -131,6 +131,16 @@ function emit(){ paint(); listeners.forEach(function(fn){ try { fn(state); } cat
 function paint(){
   if(!ON) return;
   paintNav(); paintBanners(); paintChecks(); paintChips();
+  $$('[data-reset-progress]').forEach(function(b){ b.hidden = !state.ready || !!state.user; });
+}
+// temporary reset for visitors who are not signed in: clears what this browser saved (checkmarks, lecture watch time, quiz scores)
+function resetLocal(){
+  if(state.user) return;
+  var q = 'Reset your progress on this device? Your checkmarks, lecture watch progress and quiz scores will be cleared.';
+  if(!confirm(window.TMI18n ? TMI18n.t(q) : q)) return;
+  ['tm-progress-local', 'tm-watch', 'tm-quiz-best'].forEach(function(k){ try { localStorage.removeItem(k); } catch(e){} });
+  state.done = {}; emit();
+  toast('Your progress was reset.');
 }
 
 function ring(pct, size){
@@ -300,6 +310,7 @@ document.addEventListener('click', function(e){
     else markDone(id);
     return;
   }
+  if(e.target.closest('[data-reset-progress]')){ resetLocal(); return; }
   var b = e.target.closest('[data-acct]');
   if(b){
     var act = b.getAttribute('data-acct');

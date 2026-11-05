@@ -1,12 +1,17 @@
 /* In-page viewer: YouTube videos, 3DVista lab activities and readings from sites that allow it open in a large
-   window over the page instead of a new tab. Sites that refuse to be shown inside another page (This American Life,
-   Auburn Box) keep opening in a new tab. Progress tracking is untouched: auth.js still sees the click on a[data-item].
+   window over the page instead of a new tab. Auburn Box readings use Box's embed address, which allows it. This American Life
+   refuses to be shown inside another page, so its episode plays in a small audio player here, with credit and a link to the show. Progress tracking is untouched: auth.js still sees the click on a[data-item].
    Lectures are the exception: they count as done only once watched to the end, with no skipping ahead, and they pause
    when the tab is hidden. The furthest point watched is kept in localStorage (tm-watch) so a lecture picks up where it stopped. */
 (function(){
 'use strict';
 // hosts checked on 2026-11-02 to load inside a frame
 var PAGES = /^https:\/\/(cloud\.3dvista\.com|storage\.net-fs\.com|kaizen\.com|www\.6sigma\.us)\//i;
+// This American Life episodes: the audio file the episode page itself offers for download
+var AUDIO = {
+  'www.thisamericanlife.org/561/nummi-2015': { mp3: 'https://www.thisamericanlife.org/sites/default/files/audio/561/r3IzbG6bzFT0_Lc5yVlHhsT8VKLOrSeFX2k4ksmlSUw/561.mp3',
+    show: 'This American Life', ep: 'Episode 561 · NUMMI (2015)' }
+};
 var dlg, frame, els = {};
 var WKEY = 'tm-watch';
 var W = null;   // the lecture being watched: { id, a, player, max, dur, timer, ... }
@@ -27,6 +32,10 @@ function plan(a){
   var u = a.href || '';
   var id = ytId(u);
   if(id) return { kind: 'video', v360: is360(id), src: 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0&playsinline=1' + ytStart(u), open: 'Watch on YouTube' };
+  var box = u.match(/^https:\/\/auburn(?:\.app)?\.box\.com\/s\/(\w+)/i);
+  if(box) return { kind: 'page', src: 'https://auburn.app.box.com/embed/s/' + box[1], open: 'Open in new tab' };
+  var au = AUDIO[u.replace(/^https?:\/\//, '').replace(/[?#].*$/, '').replace(/\/$/, '')];
+  if(au) return { kind: 'audio', audio: au, open: 'Open on This American Life' };
   if(PAGES.test(u)){
     var tour = /3dvista|net-fs/i.test(u);
     return { kind: tour ? 'tour' : 'page', src: u, open: 'Open in new tab' };
@@ -160,7 +169,7 @@ function build(){
    els.h = dlg.querySelector('#vw-h'); els.out = dlg.querySelector('.vw-out'); els.body = dlg.querySelector('.vw-body'); els.hint = dlg.querySelector('.vw-hint'); els.hintA = dlg.querySelector('.vw-hint-a');
   dlg.querySelector('.vw-x').addEventListener('click', close);
   dlg.addEventListener('click', function(e){ if(e.target === dlg) close(); });
-  dlg.addEventListener('close', function(){ stopWatch(); if(frame){ frame.remove(); frame = null; } document.documentElement.classList.remove('vw-open'); });
+  dlg.addEventListener('close', function(){ stopWatch(); var au = frame && frame.querySelector && frame.querySelector('audio'); if(au) au.pause(); if(frame){ frame.remove(); frame = null; } document.documentElement.classList.remove('vw-open'); });
   els.out.addEventListener('click', function(){ close(); });
   els.hintA.addEventListener('click', function(){ close(); });
   dlg.querySelector('.vw-hint-x').addEventListener('click', function(){ els.hint.hidden = true; });
@@ -168,7 +177,7 @@ function build(){
 
 function open(a, p){
   if(!dlg) build();
-  var KIND = { video: 'Video', tour: 'Lab activity', page: 'Reading' };
+  var KIND = { video: 'Video', tour: 'Lab activity', page: 'Reading', audio: 'Podcast' };
   dlg.className = 'vw vw-' + p.kind;
   els.k.textContent = KIND[p.kind];
   els.h.textContent = titleOf(a);
@@ -176,6 +185,21 @@ function open(a, p){
   els.hintA.href = a.href; els.hint.hidden = !p.v360; dlg.classList.toggle('vw-360', !!p.v360);
   stopWatch();
   if(frame) frame.remove();
+  if(p.kind === 'audio'){
+    var au = p.audio;
+    frame = document.createElement('div'); frame.className = 'vw-au';
+    frame.innerHTML = '<div class="vw-au-art" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8.5 21h7"/></svg></div><div class="vw-au-t"><span class="vw-au-show"></span><b></b>' +
+      '<audio controls autoplay preload="metadata"></audio><p class="vw-au-err" hidden>The episode could not be loaded here. Use the button above to listen on This American Life.</p>' +
+      '<p class="vw-au-c">Audio courtesy of This American Life.</p></div>';
+    frame.querySelector('.vw-au-show').textContent = au.show; frame.querySelector('b').textContent = au.ep;
+    var el = frame.querySelector('audio'); el.src = au.mp3;
+    el.addEventListener('error', function(){ el.hidden = true; frame.querySelector('.vw-au-err').hidden = false; });
+    dlg.classList.add('vw-ready');
+    els.body.appendChild(frame);
+    document.documentElement.classList.add('vw-open');
+    dlg.showModal();
+    return;
+  }
   var lec = p.kind === 'video' && lectureId(a);
   if(lec) p.src += '&enablejsapi=1&origin=' + encodeURIComponent(location.origin);
   frame = document.createElement('iframe');
@@ -246,6 +270,19 @@ css.textContent =
   '.vw-wok::before{content:"\\2713  "}' +
   '.vw-note{position:absolute;left:50%;top:14px;z-index:3;margin:0;max-width:min(560px,calc(100% - 32px));width:max-content;padding:10px 16px;border-radius:12px;background:rgba(7,18,31,.94);border:1px solid rgba(160,185,212,.3);color:#EAF0F7;font:500 14px/1.45 "IBM Plex Sans",system-ui,sans-serif;text-align:center;box-shadow:0 14px 34px -12px rgba(0,0,0,.7);opacity:0;transform:translate(-50%,-6px);transition:opacity .3s,transform .3s;pointer-events:none}' +
   '.vw-note.show{opacity:1;transform:translate(-50%,0)}' +
+  '.vw.vw-audio{width:min(760px,96vw);height:fit-content}' +
+  '.vw.vw-audio[open]{grid-template-rows:auto auto}' +
+  '.vw-audio .vw-body{background:#07121F}' +
+  '.vw-au{display:grid;grid-template-columns:200px minmax(0,1fr);gap:24px;align-items:center;padding:24px}' +
+  '.vw-au-art{aspect-ratio:1;border-radius:14px;display:grid;place-items:center;color:#FF9B4D;background:radial-gradient(120% 120% at 30% 20%,rgba(232,119,34,.28),rgba(232,119,34,0) 60%),#0E1E31;border:1px solid rgba(160,185,212,.2)}' +
+  '.vw-au-art svg{width:42%;height:42%}' +
+  '.vw-au-t{display:grid;gap:10px;min-width:0}' +
+  '.vw-au-show{font:600 12px "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:#FF9B4D}' +
+  '.vw-au-t b{font:600 20px/1.3 "IBM Plex Sans",system-ui,sans-serif}' +
+  '.vw-au audio{width:100%;margin-top:6px;color-scheme:dark}' +
+  '.vw-au-err{margin:0;font:500 14px/1.5 "IBM Plex Sans",system-ui,sans-serif;color:#EAF0F7}' +
+  '.vw-au-c{margin:0;font:500 13px/1.5 "IBM Plex Sans",system-ui,sans-serif;color:#C9D6E4}.vw-au-c a{color:#FF9B4D}' +
+  '@media (max-width:640px){.vw.vw-audio{height:100dvh}.vw.vw-audio[open]{grid-template-rows:auto minmax(0,1fr)}.vw-au{grid-template-columns:1fr;align-content:start;justify-items:center;text-align:center}.vw-au-art{width:140px}.vw-au-t{width:100%}}' +
   '@media (max-width:640px){.vw.vw-video.vw-lec[open]{grid-template-rows:auto auto minmax(0,1fr)}}' +
   '@media (max-width:640px){.vw,.vw.vw-video{width:100vw;height:100dvh;border-radius:0;border:0}.vw.vw-video[open]{grid-template-rows:auto minmax(0,1fr)}.vw.vw-video .vw-body{aspect-ratio:auto}.vw-out span{display:none}.vw-out{padding:0;width:42px;height:42px;justify-content:center}.vw-bar{padding-left:14px}}' +
   '@media (max-width:640px){.vw-hint{right:10px;left:10px;max-width:none}.vw-hint::before{right:68px}}' +

@@ -1545,6 +1545,12 @@ html[data-mode="light"] .cta-note{color:#8A3E0A}
 .mnav a.mnav-inst svg{width:26px;height:26px;align-self:center}
 .foot .fl a.fl-inst{display:inline-flex;align-items:center;gap:6px}
 .foot .fl a.fl-inst svg{width:15px;height:15px}
+/* temporary: lets a visitor who is not signed in clear the progress saved in this browser */
+.foot .fl .fl-reset{flex-basis:100%;display:flex;justify-content:flex-end;align-items:center;gap:6px;padding:0;border:0;background:none;cursor:pointer;font:500 12px var(--f-mono);letter-spacing:.08em;color:var(--text-2)}
+.foot .fl .fl-reset[hidden]{display:none}
+.foot .fl .fl-reset svg{width:15px;height:15px}
+.foot .fl .fl-reset:hover,.foot .fl .fl-reset:focus-visible{color:var(--orange-2)}
+@media (max-width:1024px){.foot .fl .fl-reset{justify-content:flex-start;margin-top:6px}}
 .idlg{max-width:min(560px,calc(100vw - 32px))}
 .idlg-tabs{display:flex;gap:6px;padding:4px;border-radius:999px;background:var(--paper);margin-bottom:18px}
 .idlg-tab{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:7px;border:0;background:transparent;color:var(--ink-2);font:600 13px var(--f-mono);letter-spacing:.06em;padding:10px 8px;border-radius:999px;cursor:pointer}
