@@ -221,13 +221,13 @@ var M = [
      o:['To supervise workers closely and correct their mistakes','To help people do a better job','To set targets and cost-cutting goals from the office','To get “buy-in” from employees for management’s ideas'], a:1,
      e:'Deming said supervision should be replaced by leadership, and that leadership’s job is to help people. Ohno was very tough on managers but not on operators. He expected managers to understand why things fail and get people what they need. Operators are involved because they’re the only ones who can “hear the process,” not as a goodwill gesture or to win buy-in.'}
   ]}},
-  {k:'sqdcm', n:'', name:'SQDCM', role:'Performance · Safety, Quality, Delivery, Cost, Morale', hide:['experience'], items:[
-    {id:'sqdcm.reading.sqdcm', verb:'explore', type:'reading', title:'SQDCM', src:'Supplemental material', url:null, pending:'Coming in Spring 2027'}
-  ], empty:{learn:'Coming in Spring 2027', apply:'Coming in Spring 2027'}},
+  {k:'sqdcm', n:'', name:'SQDCM', role:'Performance · Safety, Quality, Delivery, Cost, Morale', hide:['experience'], items:[], empty:{learn:'Coming in Spring 2027', explore:'Coming in Spring 2027', apply:'Coming in Spring 2027'}},
   {k:'cs', n:'', name:'Customer Satisfaction', role:'Goal · Roof of the house', items:[], empty:{learn:'Coming in Spring 2027', explore:'Coming in Spring 2027', experience:'Coming in Spring 2027', apply:'Coming in Spring 2027'}}
 ];
 var BYK = {}; M.forEach(function(m){BYK[m.k]=m;});
 var SEQ = ['people','std','jidoka','jit','ci'];
+// a module shows on the learning modules page once it has material (a linked resource or a quiz)
+function hasMaterial(k){ var m = BYK[k]; return !!m && (!!m.quiz || (m.items||[]).some(function(it){ return it.url; })); }
 
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
 function icon(id,cls){return '<svg'+(cls?' class="'+cls+'"':'')+' aria-hidden="true"><use href="#i-'+id+'"/></svg>';}
@@ -237,5 +237,5 @@ function isLaunch(t){return t==='lab'||t==='immersive';}
 // every linked resource in the five Lean House elements (except items marked optional:true), plus each module quiz
 var REQUIRED = []; SEQ.forEach(function(k){ (BYK[k].items||[]).forEach(function(it){ if(it.url && it.id && !it.optional) REQUIRED.push(it.id); }); if(BYK[k].quiz) REQUIRED.push(BYK[k].quiz.id); });
 var SQ = [['S','SAFETY'],['Q','QUALITY'],['D','DELIVERY'],['C','COST'],['M','MORALE']];
-return {TYPES:TYPES, VERBS:VERBS, M:M, BYK:BYK, SEQ:SEQ, SQ:SQ, REQUIRED:REQUIRED, esc:esc, icon:icon, ext:ext, isLaunch:isLaunch};
+return {TYPES:TYPES, VERBS:VERBS, M:M, BYK:BYK, SEQ:SEQ, SQ:SQ, REQUIRED:REQUIRED, esc:esc, icon:icon, ext:ext, isLaunch:isLaunch, hasMaterial:hasMaterial};
 })();
