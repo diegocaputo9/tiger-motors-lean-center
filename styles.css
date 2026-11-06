@@ -537,10 +537,7 @@ a.mini:hover{border-color:rgba(232,119,34,.5);background:rgba(232,119,34,.07);tr
 .news-body .rc-act{border-top:1px solid var(--paper-line)}
 .news-card:hover .rc-act{color:#9A460C}
 .team-head{margin-top:clamp(90px,10vw,130px)}
-.team-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
-.team-grid>.pc{grid-column:span 2}
-.team-grid>.pc:nth-child(4){grid-column:2/4}
-.team-grid>.pc:nth-child(5){grid-column:4/6}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .team-label{display:none}
 .pc-exp{border-color:rgba(232,119,34,.4);box-shadow:0 20px 44px -30px rgba(232,119,34,.55)}
 .pc-exp .role{color:var(--ink);font-weight:600}
@@ -631,7 +628,7 @@ footer{border-top:1px solid var(--line);padding-block:40px calc(40px + env(safe-
 .pchip:hover,.pchip.on{color:var(--text);border-color:rgba(232,119,34,.6);background:rgba(232,119,34,.1)}
 .pchip-arrow{color:var(--text-3);font-family:var(--f-mono);font-size:12px}
 .plan-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:12px;background:rgba(7,18,31,.5);border:1px solid var(--line)}
-.plan-svg{display:block;width:100%;min-width:640px;height:auto}
+.plan-svg{display:block;width:100%;min-width:700px;height:auto}
 .fact b{white-space:nowrap}
 .pl-lab,.pl-lab text{font:500 12px var(--f-mono);fill:#D6DFE9;letter-spacing:.04em}
 .pl-tag{font:500 12px var(--f-mono);fill:#D6DFE9;letter-spacing:.2em}
@@ -776,8 +773,6 @@ html[data-mode="light"]{--bg-rgb:244,246,249}
   .mod{grid-template-columns:1fr}
   .mod-side{position:relative;top:auto}
   .team-grid{grid-template-columns:1fr 1fr}
-  .team-grid>.pc,.team-grid>.pc:nth-child(4),.team-grid>.pc:nth-child(5){grid-column:auto}
-  .team-grid>.pc:nth-child(5){grid-column:1/-1;justify-self:center;width:calc(50% - 8px)}
   .runs{grid-template-columns:1fr}
   .foot{grid-template-columns:1fr}.foot .fl{justify-content:flex-start}
   .hero::after{background:linear-gradient(180deg,rgba(7,18,31,.55) 0%,rgba(7,18,31,.82) 55%,var(--bg) 100%)}
@@ -785,7 +780,6 @@ html[data-mode="light"]{--bg-rgb:244,246,249}
 @media (max-width:640px){
   body{font-size:16px}
   .ideas,.cats,.team-grid,.contact-grid,.ta-list{grid-template-columns:1fr}
-  .team-grid>.pc:nth-child(5){width:auto;justify-self:stretch}
   .contact-grid .cc:last-child{grid-column:auto}
   .facts{grid-template-columns:1fr}
   .pillars{grid-template-columns:1fr}
@@ -1038,7 +1032,8 @@ html[data-mode="light"] .pdlg::backdrop{background:rgba(220,228,238,.5)}
 .kb-link{fill:none;stroke:rgba(233,238,244,.55);stroke-width:1.5;stroke-dasharray:4 5;stroke-linecap:round;transition:stroke .25s,stroke-width .25s}
 .kb-link.on{stroke:#fff;stroke-width:2.6}
 .kb-note{fill:#FFB877;font-size:12px}
-.kb-sup text{fill:#FFB877;font-size:12px}
+.sup-tag .pl-cell{font-size:16px;fill:#FFB877}
+.sup-arrow{fill:none;stroke:#FF9B4D;stroke-width:2}
 .kb-pop{opacity:0;transition:opacity .3s ease;pointer-events:none}
 .kb-pop.on{opacity:1}
 .kb-pop rect,.kb-pop polygon{fill:rgba(232,119,34,.97);stroke:#fff;stroke-width:1}
@@ -1057,7 +1052,7 @@ html{-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
   .intro-top .facts{background:rgba(var(--bg-rgb),.78)}
   .spin,.spin-r{animation:none!important}
   .portal{transition:none}
-  .plan-svg{min-width:880px}
+  .plan-svg{min-width:970px}
   .plan-hint{display:block}
   .hero{min-height:0}
   .hero-in{padding-block:calc(var(--nav-h) + 40px) 96px}
@@ -1597,7 +1592,7 @@ html[data-mode="light"] .grant figcaption{background:rgba(7,18,31,.92);color:#E9
 .plan-svg .kb-sm{transform:scale(1.6)}   /* SMED and SUPERMKT tags: smaller by choice so they do not cover the stations */
 .plan-svg .mc-st text,.plan-svg .we-sub{font-family:var(--f-body);letter-spacing:0}
 .plan-svg .kb-n{transform:scale(1.45)}
-@media (max-width:1240px){.plan-svg{min-width:1100px}}
+@media (max-width:1240px){.plan-svg{min-width:1210px}}
 @media (max-width:900px){.portal-vis .pv-small{display:none}}
 
 /* free-account banner: how much material the course holds */
