@@ -62,7 +62,11 @@ function audioOf(u){ return AUDIO[String(u || '').replace(/^https?:\/\//, '').re
 // lectures on YouTube and podcasts with an in-page player are tracked; everything else counts on the click
 function tracked(id){ var it = itemOf(id); return !!it && (it.type === 'lecture' && !!ytId(it.url || '') || it.type === 'podcast' && !!audioOf(it.url)); }
 function loadW(){ try { return JSON.parse(localStorage.getItem(WKEY) || '{}') || {}; } catch(e){ return {}; } }
+// the account (auth.js) keeps it when accounts are on; this browser otherwise
+function getW(id){ var A = auth(); return (A && A.watchGet ? A.watchGet(id) : loadW()[id]) || {}; }
 function saveW(id, max, dur){
+  var A = auth();
+  if(A && A.watchSet){ if(max == null) A.watchClear(id); else A.watchSet(id, max, dur); return; }
   var all = loadW();
   if(max == null) delete all[id]; else all[id] = { m: Math.round(max), d: Math.round(dur || 0) };
   try { localStorage.setItem(WKEY, JSON.stringify(all)); } catch(e){}
@@ -117,11 +121,11 @@ function tick(){
   }
   if(P.getPlayerState() === 1 && document.visibilityState === 'visible') W.max = Math.max(W.max, t);
   if(W.dur && W.max >= W.dur - 2) complete();
-  if(now - W.saved > 5000){ W.saved = now; saveW(W.id, W.max, W.dur); }
+  if(now - W.saved > 10000){ W.saved = now; saveW(W.id, W.max, W.dur); }
   paintW();
 }
 function startWatch(a, id, kind, audioEl){
-  var prev = loadW()[id] || {};
+  var prev = getW(id);
   W = { id: id, kind: kind, player: null, max: prev.m || 0, dur: prev.d || 0, done: isDone(id), wall: Date.now(), saved: Date.now(), timer: 0 };
   dlg.classList.add('vw-lec');
   els.wl.textContent = kind === 'podcast' ? 'Listened' : 'Watched';
@@ -252,7 +256,7 @@ document.addEventListener('click', function(e){
   open(a, p);
 });
 
-window.TMViewer = { handles: function(a){ return !!plan(a); }, close: close, tracked: tracked, watched: function(id){ var w = loadW()[id]; return w && w.d && w.m > 0 ? Math.max(1, Math.min(99, Math.floor(w.m * 100 / w.d))) : 0; } };
+window.TMViewer = { handles: function(a){ return !!plan(a); }, close: close, tracked: tracked, watched: function(id){ var A = auth(); if(A && A.watched) return A.watched(id); var w = loadW()[id]; return w && w.d && w.m > 0 ? Math.max(1, Math.min(99, Math.floor(w.m * 100 / w.d))) : 0; } };
 
 var css = document.createElement('style');
 css.textContent =

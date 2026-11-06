@@ -25,7 +25,7 @@ var sb = (window.supabase && window.supabase.createClient)
   ? window.supabase.createClient(CFG.url, CFG.key, { auth: { flowType: 'implicit', persistSession: true, autoRefreshToken: true, detectSessionInUrl: true } })
   : null;
 
-var state = { ready: false, user: null, profile: null, done: {}, cert: null };
+var state = { ready: false, user: null, profile: null, done: {}, cert: null, watch: {} };
 var listeners = [];
 var lastUid = undefined;
 
@@ -82,6 +82,39 @@ function unmark(id){
   emit();
 }
 
+/* ---------- how far lectures and podcasts were played (viewer.js) ---------- */
+// signed in: the watch_progress table, so it follows the learner to any device; signed out: this browser (tm-watch)
+var WATCH_KEY = 'tm-watch';
+function loadWatchLocal(){ try { return JSON.parse(localStorage.getItem(WATCH_KEY) || '{}') || {}; } catch(e){ return {}; } }
+function saveWatchLocal(o){ try { localStorage.setItem(WATCH_KEY, JSON.stringify(o)); } catch(e){} }
+async function loadWatchRemote(){
+  var r = await sb.from('watch_progress').select('item_id,pos,dur');
+  if(r.error) throw r.error;
+  var w = {}; r.data.forEach(function(x){ w[x.item_id] = { m: x.pos, d: x.dur }; }); return w;
+}
+// what was played before signing in is kept when it is further along than what the account has
+async function mergeWatch(){
+  var loc = loadWatchLocal(), rows = Object.keys(loc).filter(function(id){ return !state.done[id] && loc[id].m > ((state.watch[id] || {}).m || 0); })
+    .map(function(id){ return { item_id: id, pos: clampW(loc[id].m), dur: clampW(loc[id].d), updated_at: new Date().toISOString() }; });
+  if(rows.length){ var r = await sb.from('watch_progress').upsert(rows, { onConflict: 'user_id,item_id' }); if(r.error) return; rows.forEach(function(x){ state.watch[x.item_id] = { m: x.pos, d: x.dur }; }); }
+  saveWatchLocal({});
+}
+function clampW(n){ return Math.max(0, Math.min(36000, Math.round(n || 0))); }
+function watchGet(id){ return state.watch[id] || null; }
+function watchSet(id, m, d){
+  m = clampW(m); d = clampW(d); if(!id || !m || state.done[id]) return;
+  state.watch[id] = { m: m, d: d };
+  if(state.user && sb) sb.from('watch_progress').upsert({ item_id: id, pos: m, dur: d, updated_at: new Date().toISOString() }, { onConflict: 'user_id,item_id' }).then(function(r){ if(r.error) console.warn('watch', r.error.message); });
+  else saveWatchLocal(state.watch);
+}
+function watchClear(id){
+  if(!state.watch[id]) return;
+  delete state.watch[id];
+  if(state.user && sb) sb.from('watch_progress').delete().eq('item_id', id).then(function(){});
+  else saveWatchLocal(state.watch);
+}
+function watchedPct(id){ var w = state.watch[id]; return w && w.d && w.m > 0 && !state.done[id] ? Math.max(1, Math.min(99, Math.floor(w.m * 100 / w.d))) : 0; }
+
 /* ---------- session ---------- */
 async function onSession(session){
   var uid = session && session.user ? session.user.id : null;
@@ -94,11 +127,13 @@ async function onSession(session){
       state.profile = p.data || null;
       state.done = await loadRemote();
       await mergeLocal();
+      state.watch = await loadWatchRemote();
+      await mergeWatch();
       if(CFG.certificates){ var c = await sb.from('certificates').select('*').eq('kind', 'lean-house').maybeSingle(); state.cert = c.data || null; }
     } catch(e){ console.warn('account load', e); }
     if(cameFromLink){ cameFromLink = false; toast('Welcome' + (firstName() ? ', ' + firstName() : '') + '! You are signed in, and your progress is saved to your account.'); }
   } else {
-    state.profile = null; state.cert = null; state.done = loadLocal();
+    state.profile = null; state.cert = null; state.done = loadLocal(); state.watch = loadWatchLocal();
   }
   state.ready = true;
   emit();
@@ -106,7 +141,7 @@ async function onSession(session){
 if(sb){
   sb.auth.onAuthStateChange(function(ev, session){ setTimeout(function(){ onSession(session); }, 0); });
 } else {
-  state.done = loadLocal(); state.ready = true;
+  state.done = loadLocal(); state.watch = loadWatchLocal(); state.ready = true;
 }
 if(/access_token=|error_code=|error=access_denied/.test(hash)){
   setTimeout(function(){ try { history.replaceState(null, '', location.pathname + location.search); } catch(e){} }, 1500);
@@ -139,7 +174,7 @@ function resetLocal(){
   var q = 'Reset your progress on this device? Your checkmarks, lecture watch progress and quiz scores will be cleared.';
   if(!confirm(window.TMI18n ? TMI18n.t(q) : q)) return;
   ['tm-progress-local', 'tm-watch', 'tm-quiz-best'].forEach(function(k){ try { localStorage.removeItem(k); } catch(e){} });
-  state.done = {}; emit();
+  state.done = {}; state.watch = {}; emit();
   toast('Your progress was reset.');
 }
 
@@ -260,21 +295,42 @@ function paintChecks(){
   $$('[data-item]').forEach(function(el){
     var id = el.getAttribute('data-item'), on = !!state.done[id];
     el.classList.toggle('is-done', on);
-    if(el.matches('article.rc') && isLecture(id)){
-      var w = on ? 0 : TMViewer.watched(id), bar = $('.rc-watch', el);
-      if(w && !bar){ bar = document.createElement('div'); bar.className = 'rc-watch'; bar.innerHTML = '<i><em></em></i><span></span>'; el.insertBefore(bar, $('.rc-act', el)); }
-      if(bar){ bar.hidden = !w; $('em', bar).style.width = w + '%'; var txt = w + (el.getAttribute('data-type') === 'podcast' ? '% listened' : '% watched'); if($('span', bar).textContent !== txt) $('span', bar).textContent = txt; }
+    var w = isLecture(id) && !on ? TMViewer.watched(id) : 0;
+    var heard = (el.getAttribute('data-type') || (itemType(id))) === 'podcast';
+    if(el.matches('a.mini')){
+      var mr = $('.wring', el);
+      if(w && !mr){ mr = document.createElement('span'); mr.className = 'wring'; el.insertBefore(mr, $('.go', el)); }
+      if(mr) paintRing(mr, w, heard);
+      el.classList.toggle('has-ring', !!w);
     }
     if(el.matches('article.rc')){
       var tg = $('.tm-tg', el);
       if(!tg){ tg = document.createElement('button'); tg.type = 'button'; tg.className = 'tm-tg'; tg.setAttribute('data-tg', id); var top = $('.rc-top', el); if(top) top.appendChild(tg); }
       var title = on ? 'Done. Click to mark as not done' : isLecture(id) ? (el.getAttribute('data-type') === 'podcast' ? 'Listen to the end to complete' : 'Watch to the end to complete') : 'Mark as done';
+      if(w) title = w + (heard ? '% listened' : '% watched');
       if(tg.__en !== title){ tg.__en = title; tg.title = title; tg.setAttribute('aria-label', title); }
+      // a lecture or podcast part way through: the button becomes a ring that fills up, with the percentage inside
+      if(w){ if(!tg.classList.contains('has-ring')){ tg.classList.add('has-ring'); tg.className += ' wring'; tg.innerHTML = ''; tg.removeAttribute('aria-pressed'); } paintRing(tg, w, heard); return; }
+      if(tg.classList.contains('has-ring')){ tg.classList.remove('has-ring', 'wring'); tg.innerHTML = ''; tg.removeAttribute('aria-pressed'); }
       if(tg.getAttribute('aria-pressed') === (on ? 'true' : 'false')) return;
       tg.setAttribute('aria-pressed', on ? 'true' : 'false');
       tg.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12.5l4 4L18 8" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
     }
   });
+}
+function itemType(id){ var t = ''; Object.keys(TM.BYK || {}).forEach(function(k){ (TM.BYK[k].items || []).forEach(function(it){ if(it.id === id) t = it.type; }); }); return t; }
+function paintRing(el, w, heard){
+  if(!el.firstChild){
+    el.innerHTML = '<svg viewBox="0 0 40 40" aria-hidden="true"><circle class="wr-bg" cx="20" cy="20" r="17"/><circle class="wr-fg" cx="20" cy="20" r="17" pathLength="100" style="stroke-dasharray:0 100"/></svg><b></b>';
+    el.__w = 0;
+  }
+  if(!el.matches('button')){ var t = w + (heard ? '% listened' : '% watched'); if(el.title !== t) el.title = t; }
+  if(el.__w === w) return;
+  el.__w = w;
+  $('b', el).textContent = w + '%';
+  // filled on the next frame, so a new ring sweeps up from zero
+  var fg = $('.wr-fg', el);
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){ fg.style.strokeDasharray = w + ' 100'; }); });
 }
 function paintChips(){
   $$('.step-chip[data-k]').forEach(function(ch){
@@ -444,7 +500,7 @@ if(document.readyState === 'loading') document.addEventListener('DOMContentLoade
 
 window.TMAuth = {
   client: sb, config: CFG, enabled: ON, state: state, stats: stats, moduleStats: moduleStats,
-  markDone: markDone, unmark: unmark, signOut: signOut, openSignIn: function(){ openDialog('signin'); },
+  markDone: markDone, unmark: unmark, watchGet: watchGet, watchSet: watchSet, watchClear: watchClear, watched: watchedPct, signOut: signOut, openSignIn: function(){ openDialog('signin'); },
   onChange: function(fn){ listeners.push(fn); if(state.ready) fn(state); }, repaint: paint
 };
 })();
