@@ -12,6 +12,7 @@ var AUDIO = {
   'www.thisamericanlife.org/561/nummi-2015': { mp3: 'https://www.thisamericanlife.org/sites/default/files/audio/561/r3IzbG6bzFT0_Lc5yVlHhsT8VKLOrSeFX2k4ksmlSUw/561.mp3',
     show: 'This American Life', ep: 'Episode 561 · NUMMI (2015)' }
 };
+var PHONE = window.matchMedia && matchMedia('(pointer:coarse)').matches && Math.min(screen.width, screen.height) <= 500;
 var dlg, frame, els = {};
 var WKEY = 'tm-watch';
 var W = null;   // the lecture or podcast playing: { id, kind, player, max, dur, timer, ... }
@@ -47,6 +48,9 @@ function plan(a){
   if(box) return { kind: 'page', src: 'https://auburn.app.box.com/embed/s/' + box[1], open: 'Open in new tab' };
   if(PAGES.test(u)){
     var tour = /3dvista|net-fs/i.test(u);
+    // phones enlarge the text of a page shown inside another page (iPhone Safari in landscape), which breaks the
+    // 3DVista panels: there the lab activities open in their own tab, full screen, where they look right
+    if(tour && PHONE) return null;
     return { kind: tour ? 'tour' : 'page', src: u, open: 'Open in new tab' };
   }
   return null;
