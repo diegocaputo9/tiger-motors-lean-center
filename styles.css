@@ -1771,3 +1771,12 @@ html[data-mode="light"] .cta-note{color:#8A3E0A}
   html.fit-wide .pdlg{max-width:min(1040px,calc(100vw / var(--z) - 32px));max-height:calc(100svh / var(--z) - 48px)}
   html.fit-wide .pdlg-in{max-height:calc(100svh / var(--z) - 48px)}
 }
+
+/* learning module games: open by default, the corner arrow folds a game down to its title */
+.foldable{position:relative}
+.foldable>.pl-head,.foldable>.ws-head{padding-right:44px}
+.pl-fold{position:absolute;top:14px;right:14px;width:32px;height:32px;padding:0;border-radius:50%;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.06);color:#EAF0F7;display:grid;place-items:center;cursor:pointer;transition:background .2s,border-color .2s}
+.pl-fold:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.4)}
+.pl-fold svg{transition:transform .3s cubic-bezier(.23,1,.32,1)}
+.pl-closed .pl-fold svg{transform:rotate(180deg)}
+.pl-closed>:not(.pl-head):not(.ws-head):not(.pl-fold){display:none!important}

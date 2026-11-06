@@ -387,4 +387,15 @@ function jidoka(box){
 
 var PLAY = { people: people, std: std, jidoka: jidoka, jit: jit };
 $$('[data-play]').forEach(function(box){ var f = PLAY[box.getAttribute('data-play')]; if(f) f(box); });
+// every game (and the seven wastes) opens by default; the arrow in its top corner folds it down to its title
+var CHEV = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg>';
+$$('.play, .wastes').forEach(function(box){
+  if($('.pl-fold', box)) return;
+  var b = el('<button type="button" class="pl-fold" aria-expanded="true" aria-label="Minimize" title="Minimize">' + CHEV + '</button>');
+  box.classList.add('foldable'); box.insertBefore(b, box.firstChild);
+  b.addEventListener('click', function(){
+    var shut = box.classList.toggle('pl-closed'), t = shut ? 'Expand' : 'Minimize';
+    b.setAttribute('aria-expanded', shut ? 'false' : 'true'); b.setAttribute('aria-label', t); b.setAttribute('title', t);
+  });
+});
 })();

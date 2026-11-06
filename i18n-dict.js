@@ -5429,4 +5429,5 @@ window.TM_I18N = {
 "This is the AS/RS": ["Este es el AS/RS", "Das ist das AS/RS", "Questo è l'AS/RS"],
 "<b>AS</b>AS/RS · Tier 1 Raw Material Supplier": ["<b>AS</b>AS/RS · Proveedor Tier 1 de materia prima", "<b>AS</b>AS/RS · Tier-1-Lieferant für Rohmaterial", "<b>AS</b>AS/RS · Fornitore Tier 1 di materie prime"],
 "AS/RS · Tier 1 Raw Material Supplier": ["AS/RS · Proveedor Tier 1 de materia prima", "AS/RS · Tier-1-Lieferant für Rohmaterial", "AS/RS · Fornitore Tier 1 di materie prime"],
+"Expand": ["Expandir", "Aufklappen", "Espandi"],
 };
