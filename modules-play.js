@@ -1,6 +1,6 @@
 /* Learning modules: small interactive pieces at the top of a module (modules.html leaves a <div data-play="..."> for each).
    people: sort statements into mass production or lean. std: 5S a messy workbench, step by step, in the right order.
-   jit: the same three-station line run as push and as pull, to watch inventory and lead time. */
+   jit: the same three-station line run as push and as pull side by side, to watch inventory and lead time. */
 (function(){
 'use strict';
 var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -126,69 +126,109 @@ function std(box){
   });
 }
 
-/* ---------- JIT: push or pull ---------- */
-// three stations; Weld is the slowest. The customer takes one car every takt (1.2 s here, one minute on a real line)
-var ST = [['Cut', .6], ['Weld', 1.2], ['Paint', 1]], TAKT = 1.2, LIMIT = 2, SHOW = 18, SPEED = 1.5;
+/* ---------- JIT: push or pull, side by side ---------- */
+// the same three-station line runs twice on one clock: on top every station pushes, below each one waits for a kanban.
+// Weld is the slowest station; the customer takes one car every takt. 3 s here stands for one minute on a real line.
+var ST = [['Cut', 1.5], ['Weld', 3], ['Paint', 2.5]], TAKT = 3, LIMIT = 2, SHOW = 12, SPAN = 90;
 function jit(box){
   box.className = 'play pl-jit';
-  box.innerHTML = '<div class="pl-head"><b>Push or pull?</b><small>The same line, run two ways. Weld is the slowest station.</small></div>' +
-    '<div class="pj-mode" role="group" aria-label="How the line is run"><button type="button" data-m="push" aria-pressed="true"><b>Push</b><small>Every station makes parts as fast as it can</small></button><button type="button" data-m="pull" aria-pressed="false"><b>Pull</b><small>Kanban: make only what the next station used</small></button></div>' +
-    '<div class="pj-line">' + ST.map(function(s, i){
-      return '<div class="pj-st" data-s="' + i + '"><b>' + s[0] + '</b><i class="pj-bar"><em></em></i><small>' + s[1] + ' s</small></div>' +
-        '<div class="pj-buf" data-b="' + i + '"><div class="pj-dots"></div><span class="pj-cap">max 2</span></div>';
-    }).join('') + '<div class="pj-st pj-cust"><b>Customer</b><small>1 every 1.2 s</small></div></div>' +
-    '<div class="pj-stats"><p><b class="pj-wip">0</b><span>cars in the line (WIP)</span></p><p><b class="pj-lt">0</b><span>minutes of lead time, if takt is 1 minute</span></p><p><b class="pj-out">0</b><span>cars delivered</span></p></div>' +
+  function lane(m){
+    return '<div class="pj-lane" data-m="' + m + '"><div class="pj-lh"><b>' + (m === 'push' ? 'Push' : 'Pull') + '</b><small>' +
+      (m === 'push' ? 'Every station makes cars as fast as it can' : 'Kanban: a station makes a car only when the next one takes one') + '</small>' +
+      '<p class="pj-ls"><span><b class="pj-wip">0</b> in the line</span><span><b class="pj-lt">0</b> min lead time</span><span><b class="pj-out">0</b> delivered</span></p></div>' +
+      '<div class="pj-line">' + ST.map(function(s, i){
+        return '<div class="pj-st" data-s="' + i + '"><b>' + s[0] + '</b><i class="pj-bar"><em></em></i><small class="pj-state">Waiting for parts</small></div>' +
+          '<div class="pj-buf" data-b="' + i + '"><b class="pj-n">0</b><div class="pj-cars"></div>' + (m === 'pull' ? '<span class="pj-cap">max 2</span>' : '') + '</div>';
+      }).join('') + '<div class="pj-st pj-cust"><b>Customer</b><small>takes 1 car per takt</small></div></div></div>';
+  }
+  box.innerHTML = '<div class="pl-head"><b>Push or pull?</b><small>The same line, run two ways at once. Weld is the slowest station.</small></div>' +
+    lane('push') + lane('pull') +
+    '<div class="pj-chart"><p class="pj-ch"><b>Cars in the line</b><span class="pj-key"><i class="k-push"></i>Push</span><span class="pj-key"><i class="k-pull"></i>Pull</span></p>' +
+    '<svg viewBox="0 0 300 90" preserveAspectRatio="none" aria-hidden="true"><polyline class="pj-p-push" points=""/><polyline class="pj-p-pull" points=""/></svg></div>' +
     '<p class="pj-note"></p>' +
     '<div class="pj-ctl"><button type="button" class="pj-play"></button><button type="button" class="pj-reset">Start over</button></div>';
-  var mode = 'push', run = !reduce, raf = 0, last = 0, t = 0, seen = false;
-  var S, buf, out, custT;
-  function reset(){ S = ST.map(function(){ return { busy: false, left: 0 }; }); buf = [0, 0, 0]; out = 0; custT = TAKT; t = 0; paint(true); }
-  function step(dt){
-    t += dt;
-    // the customer takes a finished car every takt
-    custT -= dt; if(custT <= 0){ custT += TAKT; if(buf[2] > 0){ buf[2]--; out++; } }
-    for(var i = ST.length - 1; i >= 0; i--){
-      var s = S[i];
-      if(s.busy){ s.left -= dt; if(s.left <= 0){ s.busy = false; buf[i]++; } }
-      if(!s.busy){
-        var hasIn = i === 0 || buf[i - 1] > 0;
-        var room = mode === 'push' || buf[i] < LIMIT;
-        if(hasIn && room){ if(i > 0) buf[i - 1]--; s.busy = true; s.left = ST[i][1]; }
-      }
-    }
+  var run = !reduce, raf = 0, last = 0, seen = false, t = 0, custT = TAKT, hist = [], sampleT = 0;
+  var L = $$('.pj-lane', box).map(function(e){ return { el: e, mode: e.getAttribute('data-m') }; });
+  function reset(){
+    t = 0; custT = TAKT; hist = []; sampleT = 0;
+    L.forEach(function(l){ l.S = ST.map(function(){ return { busy: false, left: 0, why: 'parts' }; }); l.buf = [0, 0, 0]; l.out = 0; $$('.pj-fly', l.el).forEach(function(f){ f.parentNode.removeChild(f); }); });
+    paint(true);
   }
-  function paint(force){
-    S.forEach(function(s, i){ $('.pj-st[data-s="' + i + '"] em', box).style.width = (s.busy ? 100 * (1 - s.left / ST[i][1]) : 0) + '%'; });
-    buf.forEach(function(n, i){
-      var d = $('.pj-buf[data-b="' + i + '"] .pj-dots', box);
-      if(!force && d.__n === n) return; d.__n = n;
-      d.innerHTML = new Array(Math.min(n, SHOW) + 1).join('<i></i>') + (n > SHOW ? '<span>+' + (n - SHOW) + '</span>' : '');
-      d.parentNode.classList.toggle('pj-pile', n > 6);
+  // a car or a kanban card sliding from one box to another
+  function fly(l, from, to, cls){
+    if(reduce || !seen) return;
+    var line = $('.pj-line', l.el), r0 = line.getBoundingClientRect(), a = from.getBoundingClientRect(), b = to.getBoundingClientRect();
+    if(!a.width || !b.width || !line.animate) return;
+    var f = document.createElement('i'); f.className = 'pj-fly ' + cls; line.appendChild(f);
+    // cars land under a space's count, not on top of it
+    function ys(e, r){ return r.top + r.height * (e.classList.contains('pj-buf') ? .74 : .5); }
+    var x0 = a.left + a.width / 2 - r0.left, y0 = ys(from, a) - r0.top, x1 = b.left + b.width / 2 - r0.left, y1 = ys(to, b) - r0.top;
+    var an = f.animate([{ transform: 'translate(' + x0 + 'px,' + y0 + 'px)' }, { transform: 'translate(' + x1 + 'px,' + y1 + 'px)' }], { duration: cls === 'pj-kb' ? 1000 : 700, easing: 'cubic-bezier(.4,0,.2,1)', fill: 'forwards' });
+    an.onfinish = function(){ if(f.parentNode) f.parentNode.removeChild(f); };
+  }
+  function step(dt){
+    t += dt; custT -= dt;
+    var take = custT <= 0; if(take) custT += TAKT;
+    L.forEach(function(l){
+      var st = $$('.pj-st', l.el), bf = $$('.pj-buf', l.el);
+      if(take && l.buf[2] > 0){ l.buf[2]--; l.out++; fly(l, bf[2], st[3], 'pj-car'); if(l.mode === 'pull') fly(l, bf[2], st[2], 'pj-kb'); }
+      for(var i = ST.length - 1; i >= 0; i--){
+        var s = l.S[i];
+        if(s.busy){ s.left -= dt; if(s.left <= 0){ s.busy = false; l.buf[i]++; fly(l, st[i], bf[i], 'pj-car'); } }
+        if(!s.busy){
+          var hasIn = i === 0 || l.buf[i - 1] > 0, room = l.mode === 'push' || l.buf[i] < LIMIT;
+          s.why = !hasIn ? 'parts' : !room ? 'kanban' : '';
+          if(hasIn && room){
+            if(i > 0){ l.buf[i - 1]--; if(l.mode === 'pull') fly(l, bf[i - 1], st[i - 1], 'pj-kb'); }
+            s.busy = true; s.left = ST[i][1];
+          }
+        }
+      }
     });
-    var wip = buf[0] + buf[1] + buf[2] + S.filter(function(s){ return s.busy; }).length;
-    $('.pj-wip', box).textContent = wip; $('.pj-lt', box).textContent = Math.round(wip * 1);
-    $('.pj-out', box).textContent = out;
-    $('.pj-note', box).textContent = mode === 'push'
-      ? (buf[0] > 6 ? 'Cut keeps going, so cars pile up in front of Weld. Lead time keeps growing, but the customer still gets one car per takt.' : 'Watch the space in front of Weld.')
-      : 'Each station waits for a kanban signal. Inventory stays at two cars per space, and the customer gets just as many cars.';
+    sampleT -= dt;
+    if(sampleT <= 0){ sampleT += 1; hist.push(L.map(wip)); if(hist.length > SPAN) hist.shift(); }
+  }
+  function wip(l){ return l.buf[0] + l.buf[1] + l.buf[2] + l.S.filter(function(s){ return s.busy; }).length; }
+  function paint(force){
+    L.forEach(function(l){
+      l.S.forEach(function(s, i){
+        var st = $('.pj-st[data-s="' + i + '"]', l.el);
+        $('em', st).style.width = (s.busy ? 100 * (1 - s.left / ST[i][1]) : 0) + '%';
+        st.classList.toggle('on', s.busy);
+        var txt = s.busy ? 'Working' : s.why === 'kanban' ? 'Waiting for a kanban' : 'Waiting for parts';
+        var sm = $('.pj-state', st); if(sm.__en !== txt){ sm.__en = txt; sm.textContent = txt; }
+      });
+      l.buf.forEach(function(n, i){
+        var b = $('.pj-buf[data-b="' + i + '"]', l.el);
+        if(!force && b.__n === n) return; b.__n = n;
+        $('.pj-n', b).textContent = n;
+        $('.pj-cars', b).innerHTML = new Array(Math.min(n, SHOW) + 1).join('<i class="pj-car"></i>') + (n > SHOW ? '<span>+' + (n - SHOW) + '</span>' : '');
+        b.classList.toggle('pj-pile', n > 4);
+      });
+      var w = wip(l);
+      $('.pj-wip', l.el).textContent = w; $('.pj-lt', l.el).textContent = w; $('.pj-out', l.el).textContent = l.out;
+    });
+    var top = Math.max(8, hist.reduce(function(m, h){ return Math.max(m, h[0], h[1]); }, 0) + 2);
+    ['push', 'pull'].forEach(function(m, k){
+      $('.pj-p-' + m, box).setAttribute('points', hist.map(function(h, i){ return (i * 300 / (SPAN - 1)).toFixed(1) + ',' + (88 - h[k] * 84 / top).toFixed(1); }).join(' '));
+    });
+    var p = wip(L[0]), q = wip(L[1]);
+    var note = t < 8 ? 'Both lines start empty. Watch the space in front of Weld.'
+      : p > q + 3 ? 'Push: Cut keeps going, so cars pile up in front of Weld and lead time keeps growing. Pull holds two cars per space, and both lines deliver the same number of cars.'
+      : 'Pull: when a car is taken, a yellow kanban card goes back and tells the station before it to make one more.';
+    var ne = $('.pj-note', box); if(ne.__en !== note){ ne.__en = note; ne.textContent = note; }
   }
   function frame(now){
     if(!last) last = now;
-    var dt = Math.min(.1, (now - last) / 1000) * SPEED; last = now;
+    var dt = Math.min(.1, (now - last) / 1000); last = now;
     step(dt); paint(false);
     raf = requestAnimationFrame(frame);
   }
   function go(){ if(run && seen && !raf){ last = 0; raf = requestAnimationFrame(frame); } }
   function stop(){ if(raf){ cancelAnimationFrame(raf); raf = 0; } }
   function label(){ $('.pj-play', box).textContent = run ? 'Pause' : 'Play'; }
-  $$('.pj-mode button', box).forEach(function(b){ b.addEventListener('click', function(){
-    mode = b.getAttribute('data-m');
-    $$('.pj-mode button', box).forEach(function(x){ x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
-    box.classList.toggle('pj-pullm', mode === 'pull');
-    reset(); if(!run){ run = true; label(); } go();
-  }); });
   $('.pj-play', box).addEventListener('click', function(){ run = !run; label(); if(run) go(); else stop(); });
-  $('.pj-reset', box).addEventListener('click', function(){ reset(); });
+  $('.pj-reset', box).addEventListener('click', function(){ reset(); if(!run){ run = true; label(); go(); } });
   whileSeen(box, function(){ seen = true; go(); }, function(){ seen = false; stop(); });
   reset(); label();
 }

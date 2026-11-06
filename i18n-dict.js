@@ -5372,5 +5372,19 @@ window.TM_I18N = {
 "Each station waits for a kanban signal. Inventory stays at two cars per space, and the customer gets just as many cars.": ["Cada estación espera una señal kanban. El inventario se queda en dos coches por espacio y el cliente recibe los mismos coches.", "Jede Station wartet auf ein Kanban-Signal. Der Bestand bleibt bei zwei Autos pro Platz, und der Kunde bekommt genauso viele Autos.", "Ogni stazione aspetta un segnale kanban. Le scorte restano a due auto per spazio e il cliente riceve lo stesso numero di auto."],
 "Pause": ["Pausa", "Pause", "Pausa"],
 "Play": ["Reproducir", "Abspielen", "Avvia"],
-"Start over": ["Empezar de nuevo", "Neu starten", "Ricomincia"]
+"Start over": ["Empezar de nuevo", "Neu starten", "Ricomincia"],
+"The same line, run two ways at once. Weld is the slowest station.": ["La misma línea, de dos maneras a la vez. Soldadura es la estación más lenta.", "Dieselbe Linie, gleichzeitig auf zwei Arten betrieben. Schweißen ist die langsamste Station.", "La stessa linea, gestita in due modi contemporaneamente. Saldatura è la stazione più lenta."],
+"Every station makes cars as fast as it can": ["Cada estación fabrica coches tan rápido como puede", "Jede Station baut Autos so schnell sie kann", "Ogni stazione produce auto il più in fretta possibile"],
+"Kanban: a station makes a car only when the next one takes one": ["Kanban: una estación fabrica un coche solo cuando la siguiente se lleva uno", "Kanban: Eine Station baut nur dann ein Auto, wenn die nächste eins nimmt", "Kanban: una stazione produce un'auto solo quando la successiva ne prende una"],
+"in the line": ["en la línea", "in der Linie", "in linea"],
+"min lead time": ["min de lead time", "Min. Durchlaufzeit", "min di lead time"],
+"delivered": ["entregados", "geliefert", "consegnate"],
+"Working": ["Trabajando", "Arbeitet", "Al lavoro"],
+"Waiting for parts": ["Esperando piezas", "Wartet auf Teile", "In attesa di pezzi"],
+"Waiting for a kanban": ["Esperando un kanban", "Wartet auf ein Kanban", "In attesa di un kanban"],
+"takes 1 car per takt": ["se lleva 1 coche por takt", "nimmt 1 Auto pro Takt", "prende 1 auto per takt"],
+"Cars in the line": ["Coches en la línea", "Autos in der Linie", "Auto in linea"],
+"Both lines start empty. Watch the space in front of Weld.": ["Las dos líneas empiezan vacías. Fíjate en el espacio delante de Soldadura.", "Beide Linien starten leer. Achte auf den Platz vor dem Schweißen.", "Entrambe le linee partono vuote. Guarda lo spazio davanti a Saldatura."],
+"Push: Cut keeps going, so cars pile up in front of Weld and lead time keeps growing. Pull holds two cars per space, and both lines deliver the same number of cars.": ["Push: Corte sigue produciendo, así que los coches se acumulan delante de Soldadura y el lead time no deja de crecer. Pull mantiene dos coches por espacio, y las dos líneas entregan el mismo número de coches.", "Push: Schneiden läuft weiter, also stauen sich die Autos vor dem Schweißen und die Durchlaufzeit wächst immer weiter. Pull hält zwei Autos pro Platz, und beide Linien liefern gleich viele Autos.", "Push: Taglio continua, quindi le auto si accumulano davanti a Saldatura e il lead time continua a crescere. Pull tiene due auto per spazio, ed entrambe le linee consegnano lo stesso numero di auto."],
+"Pull: when a car is taken, a yellow kanban card goes back and tells the station before it to make one more.": ["Pull: cuando se lleva un coche, una tarjeta kanban amarilla vuelve atrás y le dice a la estación anterior que fabrique otro.", "Pull: Wenn ein Auto genommen wird, geht eine gelbe Kanban-Karte zurück und sagt der Station davor, ein weiteres zu bauen.", "Pull: quando un'auto viene presa, un cartellino kanban giallo torna indietro e dice alla stazione precedente di produrne un'altra."]
 };
