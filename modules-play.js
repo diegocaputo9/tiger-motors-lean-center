@@ -1,5 +1,5 @@
 /* Learning modules: small interactive pieces at the top of a module (modules.html leaves a <div data-play="..."> for each).
-   people: sort statements into mass production or lean. std: 5S a messy workbench, step by step, in the right order.
+   people: sort statements into mass production or lean. jidoka: pull the andon cord when a defect reaches your station. std: 5S a messy workbench, step by step, in the right order.
    jit: the same three-station line run as push and as pull side by side, to watch inventory and lead time. */
 (function(){
 'use strict';
@@ -95,7 +95,7 @@ function std(box){
   box.innerHTML = '<div class="pl-head"><b>5S the workbench</b><small>Press the five steps in the right order to clean up this bench</small></div>' +
     '<div class="s5-wrap">' + svg + '<div class="s5-side"><ol class="s5-done"></ol><p class="s5-msg" aria-live="polite">Which step comes first?</p></div></div>' +
     '<div class="s5-btns">' + SHUFFLE.map(function(i){ return '<button type="button" class="s5-b" data-i="' + i + '">' + S5[i][1] + '</button>'; }).join('') + '</div>' +
-    '<button type="button" class="s5-reset" hidden>Mess it up again</button>';
+    '<button type="button" class="s5-reset" hidden>Mess it up again<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg></button>';
   var next = 0, msg = $('.s5-msg', box), done = $('.s5-done', box);
   function apply(k){
     box.classList.add('s5-' + k);
@@ -233,6 +233,109 @@ function jit(box){
   reset(); label();
 }
 
-var PLAY = { people: people, std: std, jit: jit };
+/* ---------- Jidoka: pull the andon cord ---------- */
+// cars ride a conveyor through your station. When one is missing a wheel, pull the cord: the light turns yellow and a
+// team leader comes to fix it while the line keeps moving. If the car reaches the end of your station first, the line stops (red).
+// A defect nobody flags ends up in the repair area at the end of the line.
+var JV = 42, JGAP = 2.6, JZ0 = 230, JZ1 = 350, JEND = 548, JFIX = 1.6, JDEF = [0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1];
+function carSvg(defect){
+  return '<rect x="-20" y="-16" width="40" height="13" rx="4" class="jc-body"/><path d="M-12 -16l5-8h14l6 8z" class="jc-body"/>' +
+    '<rect x="-8" y="-22" width="7" height="5" rx="1" class="jc-win"/><rect x="2" y="-22" width="7" height="5" rx="1" class="jc-win"/>' +
+    '<circle cx="-11" cy="-2" r="5" class="jc-wheel"/>' +
+    (defect ? '<circle cx="11" cy="-2" r="7.5" class="jc-miss"/><circle cx="11" cy="-2" r="5" class="jc-wheel jc-new"/>' : '<circle cx="11" cy="-2" r="5" class="jc-wheel"/>');
+}
+function jidoka(box){
+  box.className = 'play pl-jdk';
+  box.innerHTML = '<div class="pl-head"><b>Pull the andon cord</b><small>You work the station in the middle. Watch for a car with a missing wheel.</small></div>' +
+    '<div class="jd-stage"><svg class="jd-svg" viewBox="0 0 600 190" aria-hidden="true">' +
+      '<rect x="' + JZ0 + '" y="40" width="' + (JZ1 - JZ0) + '" height="118" rx="8" class="jd-zone"/>' +
+      '<rect x="' + (JEND - 4) + '" y="40" width="56" height="118" rx="8" class="jd-repair"/>' +
+      '<rect x="0" y="134" width="600" height="12" class="jd-belt"/><g class="jd-rollers"></g>' +
+      '<g class="jd-cars"></g>' +
+      '<g class="jd-leader" style="transform:translate(' + ((JZ0 + JZ1) / 2) + 'px,-140px)"><circle cx="0" cy="58" r="8"/><path d="M-11 92v-14a11 11 0 0 1 22 0v14z"/><rect x="-7" y="95" width="14" height="3" rx="1.5"/></g>' +
+      '<g class="jd-andon" transform="translate(' + (JZ1 + 10) + ' 0)"><rect x="-1" y="6" width="22" height="58" rx="5"/><circle class="jl-red" cx="10" cy="17" r="6.5"/><circle class="jl-yel" cx="10" cy="35" r="6.5"/><circle class="jl-grn" cx="10" cy="53" r="6.5"/><rect x="9" y="64" width="2" height="66" class="jd-pole"/></g>' +
+    '</svg><div class="jd-labels"><span class="jd-you">Your station</span><span class="jd-rep">Repair area</span></div></div>' +
+    '<div class="jd-ctl"><button type="button" class="jd-cord"><i aria-hidden="true"></i>Pull the andon cord</button><button type="button" class="jd-run"></button><button type="button" class="jd-reset">Start over</button></div>' +
+    '<p class="jd-msg" aria-live="polite"></p>' +
+    '<div class="jd-stats"><p><b class="jd-caught">0</b><span>defects fixed at your station</span></p><p><b class="jd-stops">0</b><span>times the line stopped</span></p><p><b class="jd-missed">0</b><span>sent to the repair area</span></p></div>';
+  var svg = $('.jd-svg', box), carsG = $('.jd-cars', box), rollers = $('.jd-rollers', box), leader = $('.jd-leader', box);
+  var cars, nextIn, made, state, target, fixLeft, stats, run = false, seen = false, raf = 0, last = 0, belt = 0;
+  for(var x = 10; x < 600; x += 26) rollers.insertAdjacentHTML('beforeend', '<circle cx="' + x + '" cy="146" r="3"/>');
+  function msg(t, kind){ var m = $('.jd-msg', box); m.textContent = t; m.className = 'jd-msg' + (kind ? ' ' + kind : ''); }
+  function setState(s){ state = s; box.classList.remove('jd-green', 'jd-yellow', 'jd-red'); box.classList.add('jd-' + s); }
+  function reset(){
+    cars = []; nextIn = 0; made = 0; target = null; fixLeft = 0; stats = { caught: 0, stops: 0, missed: 0 };
+    carsG.innerHTML = ''; setState('green'); leader.style.transform = 'translate(' + ((JZ0 + JZ1) / 2) + 'px,-140px)';
+    paint(); msg('Press Start the line. Pull the cord as soon as a car with a missing wheel is in your station.');
+  }
+  function spawn(){
+    var c = { x: -30, defect: !!JDEF[made % JDEF.length], fixed: false, flagged: false, done: false };
+    made++;
+    c.el = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    c.el.setAttribute('class', 'jd-car' + (c.defect ? ' is-bad' : ''));
+    c.el.innerHTML = carSvg(c.defect);
+    carsG.appendChild(c.el); cars.push(c);
+  }
+  function inZone(c){ return c.x >= JZ0 && c.x <= JZ1; }
+  function pull(){
+    if(!run){ msg('Start the line first.'); return; }
+    if(target){ msg('Help is already on the way.'); return; }
+    var c = cars.filter(function(c){ return c.defect && !c.fixed && inZone(c); })[0];
+    if(!c){ msg('Nothing is wrong at your station right now. Pull the cord only when you see a problem.', 'no'); return; }
+    target = c; c.flagged = true; fixLeft = JFIX; setState('yellow');
+    leader.style.transform = 'translate(' + ((JZ0 + JZ1) / 2) + 'px,0px)';
+    msg('Yellow: you called for help. The team leader fixes the car while the line keeps moving.', 'warn');
+  }
+  function step(dt){
+    var moving = state !== 'red';
+    if(moving){
+      belt = (belt + JV * dt) % 26;
+      nextIn -= dt; if(nextIn <= 0){ nextIn += JGAP; spawn(); }
+      cars.forEach(function(c){ c.x += JV * dt; });
+    }
+    if(target){
+      fixLeft -= dt;
+      if(fixLeft <= 0){
+        target.fixed = true; target.el.classList.add('fixed'); target = null; stats.caught++;
+        leader.style.transform = 'translate(' + ((JZ0 + JZ1) / 2) + 'px,-140px)';
+        if(state === 'red') msg('Fixed. The line starts again. Problems found at the station get solved for good.', 'ok');
+        else msg('Fixed in station, and the line never stopped. That is jidoka: quality built in.', 'ok');
+        setState('green');
+      } else if(state === 'yellow' && target.x >= JZ1){
+        setState('red'); stats.stops++;
+        msg('Red: the car reached the end of your station before the fix, so the line stopped. Pull sooner next time.', 'no');
+      }
+    }
+    cars.forEach(function(c){
+      if(c.defect && !c.fixed && !c.flagged && c.x > JZ1 && !c.passed){ c.passed = true; msg('A car with a missing wheel got past your station.', 'no'); }
+      if(c.x >= JEND + 24 && !c.done){
+        c.done = true;
+        if(c.defect && !c.fixed){ stats.missed++; msg('A defect reached the repair area. Mass producers kept 20 to 25% of their workers busy just on repairs like this.', 'no'); }
+      }
+    });
+    cars = cars.filter(function(c){ if(c.x > 640){ c.el.parentNode.removeChild(c.el); return false; } return true; });
+  }
+  function paint(){
+    cars.forEach(function(c){ c.el.setAttribute('transform', 'translate(' + c.x.toFixed(1) + ' 132)'); });
+    rollers.setAttribute('transform', 'translate(' + belt.toFixed(1) + ' 0)');
+    $('.jd-caught', box).textContent = stats.caught; $('.jd-stops', box).textContent = stats.stops; $('.jd-missed', box).textContent = stats.missed;
+  }
+  function frame(now){
+    if(!last) last = now;
+    var dt = Math.min(.1, (now - last) / 1000); last = now;
+    step(dt); paint();
+    raf = requestAnimationFrame(frame);
+  }
+  function go(){ if(run && seen && !raf){ last = 0; raf = requestAnimationFrame(frame); } }
+  function stop(){ if(raf){ cancelAnimationFrame(raf); raf = 0; } }
+  function label(){ $('.jd-run', box).textContent = run ? 'Pause' : made ? 'Resume' : 'Start the line'; box.classList.toggle('jd-on', run); }
+  $('.jd-cord', box).addEventListener('click', pull);
+  $('.jd-run', box).addEventListener('click', function(){ run = !run; label(); if(run){ if(!made) msg('The line is running. Watch your station.'); go(); } else stop(); });
+  $('.jd-reset', box).addEventListener('click', function(){ stop(); run = false; reset(); label(); });
+  whileSeen(box, function(){ seen = true; go(); }, function(){ seen = false; stop(); });
+  reset(); label();
+}
+
+var PLAY = { people: people, std: std, jidoka: jidoka, jit: jit };
 $$('[data-play]').forEach(function(box){ var f = PLAY[box.getAttribute('data-play')]; if(f) f(box); });
 })();
