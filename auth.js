@@ -245,9 +245,10 @@ function bannerHTML(){
 }
 // the box above the Lean House folds into a slim bar and opens again; it starts open, and folding is
 // remembered on this device (separately for the signed-in progress box and the signed-out invite)
-function minKey(){ return state.user ? 'tm-progress-min' : 'tm-promo-min'; }
-function progressMin(){ try { return localStorage.getItem(minKey()) === '1'; } catch(e){ return false; } }
-function setProgressMin(v){ try { localStorage.setItem(minKey(), v ? '1' : '0'); } catch(e){} }
+// the progress card opens on every page load; minimizing it lasts until the page is reloaded
+var progMin = false;
+function progressMin(){ return progMin; }
+function setProgressMin(v){ progMin = !!v; }
 function miniHTML(){
   var s = stats();
   return '<div class="ab-ico ab-ico-sm" aria-hidden="true">' + ring(s.pct, 34) + '</div>' +
