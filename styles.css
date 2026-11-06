@@ -1536,6 +1536,9 @@ html.qz-open{overflow:hidden}
 .taa-txt{grid-area:txt;display:grid;gap:4px;padding-left:4px}
 .taa-txt small{font:500 12px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:#FFB877}
 .taa-txt b{font:700 20px/1.2 var(--f-display)}
+.taa-k{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}
+.wip-tag{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:999px;border:1px solid rgba(255,184,119,.55);background:rgba(232,119,34,.16);color:#FFD7B0;font:600 12px var(--f-mono);font-style:normal;letter-spacing:.06em;text-transform:uppercase}
+.wip-tag svg{width:13px;height:13px;flex:none}
 .taa-txt span{font-size:15px;line-height:1.5;color:#E2E9F1}
 .taa-go{grid-area:go;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;background:var(--orange);color:#1A0C02;font:600 12px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
 .taa-go svg{width:15px;height:15px}

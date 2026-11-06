@@ -34,6 +34,11 @@ html[data-mode="light"] .mode .i-moon{display:block}
 /* page head */
 .kick{color:var(--orange)}
 .p-head{padding:clamp(32px,5vw,56px) 0 0}
+.wip-bar{display:flex;align-items:flex-start;gap:12px;margin-top:clamp(20px,3vw,28px);padding:14px 18px;border-radius:10px;border:1px dashed rgba(232,119,34,.6);background:rgba(232,119,34,.1);color:var(--ink)}
+.wip-bar svg{width:20px;height:20px;flex:none;margin-top:1px;color:var(--orange)}
+.wip-bar p{margin:0;font:400 15px/1.5 var(--f-body)}
+.wip-bar b{font-weight:600;color:var(--orange)}
+.wip-bar+.p-head{padding-top:clamp(20px,3vw,32px)}
 .p-head h1{font:400 clamp(38px,5.4vw,68px)/1 var(--f-display);letter-spacing:-.02em;margin-top:12px}
 .p-head h1 em{font-style:italic;color:var(--orange)}
 .p-sub{margin-top:14px;font-size:clamp(16px,1.4vw,18px);line-height:1.6;color:var(--ink-2);max-width:64ch}
