@@ -32,9 +32,9 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="styles.css?v=e37a182e">
+<link rel="stylesheet" href="styles.css?v=26ddbe70">
 <style>.back-link{display:inline-flex;align-items:center;gap:8px;font:600 12px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:#9A460C;text-decoration:none;margin-bottom:6px}.back-link:hover{color:var(--ink)}main>.sec:first-child{padding-top:calc(var(--nav-h) + 44px)}</style>
-<script src="i18n-dict.js?v=24d4c0e0" defer></script>
+<script src="i18n-dict.js?v=39159380" defer></script>
 <script src="i18n.js?v=3a5d34c9" defer></script>
 <script src="feedback.js?v=812720da" defer></script>
 <script src="viewer.js?v=3de2fb27" defer></script>
@@ -141,7 +141,7 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
       <a href="/#lab">Explore the Lab</a><a href="/#lean-house">Lean House</a><a href="modules">Modules</a><a href="/#project">About</a><a href="testimonials">Testimonials</a><a href="/#contact">Contact</a>
     </div>
   </div>
-  <div class="wrap"><p class="site-rev">Last updated November 6, 2026 · Revision 155</p></div>
+  <div class="wrap"><p class="site-rev">Last updated November 6, 2026 · Revision 156</p></div>
 </footer>
 <div class="toast" id="toast" role="status"><i></i><span>Opening 360° experience</span></div>
 <script src="modules-data.js?v=407d0011"></script>
@@ -165,16 +165,6 @@ function card(it, total){
 }
 function noneCard(text, verb){
   return '<article class="rc none" data-type="none"><div class="rc-top"><span class="verb">'+VERBS[verb].t+'</span></div><div><h4 class="soon">'+esc(text)+'</h4></div></article>';
-}
-function jitVsm(m){
-  var steps = m.items.filter(function(it){return it.step;});
-  var row = steps.map(function(it,i){
-    var cls = it.type==='lab'?'lab':(it.type==='reading'?'art':(it.type==='video360'?'v360':''));
-    return (i?'<span class="varrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 12h15M13 7l5 5-5 5"/></svg></span>':'')+
-      '<a class="vbox '+cls+(isLaunch(it.type)?' launch':'')+'" data-item="'+esc(it.id)+'" '+ext(it.url)+'><small>'+String(it.step).padStart(2,'0')+'</small><b>'+esc(it.short||it.title)+'</b><em>'+esc(TYPES[it.type].label)+'</em></a>';
-  }).join('');
-  return '<div class="vsm"><div class="vsm-head"><b>JIT value stream · '+steps.length+' steps</b><div class="vsm-leg"><span><i></i>Lecture</span><span><i class="lab"></i>Lab activity</span><span><i class="art"></i>Reading</span><span><i class="v360"></i>360° video</span></div></div>'+
-         '<div class="vsm-row">'+row+'</div><div class="vsm-foot"><span>Flow</span><span class="belt"></span><span>Scroll →</span></div></div>';
 }
 function jidokaLoop(){
   var nodes = ['Production system','Abnormality detection','Response','Quality'];
@@ -202,7 +192,7 @@ var WASTES = [
   ['W','Waiting','People or parts sitting idle.','An operator who stands by until the upstream cell finishes, or until a machine is ready.'],
   ['O','Overproduction','Making more, or making it sooner, than the customer needs.','Building cars that nobody has ordered yet. It is the worst waste because it creates the others: extra inventory, transport and waiting.'],
   ['O','Overprocessing','Doing more to the product than the customer needs.','Continental Motors polished the paint on its engines and re-measured every part from its suppliers. The customer needed neither.'],
-  ['D','Defects','Mistakes that cause rework, scrap or extra inspection.','A car that reaches final inspection with a missing piece and has to go back down the line.']
+  ['D','Defects','Mistakes that cause rework, scrap or extra inspection.','A car that reaches the end of the line with a missing piece is sent to a repair area, where a specialist has to fix it. Mass producers used 20 to 25% of their labor just on these offline repairs.']
 ];
 function ciWastes(){
   return '<div class="wastes"><div class="ws-head"><b>Spot the seven wastes</b><small><span class="ws-click">Click a letter to see each waste</span><span class="ws-tap">Tap a letter to see each waste</span></small></div>'+
@@ -228,6 +218,8 @@ function miniHouse(k, name){
     '</svg><span>'+MH_PART[k]+' of the Lean House</span></button>';
 }
 // SQDCM comes back by itself once it has material in modules-data.js
+// modules-play.js fills these in: People sorting game, 5S workbench, JIT push or pull
+var PLAYS = {people:1, std:1, jit:1};
 var LIB_ORDER = ['people','std','jidoka','jit','sqdcm','ci'].filter(TM.hasMaterial);
 var lib = document.getElementById('library');
 lib.innerHTML = LIB_ORDER.map(function(k){
@@ -238,7 +230,7 @@ lib.innerHTML = LIB_ORDER.map(function(k){
   var cards = stepped.map(function(it){return card(it,total);}).concat(extra.map(function(it){return card(it,total);}));
   if(m.empty) Object.keys(m.empty).forEach(function(v){cards.push(noneCard(m.empty[v], v));});
   if(m.quiz) cards.push('<article class="rc rc-quiz" data-type="quiz" data-quiz="'+k+'"></article>');   // filled in by quiz.js
-  var vis = k==='jit'?jitVsm(m):k==='jidoka'?jidokaLoop():k==='sqdcm'?sqdcmBand():k==='ci'?ciWastes():'';
+  var vis = PLAYS[k]?'<div class="play" data-play="'+k+'"></div>':k==='jidoka'?jidokaLoop():k==='sqdcm'?sqdcmBand():k==='ci'?ciWastes():'';
   var counts = {}; m.items.forEach(function(it){var l=TYPES[it.type].label; counts[l]=(counts[l]||0)+1;});
   return '<div class="mod" id="mod-'+k+'" data-k="'+k+'"><div class="mod-side"><span class="mod-num">'+(m.n?'MODULE '+(+m.n):'SYSTEM LEVEL')+'</span><h3>'+esc(m.name)+'</h3>'+miniHouse(k, m.name)+'<p>'+esc(m.role)+'</p>'+
     '<div class="counts">'+Object.keys(counts).map(function(l){return '<span>'+counts[l]+' × '+esc(l)+'</span>';}).join('')+'</div>'+
@@ -265,7 +257,7 @@ fEl.addEventListener('click', function(e){
       var show = f==='all' || c.getAttribute('data-type')===f;
       c.hidden = !show; if(show && c.getAttribute('data-type')!=='none') any = true;
     });
-    mod.querySelectorAll('.vsm,.jloop,.sqdcm,.wastes').forEach(function(v){v.hidden = f!=='all';});
+    mod.querySelectorAll('.play,.jloop,.sqdcm,.wastes').forEach(function(v){v.hidden = f!=='all';});
     mod.hidden = !(f==='all' || any);
   });
 });
@@ -369,6 +361,7 @@ if(location.hash && /^#mod-/.test(location.hash)){
 }
 })();
 </script>
+<script src="modules-play.js?v=63d7cbcf"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script src="auth.js?v=6c36b4d4"></script>
 <script src="quiz.js?v=626f4fef"></script>
