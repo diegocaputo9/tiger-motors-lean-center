@@ -5060,10 +5060,10 @@ window.TM_I18N = {
 "Bitte füge ein Porträtfoto hinzu.",
 "Aggiungi una foto ritratto."
 ],
-"Earn a free certificate<br>when you finish": [
-"Obtén un certificado gratis<br>al terminar",
-"Kostenloses Zertifikat<br>nach Abschluss",
-"Ottieni un certificato gratuito<br>al termine"
+"Earn a certificate<br>when you finish": [
+"Obtén un certificado<br>al terminar",
+"Zertifikat<br>nach Abschluss",
+"Ottieni un certificato<br>al termine"
 ],
 "View in Lean House": [
 "Ver en la Casa Lean",
@@ -5277,5 +5277,11 @@ window.TM_I18N = {
 "The episode could not be loaded here. Use the button above to listen on This American Life.": ["No se pudo cargar el episodio aquí. Usa el botón de arriba para escucharlo en This American Life.", "Die Folge konnte hier nicht geladen werden. Nutze die Schaltfläche oben, um sie auf This American Life anzuhören.", "Non è stato possibile caricare l'episodio qui. Usa il pulsante in alto per ascoltarlo su This American Life."],
 "Two views": ["Dos vistas", "Zwei Ansichten", "Due viste"],
 "click one to switch": ["haz clic en una para cambiar", "klicke auf eine, um zu wechseln", "fai clic su una per cambiare"],
-"tap one to switch": ["toca una para cambiar", "tippe auf eine, um zu wechseln", "tocca una per cambiare"]
+"tap one to switch": ["toca una para cambiar", "tippe auf eine, um zu wechseln", "tocca una per cambiare"],
+"Listened": ["Escuchado", "Angehört", "Ascoltato"],
+"re:^(\\d+)% listened$": ["$1% escuchado", "$1% angehört", "$1% ascoltato"],
+"Listen to the end to complete this episode. Skipping ahead is off, and it pauses if you leave this tab.": ["Escúchalo hasta el final para completar este episodio. No se puede adelantar y se pausa si sales de esta pestaña.", "Hör die Folge bis zum Ende, um sie abzuschließen. Vorspulen ist deaktiviert, und sie pausiert, wenn du diesen Tab verlässt.", "Ascoltalo fino alla fine per completare questo episodio. Non si può andare avanti e si mette in pausa se lasci questa scheda."],
+"Skipping ahead is off for podcasts. You can go back, but not forward past what you have heard.": ["En los podcasts no se puede adelantar. Puedes retroceder, pero no avanzar más allá de lo que has escuchado.", "Vorspulen ist bei Podcasts deaktiviert. Du kannst zurückspringen, aber nicht über das hinaus, was du gehört hast.", "Nei podcast non si può andare avanti. Puoi tornare indietro, ma non oltre ciò che hai già ascoltato."],
+"Episode complete. It now counts toward your progress.": ["Episodio completado. Ya cuenta para tu progreso.", "Folge abgeschlossen. Sie zählt jetzt zu deinem Fortschritt.", "Episodio completato. Ora conta per i tuoi progressi."],
+"Listen to the end to complete": ["Escúchalo hasta el final para completarlo", "Bis zum Ende anhören, um abzuschließen", "Ascoltalo fino alla fine per completarlo"]
 };

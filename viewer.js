@@ -1,8 +1,8 @@
 /* In-page viewer: YouTube videos, 3DVista lab activities and readings from sites that allow it open in a large
    window over the page instead of a new tab. Auburn Box readings use Box's embed address, which allows it. This American Life
    refuses to be shown inside another page, so its episode plays in a small audio player here, with credit and a link to the show. Progress tracking is untouched: auth.js still sees the click on a[data-item].
-   Lectures are the exception: they count as done only once watched to the end, with no skipping ahead, and they pause
-   when the tab is hidden. The furthest point watched is kept in localStorage (tm-watch) so a lecture picks up where it stopped. */
+   Lectures and podcasts played here are the exception: they count as done only once played to the end, with no skipping ahead,
+   and they pause when the tab is hidden. The furthest point reached is kept in localStorage (tm-watch) so they pick up where they stopped. */
 (function(){
 'use strict';
 // hosts checked on 2026-11-02 to load inside a frame
@@ -14,7 +14,16 @@ var AUDIO = {
 };
 var dlg, frame, els = {};
 var WKEY = 'tm-watch';
-var W = null;   // the lecture being watched: { id, a, player, max, dur, timer, ... }
+var W = null;   // the lecture or podcast playing: { id, kind, player, max, dur, timer, ... }
+// what each kind says: [counts message, skip message, complete message]
+var MSG = {
+  lecture: ['Watch to the end to complete this lecture. Skipping ahead is off, and it pauses if you leave this tab.',
+    'Skipping ahead is off for lectures. You can go back, but not forward past what you have watched.',
+    'Lecture complete. It now counts toward your progress.'],
+  podcast: ['Listen to the end to complete this episode. Skipping ahead is off, and it pauses if you leave this tab.',
+    'Skipping ahead is off for podcasts. You can go back, but not forward past what you have heard.',
+    'Episode complete. It now counts toward your progress.']
+};
 
 function ytId(u){
   var m = u.match(/^https:\/\/(?:www\.|m\.)?(?:youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|live\/)|youtu\.be\/)([\w-]{11})/i);
@@ -32,10 +41,10 @@ function plan(a){
   var u = a.href || '';
   var id = ytId(u);
   if(id) return { kind: 'video', v360: is360(id), src: 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0&playsinline=1' + ytStart(u), open: 'Watch on YouTube' };
+  var au = audioOf(u);
+  if(au) return { kind: 'audio', audio: au, open: 'Open on This American Life' };
   var box = u.match(/^https:\/\/auburn(?:\.app)?\.box\.com\/s\/(\w+)/i);
   if(box) return { kind: 'page', src: 'https://auburn.app.box.com/embed/s/' + box[1], open: 'Open in new tab' };
-  var au = AUDIO[u.replace(/^https?:\/\//, '').replace(/[?#].*$/, '').replace(/\/$/, '')];
-  if(au) return { kind: 'audio', audio: au, open: 'Open on This American Life' };
   if(PAGES.test(u)){
     var tour = /3dvista|net-fs/i.test(u);
     return { kind: tour ? 'tour' : 'page', src: u, open: 'Open in new tab' };
@@ -44,10 +53,14 @@ function plan(a){
 }
 
 /* ---------- lecture watch tracking ---------- */
-function lectureId(a){
-  var id = a.getAttribute('data-item'), B = window.TM && TM.BYK; if(!id || !B) return null;
-  return Object.keys(B).some(function(k){ return (B[k].items || []).some(function(it){ return it.id === id && it.type === 'lecture'; }); }) ? id : null;
+function itemOf(id){
+  var B = window.TM && TM.BYK, hit = null; if(!id || !B) return null;
+  Object.keys(B).forEach(function(k){ (B[k].items || []).forEach(function(it){ if(it.id === id) hit = it; }); });
+  return hit;
 }
+function audioOf(u){ return AUDIO[String(u || '').replace(/^https?:\/\//, '').replace(/[?#].*$/, '').replace(/\/$/, '')]; }
+// lectures on YouTube and podcasts with an in-page player are tracked; everything else counts on the click
+function tracked(id){ var it = itemOf(id); return !!it && (it.type === 'lecture' && !!ytId(it.url || '') || it.type === 'podcast' && !!audioOf(it.url)); }
 function loadW(){ try { return JSON.parse(localStorage.getItem(WKEY) || '{}') || {}; } catch(e){ return {}; } }
 function saveW(id, max, dur){
   var all = loadW();
@@ -87,7 +100,7 @@ function complete(){
   if(W.done) return;
   W.done = true; saveW(W.id, null);
   var A = auth(); if(A) A.markDone(W.id);
-  paintW(); note('Lecture complete. It now counts toward your progress.', 5200);
+  paintW(); note(MSG[W.kind][2], 5200);
 }
 function tick(){
   var P = W && W.player; if(!P || !P.getCurrentTime) return;
@@ -99,7 +112,7 @@ function tick(){
   var room = Math.max(2, dt * (P.getPlaybackRate ? P.getPlaybackRate() : 1) * 1.5 + 1);
   if(t > W.max + room){
     P.seekTo(W.max, true);
-    note('Skipping ahead is off for lectures. You can go back, but not forward past what you have watched.');
+    note(MSG[W.kind][1]);
     return;
   }
   if(P.getPlayerState() === 1 && document.visibilityState === 'visible') W.max = Math.max(W.max, t);
@@ -107,21 +120,32 @@ function tick(){
   if(now - W.saved > 5000){ W.saved = now; saveW(W.id, W.max, W.dur); }
   paintW();
 }
-function startWatch(a, id){
+function startWatch(a, id, kind, audioEl){
   var prev = loadW()[id] || {};
-  W = { id: id, a: a, player: null, max: prev.m || 0, dur: prev.d || 0, done: isDone(id), wall: Date.now(), saved: Date.now(), timer: 0 };
+  W = { id: id, kind: kind, player: null, max: prev.m || 0, dur: prev.d || 0, done: isDone(id), wall: Date.now(), saved: Date.now(), timer: 0 };
   dlg.classList.add('vw-lec');
+  els.wl.textContent = kind === 'podcast' ? 'Listened' : 'Watched';
   paintW();
   var w = W;
+  function begin(){
+    if(!w.done && w.max > 5){ w.player.seekTo(Math.max(0, w.max - 3), true); note('Picking up where you left off.'); }
+    else if(!w.done) note(MSG[kind][0], 6000);
+    w.timer = setInterval(tick, 500);
+  }
+  if(audioEl){
+    // the same calls as the YouTube player, so tick() works for both
+    w.player = { getCurrentTime: function(){ return audioEl.currentTime; }, getDuration: function(){ return isFinite(audioEl.duration) ? audioEl.duration : 0; },
+      getPlaybackRate: function(){ return audioEl.playbackRate; }, getPlayerState: function(){ return audioEl.paused ? 2 : 1; },
+      seekTo: function(t){ audioEl.currentTime = t; }, pauseVideo: function(){ audioEl.pause(); } };
+    if(audioEl.readyState >= 1) begin(); else audioEl.addEventListener('loadedmetadata', function(){ if(W === w) begin(); }, { once: true });
+    audioEl.addEventListener('ended', function(){ if(W === w && !w.done && w.max >= w.player.getDuration() - 5) complete(); });
+    audioEl.addEventListener('error', function(){ if(W === w && !w.done){ var A = auth(); if(A) A.markDone(id); dlg.classList.remove('vw-lec'); } });
+    return;
+  }
   loadYT().then(function(){
     if(W !== w || !frame) return;
     w.player = new YT.Player(frame, { events: {
-      onReady: function(){
-        if(W !== w) return;
-        if(!w.done && w.max > 5){ w.player.seekTo(Math.max(0, w.max - 3), true); note('Picking up where you left off.'); }
-        else if(!w.done) note('Watch to the end to complete this lecture. Skipping ahead is off, and it pauses if you leave this tab.', 6000);
-        w.timer = setInterval(tick, 500);
-      },
+      onReady: function(){ if(W === w) begin(); },
       onStateChange: function(e){ if(W === w && e.data === 0 && !w.done && w.max >= (w.dur || 0) - 5) complete(); }
     }});
   }, function(){
@@ -165,7 +189,7 @@ function build(){
   document.body.appendChild(dlg);
   els.k = dlg.querySelector('.vw-k'); els.note = dlg.querySelector('.vw-note'); els.wFill = dlg.querySelector('.vw-wbar i');
   els.w = document.createElement('span'); els.w.className = 'vw-w'; els.w.innerHTML = '<span class="vw-wl">Watched</span> <span class="vw-wp"></span><span class="vw-wok">Complete</span>';
-  els.k.after(els.w); els.wPct = els.w.querySelector('.vw-wp');
+  els.k.after(els.w); els.wPct = els.w.querySelector('.vw-wp'); els.wl = els.w.querySelector('.vw-wl');
    els.h = dlg.querySelector('#vw-h'); els.out = dlg.querySelector('.vw-out'); els.body = dlg.querySelector('.vw-body'); els.hint = dlg.querySelector('.vw-hint'); els.hintA = dlg.querySelector('.vw-hint-a');
   dlg.querySelector('.vw-x').addEventListener('click', close);
   dlg.addEventListener('click', function(e){ if(e.target === dlg) close(); });
@@ -198,9 +222,12 @@ function open(a, p){
     els.body.appendChild(frame);
     document.documentElement.classList.add('vw-open');
     dlg.showModal();
+    var pid = a.getAttribute('data-item');
+    if(pid && tracked(pid)) startWatch(a, pid, 'podcast', el);
     return;
   }
-  var lec = p.kind === 'video' && lectureId(a);
+  var lec = p.kind === 'video' && a.getAttribute('data-item');
+  if(lec && !(tracked(lec) && itemOf(lec).type === 'lecture')) lec = null;
   if(lec) p.src += '&enablejsapi=1&origin=' + encodeURIComponent(location.origin);
   frame = document.createElement('iframe');
   frame.title = titleOf(a);
@@ -213,7 +240,7 @@ function open(a, p){
   els.body.appendChild(frame);
   document.documentElement.classList.add('vw-open');
   dlg.showModal();
-  if(lec) startWatch(a, lec);
+  if(lec) startWatch(a, lec, 'lecture');
 }
 function close(){ if(dlg && dlg.open) dlg.close(); }
 
@@ -225,7 +252,7 @@ document.addEventListener('click', function(e){
   open(a, p);
 });
 
-window.TMViewer = { handles: function(a){ return !!plan(a); }, close: close, watched: function(id){ var w = loadW()[id]; return w && w.d && w.m > 0 ? Math.max(1, Math.min(99, Math.floor(w.m * 100 / w.d))) : 0; } };
+window.TMViewer = { handles: function(a){ return !!plan(a); }, close: close, tracked: tracked, watched: function(id){ var w = loadW()[id]; return w && w.d && w.m > 0 ? Math.max(1, Math.min(99, Math.floor(w.m * 100 / w.d))) : 0; } };
 
 var css = document.createElement('style');
 css.textContent =
@@ -273,6 +300,7 @@ css.textContent =
   '.vw.vw-audio{width:min(760px,96vw);height:fit-content}' +
   '.vw.vw-audio[open]{grid-template-rows:auto auto}' +
   '.vw-audio .vw-body{background:#07121F}' +
+  '.vw.vw-audio.vw-lec[open]{grid-template-rows:auto auto auto}' +
   '.vw-au{display:grid;grid-template-columns:200px minmax(0,1fr);gap:24px;align-items:center;padding:24px}' +
   '.vw-au-art{aspect-ratio:1;border-radius:14px;display:grid;place-items:center;color:#FF9B4D;background:radial-gradient(120% 120% at 30% 20%,rgba(232,119,34,.28),rgba(232,119,34,0) 60%),#0E1E31;border:1px solid rgba(160,185,212,.2)}' +
   '.vw-au-art svg{width:42%;height:42%}' +
@@ -282,7 +310,7 @@ css.textContent =
   '.vw-au audio{width:100%;margin-top:6px;color-scheme:dark}' +
   '.vw-au-err{margin:0;font:500 14px/1.5 "IBM Plex Sans",system-ui,sans-serif;color:#EAF0F7}' +
   '.vw-au-c{margin:0;font:500 13px/1.5 "IBM Plex Sans",system-ui,sans-serif;color:#C9D6E4}.vw-au-c a{color:#FF9B4D}' +
-  '@media (max-width:640px){.vw.vw-audio{height:100dvh}.vw.vw-audio[open]{grid-template-rows:auto minmax(0,1fr)}.vw-au{grid-template-columns:1fr;align-content:start;justify-items:center;text-align:center}.vw-au-art{width:140px}.vw-au-t{width:100%}}' +
+  '@media (max-width:640px){.vw.vw-audio{height:100dvh}.vw.vw-audio[open]{grid-template-rows:auto minmax(0,1fr)}.vw.vw-audio.vw-lec[open]{grid-template-rows:auto auto minmax(0,1fr)}.vw-au{grid-template-columns:1fr;align-content:start;justify-items:center;text-align:center}.vw-au-art{width:140px}.vw-au-t{width:100%}}' +
   '@media (max-width:640px){.vw.vw-video.vw-lec[open]{grid-template-rows:auto auto minmax(0,1fr)}}' +
   '@media (max-width:640px){.vw,.vw.vw-video{width:100vw;height:100dvh;border-radius:0;border:0}.vw.vw-video[open]{grid-template-rows:auto minmax(0,1fr)}.vw.vw-video .vw-body{aspect-ratio:auto}.vw-out span{display:none}.vw-out{padding:0;width:42px;height:42px;justify-content:center}.vw-bar{padding-left:14px}}' +
   '@media (max-width:640px){.vw-hint{right:10px;left:10px;max-width:none}.vw-hint::before{right:68px}}' +

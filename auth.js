@@ -254,12 +254,8 @@ function paintBanners(){
   });
 }
 
-// lectures count only when watched to the end in the viewer (viewer.js), not on the click
-var LECT = null;
-function isLecture(id){
-  if(!LECT){ LECT = {}; Object.keys(TM.BYK || {}).forEach(function(k){ (TM.BYK[k].items || []).forEach(function(it){ if(it.type === 'lecture') LECT[it.id] = 1; }); }); }
-  return !!LECT[id] && !!window.TMViewer;
-}
+// lectures and podcasts played in the viewer (viewer.js) count only when played to the end, not on the click
+function isLecture(id){ return !!(window.TMViewer && TMViewer.tracked && TMViewer.tracked(id)); }
 function paintChecks(){
   $$('[data-item]').forEach(function(el){
     var id = el.getAttribute('data-item'), on = !!state.done[id];
@@ -267,12 +263,12 @@ function paintChecks(){
     if(el.matches('article.rc') && isLecture(id)){
       var w = on ? 0 : TMViewer.watched(id), bar = $('.rc-watch', el);
       if(w && !bar){ bar = document.createElement('div'); bar.className = 'rc-watch'; bar.innerHTML = '<i><em></em></i><span></span>'; el.insertBefore(bar, $('.rc-act', el)); }
-      if(bar){ bar.hidden = !w; $('em', bar).style.width = w + '%'; var txt = w + '% watched'; if($('span', bar).textContent !== txt) $('span', bar).textContent = txt; }
+      if(bar){ bar.hidden = !w; $('em', bar).style.width = w + '%'; var txt = w + (el.getAttribute('data-type') === 'podcast' ? '% listened' : '% watched'); if($('span', bar).textContent !== txt) $('span', bar).textContent = txt; }
     }
     if(el.matches('article.rc')){
       var tg = $('.tm-tg', el);
       if(!tg){ tg = document.createElement('button'); tg.type = 'button'; tg.className = 'tm-tg'; tg.setAttribute('data-tg', id); var top = $('.rc-top', el); if(top) top.appendChild(tg); }
-      var title = on ? 'Done. Click to mark as not done' : isLecture(id) ? 'Watch to the end to complete' : 'Mark as done';
+      var title = on ? 'Done. Click to mark as not done' : isLecture(id) ? (el.getAttribute('data-type') === 'podcast' ? 'Listen to the end to complete' : 'Watch to the end to complete') : 'Mark as done';
       if(tg.__en !== title){ tg.__en = title; tg.title = title; tg.setAttribute('aria-label', title); }
       if(tg.getAttribute('aria-pressed') === (on ? 'true' : 'false')) return;
       tg.setAttribute('aria-pressed', on ? 'true' : 'false');
