@@ -17,7 +17,7 @@ function whileSeen(box, on, off){
 var SORT = [
   ['Workers can’t stop the line, and they have no part in solving quality problems.', 'mass', 'Ford’s line was designed so workers didn’t need to talk to each other or fix problems.'],
   ['An operator pulls the andon cord, a team leader comes to help, and the line stops only if help doesn’t arrive in time.', 'lean', 'Problems get fixed in the process, so they have to be solved for good.'],
-  ['Cars with defects go to a repair area at the end of the line, where specialists fix them.', 'mass', 'Mass producers used 20 to 25% of their labor just on these offline repairs.'],
+  ['Cars with defects go to a repair station at the end of the line, where specialists fix them.', 'mass', 'Mass producers used 20 to 25% of their labor just on these offline repairs.'],
   ['Parts are pulled: a process makes more only after the next one uses some, like a supermarket refilling a shelf.', 'lean', 'Ohno got the idea from American supermarkets, which restock only what customers take.'],
   ['A machine stops itself the moment something goes wrong, so a defect is never passed on.', 'lean', 'That is jidoka, which started with Sakichi Toyoda’s automatic loom.'],
   ['Everyone has one narrow job: an electrician can’t do a millwright’s work.', 'mass', 'Rigid job classifications were part of Ford’s system.'],
@@ -236,8 +236,10 @@ function jit(box){
 /* ---------- Jidoka: pull the andon cord ---------- */
 // cars ride a conveyor through your station. When one is missing a wheel, pull the cord: the light turns yellow and a
 // team leader comes to fix it while the line keeps moving. If the car reaches the end of your station first, the line stops (red).
-// A defect nobody flags ends up in the repair area at the end of the line.
-var JV = 42, JGAP = 2.6, JZ0 = 230, JZ1 = 350, JEND = 548, JFIX = 1.6;
+// A defect nobody flags is pulled off the line into the repair station, where a specialist walks in to fix it.
+var JV = 42, JGAP = 2.6, JZ0 = 230, JZ1 = 350, JFIX = 1.6;
+// repair station: x range, where a car is lifted off the belt, its height there, and where the specialist stands
+var JR0 = 466, JR1 = 596, JRC = 506, JRY = 96, JRS = 566, JREP = 3;
 // what can be wrong with a car: the missing part is drawn as a pulsing red outline and appears once it is fixed
 var JKIND = {
   rear: 'missing rear wheel', front: 'missing front wheel', roof: 'missing roof', paint: 'paint scratch', windows: 'missing windows', bumper: 'missing bumper'
@@ -260,29 +262,30 @@ function jidoka(box){
   box.innerHTML = '<div class="pl-head"><b>Pull the andon cord</b><small>You work the station in the middle. Watch for cars with something missing or damaged.</small></div>' +
     '<div class="jd-stage"><svg class="jd-svg" viewBox="0 0 600 190" aria-hidden="true">' +
       '<rect x="' + JZ0 + '" y="40" width="' + (JZ1 - JZ0) + '" height="118" rx="8" class="jd-zone"/>' +
-      '<rect x="' + (JEND - 4) + '" y="40" width="56" height="118" rx="8" class="jd-repair"/>' +
+      '<rect x="' + JR0 + '" y="40" width="' + (JR1 - JR0) + '" height="118" rx="8" class="jd-repair"/>' +
       '<rect x="0" y="134" width="600" height="12" class="jd-belt"/><g class="jd-rollers"></g>' +
       '<g class="jd-cars"></g>' +
       '<g class="jd-leader" style="transform:translate(' + ((JZ0 + JZ1) / 2) + 'px,-140px)"><circle cx="0" cy="58" r="8"/><path d="M-11 92v-14a11 11 0 0 1 22 0v14z"/><rect x="-7" y="95" width="14" height="3" rx="1.5"/></g>' +
+      '<g class="jd-spec" style="transform:translate(' + JRS + 'px,-140px)"><circle cx="0" cy="58" r="8"/><path d="M-11 92v-14a11 11 0 0 1 22 0v14z"/><rect x="-7" y="95" width="14" height="3" rx="1.5"/></g>' +
       '<g class="jd-andon" transform="translate(' + (JZ1 + 10) + ' 0)"><rect x="-1" y="6" width="22" height="58" rx="5"/><circle class="jl-red" cx="10" cy="17" r="6.5"/><circle class="jl-yel" cx="10" cy="35" r="6.5"/><circle class="jl-grn" cx="10" cy="53" r="6.5"/><rect x="9" y="64" width="2" height="66" class="jd-pole"/></g>' +
-    '</svg><div class="jd-labels"><span class="jd-you">Your station</span><span class="jd-rep">Repair area</span></div></div>' +
+    '</svg><div class="jd-labels"><span class="jd-you">Your station</span><span class="jd-rep">Repair station</span></div></div>' +
     '<div class="jd-ctl"><button type="button" class="jd-cord"><i aria-hidden="true"></i>Pull the andon cord</button><button type="button" class="jd-run"></button><button type="button" class="jd-reset">Start over</button></div>' +
     '<p class="jd-msg" aria-live="polite"></p>' +
-    '<div class="jd-stats"><p><b class="jd-caught">0</b><span>defects fixed at your station</span></p><p><b class="jd-stops">0</b><span>times the line stopped</span></p><p><b class="jd-missed">0</b><span>sent to the repair area</span></p></div>';
-  var svg = $('.jd-svg', box), carsG = $('.jd-cars', box), rollers = $('.jd-rollers', box), leader = $('.jd-leader', box);
+    '<div class="jd-stats"><p><b class="jd-caught">0</b><span>defects fixed at your station</span></p><p><b class="jd-stops">0</b><span>times the line stopped</span></p><p><b class="jd-missed">0</b><span>sent to the repair station</span></p></div>';
+  var svg = $('.jd-svg', box), carsG = $('.jd-cars', box), rollers = $('.jd-rollers', box), leader = $('.jd-leader', box), spec = $('.jd-spec', box);
   var cars, nextIn, made, lastBad, state, target, fixLeft, stats, run = false, seen = false, raf = 0, last = 0, belt = 0;
   for(var x = 10; x < 600; x += 26) rollers.insertAdjacentHTML('beforeend', '<circle cx="' + x + '" cy="146" r="3"/>');
   function msg(t, kind){ var m = $('.jd-msg', box); m.textContent = t; m.className = 'jd-msg' + (kind ? ' ' + kind : ''); }
   function setState(s){ state = s; box.classList.remove('jd-green', 'jd-yellow', 'jd-red'); box.classList.add('jd-' + s); }
   function reset(){
     cars = []; nextIn = 0; made = 0; lastBad = false; target = null; fixLeft = 0; stats = { caught: 0, stops: 0, missed: 0 };
-    carsG.innerHTML = ''; setState('green'); leader.style.transform = 'translate(' + ((JZ0 + JZ1) / 2) + 'px,-140px)';
+    carsG.innerHTML = ''; setState('green'); spec.style.transform = 'translate(' + JRS + 'px,-140px)'; leader.style.transform = 'translate(' + ((JZ0 + JZ1) / 2) + 'px,-140px)';
     paint(); msg('Press Start the line. Pull the cord as soon as a car with a problem is in your station.');
   }
   function spawn(){
     // about one car in three has a problem, never two in a row, and each one is a surprise
     var bad = made > 0 && !lastBad && Math.random() < .38;
-    var c = { x: -30, defect: bad, kind: bad ? JKINDS[Math.floor(Math.random() * JKINDS.length)] : '', fixed: false, flagged: false, done: false };
+    var c = { x: -30, y: 132, defect: bad, kind: bad ? JKINDS[Math.floor(Math.random() * JKINDS.length)] : '', fixed: false, flagged: false, done: false };
     lastBad = bad;
     made++;
     c.el = document.createElementNS('http://www.w3.org/2000/svg', 'g');
@@ -305,7 +308,7 @@ function jidoka(box){
     if(moving){
       belt = (belt + JV * dt) % 26;
       nextIn -= dt; if(nextIn <= 0){ nextIn += JGAP; spawn(); }
-      cars.forEach(function(c){ c.x += JV * dt; });
+      cars.forEach(function(c){ if(!c.rep) c.x += JV * dt; });
     }
     if(target){
       fixLeft -= dt;
@@ -322,15 +325,24 @@ function jidoka(box){
     }
     cars.forEach(function(c){
       if(c.defect && !c.fixed && !c.flagged && c.x > JZ1 && !c.passed){ c.passed = true; msg('A car with a ' + JKIND[c.kind] + ' got past your station.', 'no'); }
-      if(c.x >= JEND + 24 && !c.done){
-        c.done = true;
-        if(c.defect && !c.fixed){ stats.missed++; msg('A defect reached the repair area. Mass producers kept 20 to 25% of their workers busy just on repairs like this.', 'no'); }
+      // an unfixed car is lifted off the belt into the repair station; the station works even while the line is stopped
+      if(c.defect && !c.fixed && !c.rep && !c.flagged && c.x >= JRC){
+        c.rep = true; c.x = JRC; c.rt = 0; stats.missed++;
+        msg('A car with a ' + JKIND[c.kind] + ' went to the repair station, and a specialist has to come fix it. Mass producers kept 20 to 25% of their workers busy just on repairs like this.', 'no');
+      }
+      if(c.rep){
+        c.rt += dt;
+        if(c.rt < .6){ var k = c.rt / .6; c.y = 132 - (132 - JRY) * (1 - (1 - k) * (1 - k)); }
+        else if(c.rt < .6 + JREP){ c.y = JRY; }
+        else { if(!c.fixed){ c.fixed = true; c.el.classList.add('fixed'); } c.x += JV * dt; }
       }
     });
+    var busy = cars.some(function(c){ return c.rep && !c.fixed && c.rt > .3; });
+    if(busy !== spec.__on){ spec.__on = busy; spec.style.transform = 'translate(' + JRS + 'px,' + (busy ? 0 : -140) + 'px)'; }
     cars = cars.filter(function(c){ if(c.x > 640){ c.el.parentNode.removeChild(c.el); return false; } return true; });
   }
   function paint(){
-    cars.forEach(function(c){ c.el.setAttribute('transform', 'translate(' + c.x.toFixed(1) + ' 132)'); });
+    cars.forEach(function(c){ c.el.setAttribute('transform', 'translate(' + c.x.toFixed(1) + ' ' + c.y.toFixed(1) + ')'); });
     rollers.setAttribute('transform', 'translate(' + belt.toFixed(1) + ' 0)');
     $('.jd-caught', box).textContent = stats.caught; $('.jd-stops', box).textContent = stats.stops; $('.jd-missed', box).textContent = stats.missed;
   }
