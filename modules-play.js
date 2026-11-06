@@ -237,16 +237,27 @@ function jit(box){
 // cars ride a conveyor through your station. When one is missing a wheel, pull the cord: the light turns yellow and a
 // team leader comes to fix it while the line keeps moving. If the car reaches the end of your station first, the line stops (red).
 // A defect nobody flags ends up in the repair area at the end of the line.
-var JV = 42, JGAP = 2.6, JZ0 = 230, JZ1 = 350, JEND = 548, JFIX = 1.6, JDEF = [0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1];
-function carSvg(defect){
-  return '<rect x="-20" y="-16" width="40" height="13" rx="4" class="jc-body"/><path d="M-12 -16l5-8h14l6 8z" class="jc-body"/>' +
-    '<rect x="-8" y="-22" width="7" height="5" rx="1" class="jc-win"/><rect x="2" y="-22" width="7" height="5" rx="1" class="jc-win"/>' +
-    '<circle cx="-11" cy="-2" r="5" class="jc-wheel"/>' +
-    (defect ? '<circle cx="11" cy="-2" r="7.5" class="jc-miss"/><circle cx="11" cy="-2" r="5" class="jc-wheel jc-new"/>' : '<circle cx="11" cy="-2" r="5" class="jc-wheel"/>');
+var JV = 42, JGAP = 2.6, JZ0 = 230, JZ1 = 350, JEND = 548, JFIX = 1.6;
+// what can be wrong with a car: the missing part is drawn as a pulsing red outline and appears once it is fixed
+var JKIND = {
+  rear: 'missing rear wheel', front: 'missing front wheel', roof: 'missing roof', paint: 'paint scratch', windows: 'missing windows', bumper: 'missing bumper'
+};
+var JKINDS = Object.keys(JKIND);
+function carSvg(kind){
+  function part(k, ok, missing){ return kind === k ? missing + ok.replace('class="', 'class="jc-new ') : ok; }
+  return '<rect x="-20" y="-16" width="40" height="13" rx="4" class="jc-body"/>' +
+    part('paint', '<path d="M-4-14l10 2-8 3 12 2" class="jc-scr-ok"/>', '<path d="M-4-14l10 2-8 3 12 2" class="jc-scratch"/><rect x="-7" y="-17" width="22" height="11" rx="3" class="jc-miss"/>') +
+    part('roof', '<path d="M-12 -16l5-8h14l6 8z" class="jc-body"/>', '<path d="M-12 -16l5-8h14l6 8z" class="jc-miss"/>') +
+    (kind === 'roof' ? '' : part('windows', '<g class="jc-wins"><rect x="-8" y="-22" width="7" height="5" rx="1" class="jc-win"/><rect x="2" y="-22" width="7" height="5" rx="1" class="jc-win"/></g>',
+      '<rect x="-10" y="-24" width="21" height="9" rx="2" class="jc-miss"/>')) +
+    (kind === 'roof' ? '<g class="jc-new"><rect x="-8" y="-22" width="7" height="5" rx="1" class="jc-win"/><rect x="2" y="-22" width="7" height="5" rx="1" class="jc-win"/></g>' : '') +
+    part('bumper', '<rect x="18" y="-9" width="6" height="5" rx="2" class="jc-bump"/>', '<rect x="16" y="-11" width="10" height="9" rx="2" class="jc-miss"/>') +
+    part('front', '<circle cx="11" cy="-2" r="5" class="jc-wheel"/>', '<circle cx="11" cy="-2" r="7.5" class="jc-miss"/>') +
+    part('rear', '<circle cx="-11" cy="-2" r="5" class="jc-wheel"/>', '<circle cx="-11" cy="-2" r="7.5" class="jc-miss"/>');
 }
 function jidoka(box){
   box.className = 'play pl-jdk';
-  box.innerHTML = '<div class="pl-head"><b>Pull the andon cord</b><small>You work the station in the middle. Watch for a car with a missing wheel.</small></div>' +
+  box.innerHTML = '<div class="pl-head"><b>Pull the andon cord</b><small>You work the station in the middle. Watch for cars with something missing or damaged.</small></div>' +
     '<div class="jd-stage"><svg class="jd-svg" viewBox="0 0 600 190" aria-hidden="true">' +
       '<rect x="' + JZ0 + '" y="40" width="' + (JZ1 - JZ0) + '" height="118" rx="8" class="jd-zone"/>' +
       '<rect x="' + (JEND - 4) + '" y="40" width="56" height="118" rx="8" class="jd-repair"/>' +
@@ -259,21 +270,24 @@ function jidoka(box){
     '<p class="jd-msg" aria-live="polite"></p>' +
     '<div class="jd-stats"><p><b class="jd-caught">0</b><span>defects fixed at your station</span></p><p><b class="jd-stops">0</b><span>times the line stopped</span></p><p><b class="jd-missed">0</b><span>sent to the repair area</span></p></div>';
   var svg = $('.jd-svg', box), carsG = $('.jd-cars', box), rollers = $('.jd-rollers', box), leader = $('.jd-leader', box);
-  var cars, nextIn, made, state, target, fixLeft, stats, run = false, seen = false, raf = 0, last = 0, belt = 0;
+  var cars, nextIn, made, lastBad, state, target, fixLeft, stats, run = false, seen = false, raf = 0, last = 0, belt = 0;
   for(var x = 10; x < 600; x += 26) rollers.insertAdjacentHTML('beforeend', '<circle cx="' + x + '" cy="146" r="3"/>');
   function msg(t, kind){ var m = $('.jd-msg', box); m.textContent = t; m.className = 'jd-msg' + (kind ? ' ' + kind : ''); }
   function setState(s){ state = s; box.classList.remove('jd-green', 'jd-yellow', 'jd-red'); box.classList.add('jd-' + s); }
   function reset(){
-    cars = []; nextIn = 0; made = 0; target = null; fixLeft = 0; stats = { caught: 0, stops: 0, missed: 0 };
+    cars = []; nextIn = 0; made = 0; lastBad = false; target = null; fixLeft = 0; stats = { caught: 0, stops: 0, missed: 0 };
     carsG.innerHTML = ''; setState('green'); leader.style.transform = 'translate(' + ((JZ0 + JZ1) / 2) + 'px,-140px)';
-    paint(); msg('Press Start the line. Pull the cord as soon as a car with a missing wheel is in your station.');
+    paint(); msg('Press Start the line. Pull the cord as soon as a car with a problem is in your station.');
   }
   function spawn(){
-    var c = { x: -30, defect: !!JDEF[made % JDEF.length], fixed: false, flagged: false, done: false };
+    // about one car in three has a problem, never two in a row, and each one is a surprise
+    var bad = made > 0 && !lastBad && Math.random() < .38;
+    var c = { x: -30, defect: bad, kind: bad ? JKINDS[Math.floor(Math.random() * JKINDS.length)] : '', fixed: false, flagged: false, done: false };
+    lastBad = bad;
     made++;
     c.el = document.createElementNS('http://www.w3.org/2000/svg', 'g');
     c.el.setAttribute('class', 'jd-car' + (c.defect ? ' is-bad' : ''));
-    c.el.innerHTML = carSvg(c.defect);
+    c.el.innerHTML = carSvg(c.kind);
     carsG.appendChild(c.el); cars.push(c);
   }
   function inZone(c){ return c.x >= JZ0 && c.x <= JZ1; }
@@ -284,7 +298,7 @@ function jidoka(box){
     if(!c){ msg('Nothing is wrong at your station right now. Pull the cord only when you see a problem.', 'no'); return; }
     target = c; c.flagged = true; fixLeft = JFIX; setState('yellow');
     leader.style.transform = 'translate(' + ((JZ0 + JZ1) / 2) + 'px,0px)';
-    msg('Yellow: you called for help. The team leader fixes the car while the line keeps moving.', 'warn');
+    msg('Yellow: ' + JKIND[c.kind] + '. The team leader fixes it while the line keeps moving.', 'warn');
   }
   function step(dt){
     var moving = state !== 'red';
@@ -307,7 +321,7 @@ function jidoka(box){
       }
     }
     cars.forEach(function(c){
-      if(c.defect && !c.fixed && !c.flagged && c.x > JZ1 && !c.passed){ c.passed = true; msg('A car with a missing wheel got past your station.', 'no'); }
+      if(c.defect && !c.fixed && !c.flagged && c.x > JZ1 && !c.passed){ c.passed = true; msg('A car with a ' + JKIND[c.kind] + ' got past your station.', 'no'); }
       if(c.x >= JEND + 24 && !c.done){
         c.done = true;
         if(c.defect && !c.fixed){ stats.missed++; msg('A defect reached the repair area. Mass producers kept 20 to 25% of their workers busy just on repairs like this.', 'no'); }

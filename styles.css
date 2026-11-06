@@ -437,6 +437,10 @@ a.mini:hover{border-color:rgba(232,119,34,.5);background:rgba(232,119,34,.07);tr
 .jc-miss{fill:rgba(229,72,77,.3);stroke:#FF6B6B;stroke-width:2.5;stroke-dasharray:4 3;transform-box:fill-box;transform-origin:center;animation:jcMiss 1s ease-in-out infinite}
 @keyframes jcMiss{50%{transform:scale(1.25);fill:rgba(229,72,77,.55)}}
 @media (prefers-reduced-motion:reduce){.jc-miss{animation:none}}
+.jc-bump{fill:#C9D6E4}
+.jc-scr-ok{display:none}
+.jc-scratch{fill:none;stroke:#E9EEF4;stroke-width:1.6;stroke-linecap:round}
+.jd-car.fixed .jc-scratch{display:none}
 .jd-car .jc-new{opacity:0;transition:opacity .4s}
 .jd-car.fixed .jc-new{opacity:1}.jd-car.fixed .jc-miss{display:none}
 .jd-leader{transition:transform .6s var(--ease)}
