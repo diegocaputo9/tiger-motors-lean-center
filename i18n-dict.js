@@ -5430,4 +5430,6 @@ window.TM_I18N = {
 "<b>AS</b>AS/RS · Tier 1 Raw Material Supplier": ["<b>AS</b>AS/RS · Proveedor Tier 1 de materia prima", "<b>AS</b>AS/RS · Tier-1-Lieferant für Rohmaterial", "<b>AS</b>AS/RS · Fornitore Tier 1 di materie prime"],
 "AS/RS · Tier 1 Raw Material Supplier": ["AS/RS · Proveedor Tier 1 de materia prima", "AS/RS · Tier-1-Lieferant für Rohmaterial", "AS/RS · Fornitore Tier 1 di materie prime"],
 "Expand": ["Expandir", "Aufklappen", "Espandi"],
+"Tom Devall and Diego Caputo at the Southern Automotive Quality Summit": ["Tom Devall y Diego Caputo en la Southern Automotive Quality Summit", "Tom Devall und Diego Caputo auf dem Southern Automotive Quality Summit", "Tom Devall e Diego Caputo al Southern Automotive Quality Summit"],
+"Tom Devall and Diego Caputo at the Auburn Engineering booth": ["Tom Devall y Diego Caputo en el stand de Auburn Engineering", "Tom Devall und Diego Caputo am Stand von Auburn Engineering", "Tom Devall e Diego Caputo allo stand di Auburn Engineering"],
 };
