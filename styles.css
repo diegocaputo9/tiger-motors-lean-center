@@ -1034,10 +1034,6 @@ html[data-mode="light"] .pdlg::backdrop{background:rgba(220,228,238,.5)}
 .kb-note{fill:#FFB877;font-size:12px}
 .sup-tag .pl-cell{font-size:16px;fill:#FFB877}
 .sup-arrow{fill:none;stroke:#FF9B4D;stroke-width:2}
-.kb-pop{opacity:0;transition:opacity .3s ease;pointer-events:none}
-.kb-pop.on{opacity:1}
-.kb-pop rect,.kb-pop polygon{fill:rgba(232,119,34,.97);stroke:#fff;stroke-width:1}
-.kb-pop text{font:700 12px var(--f-mono);fill:#1A0C02;letter-spacing:.04em}
 
 .plan-hint{display:none;margin:0 0 8px;font:500 12px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--text-3)}
 #lab .plan{margin:0 0 28px}
@@ -1780,3 +1776,38 @@ html[data-mode="light"] .cta-note{color:#8A3E0A}
 .pl-fold svg{transition:transform .3s cubic-bezier(.23,1,.32,1)}
 .pl-closed .pl-fold svg{transform:rotate(180deg)}
 .pl-closed>:not(.pl-head):not(.ws-head):not(.pl-fold){display:none!important}
+
+/* ---- information flow: supermarket numbers and step-by-step explanation bubbles ---- */
+.sm-num circle{fill:#FF9B4D;stroke:#0A1B30;stroke-width:1.5}
+.sm-num text{font:700 10px var(--f-mono);fill:#1A0C02}
+.plan-scroll{position:relative}
+.kb-bubs{position:absolute;left:0;top:0;pointer-events:none;display:none}
+.plan.is-info .kb-bubs{display:block}
+.kb-bub{position:absolute;box-sizing:border-box;display:grid;grid-template-columns:auto 1fr;column-gap:10px;row-gap:3px;align-items:center;padding:11px 14px 12px 12px;border-radius:14px;
+  background:linear-gradient(180deg,rgba(26,48,76,.9),rgba(10,24,42,.92));border:1px solid rgba(255,255,255,.16);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 12px 30px rgba(0,0,0,.45);-webkit-backdrop-filter:blur(10px) saturate(140%);backdrop-filter:blur(10px) saturate(140%);
+  opacity:0;transform:translateY(8px) scale(.97);transform-origin:50% 0;transition:opacity .35s ease,transform .5s cubic-bezier(.23,1,.32,1)}
+.kb-bub.on{opacity:1;transform:none}
+.kb-bn{grid-row:1;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:#FF9B4D;color:#1A0C02;font:700 12px var(--f-mono)}
+.kb-bub b{grid-row:1;font:600 12px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:#FFB877}
+.kb-bub p{grid-column:1/-1;margin:2px 0 0;font:400 13.5px/1.4 var(--f-body);color:#EEF3F8}
+.plan.bubs-off .kb-bub{display:none}
+.kb-ring rect,.kb-ring circle{stroke:#FF9B4D;stroke-width:2;stroke-dasharray:5 4}
+.kb-ring{opacity:0;transition:opacity .35s ease}
+.kb-ring.on{opacity:1;animation:kbRing 1.6s ease-in-out infinite}
+@keyframes kbRing{50%{opacity:.45}}
+.plan.bubs-off .kb-ring{display:none}
+.kb-pop{position:absolute;transform:translate(-50%,calc(-100% + 6px));display:inline-flex;align-items:center;gap:8px;white-space:nowrap;padding:6px 12px 6px 10px;border-radius:999px;
+  background:rgba(10,24,42,.92);border:1px solid rgba(255,184,119,.6);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 8px 20px rgba(0,0,0,.4);
+  font:600 12.5px var(--f-body);color:#FFFFFF;opacity:0;transition:opacity .3s ease,transform .45s cubic-bezier(.23,1,.32,1)}
+.kb-pop.on{opacity:1;transform:translate(-50%,-100%)}
+.kb-pop i{width:8px;height:8px;border-radius:50%;background:#FF9B4D;box-shadow:0 0 0 3px rgba(255,155,77,.25)}
+.kb-pop::after{content:"";position:absolute;left:50%;bottom:-5px;width:8px;height:8px;margin-left:-4px;background:rgba(10,24,42,.92);border-right:1px solid rgba(255,184,119,.6);border-bottom:1px solid rgba(255,184,119,.6);transform:rotate(45deg)}
+.kb-bubtog{display:none;margin-top:10px;align-items:center;gap:10px;padding:6px 12px 6px 6px;border-radius:999px;border:1px solid var(--line-2);background:rgba(255,255,255,.04);color:var(--text-2);font:500 13px var(--f-body);cursor:pointer;transition:background .2s,color .2s}
+.plan.is-info .kb-bubtog{display:inline-flex}
+.kb-bubtog:hover{background:rgba(255,255,255,.08);color:var(--text)}
+.kb-sw{position:relative;width:34px;height:20px;border-radius:999px;background:rgba(255,255,255,.18);transition:background .25s}
+.kb-sw::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.4);transition:transform .35s cubic-bezier(.34,1.4,.64,1)}
+.kb-bubtog[aria-pressed="true"] .kb-sw{background:#FF9B4D}
+.kb-bubtog[aria-pressed="true"] .kb-sw::after{transform:translateX(14px)}
+@media (prefers-reduced-motion:reduce){.kb-bub,.kb-pop,.kb-sw::after{transition:none}.kb-ring.on{animation:none}}

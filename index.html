@@ -33,9 +33,9 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="styles.css?v=f8794049">
+<link rel="stylesheet" href="styles.css?v=f5f185eb">
 
-<script src="i18n-dict.js?v=094d6789" defer></script>
+<script src="i18n-dict.js?v=14aab4b0" defer></script>
 <script src="i18n.js?v=3a5d34c9" defer></script>
 <script src="feedback.js?v=812720da" defer></script>
 <script src="install.js?v=cb9719a8" defer></script>
@@ -235,6 +235,7 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
         <div>
           <p class="plan-kicker">Facility layout · schematic</p>
           <h3 id="planTitle">Material flows from Cell 1 to Cell 2 to Cell 3</h3>
+          <button type="button" class="kb-bubtog" id="kbBubTog" aria-pressed="true"><span class="kb-sw" aria-hidden="true"></span>Explanation bubbles</button>
         </div>
         <div class="plan-legend" role="list">
           <button class="pchip" data-c="c1" role="listitem"><b>01</b>Cell 1 · U-shaped cell</button>
@@ -388,6 +389,7 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
         <!-- supermarkets between Cell 1 and Cell 2 (stations 10 and 6) -->
         <g id="kbn-sm10" class="kb-sm" data-def="supermkt"><rect x="504" y="384.5" width="30" height="11" rx="2"/><text x="519" y="389.7" text-anchor="middle" dominant-baseline="central">SUPERMKT</text></g>
         <g id="kbn-sm6" class="kb-sm" data-def="supermkt"><rect x="570" y="384.5" width="30" height="11" rx="2"/><text x="585" y="389.7" text-anchor="middle" dominant-baseline="central">SUPERMKT</text></g>
+        <g class="sm-num" aria-hidden="true"><circle cx="519" cy="371" r="7"/><text x="519" y="371" text-anchor="middle" dominant-baseline="central">2</text><circle cx="585" cy="371" r="7"/><text x="585" y="371" text-anchor="middle" dominant-baseline="central">1</text></g>
         <g class="kb-sm smed-tag" data-def="smed"><rect x="570" y="340.5" width="26" height="11" rx="2"/><text x="583" y="345.7" text-anchor="middle" dominant-baseline="central">SMED</text></g>
         <g class="sup-tag" aria-hidden="true">
           <path d="M934 253H906" class="sup-arrow" marker-end="url(#ah)"/>
@@ -398,7 +400,7 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
         <!-- information flow: kanban layer (shown in the Information flow view) -->
         <g class="kb" id="kb">
           <g class="kb-paths" fill="none" stroke="rgba(233,238,244,.55)" stroke-width="1.5" stroke-dasharray="4 5" stroke-linecap="round">
-            <path id="kbl1" d="M443 318H480V390H495"/><path id="kbl2" d="M543 390H550V417H577.5"/><path id="kbl3" d="M585 409.5V399"/><path id="kbl4" d="M585 381V364H517V325.5"/>
+            <path id="kbl1" d="M443 318H480V390H495"/><path id="kbl2" d="M543 390H550V417H577.5"/><path id="kbl3" d="M585 409.5V399"/><path id="kbl4" d="M578 364H517V325.5"/>
           </g>
           <g class="kb-st"><g id="kbn-s1" class="kb-n"><circle cx="517" cy="318" r="7.5"/><text x="517" y="321" text-anchor="middle">1</text></g><g id="kbn-s2" class="kb-n"><circle cx="517" cy="283" r="7.5"/><text x="517" y="286" text-anchor="middle">2</text></g><g id="kbn-s3" class="kb-n"><circle cx="552" cy="258" r="7.5"/><text x="552" y="261" text-anchor="middle">3</text></g><g id="kbn-s4" class="kb-n"><circle cx="583" cy="283" r="7.5"/><text x="583" y="286" text-anchor="middle">4</text></g><g id="kbn-s5" class="kb-n"><circle cx="583" cy="318" r="7.5"/><text x="583" y="321" text-anchor="middle">5</text></g><g id="kbn-s6" class="kb-n"><circle cx="585" cy="417" r="7.5"/><text x="585" y="420" text-anchor="middle">6</text></g><g id="kbn-s7" class="kb-n"><circle cx="585" cy="452" r="7.5"/><text x="585" y="455" text-anchor="middle">7</text></g><g id="kbn-s8" class="kb-n"><circle cx="550" cy="474" r="7.5"/><text x="550" y="477" text-anchor="middle">8</text></g><g id="kbn-s9" class="kb-n"><circle cx="519" cy="452" r="7.5"/><text x="519" y="455" text-anchor="middle">9</text></g><g id="kbn-s10" class="kb-n"><circle cx="519" cy="417" r="7.5"/><text x="519" y="420" text-anchor="middle">10</text></g><g id="kbn-s11" class="kb-n"><circle cx="435" cy="318" r="7.5"/><text x="435" y="321" text-anchor="middle">11</text></g><g id="kbn-s12" class="kb-n"><circle cx="402" cy="318" r="7.5"/><text x="402" y="321" text-anchor="middle">12</text></g><g id="kbn-s13" class="kb-n"><circle cx="369" cy="318" r="7.5"/><text x="369" y="321" text-anchor="middle">13</text></g><g id="kbn-s14" class="kb-n"><circle cx="336" cy="318" r="7.5"/><text x="336" y="321" text-anchor="middle">14</text></g><g id="kbn-s15" class="kb-n"><circle cx="303" cy="318" r="7.5"/><text x="303" y="321" text-anchor="middle">15</text></g></g>
           <g id="kbn-h" class="kb-box"><rect x="398" y="372" width="70" height="22" rx="3"/><line x1="408.0" y1="372" x2="408.0" y2="394"/><line x1="418.0" y1="372" x2="418.0" y2="394"/><line x1="428.0" y1="372" x2="428.0" y2="394"/><line x1="438.0" y1="372" x2="438.0" y2="394"/><line x1="448.0" y1="372" x2="448.0" y2="394"/><line x1="458.0" y1="372" x2="458.0" y2="394"/></g>
@@ -406,7 +408,14 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
           <path id="kbl5" class="kb-link" d="M604 300L716 300"/><path id="kbl6" class="kb-link" d="M782 290L842 290"/>
           <text x="602" y="293" class="kb-lab">2-bin replenishment</text>
           <text x="435" y="303" class="kb-lab kb-note" text-anchor="middle">Pacemaker process</text>
-          <g id="kbpop" class="kb-pop"><rect x="233" y="258" width="140" height="22" rx="4"/><polygon points="297,279.5 309,279.5 303,290"/><text x="303" y="273.5" text-anchor="middle">JIT delivery point</text></g>
+          <!-- outlines that show where each explanation bubble is talking about -->
+          <g class="kb-rings" fill="none">
+            <g class="kb-ring" id="ring1"><rect x="392" y="366" width="82" height="34" rx="6"/><circle cx="435" cy="318" r="15"/></g>
+            <g class="kb-ring" id="ring2"><rect x="490" y="377" width="58" height="26" rx="6"/><circle cx="435" cy="318" r="15"/><circle cx="585" cy="417" r="15"/></g>
+            <g class="kb-ring" id="ring3"><rect x="556" y="377" width="58" height="26" rx="6"/><circle cx="585" cy="417" r="15"/><circle cx="517" cy="318" r="15"/></g>
+            <g class="kb-ring" id="ring4"><rect x="700" y="405" width="218" height="98" rx="8"/><circle cx="303" cy="318" r="15"/></g>
+            <g class="kb-ring" id="ring5"><rect x="713" y="258" width="72" height="108" rx="8"/><rect x="788" y="154" width="126" height="204" rx="8"/></g>
+          </g>
           <g id="kbCards"></g>
         </g>
         <!-- labels -->
@@ -421,6 +430,14 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
         <text x="18" y="136" class="pl-tag">TIGER MOTORS · INTEGRATED MANUFACTURING FACILITY</text>
         <text x="392" y="218" class="pl-cell we-title" text-anchor="middle" style="font-size:15px">Tiger Motors · Assembly Plant</text>
       </svg>
+      <div class="kb-bubs" id="kbBubs" aria-live="polite">
+        <div class="kb-bub" id="bub1" style="left:15.405%;top:70.370%;width:28.468%"><span class="kb-bn" aria-hidden="true">1</span><b>Heijunka box</b><p>Cards leave the Heijunka box and go to station 11, the pacemaker process, in packs of 7 cards.</p></div>
+        <div class="kb-bub" id="bub2" style="left:15.405%;top:70.370%;width:28.468%"><span class="kb-bn" aria-hidden="true">2</span><b>Supermarket 2</b><p>Station 11 pulls a car from Supermarket 2. This reveals a kanban card, which is sent to station 6.</p></div>
+        <div class="kb-bub" id="bub3" style="left:15.405%;top:70.370%;width:28.468%"><span class="kb-bn" aria-hidden="true">3</span><b>Supermarket 1</b><p>Station 6 grabs a car from Supermarket 1. This reveals a kanban card, which is posted at station 1.</p></div>
+        <div class="kb-bub" id="bub4" style="left:15.405%;top:70.370%;width:28.468%"><span class="kb-bn" aria-hidden="true">4</span><b>White card · special order</b><p>War Eagle Inc. gets an order for a special part, produces it and delivers it just in time to the line at station 15.</p></div>
+        <div class="kb-bub" id="bub5" style="left:15.405%;top:70.370%;width:28.468%"><span class="kb-bn" aria-hidden="true">5</span><b>2-bin replenishment</b><p>When a bin in Cell 1 runs low, a card goes to Raw Stock and the AS/RS. The green card brings the material back to Cell 1.</p></div>
+        <div class="kb-pop" id="kbpop" style="left:27.297%;top:44.444%"><i aria-hidden="true"></i>JIT delivery point</div>
+      </div>
       </div>
       <figcaption class="plan-cap"><span class="plan-note"><span class="pdef" data-def-k="asrs">AS/RS: Automated Storage and Retrieval System</span><span class="pdef" data-def-k="smed">SMED: Single-Minute Exchange of Die</span><span class="pdef" data-def-k="supermkt">Supermarket: the buffer inventory between cells</span></span><span id="planCapR">AS/RS feeds raw stock · Raw Stock delivers material to Cells 1, 2 and 3 · product flows Cell 1 → Cell 2 → Cell 3</span></figcaption>
       <div class="kb-legend" id="kbLegend" hidden>
@@ -751,7 +768,7 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
       <a href="#lab">Explore the Lab</a><a href="#lean-house">Lean House</a><a href="modules">Modules</a><a href="#project">About</a><a href="testimonials">Testimonials</a><a href="#contact">Contact</a><a href="#install" class="fl-inst" data-install><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="12.5" rx="2"/><path d="M12 7.5v6M9.3 10.8L12 13.5l2.7-2.7M8.5 20.5h7"/></svg>Install the app</a><button type="button" class="fl-reset" data-reset-progress hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.6-5.9"/><path d="M4 4.5v4h4"/></svg>Reset my progress</button>
     </div>
   </div>
-  <div class="wrap"><p class="site-rev">Last updated November 9, 2026 · Revision 168</p></div>
+  <div class="wrap"><p class="site-rev">Last updated November 9, 2026 · Revision 169</p></div>
 </footer>
 
 <dialog class="bdlg" id="bioDlg" aria-labelledby="bdlg-h">
@@ -1469,7 +1486,7 @@ if('IntersectionObserver' in window && !reduce){
   // pack: 2 blue, 1 orange, 1 white (special order), 2 blue, 1 orange
   var PACK=['b','b','r','w','b','b','r'], FILL={b:'#3B82F6',r:'#E87722',w:'#FFFFFF',g:'#2FBF71'};
   var W=9,H=14;
-  var TICK=2000, MOVE=750, PITCH=1;   // every card hops one station per tick; one card per station; stations stay filled
+  var SLOW=1/0.85, TICK=Math.round(2000*SLOW), MOVE=Math.round(750*SLOW), PITCH=1;   // every card hops one station per tick; one card per station; stations stay filled
   var WE_T=3*TICK+MOVE;               // War Eagle round trip ends exactly when the white card on the line reaches station 15
   var rm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
   function slot(i){return [398+5+i*10,383];}
@@ -1489,7 +1506,7 @@ if('IntersectionObserver' in window && !reduce){
   var IN=smooth([P[11],[470,352],[560,366],[660,366],[708,384],[719,408],CNC[0]],14);
   var OUT=smooth([CNC[5],[870,414],[800,416],[740,412],[716,394],[690,366],[600,366],[500,366],[410,360],[340,342],[307,322],P[15]],14);
   function plen(a){ var L=[0]; for(var q=1;q<a.length;q++) L.push(L[q-1]+Math.hypot(a[q][0]-a[q-1][0],a[q][1]-a[q-1][1])); return L; }
-  var HOP=800, HOPMOVE=400, IN_T=1000, HOPS=5*HOP, OUT_T=WE_T-IN_T-HOPS;
+  var HOP=Math.round(800*SLOW), HOPMOVE=Math.round(400*SLOW), IN_T=Math.round(1000*SLOW), HOPS=5*HOP, OUT_T=WE_T-IN_T-HOPS;
   var tokens=[], links=[], arrivals=[];
   function steps(n){ var a=[]; for(var k=0;k<n;k++) a.push(TICK); return a; }
   function tok(o){ o.total=o.dur.reduce(function(a,b){return a+b;},0); o.end=o.start+o.total; tokens.push(o); return o; }
@@ -1527,6 +1544,8 @@ if('IntersectionObserver' in window && !reduce){
     tok({fill:FILL.g,step:true,pts:[[842,298],[749,310],[604,308]],ids:[null,null,null],dur:steps(2),start:SE,appear:SE,fade:350});
     lit('kbl6',SE,SE+MOVE+250); lit('kbl5',SE+TICK,SE+TICK+MOVE+250);
   });
+  // explanation bubbles over the offices: one at a time, each while the cards are doing what it says (times in ticks)
+  [[.1,2],[2.1,4],[4.1,5.9],[6,8.7],[9.2,12]].forEach(function(w,i){ lit('bub'+(i+1),w[0]*TICK,w[1]*TICK); lit('ring'+(i+1),w[0]*TICK,w[1]*TICK); });
   var TOTAL=Math.max.apply(null,tokens.map(function(t){return t.end;}))+1800;
   // AS/RS shuttle: hops to the next bay every second time a card arrives, then returns to rest
   var shuttle=plan.querySelector('.asrs-shuttle'), shAnim=shuttle&&shuttle.querySelector('animate');
@@ -1586,8 +1605,14 @@ if('IntersectionObserver' in window && !reduce){
     raf=requestAnimationFrame(frame);
   }
   function start(){ if(raf||rm) return; t0=performance.now(); raf=requestAnimationFrame(frame); }
-  function clearHits(){ plan.querySelectorAll('.kb .hit').forEach(function(e){e.classList.remove('hit');}); plan.querySelectorAll('.kb-paths .on').forEach(function(e){e.classList.remove('on');}); }
+  function clearHits(){ plan.querySelectorAll('.kb .hit').forEach(function(e){e.classList.remove('hit');}); plan.querySelectorAll('.kb-paths .on,.kb-link.on,.kb-ring.on,.kb-bub.on,.kb-pop.on').forEach(function(e){e.classList.remove('on');}); }
   restView();
+  // the bubble layer is HTML laid over the drawing, so it is sized to the drawing (which can be wider than the screen)
+  var bubs=document.getElementById('kbBubs'), psvg=plan.querySelector('.plan-svg');
+  function fit(){ if(!bubs||!psvg) return; var r=psvg.getBoundingClientRect(); bubs.style.width=r.width+'px'; bubs.style.height=r.height+'px'; }
+  fit(); if('ResizeObserver' in window) new ResizeObserver(fit).observe(psvg); else window.addEventListener('resize',fit);
+  var tog=document.getElementById('kbBubTog');
+  if(tog) tog.addEventListener('click',function(){ var off=plan.classList.toggle('bubs-off'); tog.setAttribute('aria-pressed',off?'false':'true'); });
   function setMode(m){
     var info=m==='info'; active=info;
     plan.classList.toggle('is-info',info);
