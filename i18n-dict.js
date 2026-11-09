@@ -5434,4 +5434,6 @@ window.TM_I18N = {
 "Tom Devall and Diego Caputo at the Auburn Engineering booth": ["Tom Devall y Diego Caputo en el stand de Auburn Engineering", "Tom Devall und Diego Caputo am Stand von Auburn Engineering", "Tom Devall e Diego Caputo allo stand di Auburn Engineering"],
 "Cub Scouts Earn Modular Design Badges Through ISE Lab": ["Los Cub Scouts obtienen insignias de diseño modular en el laboratorio de ISE", "Cub Scouts verdienen Abzeichen für modulares Design im ISE-Labor", "I Cub Scout ottengono i distintivi di progettazione modulare nel laboratorio ISE"],
 "Outreach": ["Divulgación", "Öffentlichkeitsarbeit", "Divulgazione"],
+"Portfolio": ["Portafolio", "Portfolio", "Portfolio"],
+"Portfolio: diegocaputo.com": ["Portafolio: diegocaputo.com", "Portfolio: diegocaputo.com", "Portfolio: diegocaputo.com"],
 };
