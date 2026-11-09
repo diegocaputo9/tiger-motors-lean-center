@@ -33,7 +33,7 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="styles.css?v=a8d30a89">
+<link rel="stylesheet" href="styles.css?v=f3db10e0">
 
 <script src="i18n-dict.js?v=90441c74" defer></script>
 <script src="i18n.js?v=3a5d34c9" defer></script>
@@ -336,8 +336,15 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
         </g>
         <!-- material flow -->
         <g class="flow" fill="none" stroke="#FF9B4D" stroke-width="2.2" stroke-linecap="round">
-          <path d="M551 330V402" marker-end="url(#ah)"/>
-          <path d="M536 410Q498 404 490 372Q484 334 468 322" marker-end="url(#ah)"/>
+          <!-- Cell 1: a U through stations 1, 2, 3, 4 and 5 -->
+          <path d="M517 333V282Q517 258 541 258H559Q583 258 583 282V299" marker-end="url(#ah)"/>
+          <!-- station 5 to station 6, around the SMED and supermarket tags -->
+          <path d="M596 318H604Q614 318 614 328V407Q614 417 604 417H600" marker-end="url(#ah)"/>
+          <!-- Cell 2: a U through stations 6, 7, 8, 9 and 10 -->
+          <path d="M585 402V452Q585 474 563 474H541Q519 474 519 452V436" marker-end="url(#ah)"/>
+          <!-- station 10 to station 11, the start of the Cell 3 conveyor -->
+          <path d="M506 417H496Q484 417 484 405V330Q484 318 472 318H461" marker-end="url(#ah)"/>
+          <!-- Cell 3: conveyor -->
           <path d="M452 318H300" marker-end="url(#ah)"/>
         </g>
         <!-- raw material delivery: Raw Stock -> Cells 1, 2, 3 (same orange moving-dash style as the other flows) -->
@@ -430,7 +437,6 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
         <text x="392" y="218" class="pl-cell we-title" text-anchor="middle" style="font-size:15px">Tiger Motors · Assembly Plant</text>
       </svg>
       <div class="kb-bubs" id="kbBubs">
-        <button type="button" class="kb-play" id="kbPlay" aria-pressed="false" style="left:8.243%;top:83.457%"><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg><span>Pause</span></button>
         <div class="kb-bub" id="bub1" style="left:15.405%;top:70.370%;width:28.468%"><span class="kb-bn" aria-hidden="true">1</span><b>Heijunka box</b><p>Cards leave the Heijunka box and go to station 11, the pacemaker process, in packs of 7 cards.</p></div>
         <div class="kb-bub" id="bub2" style="left:15.405%;top:70.370%;width:28.468%"><span class="kb-bn" aria-hidden="true">2</span><b>Supermarket 2</b><p>Station 11 pulls a car from Supermarket 2. This reveals a kanban card, which is sent to station 6.</p></div>
         <div class="kb-bub" id="bub3" style="left:15.405%;top:70.370%;width:28.468%"><span class="kb-bn" aria-hidden="true">3</span><b>Supermarket 1</b><p>Station 6 grabs a car from Supermarket 1. This reveals a kanban card, which is posted at station 1.</p></div>
@@ -439,7 +445,7 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
         <div class="kb-pop" id="kbpop" style="left:27.297%;top:44.444%"><i aria-hidden="true"></i>JIT delivery point</div>
       </div>
       </div>
-      <figcaption class="plan-cap"><span class="plan-note"><span class="pdef" data-def-k="asrs">AS/RS: Automated Storage and Retrieval System</span><span class="pdef" data-def-k="smed">SMED: Single-Minute Exchange of Die</span><span class="pdef" data-def-k="supermkt">Supermarket: the buffer inventory between cells</span></span><span id="planCapR">AS/RS feeds raw stock · Raw Stock delivers material to Cells 1, 2 and 3 · product flows Cell 1 → Cell 2 → Cell 3</span><button type="button" class="kb-bubtog" id="kbBubTog" aria-pressed="true"><span class="kb-sw" aria-hidden="true"></span>Explanation bubbles</button></figcaption>
+      <figcaption class="plan-cap"><span class="plan-note"><span class="pdef" data-def-k="asrs">AS/RS: Automated Storage and Retrieval System</span><span class="pdef" data-def-k="smed">SMED: Single-Minute Exchange of Die</span><span class="pdef" data-def-k="supermkt">Supermarket: the buffer inventory between cells</span></span><span id="planCapR">AS/RS feeds raw stock · Raw Stock delivers material to Cells 1, 2 and 3 · product flows Cell 1 → Cell 2 → Cell 3</span><button type="button" class="kb-play" id="kbPlay" aria-pressed="false"><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg><span>Pause</span></button><button type="button" class="kb-bubtog" id="kbBubTog" aria-pressed="true"><span class="kb-sw" aria-hidden="true"></span>Explanation bubbles</button></figcaption>
       <div class="kb-legend" id="kbLegend" hidden>
         <span><i class="c-blue"></i>Blue card</span><span><i class="c-orange"></i>Orange card</span><span><i class="c-white"></i>White card · special order to War Eagle Inc.</span><span><i class="c-green"></i>Green card · material delivered back to Cell 1</span>
         <small>Each card color is a different product built in the lab. Pattern: 2 blue, 1 orange, 1 white, 2 blue, 1 orange. Cards leave the Heijunka box for station 11. A card then goes to the supermarket at station 10 and is posted at station 6, moves 6 to 10, and pulls from the supermarket at station 6, which posts at station 1 and moves 1 to 5. A second white card leaves station 11 for War Eagle Inc., circles it, and is delivered to station 15 together with the white card on the line.</small>
@@ -768,7 +774,7 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
       <a href="#lab">Explore the Lab</a><a href="#lean-house">Lean House</a><a href="modules">Modules</a><a href="#project">About</a><a href="testimonials">Testimonials</a><a href="#contact">Contact</a><a href="#install" class="fl-inst" data-install><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="12.5" rx="2"/><path d="M12 7.5v6M9.3 10.8L12 13.5l2.7-2.7M8.5 20.5h7"/></svg>Install the app</a><button type="button" class="fl-reset" data-reset-progress hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.6-5.9"/><path d="M4 4.5v4h4"/></svg>Reset my progress</button>
     </div>
   </div>
-  <div class="wrap"><p class="site-rev">Last updated November 9, 2026 · Revision 171</p></div>
+  <div class="wrap"><p class="site-rev">Last updated November 9, 2026 · Revision 172</p></div>
 </footer>
 
 <dialog class="bdlg" id="bioDlg" aria-labelledby="bdlg-h">
