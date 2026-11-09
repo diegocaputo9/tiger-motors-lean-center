@@ -33,6 +33,20 @@ var lastUid = undefined;
 var hash = location.hash || '';
 var cameFromLink = /access_token=/.test(hash);
 var linkError = /error_code=|error=access_denied/.test(hash) ? decodeURIComponent((hash.match(/error_description=([^&]+)/) || [,''])[1]).replace(/\+/g, ' ') : '';
+/* Emails link straight to tigermotorslean.com with a one-time token after the #, and the site finishes the sign-in here.
+   Keeping the link on our own domain helps the email stay out of spam, and link scanners that open the URL cannot use up the token. */
+var tokenHash = (hash.match(/[#&]token_hash=([^&]+)/) || [])[1];
+if(tokenHash){
+  cameFromLink = true;
+  var otpType = (hash.match(/[#&]type=([a-z_]+)/) || [, 'email'])[1];
+  try { history.replaceState(null, '', location.pathname + location.search); } catch(e){}
+  if(sb) sb.auth.verifyOtp({ token_hash: decodeURIComponent(tokenHash), type: otpType }).then(function(r){
+    if(!r.error) return;
+    cameFromLink = false;
+    var msg = r.error.message || 'This sign-in link is no longer valid.';
+    if(document.readyState === 'loading') linkError = msg; else if(ON) openDialog('expired', { detail: msg });
+  });
+}
 
 /* ---------- helpers ---------- */
 function $(s, r){ return (r || document).querySelector(s); }
