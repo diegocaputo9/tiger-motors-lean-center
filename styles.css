@@ -135,6 +135,7 @@ p{margin:0}
 .lab{background:
   radial-gradient(900px 500px at 15% 10%,rgba(232,119,34,.08),transparent 60%),
   linear-gradient(180deg,var(--bg-2),var(--bg));overflow:hidden}
+.lab .gridbg{position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse at 50% 30%,#000 10%,transparent 70%);-webkit-mask-image:radial-gradient(ellipse at 50% 30%,#000 10%,transparent 70%);opacity:.5;pointer-events:none}
 .portal{position:relative;display:grid;grid-template-columns:1.15fr .85fr;border-radius:24px;overflow:hidden;border:1px solid var(--line-2);background:linear-gradient(135deg,rgba(12,35,64,.9),rgba(7,18,31,.95));text-decoration:none;isolation:isolate;transition:border-color .4s,transform .5s var(--ease)}
 a.portal-vis{display:block;cursor:pointer;overflow:hidden}
 a.portal-vis .portal-img{transition:transform .6s cubic-bezier(.2,.7,.2,1)}
@@ -1862,10 +1863,3 @@ html[data-mode="light"] .acct-skel{background-color:rgba(12,35,64,.04);border-co
 .kb-bub p,.kb-bub b{opacity:0;transform:translateY(3px);transition:opacity .2s ease,transform .25s cubic-bezier(.23,1,.32,1)}
 .kb-bub.on b{opacity:1;transform:none;transition-delay:.04s}
 .kb-bub.on p{opacity:1;transform:none;transition-delay:.09s}
-
-/* ---- page-wide blueprint grid: every home-page section carries the same 56px grid, lined up across
-   section edges, and it drifts 8% behind the content as you scroll (moved by index.html) ---- */
-main > section,footer{position:relative;isolation:isolate}
-.pgrid{position:absolute;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
-.pgrid i{position:absolute;left:0;right:0;top:-56px;bottom:-56px;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:56px 56px;opacity:.5;will-change:transform}
-.hero .pgrid{z-index:1}   /* in the hero the grid sits over the dark fade, under the text */
