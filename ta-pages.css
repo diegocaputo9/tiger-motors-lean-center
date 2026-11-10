@@ -1,3 +1,4 @@
+h1,h2,h3,h4{text-wrap:balance}
 /* Past TAs (past-tas.html) and the TA spotlight form (ta-submit.html): same look as Voices from the Lab */
 :root{
   --paper:#07121F; --paper-2:#10263F; --card:#0C1D33; --ink:#E9EEF4; --ink-2:#E2E9F1; --ink-3:#E2E9F1;

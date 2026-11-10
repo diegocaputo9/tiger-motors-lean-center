@@ -1312,7 +1312,7 @@ html[data-mode="light"] .mini .wr-bg{stroke:rgba(12,35,64,.12)}
   .team-grid{gap:10px}
   .team-grid .pc{grid-template-columns:76px minmax(0,1fr);grid-template-rows:auto auto;column-gap:14px;row-gap:8px;padding:12px;border-radius:14px;align-items:start}
   .team-grid .pc:hover{transform:none}
-  .team-grid .pc .pc-photo{grid-column:1;grid-row:1/3;width:76px;aspect-ratio:1/1;border-radius:10px}
+  .team-grid .pc .pc-photo{grid-column:1;grid-row:1/3;width:76px;aspect-ratio:1/1;border-radius:4px}
   .team-grid .pc>div:not(.pc-photo):not(.pc-actions){grid-column:2;grid-row:1}
   .team-grid .pc h3{font-size:16.5px;line-height:1.2}
   .team-grid .pc .role{font-size:12.5px;line-height:1.35;margin-top:2px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
