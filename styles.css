@@ -861,7 +861,7 @@ html[data-mode="light"] .pdlg-in{background:rgba(255,255,255,.62);border-color:r
 html[data-mode="light"] .pdlg-top h3{color:var(--ink)}
 html[data-mode="light"] .pdlg::backdrop{background:rgba(220,228,238,.5)}
 .pdlg[open]{animation:pdIn .35s var(--ease)}
-@keyframes pdIn{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes pdIn{from{opacity:0;transform:translateY(8px) scale(.95)}to{opacity:1;transform:none}}
 @media (max-width:640px){.mq-track,.mq-set{gap:12px}.mq-item{height:72px;min-width:150px;padding:0 20px}.mq-item img{height:36px;max-width:140px}.mq-item.lg-sq img{height:48px}.mq-item.wide img{height:30px}.pdlg-grid{grid-template-columns:1fr 1fr}.pdlg-grid .lg-box{height:92px}}
 @media (prefers-reduced-motion:reduce){.mq-track{animation:none!important;width:100%;flex-wrap:wrap;justify-content:center}.mq-set+.mq-set{display:none}.mq-set{flex-wrap:wrap;justify-content:center}.marquee{-webkit-mask-image:none;mask-image:none}}
 
@@ -1118,9 +1118,9 @@ html[data-mode="light"] .brand-mark-dark{display:none}
 
 /* ---- Lean House dropdown in the top bar ---- */
 .nav-dd{position:relative;display:flex}
-.nav-menu{position:absolute;top:100%;left:50%;min-width:270px;margin-top:10px;padding:8px;border-radius:16px;background:rgba(10,24,42,.97);border:1px solid var(--line-2);box-shadow:0 24px 50px -20px rgba(0,0,0,.7);display:grid;gap:4px;opacity:0;visibility:hidden;transform:translate(-50%,-6px);transition:opacity .18s ease,transform .22s cubic-bezier(.23,1,.32,1),visibility 0s linear .22s;z-index:60}
+.nav-menu{position:absolute;top:100%;left:50%;min-width:270px;margin-top:10px;padding:8px;border-radius:16px;background:rgba(10,24,42,.97);border:1px solid var(--line-2);box-shadow:0 24px 50px -20px rgba(0,0,0,.7);display:grid;gap:4px;opacity:0;visibility:hidden;transform:translate(-50%,-6px) scale(.95);transform-origin:50% 0;transition:opacity .18s ease,transform .22s cubic-bezier(.23,1,.32,1),visibility 0s linear .22s;z-index:60}
 .nav-menu::before{content:"";position:absolute;left:0;right:0;top:-14px;height:14px}
-.nav-dd:hover .nav-menu,.nav-dd:focus-within .nav-menu,.nav-dd.open .nav-menu{opacity:1;visibility:visible;transform:translate(-50%,0);transition-delay:0s}
+.nav-dd:hover .nav-menu,.nav-dd:focus-within .nav-menu,.nav-dd.open .nav-menu{opacity:1;visibility:visible;transform:translate(-50%,0) scale(1);transition-delay:0s}
 .nav-links .nav-menu a{display:grid;gap:2px;padding:11px 14px;border-radius:12px;white-space:normal;color:var(--text)}
 .nav-links .nav-menu a b{font:600 14px var(--f-body)}
 .nav-links .nav-menu a small{font:400 12.5px var(--f-body);color:var(--text-3)}
@@ -1787,7 +1787,7 @@ html[data-mode="light"] .cta-note{color:#8A3E0A}
 .kb-bub{position:absolute;box-sizing:border-box;display:grid;grid-template-columns:auto 1fr;column-gap:10px;row-gap:3px;align-items:center;padding:11px 14px 12px 12px;border-radius:14px;
   background:linear-gradient(180deg,rgba(26,48,76,.9),rgba(10,24,42,.92));border:1px solid rgba(255,255,255,.16);
   box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 12px 30px rgba(0,0,0,.45);-webkit-backdrop-filter:blur(10px) saturate(140%);backdrop-filter:blur(10px) saturate(140%);
-  opacity:0;transform:translateY(8px) scale(.97);transform-origin:50% 0;transition:opacity .35s ease,transform .5s cubic-bezier(.23,1,.32,1)}
+  opacity:0;transform:translateY(8px) scale(.95);transform-origin:50% 0;transition:opacity .35s ease,transform .5s cubic-bezier(.23,1,.32,1)}
 .kb-bub.on{opacity:1;transform:none}
 .kb-bn{grid-row:1;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:#FF9B4D;color:#1A0C02;font:700 12px var(--f-mono)}
 .kb-bub b{grid-row:1;font:600 12px var(--f-label);letter-spacing:.08em;text-transform:uppercase;color:#FFB877}
@@ -1820,7 +1820,7 @@ html[data-mode="light"] .cta-note{color:#8A3E0A}
   background:rgba(255,255,255,.04);border:1px solid var(--line-2);
   color:var(--text-2);font:600 13px var(--f-body);transition:background .2s,border-color .2s,transform .3s cubic-bezier(.23,1,.32,1)}
 .kb-play:hover{border-color:#FF9B4D}
-.kb-play:active{transform:scale(.96)}
+.kb-play:active{transform:scale(.97)}
 .kb-play svg{width:16px;height:16px;fill:#FF9B4D}
 .kb-play .i-play,.kb-play[aria-pressed="true"] .i-pause{display:none}
 .kb-play[aria-pressed="true"] .i-play{display:block}
@@ -1850,3 +1850,16 @@ html[data-mode="light"] .acct-skel{background-color:rgba(12,35,64,.04);border-co
 .jd-stats,.pj-ls,.pj-lt,.pj-out,.pj-wip,.pj-n,.pj-cap,.pj-took,.pj-cars,.qz-score,.qz-row,.qz-prog,.fchip span,.mod-side .counts span,.rc-step,
 .ab-stats,.ab-mods,.ab-lock,.am-lock,.am-prog,.acct-pct,.chip-prog,.q-count,.tour-count,.ps-count,.news-switch-t,.wring,[data-resend],.kb-bub,.plan-cap,.mt-chips{font-variant-numeric:tabular-nums}
 .pj-ls b,.jd-stats b,.jd-stats span,.pj-st b{font-variant-numeric:tabular-nums}
+
+/* ---- motion polish (animation checklist) ---- */
+/* 1.4 press feedback on the main buttons */
+.btn:active,.pc-bio:active,.pmode:active,.pchip:active,.fchip:active,.kb-bubtog:active,.acct-btn:active,.news-all:active,.news-more-btn:active,
+.taa-go:active,.s5-b:active,.jd-run:active,.pj-play:active,.pj-reset:active,.qz-o:active,.step-chip:active,.pl-fold:active,.mt-chips a:active,
+.ad-go:active,.tour-chip:active,.idlg-tab:active{transform:scale(.97)}
+/* 1.5 the switch knob stretches a little while it slides */
+.kb-sw.sw-move::after{animation:swStretch .35s ease-in-out}
+@keyframes swStretch{50%{scale:1.12 1}}
+/* 1.6 inside a bubble the text settles just after the title (kept quick so it reads right away) */
+.kb-bub p,.kb-bub b{opacity:0;transform:translateY(3px);transition:opacity .2s ease,transform .25s cubic-bezier(.23,1,.32,1)}
+.kb-bub.on b{opacity:1;transform:none;transition-delay:.04s}
+.kb-bub.on p{opacity:1;transform:none;transition-delay:.09s}

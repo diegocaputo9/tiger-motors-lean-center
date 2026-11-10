@@ -37,7 +37,7 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="styles.css?v=fc338e7d">
+<link rel="stylesheet" href="styles.css?v=d04a44f3">
 
 <script src="i18n-dict.js?v=90441c74" defer></script>
 <script src="i18n.js?v=3a5d34c9" defer></script>
@@ -775,7 +775,7 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
       <a href="#lab">Explore the Lab</a><a href="#lean-house">Lean House</a><a href="modules">Modules</a><a href="#project">About</a><a href="testimonials">Testimonials</a><a href="#contact">Contact</a><a href="#install" class="fl-inst" data-install><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="12.5" rx="2"/><path d="M12 7.5v6M9.3 10.8L12 13.5l2.7-2.7M8.5 20.5h7"/></svg>Install the app</a><button type="button" class="fl-reset" data-reset-progress hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.6-5.9"/><path d="M4 4.5v4h4"/></svg>Reset my progress</button>
     </div>
   </div>
-  <div class="wrap"><p class="site-rev">Last updated November 10, 2026 · Revision 177</p></div>
+  <div class="wrap"><p class="site-rev">Last updated November 10, 2026 · Revision 178</p></div>
 </footer>
 
 <dialog class="bdlg" id="bioDlg" aria-labelledby="bdlg-h">
@@ -1623,7 +1623,8 @@ if('IntersectionObserver' in window && !reduce){
   function fit(){ if(!bubs||!psvg) return; var r=psvg.getBoundingClientRect(); bubs.style.width=r.width+'px'; bubs.style.height=r.height+'px'; }
   fit(); if('ResizeObserver' in window) new ResizeObserver(fit).observe(psvg); else window.addEventListener('resize',fit);
   var tog=document.getElementById('kbBubTog');
-  if(tog) tog.addEventListener('click',function(){ var off=plan.classList.toggle('bubs-off'); tog.setAttribute('aria-pressed',off?'false':'true'); });
+  if(tog) tog.addEventListener('click',function(){ var off=plan.classList.toggle('bubs-off'); tog.setAttribute('aria-pressed',off?'false':'true');
+    var sw=tog.querySelector('.kb-sw'); if(sw){ sw.classList.remove('sw-move'); void sw.offsetWidth; sw.classList.add('sw-move'); } });
   function setMode(m){
     var info=m==='info'; active=info; el0=0; setPaused(false);
     plan.classList.toggle('is-info',info);
@@ -1712,5 +1713,19 @@ if('IntersectionObserver' in window && !reduce){
 <script src="auth.js?v=849fef53"></script>
 <script src="quiz.js?v=626f4fef"></script>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "7c29d6c7d06f4afba228776982c5e17a"}'></script><!-- End Cloudflare Web Analytics -->
+<script>
+/* dialogs open from where they were clicked: the open animation scales from that point */
+(function(){
+  if(!window.HTMLDialogElement||!HTMLDialogElement.prototype.showModal) return;
+  var pt=null, t=0;
+  document.addEventListener('pointerdown',function(e){ pt=[e.clientX,e.clientY]; t=Date.now(); },true);
+  var show=HTMLDialogElement.prototype.showModal;
+  HTMLDialogElement.prototype.showModal=function(){
+    show.apply(this,arguments);
+    var r=this.getBoundingClientRect();
+    this.style.transformOrigin=(pt&&Date.now()-t<1500&&r.width)?Math.round(pt[0]-r.left)+'px '+Math.round(pt[1]-r.top)+'px':'';
+  };
+})();
+</script>
 </body>
 </html>

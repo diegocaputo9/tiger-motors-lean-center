@@ -354,7 +354,7 @@ html[data-mode="light"] .share .done .ok{color:#1C7A55}
     <a href="/">tigermotorslean.com</a>
     <button type="button" class="fbk-open" data-feedback>We want to hear your feedback</button>
   </div>
-  <div class="wrap"><p class="site-rev">Last updated November 10, 2026 · Revision 177</p></div>
+  <div class="wrap"><p class="site-rev">Last updated November 10, 2026 · Revision 178</p></div>
 </footer>
 
 <script>
@@ -500,8 +500,10 @@ sdlg.addEventListener('wheel',function(e){ if(reduce.matches) return; e.preventD
 sdlg.addEventListener('keydown',function(e){ if(e.key==='ArrowRight'){ e.preventDefault(); goTo(near+1); } else if(e.key==='ArrowLeft'){ e.preventDefault(); goTo(near-1); } });
 var dragX=null, dragT=0;
 view.addEventListener('pointerdown',function(e){ if(reduce.matches) return; dragX=e.clientX; dragT=target; view.classList.add('drag'); view.setPointerCapture(e.pointerId); });
-view.addEventListener('pointermove',function(e){ if(dragX!==null) moveTo(dragT-(e.clientX-dragX)*1.4); });
-['pointerup','pointercancel'].forEach(function(t){ view.addEventListener(t,function(){ dragX=null; view.classList.remove('drag'); }); });
+view.addEventListener('pointermove',function(e){ if(dragX===null) return; var v=dragT-(e.clientX-dragX)*1.4;
+  if(v<0) v=v*.25; else if(v>maxX) v=maxX+(v-maxX)*.25;   /* past either end it gives a little, with resistance */
+  target=v; if(!raf) raf=requestAnimationFrame(loop); });
+['pointerup','pointercancel'].forEach(function(t){ view.addEventListener(t,function(){ if(dragX!==null) moveTo(target); dragX=null; view.classList.remove('drag'); }); });
 document.getElementById('storyBtn').addEventListener('click',function(){ if(sdlg.showModal) sdlg.showModal(); else sdlg.setAttribute('open',''); layout(); document.getElementById('storyClose').focus(); });
 document.getElementById('storyClose').addEventListener('click',function(){ if(sdlg.close) sdlg.close(); else sdlg.removeAttribute('open'); });
 window.addEventListener('resize',function(){ if(sdlg.open) layout(); });
