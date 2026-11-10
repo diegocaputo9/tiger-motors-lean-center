@@ -179,6 +179,7 @@ function emit(){ paint(); listeners.forEach(function(fn){ try { fn(state); } cat
 
 function paint(){
   if(!ON) return;
+  document.documentElement.classList.toggle('acct-loading', !state.ready);
   paintNav(); paintBanners(); paintChecks(); paintChips();
   $$('[data-reset-progress]').forEach(function(b){ b.hidden = !state.ready || !!state.user; });
 }
@@ -204,7 +205,7 @@ function paintNav(){
     box = document.createElement('div'); box.id = 'acctNav'; box.className = 'acct-nav';
     var anchor = $('.lang-sw', host) || $('.mode-btn', host); host.insertBefore(box, anchor || null);
   }
-  if(!state.ready){ box.innerHTML = ''; return; }
+  if(!state.ready){ box.innerHTML = '<span class="acct-skel" aria-hidden="true"></span>'; return; }
   if(!state.user){
     box.innerHTML = '<button type="button" class="acct-btn" data-acct="signin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><span>Sign in</span></button>';
     return;

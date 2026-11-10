@@ -37,11 +37,11 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="styles.css?v=d7ad4b21">
+<link rel="stylesheet" href="styles.css?v=366bc63b">
 
 <script src="i18n-dict.js?v=90441c74" defer></script>
 <script src="i18n.js?v=3a5d34c9" defer></script>
-<script src="feedback.js?v=812720da" defer></script>
+<script src="feedback.js?v=4b0bf6d6" defer></script>
 <script src="install.js?v=cb9719a8" defer></script>
 <script src="viewer.js?v=3de2fb27" defer></script>
 </head>
@@ -229,7 +229,6 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
     <!-- Facility layout schematic, redrawn from the lab's floor plan -->
     <figure class="plan glass" id="plan">
       <div class="plan-switch">
-        <p class="plan-switch-label"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h13M12 6l6 6-6 6M21 5v14"/></svg>Two views<span class="psl-how"><span class="psl-click">click one to switch</span><span class="psl-tap">tap one to switch</span></span></p>
         <div class="plan-modes" role="group" aria-label="Choose a view of the facility diagram">
           <button type="button" class="pmode" data-pmode="material" aria-pressed="true"><i class="pm-dot" aria-hidden="true"></i><b>Product / Material flow</b><small>How product moves from cell to cell</small><span class="pm-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span></button>
           <button type="button" class="pmode" data-pmode="info" aria-pressed="false"><i class="pm-dot" aria-hidden="true"></i><b>Information flow · Kanban</b><small>How kanban cards signal what to build</small><span class="pm-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span></button>
@@ -436,8 +435,6 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
           <text x="632" y="468" text-anchor="middle">Tool Area</text>
           <text x="946" y="462" text-anchor="middle" style="font-size:9px">Storage</text>
         </g>
-        <!-- scale-free north / tag -->
-        <text x="18" y="136" class="pl-tag">TIGER MOTORS · INTEGRATED MANUFACTURING FACILITY</text>
         <text x="392" y="218" class="pl-cell we-title" text-anchor="middle" style="font-size:15px">Tiger Motors · Assembly Plant</text>
       </svg>
       <div class="kb-bubs" id="kbBubs">
@@ -778,7 +775,7 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
       <a href="#lab">Explore the Lab</a><a href="#lean-house">Lean House</a><a href="modules">Modules</a><a href="#project">About</a><a href="testimonials">Testimonials</a><a href="#contact">Contact</a><a href="#install" class="fl-inst" data-install><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="12.5" rx="2"/><path d="M12 7.5v6M9.3 10.8L12 13.5l2.7-2.7M8.5 20.5h7"/></svg>Install the app</a><button type="button" class="fl-reset" data-reset-progress hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.6-5.9"/><path d="M4 4.5v4h4"/></svg>Reset my progress</button>
     </div>
   </div>
-  <div class="wrap"><p class="site-rev">Last updated November 10, 2026 · Revision 175</p></div>
+  <div class="wrap"><p class="site-rev">Last updated November 10, 2026 · Revision 176</p></div>
 </footer>
 
 <dialog class="bdlg" id="bioDlg" aria-labelledby="bdlg-h">
@@ -1712,7 +1709,7 @@ if('IntersectionObserver' in window && !reduce){
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
-<script src="auth.js?v=e40ed543"></script>
+<script src="auth.js?v=849fef53"></script>
 <script src="quiz.js?v=626f4fef"></script>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "7c29d6c7d06f4afba228776982c5e17a"}'></script><!-- End Cloudflare Web Analytics -->
 </body>

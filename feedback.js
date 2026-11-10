@@ -78,7 +78,7 @@ css.textContent =
   '.fbk-form,.fbk-done{display:grid;gap:14px;padding:28px}' +
   '.fbk-form[hidden],.fbk-done[hidden]{display:none}' +
   '.fbk-x{position:absolute;top:14px;right:14px;width:38px;height:38px;border-radius:50%;border:1px solid var(--line,rgba(160,185,212,.16));background:transparent;color:inherit;display:grid;place-items:center;cursor:pointer}' +
-  '.fbk-kicker{margin:0;font:500 12px var(--f-mono,"IBM Plex Mono",monospace);letter-spacing:.16em;text-transform:uppercase;color:var(--orange-2,#F2994A)}' +
+  '.fbk-kicker{margin:0;font:500 12px var(--f-label,"IBM Plex Sans",sans-serif);letter-spacing:.16em;text-transform:uppercase;color:var(--orange-2,#F2994A)}' +
   '.fbk-dlg h3{margin:0;font:700 24px/1.2 var(--f-display,system-ui,sans-serif);padding-right:36px}' +
   '.fbk-sub{margin:0;font-size:15px;color:var(--text-2,#A9B8C9)}' +
   '.fbk-l{display:grid;gap:6px;font-size:14px;font-weight:600}.fbk-l small{font-weight:400;color:var(--text-2,#A9B8C9)}' +
