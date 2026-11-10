@@ -1846,3 +1846,7 @@ html[data-mode="light"] .acct-skel{background-color:rgba(12,35,64,.04);border-co
 @keyframes skel{from{background-position:100% 0}to{background-position:-100% 0}}
 @keyframes skelPulse{50%{opacity:.4}}
 @media (max-width:640px){.acct-skel{width:36px;height:34px}}
+/* tabular numbers: digits that count, tick or line up keep a fixed width so nothing jiggles */
+.jd-stats,.pj-ls,.pj-lt,.pj-out,.pj-wip,.pj-n,.pj-cap,.pj-took,.pj-cars,.qz-score,.qz-row,.qz-prog,.fchip span,.mod-side .counts span,.rc-step,
+.ab-stats,.ab-mods,.ab-lock,.am-lock,.am-prog,.acct-pct,.chip-prog,.q-count,.tour-count,.ps-count,.news-switch-t,.wring,[data-resend],.kb-bub,.plan-cap,.mt-chips{font-variant-numeric:tabular-nums}
+.pj-ls b,.jd-stats b,.jd-stats span,.pj-st b{font-variant-numeric:tabular-nums}

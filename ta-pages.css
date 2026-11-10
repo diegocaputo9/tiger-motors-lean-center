@@ -154,7 +154,7 @@ html[data-mode="light"] .mode .i-moon{display:block}
 .th img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .th button{position:absolute;top:5px;right:5px;width:28px;height:28px;border-radius:50%;border:0;background:rgba(7,18,31,.85);color:#fff;font-size:15px;cursor:pointer}
 .th button:hover{background:#B42318}
-.count{justify-self:end;font:500 12px var(--f-mono);color:var(--ink-2)}
+.count{justify-self:end;font:500 12px var(--f-mono);color:var(--ink-2);font-variant-numeric:tabular-nums}
 
 .consent{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;font-size:15px;line-height:1.55;color:var(--ink-2);cursor:pointer}
 .consent input{width:20px;height:20px;margin-top:2px;accent-color:var(--orange-2);cursor:pointer}
