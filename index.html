@@ -37,9 +37,9 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="styles.css?v=d04a44f3">
+<link rel="stylesheet" href="styles.css?v=9217fd77">
 
-<script src="i18n-dict.js?v=90441c74" defer></script>
+<script src="i18n-dict.js?v=46e3bba7" defer></script>
 <script src="i18n.js?v=3a5d34c9" defer></script>
 <script src="feedback.js?v=4b0bf6d6" defer></script>
 <script src="install.js?v=cb9719a8" defer></script>
@@ -119,6 +119,16 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
 <!-- ================= HERO ================= -->
 <section class="hero" id="home" aria-label="Introduction">
   <canvas id="twin" aria-hidden="true"></canvas>
+  <div class="showroom" id="showroom" aria-live="polite" hidden>
+    <div class="sr-card" data-car="suv">
+      <div class="sr-head"><div><p class="sr-kick">Showroom</p><p class="sr-name">Trail SUV</p></div><button class="sr-close" type="button"><svg aria-hidden="true"><use href="#i-close"/></svg>Back to the line</button></div>
+      <ul class="sr-specs"><li class="sr-spec" data-a="-.3,.29,.15"><small>Tires</small><b>Off-road</b></li><li class="sr-spec" data-a=".3,-.29,.15"><small>Drivetrain</small><b>4x4</b></li><li class="sr-spec" data-a="-.52,0,.45"><small>Range</small><b>450 miles</b></li><li class="sr-spec" data-a=".08,.27,.5"><small>Seats</small><b>5 minifigures</b></li><li class="sr-spec" data-a=".55,0,.15"><small>Ground clearance</small><b>3 studs</b></li></ul>
+    </div>
+    <div class="sr-card" data-car="speedster">
+      <div class="sr-head"><div><p class="sr-kick">Showroom</p><p class="sr-name">Speedster</p></div><button class="sr-close" type="button"><svg aria-hidden="true"><use href="#i-close"/></svg>Back to the line</button></div>
+      <ul class="sr-specs"><li class="sr-spec" data-a="-.6,-.18,.25"><small>0–60 mph</small><b>1.9 sec</b></li><li class="sr-spec" data-a=".33,.29,.12"><small>Rims</small><b>Bespoke</b></li><li class="sr-spec" data-a="-.05,-.27,.22"><small>Chassis</small><b>Carbon fiber monocoque</b></li><li class="sr-spec" data-a=".6,-.17,.26"><small>Top speed</small><b>211 mph</b></li><li class="sr-spec" data-a="-.52,.18,.5"><small>Rear wing</small><b>Active aero</b></li></ul>
+    </div>
+  </div>
   <div class="wrap hero-in">
     <p class="eyebrow rise d1">Auburn University · Industrial &amp; Systems Engineering</p>
     <h1 class="rise d2" style="margin-top:22px">Tiger Motors <span class="l2">Lean Education Center</span></h1>
@@ -775,7 +785,7 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
       <a href="#lab">Explore the Lab</a><a href="#lean-house">Lean House</a><a href="modules">Modules</a><a href="#project">About</a><a href="testimonials">Testimonials</a><a href="#contact">Contact</a><a href="#install" class="fl-inst" data-install><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="12.5" rx="2"/><path d="M12 7.5v6M9.3 10.8L12 13.5l2.7-2.7M8.5 20.5h7"/></svg>Install the app</a><button type="button" class="fl-reset" data-reset-progress hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.6-5.9"/><path d="M4 4.5v4h4"/></svg>Reset my progress</button>
     </div>
   </div>
-  <div class="wrap"><p class="site-rev">Last updated November 10, 2026 · Revision 182</p></div>
+  <div class="wrap"><p class="site-rev">Last updated November 10, 2026 · Revision 183</p></div>
 </footer>
 
 <dialog class="bdlg" id="bioDlg" aria-labelledby="bdlg-h">
@@ -985,11 +995,11 @@ document.addEventListener('click', function(e){
 (function(){
   var cv = document.getElementById('twin'); if(!cv||!cv.getContext) return;
   var ctx = cv.getContext('2d');
-  var W,H,S,ox,oy, C=Math.cos(Math.PI/6);
+  var W,H,S,ox,oy, C=Math.cos(Math.PI/6), NARROW=false;
   function resize(){
     var dpr=Math.min(window.devicePixelRatio||1,2), r=cv.getBoundingClientRect();
     W=r.width; H=r.height; cv.width=Math.round(W*dpr); cv.height=Math.round(H*dpr); ctx.setTransform(dpr,0,0,dpr,0,0);
-    var narrow = W<900;
+    var narrow = W<900; NARROW = narrow;
     S = narrow ? Math.min(W/19, H/20) : Math.min(W*0.029, H/15.5);
     var cx = narrow ? W*0.5 : W*0.72, cy = narrow ? H*0.36 : H*0.52;
     ox = cx - (8-6)*C*S; oy = cy - (8+6)*0.5*S;
@@ -1008,8 +1018,8 @@ document.addEventListener('click', function(e){
                : {t:'rgba(52,86,124,.55)', l:'rgba(20,40,64,.85)', r:'rgba(30,56,86,.8)', s:'rgba(160,185,212,.55)'};
     RAIL = light ? {t:'rgba(12,35,64,.08)', l:'rgba(12,35,64,.16)', r:'rgba(12,35,64,.11)', s:'rgba(12,35,64,.25)'}
                  : {t:'rgba(160,185,212,.14)', l:'rgba(20,40,64,.7)', r:'rgba(26,48,74,.7)', s:'rgba(160,185,212,.28)'};
-    PAL = light ? {grid:'12,35,64', gridA:[.10,.05], plate:'rgba(12,35,64,.05)', walk:'rgba(194,120,10,.35)', pole:'rgba(12,35,64,.5)', label:'rgba(67,83,106,.8)'}
-                : {grid:'160,185,212', gridA:[.13,.06], plate:'rgba(12,35,64,.35)', walk:'rgba(242,178,51,.25)', pole:'rgba(160,185,212,.6)', label:'rgba(169,184,201,.7)'};
+    PAL = light ? {bg:'244,246,249', grid:'12,35,64', gridA:[.10,.05], plate:'rgba(12,35,64,.05)', walk:'rgba(194,120,10,.35)', pole:'rgba(12,35,64,.5)', label:'rgba(67,83,106,.8)'}
+                : {bg:'7,18,31', grid:'160,185,212', gridA:[.13,.06], plate:'rgba(12,35,64,.35)', walk:'rgba(242,178,51,.25)', pole:'rgba(160,185,212,.6)', label:'rgba(169,184,201,.7)'};
   }
   setPal(); window.__twinPal = function(){ setPal(); if(reduce) draw(0); };
   var PART = {t:'#FF9B4D', l:'#B85510', r:'#E87722', s:'rgba(255,200,150,.6)'};
@@ -1034,14 +1044,25 @@ document.addEventListener('click', function(e){
   var hero=cv.parentNode;
   function ptr(e){ var r=cv.getBoundingClientRect(); mx=e.clientX-r.left; my=e.clientY-r.top; }
   function hitCar(){ if(mx===null) return -1; var best=-1, bz=-1e9;
-    for(var n=0;n<NP;n++){ var s=scr[n]; if(!s) continue;
+    for(var n=0;n<NP;n++){ var s=scr[n]; if(!s || (SR && SR.n===n)) continue;
       if(Math.abs(mx-s[0])<.8*S && my<s[1]+.62*S && my>s[1]-s[4]*S-.62*S && s[2]>bz){ best=n; bz=s[2]; } }
     return best; }
   if(hero && !reduce){
     hero.addEventListener('pointermove',function(e){ if(e.pointerType==='mouse') ptr(e); });
     hero.addEventListener('pointerleave',function(){ mx=my=null; hero.style.cursor=''; });
-    hero.addEventListener('pointerdown',function(e){ if(e.pointerType==='mouse'||e.target.closest('a,button')) return;
-      ptr(e); var n=hitCar(); if(n>=0) tapTo[n]=now+1600; mx=my=null; });
+    var lastPT='mouse';
+    hero.addEventListener('pointerdown',function(e){ lastPT=e.pointerType||'mouse'; });
+    hero.addEventListener('click',function(e){
+      if(e.target.closest('a,button,input,select,textarea,label')) return;
+      ptr(e); var n=hitCar(), wide=!NARROW && srEl;
+      if(n>=0 && wide) srOpen(n);                        // pick it up and take it to the showroom
+      else if(n>=0) tapTo[n]=now+1600;                   // phones: a tap just lifts it for a moment
+      else if(SR) srClose();                             // empty space: back to the line
+      if(lastPT!=='mouse') mx=my=null;
+    });
+    document.querySelectorAll('#showroom .sr-close').forEach(function(b){ b.addEventListener('click',function(e){ e.stopPropagation(); srClose(); }); });
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape' && SR) srClose(); });
+    window.addEventListener('resize',function(){ if(SR){ if(NARROW){ srClose(); } else srLayout(); } });
   }
   var OUT_Y = 1.7, IN_Y = 10.4;   // front face of station 1 and back face of the last station
   /* LEGO cars on the line: pallets alternate speedster / SUV (mixed-model line). The chassis and wheels come out of
@@ -1076,14 +1097,32 @@ document.addEventListener('click', function(e){
   function obox(cx,cy,co,si,u0,u1,v0,v1,z0,z1,c){
     var k=[[u0,v0],[u1,v0],[u1,v1],[u0,v1]].map(function(a){ return [cx+a[0]*co-a[1]*si, cy+a[0]*si+a[1]*co]; });
     for(var i=0;i<4;i++){ var a=k[i], b=k[(i+1)%4], nx=b[1]-a[1], ny=a[0]-b[0];
-      if(nx+ny>0) poly([[a[0],a[1],z0],[b[0],b[1],z0],[b[0],b[1],z1],[a[0],a[1],z1]], nx>ny?c.r:c.l); }
-    poly(k.map(function(a){ return [a[0],a[1],z1]; }), c.t);
+      if(nx+ny>0) poly([[a[0],a[1],z0],[b[0],b[1],z0],[b[0],b[1],z1],[a[0],a[1],z1]], nx>ny?c.r:c.l, EDGE); }
+    poly(k.map(function(a){ return [a[0],a[1],z1]; }), c.t, EDGE);
   }
-  function wheel(cx,cy,co,si,u,v,z,r){
+  var EDGE=null;   // set while the showroom car is drawn: crisp brick edges at the big size
+  // LEGO studs on a part's top face (showroom only; parts drawn later cover the studs they sit on)
+  function studs(cx,cy,co,si,u0,u1,v0,v1,z,c){
+    var PITCH=.13, nu=Math.floor((u1-u0)/PITCH+.001), nv=Math.floor((v1-v0)/PITCH+.001); if(nu<1||nv<1) return;
+    var ou=(u0+u1)/2-(nu-1)*PITCH/2, ov=(v0+v1)/2-(nv-1)*PITCH/2, rx=.042*S*1.2247, ry=.042*S*.7071, hh=.028*S;
+    for(var i=0;i<nu;i++) for(var j=0;j<nv;j++){ var u=ou+i*PITCH, v=ov+j*PITCH, p=P(cx+u*co-v*si, cy+u*si+v*co, z);
+      ctx.fillStyle=c.l; ctx.beginPath(); ctx.ellipse(p[0],p[1],rx,ry,0,0,Math.PI*2); ctx.fill();
+      ctx.fillStyle=c.r; ctx.fillRect(p[0]-rx,p[1]-hh,2*rx,hh);
+      ctx.fillStyle=c.t; ctx.beginPath(); ctx.ellipse(p[0],p[1]-hh,rx,ry,0,0,Math.PI*2); ctx.fill();
+      ctx.strokeStyle='rgba(0,0,0,.18)'; ctx.stroke(); }
+  }
+  function wheel(cx,cy,co,si,u,v,z,r,det){
     var c=P(cx+u*co-v*si, cy+u*si+v*co, z), f=P(cx+(u+1)*co-v*si, cy+(u+1)*si+v*co, z);
     ctx.save(); ctx.transform(f[0]-c[0], f[1]-c[1], 0, -S, c[0], c[1]);
     ctx.fillStyle='#121417'; ctx.beginPath(); ctx.arc(0,0,r,0,Math.PI*2); ctx.fill();
-    ctx.fillStyle='#A3ABB4'; ctx.beginPath(); ctx.arc(0,0,r*.5,0,Math.PI*2); ctx.fill();
+    if(det){   // big size: tyre wall line, rim with five spokes and a hub
+      ctx.lineWidth=r*.05; ctx.strokeStyle='#2A2E33'; ctx.beginPath(); ctx.arc(0,0,r*.82,0,Math.PI*2); ctx.stroke();
+      ctx.fillStyle='#C3CAD2'; ctx.beginPath(); ctx.arc(0,0,r*.56,0,Math.PI*2); ctx.fill();
+      ctx.fillStyle='#4A5058'; ctx.beginPath(); ctx.arc(0,0,r*.46,0,Math.PI*2); ctx.fill();
+      ctx.strokeStyle='#C3CAD2'; ctx.lineWidth=r*.11; ctx.lineCap='round';
+      for(var k=0;k<5;k++){ var a=k*Math.PI*2/5-Math.PI/2; ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(Math.cos(a)*r*.46,Math.sin(a)*r*.46); ctx.stroke(); }
+      ctx.lineCap='butt'; ctx.fillStyle='#E9EEF4'; ctx.beginPath(); ctx.arc(0,0,r*.13,0,Math.PI*2); ctx.fill();
+    } else { ctx.fillStyle='#A3ABB4'; ctx.beginPath(); ctx.arc(0,0,r*.5,0,Math.PI*2); ctx.fill(); }
     ctx.restore();
   }
   // a must be drawn before b: the first axis that separates them decides (z: lower first; u and v: farther from the viewer first)
@@ -1094,31 +1133,121 @@ document.addEventListener('click', function(e){
     if(a[4]<=b[3]+e) return dv>0;  if(b[4]<=a[3]+e) return dv<0;
     return (a[5]+a[6]) < (b[5]+b[6]);
   }
-  function car(q, d, M, lift){
-    var a=at(d-.3), b=at(d+.3), ang=Math.atan2(b[1]-a[1], b[0]-a[0]), co=Math.cos(ang), si=Math.sin(ang);   // turns smoothly through the corners
-    // only the part outside the stations is drawn: it slides out of station 1 and into the last one
-    var lo = d < 4 ? (OUT_Y-q[1])/Math.max(si,.5) : -9, hi = d > 27 ? (IN_Y-q[1])/Math.max(si,.5) : 9;
-    function bx(u0,u1,v0,v1,z0,z1,c){ u0=Math.max(u0,lo); u1=Math.min(u1,hi); if(u1>u0) obox(q[0],q[1],co,si,u0,u1,v0,v1,z0,z1,c); }
-    bx(PALLET[0],PALLET[1],PALLET[2],PALLET[3],PZ[0],PZ[1],PART);
-    lift=lift||0;
-    if(lift>.02){   // shadow of the lifted car on the pallet, smaller and fainter the higher it goes
-      var c0=P(q[0],q[1],PZ[1]), cu=P(q[0]+co,q[1]+si,PZ[1]), cv=P(q[0]-si,q[1]+co,PZ[1]), k=Math.max(.55,1-lift*.35);
-      ctx.save(); ctx.transform(cu[0]-c0[0],cu[1]-c0[1],cv[0]-c0[0],cv[1]-c0[1],c0[0],c0[1]);
-      ctx.fillStyle='rgba(3,8,15,'+(.42*Math.min(1,lift/.3)*k).toFixed(3)+')'; ctx.beginPath(); ctx.ellipse(0,0,.5*k,.24*k,0,0,Math.PI*2); ctx.fill(); ctx.restore();
-    }
-    var stage=0, drop=1; for(var s=1;s<7;s++){ if(d >= STOP[s]-.5){ stage=s; drop=Math.min(1,(d-(STOP[s]-.5))/.5); } }
-    var Z=PZ[1]+lift, vis=co-si>0?1:-1, du=co+si, dv=co-si, list=[];   // vis: which side of the car faces the viewer
+  // the car itself: parts sorted back to front, then the wheels on the side facing the viewer
+  function body(qx,qy,co,si,M,stage,drop,Z,lo,hi,det){
+    function bx(u0,u1,v0,v1,z0,z1,c){ u0=Math.max(u0,lo); u1=Math.min(u1,hi); if(u1>u0) obox(qx,qy,co,si,u0,u1,v0,v1,z0,z1,c); }
+    var vis=co-si>0?1:-1, du=co+si, dv=co-si, list=[];   // vis: which side of the car faces the viewer
     M.parts.forEach(function(pt){ if(pt[0]>stage) return;
       var lift = pt[0]===stage && stage>0 ? (1-drop)*(1-drop)*.6 : 0;   // the newest part drops onto the car from above
       list.push([pt[0],pt[1],pt[2],pt[3],pt[4],pt[5]+lift,pt[6]+lift,pt[7]]); });
     var done=[];   // back-to-front order
     while(list.length){ for(var i=0;i<list.length;i++){ var ok=true; for(var j=0;j<list.length;j++){ if(j!==i && before(list[j],list[i],du,dv)){ ok=false; break; } } if(ok) break; }
       if(i===list.length) i=0; done.push(list.splice(i,1)[0]); }
-    done.forEach(function(pt){ bx(pt[1],pt[2],pt[3],pt[4],Z+pt[5],Z+pt[6],pt[7]); });
-    [M.wu,-M.wu].forEach(function(u){ if(u-M.r>lo && u+M.r<hi) wheel(q[0],q[1],co,si, u, vis*.27, Z+M.r, M.r); });
+    done.forEach(function(pt){ bx(pt[1],pt[2],pt[3],pt[4],Z+pt[5],Z+pt[6],pt[7]);
+      if(det && pt[7]!==GLS) studs(qx,qy,co,si,pt[1],pt[2],pt[3],pt[4],Z+pt[6],pt[7]); });
+    [M.wu,-M.wu].forEach(function(u){ if(u-M.r>lo && u+M.r<hi) wheel(qx,qy,co,si, u, vis*.27, Z+M.r, M.r, det); });
+  }
+  // a soft shadow on the surface under a car (z = surface height)
+  function shadow(qx,qy,co,si,z,a,k){
+    var c0=P(qx,qy,z), cu=P(qx+co,qy+si,z), cv=P(qx-si,qy+co,z);
+    ctx.save(); ctx.transform(cu[0]-c0[0],cu[1]-c0[1],cv[0]-c0[0],cv[1]-c0[1],c0[0],c0[1]);
+    ctx.fillStyle='rgba(3,8,15,'+a.toFixed(3)+')'; ctx.beginPath(); ctx.ellipse(0,0,.5*k,.24*k,0,0,Math.PI*2); ctx.fill(); ctx.restore();
+  }
+  function car(q, d, M, lift){
+    var a=at(d-.3), b=at(d+.3), ang=Math.atan2(b[1]-a[1], b[0]-a[0]), co=Math.cos(ang), si=Math.sin(ang);   // turns smoothly through the corners
+    // only the part outside the stations is drawn: it slides out of station 1 and into the last one
+    var lo = d < 4 ? (OUT_Y-q[1])/Math.max(si,.5) : -9, hi = d > 27 ? (IN_Y-q[1])/Math.max(si,.5) : 9;
+    var pl=[Math.max(PALLET[0],lo), Math.min(PALLET[1],hi)];
+    if(pl[1]>pl[0]) obox(q[0],q[1],co,si,pl[0],pl[1],PALLET[2],PALLET[3],PZ[0],PZ[1],PART);
+    if(!M) return;   // its car is over in the showroom
+    lift=lift||0;
+    if(lift>.02){ var k=Math.max(.55,1-lift*.35); shadow(q[0],q[1],co,si,PZ[1],.42*Math.min(1,lift/.3)*k,k); }   // smaller and fainter the higher it goes
+    var stage=0, drop=1; for(var s=1;s<7;s++){ if(d >= STOP[s]-.5){ stage=s; drop=Math.min(1,(d-(STOP[s]-.5))/.5); } }
+    body(q[0],q[1],co,si,M,stage,drop,PZ[1]+lift,lo,hi);
+  }
+  /* Showroom: click a car and a finished copy of it grows out of its pallet to four times its size in the middle of the line,
+     where it spins with just a shadow under it while the line dims behind it. Each spec is tied to a part of the car: it pops
+     out next to that part, joined to it by a thin line, while the part is turned toward you, and goes away as it turns away.
+     Click empty space, press Esc or "Back to the line" and the car shrinks back onto its pallet. Wide layouts only. */
+  var SR=null, srEl=document.getElementById('showroom'), RT=1.05, TZ=0, SPIN=.0005, LEAD=46, OBST=[];
+  function big(){ return Math.min(4, H*.3/(RT*S*1.2247)); }
+  function srTarget(){ var B=big(), c=P(8.95,6,0); return [c[0], c[1]+.3*S*B, 0, B]; }   // ground point under the big car
+  function srCard(){ return SR && srEl ? srEl.querySelector('.sr-card[data-car="'+SR.key+'"]') : null; }
+  function elBox(el){ var cr=cv.getBoundingClientRect(), r=el.getBoundingClientRect(); return [r.left-cr.left, r.top-cr.top, r.right-cr.left, r.bottom-cr.top]; }
+  function srLayout(){
+    var cd=srCard(); if(!cd) return; var tg=srTarget(), hd=cd.querySelector('.sr-head');
+    hd.style.left=Math.round(Math.max(12, Math.min(W-hd.offsetWidth-12, tg[0]-hd.offsetWidth/2)))+'px';
+    hd.style.top=Math.round(tg[1]-1.02*S*tg[3]-hd.offsetHeight)+'px';
+    // keep the specs off the hero text and the title
+    OBST=[].map.call(hero.querySelectorAll('.hero-in .eyebrow, .hero-in h1, .hero-sub > span, .hero-copy, .hero-cta a, .cta-note, .sr-card.cur .sr-head'),
+      function(el){ var b=elBox(el); return [b[0]-12, b[1]-8, b[2]+12, b[3]+8]; });
+    SR.specs.forEach(function(sp){ sp.w=sp.el.offsetWidth; sp.h=sp.el.offsetHeight; });
+  }
+  function srOpen(n){
+    if(!srEl || !scr[n]) return;
+    if(SR){ var old=srCard(); if(old){ old.classList.remove('cur','on'); old.querySelectorAll('.sr-spec').forEach(function(x){ x.classList.remove('on'); }); } }
+    var s=scr[n], a=at(s[3]-.3), b=at(s[3]+.3);
+    SR={n:n, key:n%2?'suv':'speedster', M:n%2?SUV:SPEEDSTER, t0:now, ang0:Math.atan2(b[1]-a[1],b[0]-a[0]), tc:0, e:0, ec:0, specs:[]};
+    srEl.hidden=false; var cd=srCard(); cd.classList.add('cur');
+    SR.specs=[].map.call(cd.querySelectorAll('.sr-spec'), function(el){ var a=el.getAttribute('data-a').split(',').map(Number);
+      el.classList.remove('on'); return {el:el, a:a, on:false, al:0, x:0, y:0, placed:false, w:0, h:0}; });
+    srLayout(); setTimeout(function(){ if(SR && srCard()===cd && !SR.tc) cd.classList.add('on'); }, 350);
+  }
+  function srClose(){ if(!SR || SR.tc) return; SR.tc=now; SR.ec=SR.e; var cd=srCard(); if(cd) cd.classList.remove('on');
+    SR.specs.forEach(function(sp){ sp.on=false; sp.el.classList.remove('on'); }); }
+  function srProg(t){   // 0 = on its pallet, 1 = in the showroom
+    if(!SR) return 0;
+    var x;
+    if(!SR.tc){ x=Math.min(1,(t-SR.t0)/750); SR.e=1-Math.pow(1-x,3); }
+    else { x=Math.min(1,(t-SR.tc)/600); x=x*x*(3-2*x); SR.e=SR.ec*(1-x);
+      if(x>=1){ var cd=srCard(); if(cd) cd.classList.remove('cur'); SR=null; if(srEl) srEl.hidden=true; return 0; } }
+    return SR.e;
+  }
+  function hits(x,y,w,h,list){ for(var i=0;i<list.length;i++){ var o=list[i]; if(x<o[2]&&x+w>o[0]&&y<o[3]&&y+h>o[1]) return o; } return null; }
+  function srDraw(t, e, dt){
+    if(!SR || !scr[SR.n]) return;
+    var s=scr[SR.n], from=[s[0], s[1]+(PZ[1]+.35-TZ)*S];   // its pallet, at the height the car sits
+    var tg=srTarget(), cx=from[0]+(tg[0]-from[0])*e, cy=from[1]+(tg[1]-from[1])*e, k=1+(tg[3]-1)*e;
+    var a=at(s[3]-.3), b=at(s[3]+.3), angP=Math.atan2(b[1]-a[1],b[0]-a[0]),
+        angS=SR.ang0+((SR.tc||t)-SR.t0)*SPIN, df=((angS-angP)%(2*Math.PI)+3*Math.PI)%(2*Math.PI)-Math.PI, ang=angP+df*e;
+    var S0=S, ox0=ox, oy0=oy; S=S0*k; ox=cx; oy=cy;        // P(0,0,0) is now the spot under the big car
+    var co=Math.cos(ang), si=Math.sin(ang);
+    shadow(0,0,co,si,0,.5*e,1.15);
+    EDGE=e>.5?'rgba(0,0,0,'+(.2*(e-.5)*2).toFixed(3)+')':null;
+    body(0,0,co,si,SR.M,6,1,TZ,-9,9,e>.6);                // fully built, with studs and spoked rims once it is big
+    EDGE=null;
+    // specs: each follows its part, shown while that part faces you
+    var arrived=!SR.tc && t-SR.t0>800, ctr=P(0,0,.3), placed=OBST.slice(),
+        light=document.documentElement.getAttribute('data-mode')==='light', fade=Math.min(1,dt/140);
+    var list=SR.specs.map(function(sp){ var u=sp.a[0], v=sp.a[1], wx=u*co-v*si, wy=u*si+v*co;
+      return {sp:sp, depth:wx+wy, p:P(wx,wy,sp.a[2])}; });
+    list.sort(function(m,n){ return n.depth-m.depth; });
+    list.forEach(function(it){ var sp=it.sp;
+      var want = arrived && (sp.on ? it.depth>0 : it.depth>.14);    // a little hysteresis so it doesn't flicker at the edge
+      if(want!==sp.on){ sp.on=want; sp.el.classList.toggle('on',want); if(want) sp.placed=false; }
+      sp.al+=((sp.on?1:0)-sp.al)*fade;
+      if(sp.al<.01) return;
+      var p=it.p, dx=p[0]-ctr[0], dy=p[1]-ctr[1], L=Math.hypot(dx,dy)||1; dx/=L; dy/=L;
+      var right=dx>-.2, w=sp.w, h=sp.h, x=right?p[0]+dx*LEAD:p[0]+dx*LEAD-w, y=p[1]+dy*LEAD-h/2;
+      for(var i=0;i<8;i++){ var o=hits(x,y,w,h,placed); if(!o) break;   // slide off whatever it would cover (never further left)
+        var mv=[[0,o[3]+6-y],[0,o[1]-6-h-y],[o[2]+6-x,0]]; mv.sort(function(m,n){ return Math.abs(m[0])+Math.abs(m[1])-Math.abs(n[0])-Math.abs(n[1]); });
+        x+=mv[0][0]; y+=mv[0][1]; }
+      x=Math.max(8,Math.min(W-w-8,x)); y=Math.max(8,Math.min(H-h-8,y));
+      if(!sp.placed){ sp.x=x; sp.y=y; sp.placed=true; } else { var f=Math.min(1,dt/90); sp.x+=(x-sp.x)*f; sp.y+=(y-sp.y)*f; }
+      placed.push([sp.x-6,sp.y-6,sp.x+w+6,sp.y+h+6]);
+      sp.el.style.transform='translate3d('+sp.x.toFixed(1)+'px,'+sp.y.toFixed(1)+'px,0)';
+      // the thin line: from the part to the near edge of its chip
+      var ex = sp.x+w/2>p[0] ? sp.x : sp.x+w, ey=sp.y+h/2;
+      ctx.globalAlpha=sp.al; ctx.lineWidth=1; ctx.strokeStyle=light?'rgba(12,35,64,.55)':'rgba(233,238,244,.6)';
+      ctx.beginPath(); ctx.moveTo(p[0],p[1]); ctx.lineTo(ex,ey); ctx.stroke();
+      ctx.fillStyle='#FF9B4D'; ctx.beginPath(); ctx.arc(p[0],p[1],3,0,Math.PI*2); ctx.fill();
+      ctx.strokeStyle=light?'#fff':'rgba(7,18,31,.9)'; ctx.lineWidth=1.5; ctx.stroke(); ctx.globalAlpha=1; ctx.lineWidth=1;
+    });
+    S=S0; ox=ox0; oy=oy0;
   }
   function draw(t){
     ctx.clearRect(0,0,W,H);
+    var srE=srProg(t);
     // floor grid
     ctx.lineWidth=1;
     for(var x=-2;x<=18;x++){ var a=P(x,-2), b=P(x,14); ctx.strokeStyle='rgba('+PAL.grid+','+(x%4===0?PAL.gridA[0]:PAL.gridA[1])+')'; ctx.beginPath(); ctx.moveTo(a[0],a[1]); ctx.lineTo(b[0],b[1]); ctx.stroke(); }
@@ -1157,6 +1286,8 @@ document.addEventListener('click', function(e){
       if(d<4) z=Math.max(z,5.01); else if(d>28.5) z=Math.min(z,14.89);   // in front of station 1 as it comes out, behind the last station as it goes in
       objs.push({z:z, f:function(){ car(q, d, p%2?SUV:SPEEDSTER, h); }}); })(p); }
     objs.sort(function(a,b){return a.z-b.z;}); objs.forEach(function(o){o.f();});
+    if(srE>0){ ctx.fillStyle='rgba('+PAL.bg+','+(.62*srE).toFixed(3)+')'; ctx.fillRect(0,0,W,H); }
+    srDraw(t, srE, dt);
     // labels
     if(!reduce){
       if(t>nextAmber){ amberIdx=Math.floor(Math.random()*stations.length); amberUntil=t+1800; nextAmber=t+6500; }
