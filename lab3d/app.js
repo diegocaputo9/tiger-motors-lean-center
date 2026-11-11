@@ -195,7 +195,7 @@ if (N.floor) N.floor.traverse(o => { if (o.isMesh) { o.material.roughness = 0.2;
 let mirror = null;
 try {
   const R = L.rooms, s = new THREE.Shape();
-  [[R.plc.x[0], R.plc.y[0]], [0, R.plc.y[0]], [0, 0], [R.bay.x[0], 0], [R.bay.x[0], R.bay.y[0]], [R.wareagle.x[1], R.bay.y[0]], [R.hall.x[1], R.hall.y[1]], [R.plc.x[0], R.hall.y[1]]]
+  [[R.plc.x[0], R.plc.y[0]], [R.hall.x[0], R.plc.y[0]], [R.hall.x[0], 0], [R.bay.x[0], 0], [R.bay.x[0], R.bay.y[0]], [R.wareagle.x[1], R.bay.y[0]], [R.hall.x[1], R.hall.y[1]], [R.plc.x[0], R.hall.y[1]]]
     .forEach((p, i) => i ? s.lineTo(p[0], p[1]) : s.moveTo(p[0], p[1]));
   mirror = new Reflector(new THREE.ShapeGeometry(s), { textureWidth: 1024, textureHeight: 1024, color: 0xffffff, clipBias: 0.002 });
   const fs = mirror.material.fragmentShader, i = fs.lastIndexOf('gl_FragColor');
@@ -215,7 +215,7 @@ for (const [k, d] of Object.entries(L.stations)) {
 }
 const SM_MAX = 6, RS_MAX = 12, CT = 4.2, TAKT = 5.2, MOVE = 0.9;
 const sm = {};
-for (const [k, d] of Object.entries(L.supermarkets)) sm[k] = { k, d, cars: [], slot: i => local(d.pos, d.op, -0.24 + Math.floor(i / 3) * 0.48, -0.22 + (i % 3) * 0.22, 0.958), yaw: OPA[d.op] };
+for (const [k, d] of Object.entries(L.supermarkets)) sm[k] = { k, d, cars: [], slot: i => local(d.pos, d.op, -0.15 + Math.floor(i / 2) * 0.15, -0.15 + (i % 2) * 0.30, 0.958), yaw: OPA[d.op] + Math.PI / 2 };   // 2 across, 3 rows, on the short table
 const S = {                                                              // everything that changes
   t: 0, cars: [], fg: 0, fgCars: [], scrap: 0, rs: 9, mission: null, lastLaunch: -9, seq: 0, parts: [], jit: {}, log: [],
   mode: 'explore',
@@ -393,13 +393,13 @@ const stopsEl = $('#stops');
 stopsEl.innerHTML = L.camera_stops.map(s => `<button type="button" data-stop="${s.id}" aria-pressed="false">${s.name}</button>`).join('') +
   '<i></i><button type="button" class="walk" id="walkBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="4.5" r="1.8"/><path d="M12 7.5v6m0 0l-3 6m3-6l3 6M8 10.5l4-2 4 2"/></svg>Walk around</button>';
 stopsEl.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; if (b.dataset.stop) goTo(b.dataset.stop); else startWalk(); });
-function startWalk() { fly = null; orbit.enabled = false; camera.position.set(Math.min(26, Math.max(.6, orbit.target.x)), 1.65, Math.min(-.6, Math.max(-7, orbit.target.z + 2.5))); camera.lookAt(orbit.target.x, 1.3, orbit.target.z); walk.lock(); }
+function startWalk() { fly = null; orbit.enabled = false; camera.position.set(Math.min(26, Math.max(L.rooms.hall.x[0] + .6, orbit.target.x)), 1.65, Math.min(-.6, Math.max(-7, orbit.target.z + 2.5))); camera.lookAt(orbit.target.x, 1.3, orbit.target.z); walk.lock(); }
 document.addEventListener('pointerlockerror', () => { orbit.enabled = true; });
 walk.addEventListener('lock', () => { walking = true; orbit.enabled = false; $('#hint').classList.add('on'); document.querySelectorAll('#stops button[data-stop]').forEach(b => b.setAttribute('aria-pressed', 'false')); });
 walk.addEventListener('unlock', () => { walking = false; orbit.enabled = true; $('#hint').classList.remove('on');
   const d = new THREE.Vector3(); camera.getWorldDirection(d); orbit.target.copy(camera.position).addScaledVector(d, 3); orbit.target.y = 1.1; orbit.update(); });
 const inside = (x, y) => { const R = L.rooms, m = .35, r = k => x > R[k].x[0] + m && x < R[k].x[1] - m && y > R[k].y[0] + m && y < R[k].y[1] - m;
-  return r('hall') || r('bay') || r('wareagle') || r('plc') || (x > 11.35 && x < 26.65 && Math.abs(y) < .4 && (x < 18.6 || (x > 19.3 && x < 20.5))) || (Math.abs(x) < .4 && y > 4.5 && y < 5.3); };
+  return r('hall') || r('bay') || r('wareagle') || r('plc') || (x > 11.35 && x < 26.65 && Math.abs(y) < .4 && (x < 18.6 || (x > 19.3 && x < 20.5))) || (Math.abs(x - R.hall.x[0]) < .4 && y > L.plc.door[0] + .1 && y < L.plc.door[1] - .1); };
 function walkStep(dt) { const sp = (keys.ShiftLeft || keys.ShiftRight ? 5 : 2.4) * dt, f = (keys.KeyW || keys.ArrowUp ? 1 : 0) - (keys.KeyS || keys.ArrowDown ? 1 : 0), r = (keys.KeyD || keys.ArrowRight ? 1 : 0) - (keys.KeyA || keys.ArrowLeft ? 1 : 0);
   camera.position.y = 1.65; if (!f && !r) return; const p = camera.position.clone(); walk.moveForward(f * sp); walk.moveRight(r * sp); camera.position.y = 1.65;
   if (!inside(camera.position.x, -camera.position.z)) { const q = camera.position.clone(); camera.position.set(q.x, 1.65, p.z); if (!inside(q.x, -p.z)) { camera.position.set(p.x, 1.65, q.z); if (!inside(p.x, -q.z)) camera.position.copy(p); } } }

@@ -1,10 +1,10 @@
 {
  "_about": "Single source of truth for the Tiger Motors lab 3D model. Units: metres. X = east, Y = north, Z = up. build_lab.py (Blender) and the web page both read this file. Change a position here, rebuild, and the model and the scenarios move together.",
- "version": "0.2",
+ "version": "0.3",
  "rooms": {
   "hall": {
    "x": [
-    0,
+    -1.0,
     27
    ],
    "y": [
@@ -34,8 +34,8 @@
   },
   "plc": {
    "x": [
-    -3.6,
-    0
+    -4.6,
+    -1.0
    ],
    "y": [
     2.4,
@@ -184,11 +184,11 @@
   "1": {
    "pos": [
     15.5,
-    0.01
+    -0.265
    ],
    "op": "-x",
    "size": [
-    1.1,
+    0.55,
     0.76
    ],
    "next_to": "6",
@@ -198,11 +198,11 @@
   "2": {
    "pos": [
     11.9,
-    0.01
+    -0.265
    ],
    "op": "+x",
    "size": [
-    1.1,
+    0.55,
     0.76
    ],
    "next_to": "10",
@@ -317,20 +317,20 @@
  },
  "plc": {
   "cabinet": [
-   -1.8,
+   -2.8,
    7.42
   ],
   "desks": [
    [
-    -3.15,
+    -4.15,
     3.4
    ],
    [
-    -3.15,
+    -4.15,
     4.9
    ],
    [
-    -3.15,
+    -4.15,
     6.4
    ]
   ],
@@ -404,7 +404,7 @@
   },
   "sustain": {
    "pos": [
-    0.08,
+    -0.92,
     1.2,
     1.7
    ],
@@ -432,12 +432,12 @@
    "id": "overview",
    "name": "Whole lab",
    "eye": [
-    12.7,
-    -16.0,
-    23.0
+    12.2,
+    -16.6,
+    23.8
    ],
    "look": [
-    12.7,
+    12.2,
     0.6,
     0.0
    ]
@@ -461,12 +461,12 @@
    "name": "Supermarkets",
    "eye": [
     13.7,
-    4.6,
-    3.7
+    4.4,
+    3.6
    ],
    "look": [
     13.7,
-    0.2,
+    0.0,
     0.9
    ]
   },
@@ -530,12 +530,12 @@
    "id": "plc",
    "name": "PLC / Computer Lab",
    "eye": [
-    3.8,
+    3.0,
     5.2,
     3.0
    ],
    "look": [
-    -1.9,
+    -2.9,
     6.4,
     1.4
    ]
@@ -547,5 +547,20 @@
    0.95
   ],
   "door_x": 0.55
+ },
+ "cubbies": {
+  "count": 3,
+  "x0": 2.45,
+  "pitch": 1.55
+ },
+ "path": {
+  "y": [
+   0.55,
+   1.25
+  ],
+  "aisle_x": [
+   17.6,
+   18.4
+  ]
  }
 }

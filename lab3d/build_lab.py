@@ -162,7 +162,7 @@ def bench_station(n, d):
         g.box((0, 0.22, z), (1.44, 0.36, 0.012), 'galv', rx=T)
         g.box((0, 0.045, z-0.03), (1.44, 0.012, 0.035), 'galv', rx=T)          # front lip
         bins(g, 0.22, z, T, 1.40, 8)
-    g.box((0.50, -0.18, 0.947), (0.34, 0.20, 0.02), 'tray_red'); g.box((0.56, 0.04, 0.947), (0.22, 0.16, 0.02), 'tray_green')
+    g.box((0.53, -0.17, 0.947), (0.27, 0.16, 0.02), 'tray_red'); g.box((0.53, 0.03, 0.947), (0.27, 0.16, 0.02), 'tray_green')   # same size trays
     g.box((-0.45, -0.17, 0.939), (0.30, 0.22, 0.003), 'paper'); g.box((0.18, -0.2, 0.939), (0.26, 0.2, 0.003), 'paper')
     g.box((-0.79, 0.30, 1.30), (0.05, 0.06, 0.16), 'plastic_black')            # barcode scanner on the upright
     g.box((0, -0.74, 0.012), (0.80, 0.55, 0.024), 'rubber')                    # anti-fatigue mat
@@ -405,23 +405,25 @@ def building():
         for y in (1.2, 3.7, 6.3): g.box((x, y, H-0.62), (1.25, 0.32, 0.06), 'light_panel'); g.box((x, y, H-0.3), (0.02, 0.02, 0.6), 'steel')
     for x in (12.5, 15.0, 17.3, 20.5, 23.5, 26.0):
         for y in (-1.6, -3.9): g.box((x, y, H-0.62), (1.25, 0.32, 0.06), 'light_panel'); g.box((x, y, H-0.3), (0.02, 0.02, 0.6), 'steel')
-    for y in (3.6, 6.2): g.box((-1.8, y, H-0.62), (1.25, 0.32, 0.06), 'light_panel')
+    for y in (3.6, 6.2): g.box(((px0+hx0)/2, y, H-0.62), (1.25, 0.32, 0.06), 'light_panel')
     g.done()
     # yellow floor tape: aisles around the cells, as in the photos
     g = G('floor_tape'); w = 0.06
     def tape(x0, y0, x1, y1): g.box(((x0+x1)/2, (y0+y1)/2, 0.002), (abs(x1-x0)+w, abs(y1-y0)+w, 0.003), 'floor_tape')
     q0, q1 = L['west_path']['x']
-    tape(q0, 0.55, 10.6, 0.55); tape(q1, 1.25, 10.6, 1.25)                     # walkway in front of the conveyor ...
-    tape(q0, 0.55, q0, hy1-0.12); tape(q1, 1.25, q1, hy1-0.12)                 # ... turning north past finished goods to the door on the cubby wall
+    y0p, y1p = L['path']['y']; a0, a1 = L['path']['aisle_x']
+    tape(q0, y0p, a1, y0p); tape(q1, y1p, a0, y1p)                             # one continuous path: in front of the conveyor, between cells 1 and 2, to the aisle ...
+    tape(q0, y0p, q0, hy1-0.12); tape(q1, y1p, q1, hy1-0.12)                 # ... turning north past finished goods to the door on the cubby wall
     tape(10.9, 2.3, 16.5, 2.3); tape(10.9, 7.3, 16.5, 7.3); tape(10.9, 2.3, 10.9, 7.3); tape(16.5, 2.3, 16.5, 7.3)   # cell 1
     tape(11.2, -0.5, 16.3, -0.5); tape(11.2, -5.1, 16.3, -5.1); tape(16.3, -5.1, 16.3, -0.5)                       # cell 2
-    tape(17.6, 0.7, 17.6, 7.3); tape(18.4, 0.7, 18.4, 7.3)                     # north-south aisle to the AS/RS
+    tape(a0, y1p, a0, 7.3); tape(a1, y0p, a1, 7.3)                             # ... where it joins the north-south aisle
     tape(19.2, 1.1, 22.4, 1.1); tape(22.2, 1.6, 22.2, 7.4)
     g.done()
     # wall furniture: cubby cabinets behind cell 3 (photos), TV screens, boards
     g = G('cubbies')
-    for i in range(6):
-        x = 2.45 + i*1.55; g.box((x, hy1-0.26, 1.0), (1.5, 0.4, 2.0), 'wood_dark')
+    cb = L['cubbies']
+    for i in range(cb['count']):
+        x = cb['x0'] + i*cb['pitch']; g.box((x, hy1-0.26, 1.0), (1.5, 0.4, 2.0), 'wood_dark')
         for r in range(4):
             for c in range(4): g.box((x-0.56+c*0.375, hy1-0.47, 0.3+r*0.47), (0.33, 0.02, 0.42), 'cnc_dark')
     g.done(bevel=0.004)
