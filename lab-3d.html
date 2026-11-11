@@ -73,6 +73,12 @@ button{font:inherit;color:inherit;cursor:pointer}
 .steps li::before{counter-increment:s;content:counter(s);width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font:500 12px var(--f-mono);border:1px solid var(--line-2)}
 .steps li.done{color:var(--text)} .steps li.done::before{background:var(--green);border-color:var(--green);color:#04221A}
 .steps{margin:0;padding:0}
+.phide{position:absolute;right:12px;top:12px;width:36px;height:36px;border-radius:50%;border:1px solid var(--line-2);background:rgba(255,255,255,.05);display:grid;place-items:center;z-index:2;transition:border-color .2s,transform .15s}
+.phide:hover{border-color:var(--orange-2)} .phide:active{transform:scale(.95)} .phide svg,.pshow svg{width:16px;height:16px}
+.panel-in>div:first-child{padding-right:44px}
+.pshow{position:fixed;right:16px;top:74px;display:none;align-items:center;gap:8px;min-height:44px;padding:0 16px 0 12px;border-radius:999px;font:600 14px var(--f-body);z-index:5;transition:border-color .2s,transform .15s}
+.pshow:hover{border-color:var(--orange-2)} .pshow:active{transform:scale(.97)}
+.nopanel .panel{display:none} .nopanel .pshow{display:inline-flex} .nopanel .stops{max-width:calc(100vw - 32px)}
 /* inspect card */
 .card{position:fixed;left:16px;top:74px;width:340px;border-radius:18px;padding:16px;display:none;gap:10px;z-index:6}
 .card.on{display:grid}
@@ -125,7 +131,8 @@ button{font:inherit;color:inherit;cursor:pointer}
   <span class="ver glass" id="ver">model v0.1 · preview</span>
 </div>
 
-<aside class="panel glass" aria-live="polite"><div class="panel-in" id="panel"></div></aside>
+<aside class="panel glass" aria-live="polite"><button class="phide" type="button" id="panelHide" aria-label="Hide this panel" title="Hide this panel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button><div class="panel-in" id="panel"></div></aside>
+<button class="pshow glass" type="button" id="panelShow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>Show panel</button>
 
 <section class="card glass" id="card" aria-live="polite">
   <button class="x" type="button" id="cardX" aria-label="Close">×</button>
@@ -136,6 +143,6 @@ button{font:inherit;color:inherit;cursor:pointer}
 <div class="hint glass" id="hint">Walking: <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> to move, mouse to look, <kbd>Shift</kbd> to go faster, <kbd>Esc</kbd> to stop</div>
 
 <div class="loading" id="loading"><div><span id="loadTxt">Loading the lab…</span><i id="loadBar"></i></div></div>
-<script type="module" src="lab3d/app.js?v=0.1.0"></script>
+<script type="module" src="lab3d/app.js?v=0.2.0"></script>
 </body>
 </html>

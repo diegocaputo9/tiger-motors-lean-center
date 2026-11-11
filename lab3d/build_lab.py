@@ -203,19 +203,32 @@ def line_station(n, d):
 
 # ---------------------------------------------------------------- supermarkets, heijunka, SMED, carts, racks
 def table(g, M, w=1.4, d=0.7):
-    g.box((0, 0, 0.90), (w, d, 0.035), 'bench', M=M)
+    g.box((0, 0, 0.92), (w, d, 0.035), 'bench', M=M)                         # same height as the station benches
     for x in (-w/2+0.12, w/2-0.12):
         g.box((x, 0, 0.45), (0.07, 0.09, 0.88), 'bench', M=M); g.box((x, 0, 0.025), (0.08, d-0.06, 0.05), 'bench', M=M)
 
+def floor_label(name, c, u, w, h):
+    """A label lying on the floor at c, read by someone looking along u (unit vector on the floor)."""
+    ux, uy = u
+    M = Matrix(((uy, 0, ux, c[0]), (-ux, 0, uy, c[1]), (0, -1, 0, 0.004), (0, 0, 0, 1)))
+    return quad(name, M, w, h, 'sign')
+
 def supermarket(k, d):
-    M = frame(d['pos'], d['op']); g = G('sm%s' % k); table(g, None)
-    g.box((0, 0, 0.925), (1.20, 0.50, 0.02), 'plastic_black')                  # the tray the sub-assemblies sit on
-    g.box((0, -0.30, 0.921), (0.30, 0.10, 0.004), 'paper')
+    """A table the same depth as a bench, flush against the end of its station; the label is on the floor at the free end."""
+    M = frame(d['pos'], d['op']); w, dp = d['size']; g = G('sm%s' % k); table(g, None, w, dp)
+    g.box((0, 0, 0.9475), (w-0.14, dp-0.14, 0.02), 'plastic_black')            # the tray the sub-assemblies sit on
     g.done(M, bevel=0.004)
-    quad('label_sm%s' % k, M @ Matrix.Translation((0, -0.75, 0.004)) @ rot(rx=-math.pi/2), 0.9, 0.16, 'sign')
+    sp = L['stations'][d['next_to']]['pos']; ux, uy = sp[0]-d['pos'][0], sp[1]-d['pos'][1]; n = math.hypot(ux, uy); ux, uy = ux/n, uy/n
+    floor_label('label_sm%s' % k, (d['pos'][0]-ux*(w/2+0.22), d['pos'][1]-uy*(w/2+0.22)), (ux, uy), 0.72, 0.13)
+
+def smed_table():
+    """Small table flush against the end of station 5 that holds the SMED die."""
+    d = L['smed']; M = frame(d['pos'], d['op']); w, dp = d['size']; g = G('smed_table'); table(g, None, w, dp); g.done(M, bevel=0.004)
+    small('smed_fixture', M @ Matrix.Translation((0, 0, 0.99)), (0.42, 0.30, 0.10), 'bin_blue')
+    small('smed_plate', M @ Matrix.Translation((0, 0, 0.943)), (0.52, 0.40, 0.012), 'steel')
 
 def heijunka():
-    p = L['heijunka']['pos']; M = Matrix.Translation((p[0], p[1], 0)); g = G('heijunka')
+    p = L['heijunka']['pos']; M = Matrix.Translation((p[0], p[1], 0)) @ rot(rz=OPS[L['heijunka'].get('op', '-y')]); g = G('heijunka')
     g.box((0, 0, 0.03), (0.5, 0.4, 0.06), 'steel'); g.box((0, 0, 0.7), (0.06, 0.06, 1.3), 'steel')
     g.box((0, 0, 1.45), (0.74, 0.10, 0.40), 'bench')
     for i in range(8): g.box((-0.35+i*0.1, -0.052, 1.45), (0.006, 0.012, 0.36), 'steel')
@@ -281,7 +294,7 @@ def asrs():
     g = G('asrs_carriage'); g.box((0, 0, 0), (0.95, 0.34, 0.08), 'plastic_black'); g.box((0, 0, 0.14), (0.7, 0.3, 0.2), 'bin_black')
     car = g.done(bevel=0.004); car.parent = crane; car.location = (0, 0, 1.2)
     # operator station (HMI) in a black cabinet
-    hx, hy = a['hmi']; M = Matrix.Translation((hx, hy, 0)) @ rot(rz=math.radians(25)); g = G('asrs_hmi')
+    M = frame(a['hmi'], a.get('hmi_op', '-y')); g = G('asrs_hmi')        # flat against the cage, screen facing the CNC room
     g.box((0, 0, 0.45), (0.62, 0.55, 0.9), 'plastic_black'); g.box((0, -0.05, 0.92), (0.50, 0.20, 0.025), 'tool_dark')
     g.box((0, 0.18, 1.02), (0.06, 0.06, 0.25), 'plastic_black'); g.box((0, 0.2, 1.30), (0.66, 0.04, 0.42), 'plastic_black')
     g.done(M, bevel=0.004)
@@ -322,8 +335,6 @@ def war_eagle():
     g.box((0, 0, 1.2), (0.5, 0.5, 0.56), 'cnc_dark'); g.box((0, -0.255, 1.2), (0.4, 0.01, 0.44), 'glass')
     g.done(frame(p, '-x'), bevel=0.006)
     quad('label_wareagle', Matrix.Translation((22.9, -0.07, 2.75)) @ rot(rz=math.pi), 2.6, 0.34, 'sign')
-    # raw material delivery point for the JIT part (the web page sends the special part from here)
-    cart('wareagle_cart', (19.7, -4.6), rz=0.3)
 
 # ---------------------------------------------------------------- PLC / computer lab
 def plc_lab():
@@ -365,6 +376,8 @@ def building():
     wall(g, px0, py0, hx0, py0); wall(g, px0, py0, px0, hy1)
     for x in (3.2, 6.6):                                                       # office doors on the south wall of the hall
         g.box((x, hy0+0.07, 1.05), (0.95, 0.04, 2.1), 'door'); g.box((x+0.36, hy0+0.1, 1.05), (0.03, 0.04, 0.12), 'steel')
+    dx = L['west_path']['door_x']                                             # door on the cubby wall, at the end of the taped path
+    g.box((dx, hy1-0.07, 1.05), (0.95, 0.04, 2.1), 'door'); g.box((dx+0.36, hy1-0.1, 1.05), (0.03, 0.04, 0.12), 'steel')
     g.done()
     g = G('walls_inner')
     wall(g, bx1, by0, bx1, hy0, m='wall_light')                               # tool area / War Eagle
@@ -397,7 +410,9 @@ def building():
     # yellow floor tape: aisles around the cells, as in the photos
     g = G('floor_tape'); w = 0.06
     def tape(x0, y0, x1, y1): g.box(((x0+x1)/2, (y0+y1)/2, 0.002), (abs(x1-x0)+w, abs(y1-y0)+w, 0.003), 'floor_tape')
-    tape(0.6, 0.55, 10.6, 0.55); tape(0.6, 1.25, 10.6, 1.25)                   # walkway in front of the conveyor
+    q0, q1 = L['west_path']['x']
+    tape(q0, 0.55, 10.6, 0.55); tape(q1, 1.25, 10.6, 1.25)                     # walkway in front of the conveyor ...
+    tape(q0, 0.55, q0, hy1-0.12); tape(q1, 1.25, q1, hy1-0.12)                 # ... turning north past finished goods to the door on the cubby wall
     tape(10.9, 2.3, 16.5, 2.3); tape(10.9, 7.3, 16.5, 7.3); tape(10.9, 2.3, 10.9, 7.3); tape(16.5, 2.3, 16.5, 7.3)   # cell 1
     tape(11.2, -0.5, 16.3, -0.5); tape(11.2, -5.1, 16.3, -5.1); tape(16.3, -5.1, 16.3, -0.5)                       # cell 2
     tape(17.6, 0.7, 17.6, 7.3); tape(18.4, 0.7, 18.4, 7.3)                     # north-south aisle to the AS/RS
@@ -406,7 +421,7 @@ def building():
     # wall furniture: cubby cabinets behind cell 3 (photos), TV screens, boards
     g = G('cubbies')
     for i in range(6):
-        x = 2.0 + i*1.55; g.box((x, hy1-0.26, 1.0), (1.5, 0.4, 2.0), 'wood_dark')
+        x = 2.45 + i*1.55; g.box((x, hy1-0.26, 1.0), (1.5, 0.4, 2.0), 'wood_dark')
         for r in range(4):
             for c in range(4): g.box((x-0.56+c*0.375, hy1-0.47, 0.3+r*0.47), (0.33, 0.02, 0.42), 'cnc_dark')
     g.done(bevel=0.004)
@@ -433,10 +448,10 @@ for n, d in L['stations'].items():
 conveyor()
 for k, d in L['supermarkets'].items(): supermarket(k, d)
 heijunka()
-g = G('fg_table'); table(g, None, 1.0, 0.8); g.box((0, 0, 0.93), (0.8, 0.6, 0.03), 'tray_green'); g.done(frame(L['finished_goods']['pos'], '-y'), bevel=0.004)
+g = G('fg_table'); table(g, None, 1.0, 0.8); g.box((0, 0, 0.95), (0.8, 0.6, 0.03), 'tray_green'); g.done(frame(L['finished_goods']['pos'], '-y'), bevel=0.004)
 quad('label_fg', frame(L['finished_goods']['pos'], '-y') @ Matrix.Translation((0, -0.8, 0.004)) @ rot(rx=-math.pi/2), 0.9, 0.16, 'sign')
-cart('smed_cart', L['smed']['pos'], rz=0.5); small('smed_fixture', Matrix.Translation((L['smed']['pos'][0], L['smed']['pos'][1], 0.9)) @ rot(rz=0.5), (0.5, 0.3, 0.1), 'bin_blue')
-cart('cart1', (19.7, 1.9), rz=1.2); cart('cart2', (21.0, 0.6), rz=0.1)
+smed_table()
+cart('cart1', (18.9, 2.0), rz=1.2); cart('cart2', (17.1, 6.7), rz=0.05)        # kept well clear of the CNC room
 for i, d in enumerate(L['raw_stock']): flow_rack(i+1, d)
 asrs(); tool_area(); war_eagle(); plc_lab()
 

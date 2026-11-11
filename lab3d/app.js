@@ -35,7 +35,7 @@ Object.assign(sun.shadow.camera, { left: -17, right: 17, top: 9, bottom: -9, nea
 sun.shadow.camera.updateProjectionMatrix(); sun.shadow.mapSize.set(4096, 4096); sun.shadow.bias = -0.0004; sun.shadow.normalBias = 0.02; sun.shadow.radius = 4;
 scene.add(sun, sun.target);
 
-function resize() { const w = innerWidth, h = innerHeight, side = w > 900 ? 396 : 0;      // keep the lab centred in the space left of the side panel
+function resize() { const w = innerWidth, h = innerHeight, side = w > 900 && !document.body.classList.contains('nopanel') ? 396 : 0;      // keep the lab centred in the space left of the side panel
   renderer.setSize(w, h, false); camera.aspect = (w + side) / h; if (side) camera.setViewOffset(w + side, h, side, 0, w, h); else camera.clearViewOffset(); camera.updateProjectionMatrix(); }
 addEventListener('resize', resize); resize();
 
@@ -75,13 +75,34 @@ function paintLabel(mesh, text, o = {}) {
     g.font = `700 ${o.size || 78}px ${FONT_D}`; g.fillText(text, w / 2, h / 2 + 4);
   }) });
 }
-function paintBoard(mesh, title, cols) {
+function paintBoard(mesh, title, cols) {                                // the sustainment board: one column per area
   mesh.material = new THREE.MeshStandardMaterial({ roughness: .35, map: canvasTex(900, 600, (g, w, h) => {
     g.fillStyle = '#F6F7F5'; g.fillRect(0, 0, w, h); g.fillStyle = '#0C2340'; g.textAlign = 'center'; g.font = `800 34px ${FONT_D}`; g.fillText(title, w / 2, 54);
     g.strokeStyle = '#1A2530'; g.lineWidth = 2; g.strokeRect(30, 80, w - 60, h - 110); const cw = (w - 60) / cols.length;
     cols.forEach((c, i) => { const x = 30 + i * cw; g.beginPath(); g.moveTo(x, 80); g.lineTo(x, h - 30); g.stroke(); g.font = `700 20px ${FONT_B}`; g.fillStyle = '#0C2340'; g.fillText(c, x + cw / 2, 112);
       g.fillStyle = i === 2 ? '#C9302C' : '#2E8B57'; g.fillRect(x + cw / 2 - 26, 150, 52, 76); g.fillStyle = '#5B6675'; g.font = `500 15px ${FONT_B}`; g.fillText('NOTES', x + cw / 2, 270); });
     g.beginPath(); g.moveTo(30, 126); g.lineTo(w - 30, 126); g.moveTo(30, 284); g.lineTo(w - 30, 284); g.stroke();
+  }) });
+}
+const CI_IDEAS = [['Parts bin 4 is a long reach', 'Move it to the front row', 'TA', 'g'], ['Red and green trays get mixed up', 'Label each tray position', 'Op 2', 'g'], ['Scanner cable catches the fixture', 'Clip the cable to the upright', 'Op 4', 'y'],
+  ['Waiting on the kanban card', 'Card holder at eye level', 'TA', 'y'], ['Standard work sheet is hard to read', 'Reprint with larger steps', 'Lead', 'r']];
+function paintCI(mesh, cell) {                                           // a table: title, subtitle, 9 rows for improvement ideas
+  mesh.material = new THREE.MeshStandardMaterial({ roughness: .35, map: canvasTex(1200, 800, (g, w, h) => {
+    g.fillStyle = '#F7F8F6'; g.fillRect(0, 0, w, h);
+    g.fillStyle = '#0C2340'; g.textAlign = 'center'; g.textBaseline = 'alphabetic'; g.font = `800 58px ${FONT_D}`; g.fillText('Cell ' + cell, w / 2, 70);
+    g.font = `600 28px ${FONT_B}`; g.fillText('Continuous Improvement Board', w / 2, 112);
+    g.fillStyle = '#E87722'; g.font = `600 19px ${FONT_B}`; g.fillText('TIGER MOTORS LEAN EDUCATION CENTER · AUBURN UNIVERSITY', w / 2, 144);
+    const x0 = 36, x1 = w - 36, y0 = 168, hh = 46, rh = (h - 30 - y0 - hh) / 9, cols = [['#', 56], ['Improvement idea', 400], ['Corrective action', 372], ['Owner', 130], ['Date', 100], ['Status', 70]];
+    g.fillStyle = '#0C2340'; g.fillRect(x0, y0, x1 - x0, hh); g.fillStyle = '#FFFFFF'; g.font = `600 21px ${FONT_B}`; g.textAlign = 'left';
+    let x = x0; const xs = []; cols.forEach(c => { xs.push(x); g.fillText(c[0], x + 10, y0 + 31); x += c[1]; });
+    g.strokeStyle = '#1A2530'; g.lineWidth = 2; g.strokeRect(x0, y0, x1 - x0, hh + rh * 9);
+    g.lineWidth = 1.2; xs.slice(1).forEach(v => { g.beginPath(); g.moveTo(v, y0); g.lineTo(v, y0 + hh + rh * 9); g.stroke(); });
+    for (let r = 0; r < 9; r++) { const y = y0 + hh + r * rh; g.beginPath(); g.moveTo(x0, y); g.lineTo(x1, y); g.stroke();
+      g.fillStyle = '#5B6675'; g.font = `500 21px ${FONT_M}`; g.fillText(String(r + 1), xs[0] + 16, y + rh / 2 + 8);
+      const it = CI_IDEAS[(r + cell) % 9]; if (!it || r > 5) continue;                                 // a few rows filled in marker, the rest left open
+      g.fillStyle = '#1F3FA6'; g.font = `500 21px ${FONT_B}`; g.fillText(it[0], xs[1] + 10, y + rh / 2 + 8); g.fillText(it[1], xs[2] + 10, y + rh / 2 + 8); g.fillText(it[2], xs[3] + 10, y + rh / 2 + 8);
+      g.fillText('11/' + (3 + r * 2), xs[4] + 10, y + rh / 2 + 8);
+      g.fillStyle = it[3] === 'g' ? '#2E8B57' : it[3] === 'y' ? '#E3B117' : '#C9302C'; g.fillRect(xs[5] + 16, y + 10, 38, rh - 20); }
   }) });
 }
 const screens = {};                                                    // name -> {tex, draw}
@@ -165,8 +186,7 @@ Object.keys(N).forEach(n => {
   if (n === 'label_toolarea') return paintLabel(N[n], 'TOOL AREA', { w: 900, h: 120, size: 84 });
   if (n === 'label_wareagle') return paintLabel(N[n], 'WAR EAGLE INC. · Tier 1 JIT supplier', { w: 1560, h: 204, bg: '#0C2340', fg: '#FF9B4D', size: 84 });
   if (n === 'board_sustain') return paintBoard(N[n], 'TIGER MOTORS SUSTAINMENT BOARD', ['CELL 1', 'CELL 2', 'CELL 3', 'SUPERMARKET', 'CONFERENCE RM']);
-  if (n === 'board_ci_cell1') return paintBoard(N[n], 'Cell 1 · Continuous Improvement System', ['Issue', 'Corrective action', 'Owner', 'Status']);
-  if (n === 'board_ci_cell2') return paintBoard(N[n], 'Cell 2 · Continuous Improvement System', ['Issue', 'Corrective action', 'Owner', 'Status']);
+  m = n.match(/^board_ci_cell(\d)$/); if (m) return paintCI(N[n], +m[1]);
   if (/^screen_/.test(n)) return makeScreen(N[n], n, /cell/.test(n) ? 640 : 480, /cell/.test(n) ? 362 : 300);
 });
 if (N.floor) N.floor.traverse(o => { if (o.isMesh) { o.material.roughness = 0.2; o.material.envMapIntensity = 1.2; } });
@@ -195,7 +215,7 @@ for (const [k, d] of Object.entries(L.stations)) {
 }
 const SM_MAX = 6, RS_MAX = 12, CT = 4.2, TAKT = 5.2, MOVE = 0.9;
 const sm = {};
-for (const [k, d] of Object.entries(L.supermarkets)) sm[k] = { k, d, cars: [], slot: i => local(d.pos, d.op, -0.42 + (i % 3) * 0.42, -0.1 + Math.floor(i / 3) * 0.24, 0.94), yaw: OPA[d.op] };
+for (const [k, d] of Object.entries(L.supermarkets)) sm[k] = { k, d, cars: [], slot: i => local(d.pos, d.op, -0.24 + Math.floor(i / 3) * 0.48, -0.22 + (i % 3) * 0.22, 0.958), yaw: OPA[d.op] };
 const S = {                                                              // everything that changes
   t: 0, cars: [], fg: 0, fgCars: [], scrap: 0, rs: 9, mission: null, lastLaunch: -9, seq: 0, parts: [], jit: {}, log: [],
   mode: 'explore',
@@ -283,8 +303,8 @@ function handOn(s, c) {
     if (c.kind === 'white' && !S.jit[c.id]) { if (s.state !== 'stopped') { s.state = 'stopped'; if (S.mode === 'A') say('Station 15 stopped: the special part from War Eagle Inc. has not arrived. Andon is red.', 'bad'); } return; }
     s.car = null; s.state = 'idle';
     if (c.defect) { S.scrap++; send(c, V(1.2, 1.2, .3), 0, .8, .3, () => removeCar(c)); return; }
-    S.fg++; const slot = local(L.finished_goods.pos, '-y', -0.25 + (S.fgCars.length % 3) * .25, -.12 + Math.floor(S.fgCars.length / 3) * .25, .95);
-    send(c, slot, Math.PI, 1, .25, () => { S.fgCars.push(c); if (S.fgCars.length > 6) { const old = S.fgCars.shift(); removeCar(old); S.fgCars.forEach((k, i) => k.mesh.position.copy(local(L.finished_goods.pos, '-y', -0.25 + (i % 3) * .25, -.12 + Math.floor(i / 3) * .25, .95))); } });
+    S.fg++; const slot = local(L.finished_goods.pos, '-y', -0.25 + (S.fgCars.length % 3) * .25, -.12 + Math.floor(S.fgCars.length / 3) * .25, .97);
+    send(c, slot, Math.PI, 1, .25, () => { S.fgCars.push(c); if (S.fgCars.length > 6) { const old = S.fgCars.shift(); removeCar(old); S.fgCars.forEach((k, i) => k.mesh.position.copy(local(L.finished_goods.pos, '-y', -0.25 + (i % 3) * .25, -.12 + Math.floor(i / 3) * .25, .97))); } });
     return;
   }
   const out = s.n === 5 ? sm[1] : s.n === 10 ? sm[2] : null;
@@ -338,7 +358,7 @@ function paintScreens() {
   [1, 2, 3].forEach(c => { const cr = cellRow(c), sup = c === 1 ? ['Supermarket 1', believed.sm1() + ' / ' + SM_MAX] : c === 2 ? ['Supermarket 2', believed.sm2() + ' / ' + SM_MAX] : ['Finished goods', S.fg];
     drawScreen('screen_cell' + c, [['Line status', cr[0], cr[1]], sup, c === 3 ? ['Defects', believed.defects()] : ['Work in progress', wip(c)], c === 3 ? ['Belt speed', believed.speed() + ' %'] : ['Takt', TAKT.toFixed(1) + ' s']],
       { title: 'CELL ' + c, status: cr[0] === 'RUNNING' ? 'OK' : cr[0], alarm: cr[0] === 'STOPPED' }); });
-  drawScreen('screen_asrs_hmi', [['Crane', S.asrsDown ? 'FAULT' : S.mission ? 'RETRIEVING' : 'READY', S.asrsDown ? r : g], ['Raw stock', S.rs + ' kits']], { title: 'AS/RS', status: S.asrsDown ? 'DOWN' : 'OK', alarm: S.asrsDown });
+  drawScreen('screen_asrs_hmi', [['Crane', S.asrsDown ? 'FAULT' : S.mission ? 'RETRIEVING' : 'READY', S.asrsDown ? r : g], ['Raw stock', S.rs + ' bins']], { title: 'AS/RS', status: S.asrsDown ? 'DOWN' : 'OK', alarm: S.asrsDown });
   const plcBad = S.attack === 'plc' && S.found && S.response < 3;
   drawScreen('screen_plc_panel', [['Conveyor', believed.speed() + ' %'], ['Program', plcBad ? 'CHANGED' : 'RUN', plcBad ? r : g]], { title: 'PLC-3', status: plcBad ? 'ALERT' : 'RUN', alarm: plcBad });
   [0, 1, 2].forEach(i => drawScreen('screen_plc' + i, [['Signals', '148 tags'], ['Network', S.response >= 2 && S.attack ? 'ISOLATED' : 'ONLINE']], { title: 'ENG-' + (i + 1), status: 'OK' }));
@@ -348,7 +368,7 @@ const tagBox = $('#tags'), tags = [];
 function tag(pos, fn) { const el = document.createElement('div'); el.className = 'tag'; tagBox.appendChild(el); tags.push({ el, pos, fn, last: '' }); }
 tag(local(L.supermarkets['1'].pos, L.supermarkets['1'].op, 0, 0, 1.55), () => ['Supermarket 1', sm[1].cars.length + ' / ' + SM_MAX, sm[1].cars.length === 0 ? 'bad' : sm[1].cars.length <= 1 ? 'warn' : '']);
 tag(local(L.supermarkets['2'].pos, L.supermarkets['2'].op, 0, 0, 1.55), () => ['Supermarket 2', sm[2].cars.length + ' / ' + SM_MAX, sm[2].cars.length === 0 ? 'bad' : sm[2].cars.length <= 1 ? 'warn' : '']);
-tag(V(L.raw_stock[0].pos[0], (L.raw_stock[0].pos[1] + L.raw_stock[1].pos[1]) / 2, 2.25), () => ['Raw stock', S.rs + ' kits', S.rs === 0 ? 'bad' : S.rs <= 3 ? 'warn' : '']);
+tag(V((L.raw_stock[0].pos[0] + L.raw_stock[1].pos[0]) / 2, (L.raw_stock[0].pos[1] + L.raw_stock[1].pos[1]) / 2, 2.3), () => ['Raw stock', S.rs + ' parts bins', S.rs === 0 ? 'bad' : S.rs <= 3 ? 'warn' : '']);
 tag(V(L.asrs.aisle_x, L.asrs.rack_a.y[0] - .3, 2.9), () => ['AS/RS', S.asrsDown ? (S.manual ? 'DOWN · picking by hand' : 'DOWN') : 'Running', S.asrsDown ? 'bad' : '']);
 tag(V(22.9, -0.2, 3.1), () => ['War Eagle Inc.', S.weDelay && !S.expedite ? 'Special part LATE' : 'On time', S.weDelay && !S.expedite ? 'warn' : '']);
 tag(V(L.finished_goods.pos[0], L.finished_goods.pos[1], 1.6), () => ['Finished goods', S.fg + ' cars', '']);
@@ -391,8 +411,8 @@ const INFO = {
   heijunka: ['Heijunka box', 'Levels the mix: cards leave in a fixed pattern (2 blue, 1 orange, 1 white, 2 blue, 1 orange) and pace the whole plant.'],
   plc_cabinet: ['PLC · line control', 'The controller for the conveyor and the andon signals. It runs the program engineers load from the computer lab.'],
   conveyor: ['Conveyor · Cell 3', 'The pacemaker process. Stations 11 to 15 finish the car at takt time.'],
-  asrs: ['AS/RS · Tier 1 raw material supplier', 'Automated storage and retrieval. The crane brings totes of bricks to raw stock when stock runs low.'],
-  rawstock: ['Raw stock', 'Flow racks that feed Cell 1 with kits of bricks.'],
+  asrs: ['AS/RS · Tier 1 raw material supplier', 'Automated storage and retrieval. The crane brings totes of parts to raw stock when the bins run low.'],
+  rawstock: ['Raw stock', 'Flow racks of parts bins that feed Cell 1.'],
   wareagle: ['War Eagle Inc.', 'Tier 1 just-in-time supplier. Its CNC cell makes the special part for white-card orders and delivers it to station 15.'],
   screen_cell1: ['Cell 1 dashboard', 'What the plant system reports for Cell 1.'], screen_cell2: ['Cell 2 dashboard', 'What the plant system reports for Cell 2.'], screen_cell3: ['Cell 3 dashboard', 'What the plant system reports for the conveyor line.'],
   tool_area: ['Tool area', 'Shadow board and bench: every tool has a marked home (5S).'], fg: ['Finished goods', 'Completed cars leave the line here.'],
@@ -409,7 +429,7 @@ function rows(k) {                                                       // [wha
   if (k.startsWith('screen_cell')) { const c = +k.slice(-1), b = cells[c].map(n => believed.andon(n)), f = cells[c].map(lampOf), w = a => a.includes('r') ? 'stopped' : a.includes('y') ? 'waiting' : 'running';
     const r = [['Line status', w(b), w(f)]]; if (c === 2) r.push(['Supermarket 2 level', believed.sm2(), sm[2].cars.length]); if (c === 3) r.push(['Defects', believed.defects(), S.scrap], ['Belt speed', believed.speed() + ' %', realSpeed() + ' %']); return r; }
   if (k === 'asrs') return [['Crane', S.asrsDown ? 'fault' : 'ready', S.asrsDown ? 'not moving' : 'moving']];
-  if (k === 'rawstock') return [['Kits in the racks', S.rs, S.rs]];
+  if (k === 'rawstock') return [['Parts bins in the racks', S.rs, S.rs]];
   if (k === 'heijunka') return [['Next card', HEIJUNKA[S.seq % 7], HEIJUNKA[S.seq % 7]], ['Takt time', TAKT.toFixed(1) + ' s', (TAKT / S.lineSpeed).toFixed(1) + ' s']];
   if (k === 'wareagle') return [['Special part lead time', 'on time', S.weDelay && !S.expedite ? 'late' : 'on time']];
   if (k.startsWith('station')) { const n = +k.slice(7); return [['Andon', yn(believed.andon(n)), yn(lampOf(n))]]; }
@@ -510,6 +530,9 @@ panel.addEventListener('click', e => { const b = e.target.closest('button'); if 
   if (id === 'respond') return respond();
   paintPanel(); });
 
+$('#panelHide').onclick = () => { document.body.classList.add('nopanel'); resize(); $('#panelShow').focus(); };
+$('#panelShow').onclick = () => { document.body.classList.remove('nopanel'); resize(); $('#panelHide').focus(); };
+
 /* narration for scenario A: say what the pull system is doing, once per change */
 const seen = {};
 function narrate() {
@@ -541,5 +564,5 @@ function frame(now) {
   paintTags(); renderer.render(scene, camera); requestAnimationFrame(frame);
 }
 requestAnimationFrame(frame);
-window.__lab = { S, ST, sm, L, goTo, setMode, startAttack, camera, N, openCard, believed, lampOf,
+window.__lab = { S, ST, sm, L, goTo, setMode, startAttack, camera, orbit, N, openCard, believed, lampOf,
   step: sec => { for (let i = 0; i < sec * 20; i++) { tick(.05); narrate(); } } };   // for testing
