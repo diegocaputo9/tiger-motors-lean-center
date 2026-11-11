@@ -785,7 +785,7 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
       <a href="#lab">Explore the Lab</a><a href="#lean-house">Lean House</a><a href="modules">Modules</a><a href="#project">About</a><a href="testimonials">Testimonials</a><a href="#contact">Contact</a><a href="#install" class="fl-inst" data-install><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="12.5" rx="2"/><path d="M12 7.5v6M9.3 10.8L12 13.5l2.7-2.7M8.5 20.5h7"/></svg>Install the app</a><button type="button" class="fl-reset" data-reset-progress hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.6-5.9"/><path d="M4 4.5v4h4"/></svg>Reset my progress</button>
     </div>
   </div>
-  <div class="wrap"><p class="site-rev">Last updated November 10, 2026 · Revision 185</p></div>
+  <div class="wrap"><p class="site-rev">Last updated November 10, 2026 · Revision 186</p></div>
 </footer>
 
 <dialog class="bdlg" id="bioDlg" aria-labelledby="bdlg-h">
@@ -1175,18 +1175,20 @@ document.addEventListener('click', function(e){
   function srTarget(){   // ground point under the big car: middle of the line, nudged left as far as the tagline allows
     var B=big(), c=P(8.95,6,0), half=.66*S*B*1.2247;
     return [Math.max(c[0]-.03*W, Math.min(c[0], TEXT_R+half-10)), c[1]+.3*S*B, 0, B]; }
+  function zf(){ var w=cv.offsetWidth; return w ? cv.getBoundingClientRect().width/w : 1; }   // page zoom on big monitors (fit-wide)
   function srCard(){ return SR && srEl ? srEl.querySelector('.sr-card[data-car="'+SR.key+'"]') : null; }
   function elBox(el){ var cr=cv.getBoundingClientRect(), r=el.getBoundingClientRect(); return [r.left-cr.left, r.top-cr.top, r.right-cr.left, r.bottom-cr.top]; }
   function srLayout(){
     var cd=srCard(); if(!cd) return;
     TEXT_R=0; hero.querySelectorAll('.hero-sub > span').forEach(function(el){ TEXT_R=Math.max(TEXT_R, elBox(el)[2]); });
     var tg=srTarget(), hd=cd.querySelector('.sr-head');
-    hd.style.left=Math.round(Math.max(12, Math.min(W-hd.offsetWidth-12, tg[0]-hd.offsetWidth/2)))+'px';
-    hd.style.top=Math.round(tg[1]-1.0*S*tg[3]-hd.offsetHeight-6)+'px';
+    var z=zf(), hw=hd.offsetWidth*z, hh=hd.offsetHeight*z;   // canvas works in screen px, the overlay in (possibly zoomed) page px
+    hd.style.left=(Math.max(12, Math.min(W-hw-12, tg[0]-hw/2))/z).toFixed(1)+'px';
+    hd.style.top=((tg[1]-1.0*S*tg[3]-hh-6)/z).toFixed(1)+'px';
     // keep the specs off the hero text and the title
     OBST=[].map.call(hero.querySelectorAll('.hero-in .eyebrow, .hero-in h1, .hero-sub > span, .hero-copy, .hero-cta a, .cta-note, .sr-card.cur .sr-head'),
       function(el){ var b=elBox(el); return [b[0]-12, b[1]-8, b[2]+12, b[3]+8]; });
-    SR.specs.forEach(function(sp){ sp.w=sp.el.offsetWidth; sp.h=sp.el.offsetHeight; });
+    SR.specs.forEach(function(sp){ sp.w=sp.el.offsetWidth*z; sp.h=sp.el.offsetHeight*z; });
   }
   function srOpen(n){
     if(!srEl || !scr[n]) return;
@@ -1239,7 +1241,7 @@ document.addEventListener('click', function(e){
         var sp=SR.specs[pick], p=anchor(sp), ctr=P(0,0,.3), Rc=.62*S*1.2247+46;
         sp.last=t; Q.i=pick; Q.ph='line'; Q.t=t;
         // measure the bubble, then choose the free spot nearest its part
-        sp.el.style.left='0px'; sp.el.style.top='0px'; var w=sp.el.offsetWidth, hh=sp.el.offsetHeight;
+        var z=zf(); sp.z=z; sp.el.style.left='0px'; sp.el.style.top='0px'; var w=sp.el.offsetWidth*z, hh=sp.el.offsetHeight*z;
         var want=Math.atan2(p[1]-ctr[1], p[0]-ctr[0]), spots=[-2.35,-1.95,-1.2,-.79,-.35,0,.45,.9,2.25,2.7,Math.PI], bestS=null, bs=1e9;
         spots.forEach(function(a){ var sx=ctr[0]+Math.cos(a)*Rc*1.25, sy=ctr[1]+Math.sin(a)*Rc*.95,
             x=Math.cos(a)>.15 ? sx : Math.cos(a)<-.15 ? sx-w : sx-w/2, y=Math.sin(a)>.3 ? sy : Math.sin(a)<-.3 ? sy-hh : sy-hh/2;
@@ -1247,7 +1249,7 @@ document.addEventListener('click', function(e){
           var da=Math.abs(((a-want)%(2*Math.PI)+3*Math.PI)%(2*Math.PI)-Math.PI), sc=da+(hits(x,y,w,hh,OBST)?100:0);
           if(sc<bs){ bs=sc; bestS=[x,y]; } });
         sp.x=bestS[0]; sp.y=bestS[1]; sp.w=w; sp.h=hh;
-        sp.el.style.left=sp.x.toFixed(1)+'px'; sp.el.style.top=sp.y.toFixed(1)+'px';
+        sp.el.style.left=(sp.x/z).toFixed(1)+'px'; sp.el.style.top=(sp.y/z).toFixed(1)+'px';
       }
     }
     if(Q.i>=0){
@@ -1261,7 +1263,7 @@ document.addEventListener('click', function(e){
       var ex=Math.max(sp.x+I,Math.min(sp.x+sp.w-I,p[0])), ey=Math.max(sp.y+I,Math.min(sp.y+sp.h-I,p[1]));   // nearest point on the bubble ...
       if(p[0]>sp.x && p[0]<sp.x+sp.w && p[1]>sp.y && p[1]<sp.y+sp.h){}                                     // ... pushed out onto its edge
       else if(p[0]<=sp.x||p[0]>=sp.x+sp.w){ ex = p[0]<=sp.x ? sp.x : sp.x+sp.w; } else { ey = p[1]<=sp.y ? sp.y : sp.y+sp.h; }
-      if(Q.ph==='line' && age<30) sp.el.style.transformOrigin=(ex-sp.x).toFixed(0)+'px '+(ey-sp.y).toFixed(0)+'px';   // grows out of the line's end
+      if(Q.ph==='line' && age<30) sp.el.style.transformOrigin=((ex-sp.x)/sp.z).toFixed(1)+'px '+((ey-sp.y)/sp.z).toFixed(1)+'px';   // grows out of the line's end
       var k2 = Q.ph==='line' ? age/LINE_IN : Q.ph==='back' ? Math.max(0,1-age/LINE_OUT) : 1; k2=k2*k2*(3-2*k2);
       var lx=p[0]+(ex-p[0])*k2, ly=p[1]+(ey-p[1])*k2, ink=light?'rgba(12,35,64,.6)':'rgba(233,238,244,.72)';
       ctx.lineWidth=1; ctx.strokeStyle=ink; ctx.beginPath(); ctx.moveTo(p[0],p[1]); ctx.lineTo(lx,ly); ctx.stroke();
