@@ -1,6 +1,6 @@
 {
  "_about": "Single source of truth for the Tiger Motors lab 3D model. Units: metres. X = east, Y = north, Z = up. build_lab.py (Blender) and the web page both read this file. Change a position here, rebuild, and the model and the scenarios move together.",
- "version": "0.3",
+ "version": "0.4",
  "rooms": {
   "hall": {
    "x": [
