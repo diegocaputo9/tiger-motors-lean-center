@@ -552,6 +552,7 @@ resetSim(); paintPanel(); goTo('overview', true);
 $('#loading').classList.add('gone'); $('#ver').textContent = 'model v' + L.version + ' · preview';
 let last = performance.now(), uiT = 0;
 function frame(now) {
+  if (window.__capturing) { last = now; requestAnimationFrame(frame); return; }   // a recording drives the frames itself
   const dt = Math.min(.05, (now - last) / 1000); last = now;
   tick(dt); visuals(dt); narrate();
   if (fly) { fly.t += dt / 1.5; const k = ease(Math.min(1, fly.t)); camera.position.lerpVectors(fly.a, fly.b, k); orbit.target.lerpVectors(fly.ta, fly.tb, k); if (fly.t >= 1) fly = null; }
@@ -565,4 +566,8 @@ function frame(now) {
 }
 requestAnimationFrame(frame);
 window.__lab = { S, ST, sm, L, goTo, setMode, startAttack, camera, orbit, N, openCard, believed, lampOf,
-  step: sec => { for (let i = 0; i < sec * 20; i++) { tick(.05); narrate(); } } };   // for testing
+  step: sec => { for (let i = 0; i < sec * 20; i++) { tick(.05); narrate(); } },
+  /* one frame of a recording (used to make the home page's preview clip): advance the plant by dt, put the camera at eye looking at look */
+  shot: (dt, eye, look) => { window.__capturing = true; tick(dt); visuals(dt); camera.position.set(eye[0], eye[2], -eye[1]); orbit.target.set(look[0], look[2], -look[1]); camera.lookAt(orbit.target);
+    const above = camera.position.y > L.ceiling - .2; ['ceiling', 'ceiling_lights', 'walls_outer'].forEach(n => { if (N[n]) N[n].visible = !above; });
+    screenT += dt; if (screenT > .5) { screenT = 0; paintScreens(); } renderer.render(scene, camera); } };   // for testing

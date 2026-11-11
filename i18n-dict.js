@@ -5473,4 +5473,8 @@ window.TM_I18N = {
 "Rear wing": ["Alerón trasero", "Heckflügel", "Alettone posteriore"],
 "Active aero": ["Aerodinámica activa", "Aktive Aerodynamik", "Aerodinamica attiva"],
 "Back to the line": ["Volver a la línea", "Zurück zur Linie", "Torna alla linea"],
+"New · Interactive": ["Nuevo · Interactivo", "Neu · Interaktiv", "Novità · Interattivo"],
+"Tiger Motors Lab in 3D": ["Laboratorio Tiger Motors en 3D", "Tiger Motors Labor in 3D", "Laboratorio Tiger Motors in 3D"],
+"Explore in 3D": ["Explorar en 3D", "In 3D erkunden", "Esplora in 3D"],
+"Explore the Tiger Motors Lab in 3D": ["Explora el laboratorio Tiger Motors en 3D", "Das Tiger Motors Labor in 3D erkunden", "Esplora il laboratorio Tiger Motors in 3D"],
 };
