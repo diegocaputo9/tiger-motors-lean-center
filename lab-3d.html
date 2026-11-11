@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en" data-i18n-skip>
+<head>
+<meta charset="utf-8">
+<title>Tiger Motors Lab in 3D · Preview</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<script type="importmap">{"imports":{"three":"./lab3d/vendor/three.module.js","three/addons/":"./lab3d/vendor/jsm/"}}</script>
+<style>
+:root{--bg:#07121F;--text:#E9EEF4;--text-2:#C3CEDA;--text-3:#93A3B5;--line:rgba(160,185,212,.18);--line-2:rgba(160,185,212,.32);--orange:#E87722;--orange-2:#FF9B4D;--green:#3FB68B;--red:#F0544F;--amber:#F2B233;
+  --f-display:'Archivo','Arial Narrow',system-ui,sans-serif;--f-body:'IBM Plex Sans',system-ui,-apple-system,sans-serif;--f-mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+  --glass:rgba(12,26,44,.58);--glass-hi:rgba(255,255,255,.14)}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:var(--bg);color:var(--text);font:400 15px/1.5 var(--f-body);-webkit-font-smoothing:antialiased;overflow:hidden}
+canvas#view{position:fixed;inset:0;width:100%;height:100%;display:block;outline:none}
+button{font:inherit;color:inherit;cursor:pointer}
+.glass{background:var(--glass);-webkit-backdrop-filter:blur(18px) saturate(150%);backdrop-filter:blur(18px) saturate(150%);border:1px solid var(--line);box-shadow:inset 0 1px 0 var(--glass-hi),0 18px 40px -18px rgba(0,0,0,.7)}
+/* top bar */
+.top{position:fixed;left:16px;right:16px;top:14px;display:flex;align-items:center;gap:14px;pointer-events:none;z-index:5}
+.top>*{pointer-events:auto}
+.brand{display:flex;align-items:center;gap:12px;padding:8px 16px 8px 10px;border-radius:999px;text-decoration:none;color:var(--text)}
+.brand svg{width:18px;height:18px;flex:none}
+.brand b{font:700 15px/1.1 var(--f-display);font-stretch:110%;letter-spacing:.01em;white-space:nowrap}
+.brand small{display:block;font:500 12px/1.2 var(--f-body);color:var(--text-3)}
+.modes{margin-inline:auto;display:flex;gap:4px;padding:5px;border-radius:999px}
+.modes button{min-height:40px;padding:0 16px;border-radius:999px;border:0;background:transparent;font:600 14px var(--f-body);color:var(--text-2);white-space:nowrap;transition:background .2s,color .2s,transform .15s}
+.modes button:active{transform:scale(.97)}
+.modes button[aria-pressed="true"]{background:var(--orange-2);color:#1A0C02}
+.modes button small{font:500 12px var(--f-body);opacity:.8;margin-right:6px}
+.ver{padding:9px 14px;border-radius:999px;font:500 12px var(--f-mono);color:var(--text-3);white-space:nowrap}
+/* camera stops */
+.stops{position:fixed;left:16px;bottom:16px;display:flex;flex-wrap:wrap;gap:6px;max-width:min(760px,calc(100vw - 440px));padding:8px;border-radius:18px;z-index:5}
+.stops button{min-height:36px;padding:0 12px;border-radius:999px;border:1px solid transparent;background:rgba(255,255,255,.05);font:500 13px var(--f-body);color:var(--text-2);transition:background .2s,border-color .2s,transform .15s}
+.stops button:hover{background:rgba(255,255,255,.1)}
+.stops button:active{transform:scale(.97)}
+.stops button[aria-pressed="true"]{border-color:var(--orange-2);color:var(--text);background:rgba(232,119,34,.16)}
+.stops .walk{display:inline-flex;align-items:center;gap:7px;border-color:var(--line-2);color:var(--text)}
+.stops .walk svg{width:15px;height:15px}
+.stops i{width:1px;align-self:stretch;background:var(--line);margin:4px 2px}
+/* right panel */
+.panel{position:fixed;right:16px;top:74px;bottom:16px;width:380px;max-width:calc(100vw - 32px);border-radius:20px;display:flex;flex-direction:column;overflow:hidden;z-index:5}
+.panel-in{padding:18px 18px 16px;overflow:auto;display:grid;gap:14px;align-content:start}
+.kick{font:500 12px/1 var(--f-body);letter-spacing:.14em;text-transform:uppercase;color:var(--orange-2)}
+.panel h1{font:700 22px/1.12 var(--f-display);font-stretch:108%;margin:6px 0 0;text-wrap:balance}
+.panel p{margin:0;color:var(--text-2);font-size:14.5px;line-height:1.5}
+.btns{display:grid;gap:8px}
+.btn{display:grid;gap:2px;text-align:left;padding:11px 14px;border-radius:14px;border:1px solid var(--line-2);background:rgba(255,255,255,.04);transition:background .2s,border-color .2s,transform .15s}
+.btn:hover{border-color:var(--orange-2)}
+.btn:active{transform:scale(.98)}
+.btn b{font:600 14.5px/1.3 var(--f-body)}
+.btn span{font:400 13px/1.4 var(--f-body);color:var(--text-3)}
+.btn[aria-pressed="true"]{border-color:var(--red);background:rgba(240,84,79,.14)}
+.btn.good{border-color:rgba(63,182,139,.55)}
+.btn.good[aria-pressed="true"]{border-color:var(--green);background:rgba(63,182,139,.16)}
+.btn.primary{background:var(--orange-2);border-color:var(--orange-2);color:#1A0C02}
+.btn.primary span{color:#3A1E06}
+.btn[disabled]{opacity:.45;cursor:default}
+.sec{font:500 12px/1 var(--f-body);letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);margin-top:4px}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.kpi{padding:10px 10px 9px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid var(--line)}
+.kpi small{display:block;font:500 12px/1.2 var(--f-body);color:var(--text-3)}
+.kpi b{display:block;margin-top:4px;font:500 20px/1 var(--f-mono);font-variant-numeric:tabular-nums}
+.kpi.bad b{color:var(--red)} .kpi.warn b{color:var(--amber)} .kpi.ok b{color:var(--green)}
+.log{display:grid;gap:6px;max-height:210px;overflow:auto;padding-right:4px}
+.log div{display:grid;grid-template-columns:46px 1fr;gap:8px;font-size:13.5px;line-height:1.4;color:var(--text-2)}
+.log time{font:400 12px/1.6 var(--f-mono);color:var(--text-3);font-variant-numeric:tabular-nums}
+.log .bad{color:#FFB3AF} .log .ok{color:#9FE3C6} .log .warn{color:#FFD98A}
+.steps{display:grid;gap:6px;counter-reset:s}
+.steps li{list-style:none;display:grid;grid-template-columns:24px 1fr;gap:8px;font-size:13.5px;line-height:1.4;color:var(--text-3)}
+.steps li::before{counter-increment:s;content:counter(s);width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font:500 12px var(--f-mono);border:1px solid var(--line-2)}
+.steps li.done{color:var(--text)} .steps li.done::before{background:var(--green);border-color:var(--green);color:#04221A}
+.steps{margin:0;padding:0}
+/* inspect card */
+.card{position:fixed;left:16px;top:74px;width:340px;border-radius:18px;padding:16px;display:none;gap:10px;z-index:6}
+.card.on{display:grid}
+.card h2{font:700 18px/1.15 var(--f-display);margin:0}
+.card p{margin:0;font-size:14px;color:var(--text-2)}
+.card table{width:100%;border-collapse:collapse;font-size:13.5px}
+.card th{font:500 12px var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);text-align:left;padding:4px 6px 4px 0}
+.card td{padding:6px 6px 6px 0;border-top:1px solid var(--line);vertical-align:top}
+.card td:nth-child(n+2){font:500 13.5px var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.card tr.diff td:nth-child(n+2){color:var(--red)}
+.card .x{position:absolute;right:10px;top:10px;width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:transparent;font-size:16px;line-height:1}
+.card .row{display:flex;gap:8px;flex-wrap:wrap}
+.card .row button{min-height:38px;padding:0 14px;border-radius:999px;border:1px solid var(--line-2);background:rgba(255,255,255,.05);font:600 13.5px var(--f-body)}
+.card .row .flag{background:var(--red);border-color:var(--red);color:#fff}
+.card .verdict{font-size:13.5px;padding:8px 10px;border-radius:10px;background:rgba(255,255,255,.05)}
+.card .verdict.ok{background:rgba(63,182,139,.16);color:#BFF0DA} .card .verdict.no{background:rgba(242,178,51,.14);color:#FFE2A6}
+/* floating tags that follow things in the lab */
+.tags{position:fixed;inset:0;pointer-events:none;z-index:3;overflow:hidden}
+.tag{position:absolute;left:0;top:0;transform:translate(-50%,-100%);padding:5px 9px 6px;border-radius:10px;font:500 12px/1.25 var(--f-body);white-space:nowrap;text-align:center;
+  background:rgba(8,18,31,.72);border:1px solid var(--line-2);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);will-change:transform;opacity:0;transition:opacity .25s}
+.tag b{display:block;font:500 13px/1.2 var(--f-mono);font-variant-numeric:tabular-nums;color:var(--text)}
+.tag.bad{border-color:var(--red)} .tag.bad b{color:#FFB3AF} .tag.warn{border-color:var(--amber)} .tag.warn b{color:#FFD98A}
+/* loading + walk hint */
+.loading{position:fixed;inset:0;display:grid;place-items:center;background:var(--bg);z-index:20;transition:opacity .5s}
+.loading.gone{opacity:0;pointer-events:none}
+.loading div{display:grid;gap:14px;justify-items:center;font:500 14px var(--f-body);color:var(--text-2)}
+.loading i{width:220px;height:3px;border-radius:3px;background:rgba(255,255,255,.1);overflow:hidden;display:block}
+.loading i::after{content:"";display:block;height:100%;width:var(--p,8%);background:var(--orange-2);transition:width .2s}
+.hint{position:fixed;left:50%;bottom:86px;transform:translateX(-50%);padding:9px 16px;border-radius:999px;font:500 13px var(--f-body);color:var(--text);z-index:6;display:none}
+.hint.on{display:block}
+.hint kbd{font:500 12px var(--f-mono);padding:2px 6px;border-radius:5px;border:1px solid var(--line-2);margin:0 2px}
+@media (max-width:900px){.panel{top:auto;height:44vh;width:auto;left:16px}.stops{display:none}.card{width:auto;right:16px}.ver{display:none}.modes button small{display:none}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<canvas id="view" tabindex="0" aria-label="Interactive 3D model of the Tiger Motors lab"></canvas>
+<div class="tags" id="tags" aria-hidden="true"></div>
+
+<div class="top">
+  <a class="brand glass" href="/" aria-label="Back to the Tiger Motors Lean Education Center home page">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+    <span><b>Tiger Motors Lab · 3D</b><small>Integrated Manufacturing Facility, Auburn University</small></span>
+  </a>
+  <div class="modes glass" role="group" aria-label="Mode">
+    <button type="button" data-mode="explore" aria-pressed="true">Explore the lab</button>
+    <button type="button" data-mode="A" aria-pressed="false"><small>Scenario A</small>Supply chain disruption</button>
+    <button type="button" data-mode="B" aria-pressed="false"><small>Scenario B</small>Spot the cyber attack</button>
+  </div>
+  <span class="ver glass" id="ver">model v0.1 · preview</span>
+</div>
+
+<aside class="panel glass" aria-live="polite"><div class="panel-in" id="panel"></div></aside>
+
+<section class="card glass" id="card" aria-live="polite">
+  <button class="x" type="button" id="cardX" aria-label="Close">×</button>
+  <div id="cardBody" style="display:grid;gap:10px"></div>
+</section>
+
+<nav class="stops glass" id="stops" aria-label="Camera stops"></nav>
+<div class="hint glass" id="hint">Walking: <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> to move, mouse to look, <kbd>Shift</kbd> to go faster, <kbd>Esc</kbd> to stop</div>
+
+<div class="loading" id="loading"><div><span id="loadTxt">Loading the lab…</span><i id="loadBar"></i></div></div>
+<script type="module" src="lab3d/app.js?v=0.1.0"></script>
+</body>
+</html>
