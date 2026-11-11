@@ -37,7 +37,7 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="styles.css?v=42145af9">
+<link rel="stylesheet" href="styles.css?v=2276c569">
 
 <script src="i18n-dict.js?v=46e3bba7" defer></script>
 <script src="i18n.js?v=3a5d34c9" defer></script>
@@ -785,7 +785,7 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
       <a href="#lab">Explore the Lab</a><a href="#lean-house">Lean House</a><a href="modules">Modules</a><a href="#project">About</a><a href="testimonials">Testimonials</a><a href="#contact">Contact</a><a href="#install" class="fl-inst" data-install><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="12.5" rx="2"/><path d="M12 7.5v6M9.3 10.8L12 13.5l2.7-2.7M8.5 20.5h7"/></svg>Install the app</a><button type="button" class="fl-reset" data-reset-progress hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.6-5.9"/><path d="M4 4.5v4h4"/></svg>Reset my progress</button>
     </div>
   </div>
-  <div class="wrap"><p class="site-rev">Last updated November 10, 2026 · Revision 184</p></div>
+  <div class="wrap"><p class="site-rev">Last updated November 10, 2026 · Revision 185</p></div>
 </footer>
 
 <dialog class="bdlg" id="bioDlg" aria-labelledby="bdlg-h">
@@ -1169,7 +1169,7 @@ document.addEventListener('click', function(e){
      where it spins with just a shadow under it while the line dims behind it. Each spec is tied to a part of the car: it pops
      out next to that part, joined to it by a thin line, while the part is turned toward you, and goes away as it turns away.
      Click empty space, press Esc or "Back to the line" and the car shrinks back onto its pallet. Wide layouts only. */
-  var SR=null, srEl=document.getElementById('showroom'), RT=1.05, TZ=0, SPIN=.0005, LEAD=46, OBST=[];
+  var SR=null, srEl=document.getElementById('showroom'), RT=1.05, TZ=0, SPIN=.0003, LEAD=46, OBST=[];
   function big(){ return Math.min(4, H*.3/(RT*S*1.2247)); }
   var TEXT_R=0;   // right edge of the hero tagline, measured when the showroom opens
   function srTarget(){   // ground point under the big car: middle of the line, nudged left as far as the tagline allows
@@ -1222,40 +1222,50 @@ document.addEventListener('click', function(e){
     EDGE=e>.5?'rgba(0,0,0,'+(.2*(e-.5)*2).toFixed(3)+')':null;
     body(0,0,co,si,SR.M,6,1,TZ,-9,9,e>.6);                // fully built, with studs and spoked rims once it is big
     EDGE=null;
-    // specs, one at a time: the next spec whose part faces you gets a thin line drawn out from that part, its bubble pops
-    // at the end of the line, both follow the part as the car turns, then the bubble goes and the line pulls back in
+    // specs, one at a time. A bubble gets a fixed spot around the car (above, beside or below it, whichever is nearest its part
+    // and clear of the hero text) and stays still for about 5 seconds; only the thin line moves, running from the part (as the
+    // car turns) to the nearest point on the bubble's edge, so the two always stay joined.
     var arrived=!SR.tc && t-SR.t0>800, light=document.documentElement.getAttribute('data-mode')==='light';
-    function depth(sp){ var u=sp.a[0], v=sp.a[1]; return u*(co+si)+v*(co-si); }
-    var Q=SR.q;   // {i: spec index or -1, ph: 'gap'|'line'|'show'|'back', t: phase start}
-    if(!arrived && !SR.tc){ if(Q.i>=0){ SR.specs[Q.i].el.classList.remove('on'); } Q.i=-1; Q.ph='gap'; Q.t=t; }
-    else if(Q.ph==='gap' && t-Q.t>200 && !SR.tc){
-      var pick=-1;   // of the specs whose part faces you, the one shown longest ago (so every spec gets its turn)
-      for(var j=0;j<SR.specs.length;j++){ var c=(Q.next+j)%SR.specs.length; if(depth(SR.specs[c])>.14 && (pick<0 || SR.specs[c].last<SR.specs[pick].last)) pick=c; }
-      if(pick>=0){ Q.i=pick; Q.next=pick+1; Q.ph='line'; Q.t=t; SR.specs[pick].placed=false; SR.specs[pick].last=t; }
+    function depth(sp,c,s_){ var u=sp.a[0], v=sp.a[1]; return u*(c+s_)+v*(c-s_); }
+    function anchor(sp){ var u=sp.a[0], v=sp.a[1]; return P(u*co-v*si, u*si+v*co, sp.a[2]); }
+    var Q=SR.q, LINE_IN=260, HOLD=5000, LINE_OUT=260, GAP=450;
+    if(!arrived && !SR.tc){ if(Q.i>=0) SR.specs[Q.i].el.classList.remove('on'); Q.i=-1; Q.ph='gap'; Q.t=t; }
+    else if(Q.ph==='gap' && t-Q.t>GAP && !SR.tc){
+      var aEnd=ang+HOLD*SPIN, ce=Math.cos(aEnd), se=Math.sin(aEnd), pick=-1, best=1e18;
+      SR.specs.forEach(function(sp,c){   // its part must face you now and still be in view when its 5 s are up
+        if(depth(sp,co,si)<=.12 || depth(sp,ce,se)<=-.1) return;
+        if(sp.last<best){ best=sp.last; pick=c; } });   // the one shown longest ago
+      if(pick>=0){
+        var sp=SR.specs[pick], p=anchor(sp), ctr=P(0,0,.3), Rc=.62*S*1.2247+46;
+        sp.last=t; Q.i=pick; Q.ph='line'; Q.t=t;
+        // measure the bubble, then choose the free spot nearest its part
+        sp.el.style.left='0px'; sp.el.style.top='0px'; var w=sp.el.offsetWidth, hh=sp.el.offsetHeight;
+        var want=Math.atan2(p[1]-ctr[1], p[0]-ctr[0]), spots=[-2.35,-1.95,-1.2,-.79,-.35,0,.45,.9,2.25,2.7,Math.PI], bestS=null, bs=1e9;
+        spots.forEach(function(a){ var sx=ctr[0]+Math.cos(a)*Rc*1.25, sy=ctr[1]+Math.sin(a)*Rc*.95,
+            x=Math.cos(a)>.15 ? sx : Math.cos(a)<-.15 ? sx-w : sx-w/2, y=Math.sin(a)>.3 ? sy : Math.sin(a)<-.3 ? sy-hh : sy-hh/2;
+          x=Math.max(8,Math.min(W-w-8,x)); y=Math.max(8,Math.min(H-hh-8,y));
+          var da=Math.abs(((a-want)%(2*Math.PI)+3*Math.PI)%(2*Math.PI)-Math.PI), sc=da+(hits(x,y,w,hh,OBST)?100:0);
+          if(sc<bs){ bs=sc; bestS=[x,y]; } });
+        sp.x=bestS[0]; sp.y=bestS[1]; sp.w=w; sp.h=hh;
+        sp.el.style.left=sp.x.toFixed(1)+'px'; sp.el.style.top=sp.y.toFixed(1)+'px';
+      }
     }
     if(Q.i>=0){
       var sp=SR.specs[Q.i], age=t-Q.t;
-      if(Q.ph==='line' && age>=200){ Q.ph='show'; Q.t=t; age=0; sp.el.classList.add('on'); }
-      else if(Q.ph==='show' && (age>=2100 || depth(sp)<-.04)){ Q.ph='back'; Q.t=t; age=0; sp.el.classList.remove('on'); }
-      else if(Q.ph==='back' && age>=220){ Q.ph='gap'; Q.t=t; Q.i=-1; }
+      if(Q.ph==='line' && age>=LINE_IN){ Q.ph='show'; Q.t=t; age=0; sp.el.classList.add('on'); }
+      else if(Q.ph==='show' && (age>=HOLD || depth(sp,co,si)<-.2)){ Q.ph='back'; Q.t=t; age=0; sp.el.classList.remove('on'); }
+      else if(Q.ph==='back' && age>=LINE_OUT){ Q.ph='gap'; Q.t=t; Q.i=-1; }
     }
     if(Q.i>=0){
-      var sp=SR.specs[Q.i], age=t-Q.t, u=sp.a[0], v=sp.a[1], p=P(u*co-v*si, u*si+v*co, sp.a[2]), ctr=P(0,0,.3);
-      var dx=p[0]-ctr[0], dy=p[1]-ctr[1], L=Math.hypot(dx,dy)||1; dx/=L; dy/=L;
-      var right=dx>-.2, w=sp.w, hh=sp.h, x=right?p[0]+dx*LEAD:p[0]+dx*LEAD-w, y=p[1]+dy*LEAD-hh/2;
-      for(var i=0;i<8;i++){ var o=hits(x,y,w,hh,OBST); if(!o) break;   // slide off the hero text / title (never further left)
-        var mv=[[0,o[3]+6-y],[0,o[1]-6-hh-y],[o[2]+6-x,0]]; mv.sort(function(m,n){ return Math.abs(m[0])+Math.abs(m[1])-Math.abs(n[0])-Math.abs(n[1]); });
-        x+=mv[0][0]; y+=mv[0][1]; }
-      x=Math.max(8,Math.min(W-w-8,x)); y=Math.max(8,Math.min(H-hh-8,y));
-      if(!sp.placed){ sp.x=x; sp.y=y; sp.placed=true; } else { var f=Math.min(1,dt/90); sp.x+=(x-sp.x)*f; sp.y+=(y-sp.y)*f; }
-      var leftSide = sp.x+w/2>p[0], ex = leftSide ? sp.x : sp.x+w, ey = Math.max(sp.y+12, Math.min(sp.y+hh-12, p[1]+dy*LEAD));
-      sp.el.style.transformOrigin = (leftSide?'0 ':'100% ')+(ey-sp.y).toFixed(0)+'px';   // it grows out of the end of its line
-      sp.el.style.transform='translate3d('+sp.x.toFixed(1)+'px,'+sp.y.toFixed(1)+'px,0)';
-      var k2 = Q.ph==='line' ? age/200 : Q.ph==='back' ? Math.max(0,1-age/220) : 1;   // how much of the line is drawn
-      k2 = k2*k2*(3-2*k2);
-      var lx=p[0]+(ex-p[0])*k2, ly=p[1]+(ey-p[1])*k2, ink=light?'rgba(12,35,64,.6)':'rgba(233,238,244,.7)';
+      var sp=SR.specs[Q.i], age=t-Q.t, p=anchor(sp), I=10;
+      var ex=Math.max(sp.x+I,Math.min(sp.x+sp.w-I,p[0])), ey=Math.max(sp.y+I,Math.min(sp.y+sp.h-I,p[1]));   // nearest point on the bubble ...
+      if(p[0]>sp.x && p[0]<sp.x+sp.w && p[1]>sp.y && p[1]<sp.y+sp.h){}                                     // ... pushed out onto its edge
+      else if(p[0]<=sp.x||p[0]>=sp.x+sp.w){ ex = p[0]<=sp.x ? sp.x : sp.x+sp.w; } else { ey = p[1]<=sp.y ? sp.y : sp.y+sp.h; }
+      if(Q.ph==='line' && age<30) sp.el.style.transformOrigin=(ex-sp.x).toFixed(0)+'px '+(ey-sp.y).toFixed(0)+'px';   // grows out of the line's end
+      var k2 = Q.ph==='line' ? age/LINE_IN : Q.ph==='back' ? Math.max(0,1-age/LINE_OUT) : 1; k2=k2*k2*(3-2*k2);
+      var lx=p[0]+(ex-p[0])*k2, ly=p[1]+(ey-p[1])*k2, ink=light?'rgba(12,35,64,.6)':'rgba(233,238,244,.72)';
       ctx.lineWidth=1; ctx.strokeStyle=ink; ctx.beginPath(); ctx.moveTo(p[0],p[1]); ctx.lineTo(lx,ly); ctx.stroke();
-      ctx.fillStyle=ink; ctx.beginPath(); ctx.arc(lx,ly,2,0,Math.PI*2); ctx.fill();   // the joint where the line meets the bubble
+      ctx.fillStyle=ink; ctx.beginPath(); ctx.arc(lx,ly,2,0,Math.PI*2); ctx.fill();
       ctx.fillStyle='#FF9B4D'; ctx.beginPath(); ctx.arc(p[0],p[1],3.2,0,Math.PI*2); ctx.fill();
       ctx.strokeStyle=light?'#fff':'rgba(7,18,31,.9)'; ctx.lineWidth=1.5; ctx.stroke(); ctx.lineWidth=1;
     }
