@@ -785,7 +785,7 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
       <a href="#lab">Explore the Lab</a><a href="#lean-house">Lean House</a><a href="modules">Modules</a><a href="#project">About</a><a href="testimonials">Testimonials</a><a href="#contact">Contact</a><a href="#install" class="fl-inst" data-install><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="12.5" rx="2"/><path d="M12 7.5v6M9.3 10.8L12 13.5l2.7-2.7M8.5 20.5h7"/></svg>Install the app</a><button type="button" class="fl-reset" data-reset-progress hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.6-5.9"/><path d="M4 4.5v4h4"/></svg>Reset my progress</button>
     </div>
   </div>
-  <div class="wrap"><p class="site-rev">Last updated November 10, 2026 · Revision 186</p></div>
+  <div class="wrap"><p class="site-rev">Last updated November 10, 2026 · Revision 187</p></div>
 </footer>
 
 <dialog class="bdlg" id="bioDlg" aria-labelledby="bdlg-h">
@@ -1171,16 +1171,18 @@ document.addEventListener('click', function(e){
      Click empty space, press Esc or "Back to the line" and the car shrinks back onto its pallet. Wide layouts only. */
   var SR=null, srEl=document.getElementById('showroom'), RT=1.05, TZ=0, SPIN=.0003, LEAD=46, OBST=[];
   function big(){ return Math.min(4, H*.3/(RT*S*1.2247)); }
-  var TEXT_R=0;   // right edge of the hero tagline, measured when the showroom opens
-  function srTarget(){   // ground point under the big car: middle of the line, nudged left as far as the tagline allows
-    var B=big(), c=P(8.95,6,0), half=.66*S*B*1.2247;
-    return [Math.max(c[0]-.03*W, Math.min(c[0], TEXT_R+half-10)), c[1]+.3*S*B, 0, B]; }
+  var TEXT_R=0;   // where the words "Tiger Motors" end, measured when the showroom opens
+  function srTarget(){   // ground point under the big car: centred between the end of "Tiger Motors" and the right edge of the page
+    var B=big(), c=P(8.95,6,0);
+    return [TEXT_R ? (TEXT_R+W)/2 : c[0], c[1]+.3*S*B, 0, B]; }
   function zf(){ var w=cv.offsetWidth; return w ? cv.getBoundingClientRect().width/w : 1; }   // page zoom on big monitors (fit-wide)
   function srCard(){ return SR && srEl ? srEl.querySelector('.sr-card[data-car="'+SR.key+'"]') : null; }
   function elBox(el){ var cr=cv.getBoundingClientRect(), r=el.getBoundingClientRect(); return [r.left-cr.left, r.top-cr.top, r.right-cr.left, r.bottom-cr.top]; }
   function srLayout(){
     var cd=srCard(); if(!cd) return;
-    TEXT_R=0; hero.querySelectorAll('.hero-sub > span').forEach(function(el){ TEXT_R=Math.max(TEXT_R, elBox(el)[2]); });
+    TEXT_R=0; var h1=hero.querySelector('.hero-in h1'), cl=cv.getBoundingClientRect().left;
+    if(h1) [].forEach.call(h1.childNodes,function(n){ var s=n.nodeType===3 ? n.textContent.replace(/\s+$/,'') : ''; if(!s.trim()) return;
+      var rg=document.createRange(); rg.setStart(n,0); rg.setEnd(n,s.length); TEXT_R=Math.max(TEXT_R, rg.getBoundingClientRect().right-cl); });
     var tg=srTarget(), hd=cd.querySelector('.sr-head');
     var z=zf(), hw=hd.offsetWidth*z, hh=hd.offsetHeight*z;   // canvas works in screen px, the overlay in (possibly zoomed) page px
     hd.style.left=(Math.max(12, Math.min(W-hw-12, tg[0]-hw/2))/z).toFixed(1)+'px';
