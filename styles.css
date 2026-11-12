@@ -1936,3 +1936,25 @@ html.fit-wide{--vwz:calc(100vw / var(--z))}
 .grant img{display:block;width:100%;height:clamp(240px,44vw,660px);object-fit:cover;object-position:50% 14%}
 .grant figcaption{position:relative;left:auto;bottom:auto;margin:-28px 0 0 max(16px,calc((var(--vwz) - 1240px)/2 + 40px));width:max-content;max-width:calc(100% - 32px)}
 @media (max-width:640px){.grant img{height:auto;aspect-ratio:16/9}.grant figcaption{margin:-20px 16px 0}}
+
+/* ---- one continuous backdrop from the facility intro to the end of the Lean House:
+   soft blue tones, a faint orange glow, and the lab's grid, with no hard section edges ---- */
+.grid-run{position:relative;isolation:isolate;background:
+  radial-gradient(1200px 520px at 78% 0%,rgba(31,74,124,.20),transparent 70%),
+  radial-gradient(1400px 600px at 50% 26%,rgba(24,62,104,.26),transparent 72%),
+  radial-gradient(900px 520px at 12% 34%,rgba(232,119,34,.06),transparent 65%),
+  radial-gradient(1300px 700px at 30% 82%,rgba(12,35,64,.9),transparent 72%),
+  linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 22%,var(--bg-2) 60%,var(--bg) 100%)}
+.grid-run::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.5;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:56px 56px;background-position:center top;
+  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 240px,#000 calc(100% - 200px),transparent 100%),radial-gradient(ellipse 75% 100% at 50% 50%,#000 30%,transparent 100%);
+  -webkit-mask-composite:source-in;mask-image:linear-gradient(180deg,transparent 0,#000 240px,#000 calc(100% - 200px),transparent 100%),radial-gradient(ellipse 75% 100% at 50% 50%,#000 30%,transparent 100%);mask-composite:intersect}
+.grid-run>.intro,.grid-run>.lab,.grid-run>.house-sec,
+html[data-mode="light"] .grid-run>.lab,html[data-mode="light"] .grid-run>.house-sec{background:transparent}
+.grid-run .lab .gridbg{display:none}
+/* the facility photo melts into the backdrop at the bottom instead of ending on a line */
+.intro-photo{-webkit-mask-image:linear-gradient(180deg,#000 55%,transparent 100%);mask-image:linear-gradient(180deg,#000 55%,transparent 100%)}
+html[data-mode="light"] .grid-run{background:
+  radial-gradient(1400px 600px at 50% 26%,rgba(193,211,232,.45),transparent 72%),
+  radial-gradient(1300px 700px at 30% 82%,rgba(193,211,232,.5),transparent 72%),
+  linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 30%,var(--bg-2) 70%,var(--bg) 100%)}
