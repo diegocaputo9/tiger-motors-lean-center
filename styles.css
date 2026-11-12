@@ -1922,3 +1922,10 @@ html[data-mode="light"] .sr-spec,html[data-mode="light"] .sr-close{background:rg
   .l3-go svg{width:13px;height:13px;transition:transform .2s}
   .lab3d-tile:hover .l3-go svg{transform:translateX(3px)}
 }
+
+/* ---- a little wider: hero and Lean House get a 1320px column (1240 elsewhere); the plant layout card and the NSF photo
+   reach up to 40px past the 1240px column on each side when the screen has room ---- */
+.wrap.hero-in,#lean-house>.wrap{max-width:1320px}
+:root{--vwz:100vw;--bleed:min(40px,max(0px,calc((var(--vwz) - 1240px)/2)))}
+html.fit-wide{--vwz:calc(100vw / var(--z))}
+#lab .plan,.grant{margin-left:calc(-1*var(--bleed));margin-right:calc(-1*var(--bleed));max-width:none}
