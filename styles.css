@@ -29,7 +29,7 @@ a{color:inherit}
 h1,h2,h3,h4{font-family:var(--f-display);margin:0;text-wrap:balance;letter-spacing:-.01em}
 p{margin:0}
 :focus-visible{outline:2px solid var(--orange-2);outline-offset:3px;border-radius:6px}
-.wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:clamp(16px,4vw,40px)}
+.wrap{max-width:1240px;margin-inline:auto;padding-inline:clamp(16px,4vw,40px)}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 /* ---------- shared type ---------- */
@@ -883,7 +883,7 @@ html[data-mode="light"] .pdlg::backdrop{background:rgba(220,228,238,.5)}
 .bdlg-x{flex:none;background:var(--paper-2,#EDF0F3);color:var(--ink);border:0;width:38px;height:38px;border-radius:50%;cursor:pointer;display:grid;place-items:center}
 
 /* ---- balance wide screens: art/photo fade out on the right like the left side ---- */
-:root{--gut:max(24px,calc((100vw - var(--wrap))/2))}
+:root{--gut:max(24px,calc((100vw - 1240px)/2))}
 @media (min-width:1100px){
   .hero::after{background:linear-gradient(270deg,rgb(var(--bg-rgb)) 0,rgba(var(--bg-rgb),.88) calc(var(--gut)*.55),rgba(var(--bg-rgb),.4) calc(var(--gut)*1.05),rgba(var(--bg-rgb),0) calc(var(--gut)*1.6)),linear-gradient(90deg,rgba(7,18,31,.95) 0%,rgba(7,18,31,.78) 38%,rgba(7,18,31,.15) 62%,rgba(7,18,31,0) 75%),linear-gradient(0deg,var(--bg) 0%,transparent 22%)}
   .intro-photo::after{background:linear-gradient(270deg,rgb(var(--bg-rgb)) 0,rgba(var(--bg-rgb),.88) calc(var(--gut)*.55),rgba(var(--bg-rgb),.4) calc(var(--gut)*1.05),rgba(var(--bg-rgb),0) calc(var(--gut)*1.6)),linear-gradient(90deg,rgb(var(--bg-rgb)) 0%,rgba(var(--bg-rgb),.9) 22%,rgba(var(--bg-rgb),.45) 45%,rgba(var(--bg-rgb),.12) 72%,rgba(var(--bg-rgb),.2) 100%),linear-gradient(180deg,rgb(var(--bg-rgb)) 0%,rgba(var(--bg-rgb),0) 16%,rgba(var(--bg-rgb),0) 72%,rgb(var(--bg-rgb)) 100%)}
@@ -1763,7 +1763,7 @@ html[data-mode="light"] .cta-note{color:#8A3E0A}
 @media (min-width:3200px){:root{--z:1.9}}
 @media (min-width:1600px){
   html.fit-wide>body>header,html.fit-wide>body>main,html.fit-wide>body>footer{zoom:var(--z)}
-  html.fit-wide{scroll-padding-top:calc(var(--nav-h)*var(--z) + 12px);--gut:max(24px,calc((100vw / var(--z) - var(--wrap))/2));--vwz:calc(100vw / var(--z))}
+  html.fit-wide{scroll-padding-top:calc(var(--nav-h)*var(--z) + 12px);--gut:max(24px,calc((100vw / var(--z) - 1240px)/2))}
   html.fit-wide .hero{min-height:calc(92vh / var(--z))}
   html.fit-wide .pdlg{max-width:min(1040px,calc(100vw / var(--z) - 32px));max-height:calc(100svh / var(--z) - 48px)}
   html.fit-wide .pdlg-in{max-height:calc(100svh / var(--z) - 48px)}
@@ -1922,8 +1922,3 @@ html[data-mode="light"] .sr-spec,html[data-mode="light"] .sr-close{background:rg
   .l3-go svg{width:13px;height:13px;transition:transform .2s}
   .lab3d-tile:hover .l3-go svg{transform:translateX(3px)}
 }
-
-/* ---- wider site: main column 1280px; a few pieces (plan card, NSF photo) break out up to 64px past it on each side
-   (only when the screen has room for it) ---- */
-:root{--wrap:1240px;--vwz:100vw;--bleed:min(40px,max(0px,calc((var(--vwz) - var(--wrap))/2)))}
-#lab .plan,.grant{margin-left:calc(-1*var(--bleed));margin-right:calc(-1*var(--bleed));max-width:none}
