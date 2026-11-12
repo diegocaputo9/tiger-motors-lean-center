@@ -1925,5 +1925,5 @@ html[data-mode="light"] .sr-spec,html[data-mode="light"] .sr-close{background:rg
 
 /* ---- wider site: main column 1280px; a few pieces (plan card, NSF photo) break out up to 64px past it on each side
    (only when the screen has room for it) ---- */
-:root{--wrap:1280px;--vwz:100vw;--bleed:min(48px,max(0px,calc((var(--vwz) - var(--wrap))/2)))}
+:root{--wrap:1240px;--vwz:100vw;--bleed:min(40px,max(0px,calc((var(--vwz) - var(--wrap))/2)))}
 #lab .plan,.grant{margin-left:calc(-1*var(--bleed));margin-right:calc(-1*var(--bleed));max-width:none}
