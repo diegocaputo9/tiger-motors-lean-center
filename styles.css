@@ -1931,16 +1931,8 @@ html.fit-wide{--vwz:calc(100vw / var(--z))}
 #lab .plan{margin-left:calc(-1*var(--bleed));margin-right:calc(-1*var(--bleed));max-width:none}
 
 /* ---- full-width pieces: they break out of the centred column to the screen edges ---- */
-/* lab photo strip between the intro and the lab section: photos flush to each other, drifting slowly */
-.lab-strip{position:relative;overflow:hidden;height:clamp(180px,21vw,320px);background:#0A1828;border-block:1px solid var(--line)}
-.ls-track{display:flex;width:max-content;height:100%;animation:lsDrift 110s linear infinite;will-change:transform}
-.lab-strip:hover .ls-track{animation-play-state:paused}
-.ls-set{display:flex;height:100%}
-.ls-set img{height:100%;width:auto;aspect-ratio:4/3;object-fit:cover;display:block;filter:saturate(.9)}
-@keyframes lsDrift{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
-@media (prefers-reduced-motion:reduce){.ls-track{animation:none}.lab-strip{overflow-x:auto}.ls-set+.ls-set{display:none}}
-/* NSF photo: a wide, short band from edge to edge (not taller, just wider) */
-.grant{width:var(--vwz);max-width:none;margin-left:calc(50% - var(--vwz)/2);margin-right:0;border-radius:0;border-inline:0;aspect-ratio:auto;height:clamp(240px,27vw,420px)}
-.grant img{object-position:50% 20%}
-.grant figcaption{left:max(18px,calc((var(--vwz) - 1240px)/2 + 40px))}
-@media (max-width:640px){.grant{aspect-ratio:auto;height:240px}.grant figcaption{left:10px}}
+/* NSF photo: a band from edge to edge, tall enough to show the faces and the cars in their hands; the caption sits under it, in line with the text column */
+.grant{width:var(--vwz);max-width:none;margin-left:calc(50% - var(--vwz)/2);margin-right:0;border-radius:0;border-inline:0;aspect-ratio:auto;height:auto;overflow:visible}
+.grant img{display:block;width:100%;height:clamp(240px,44vw,660px);object-fit:cover;object-position:50% 14%}
+.grant figcaption{position:relative;left:auto;bottom:auto;margin:-28px 0 0 max(16px,calc((var(--vwz) - 1240px)/2 + 40px));width:max-content;max-width:calc(100% - 32px)}
+@media (max-width:640px){.grant img{height:auto;aspect-ratio:16/9}.grant figcaption{margin:-20px 16px 0}}
