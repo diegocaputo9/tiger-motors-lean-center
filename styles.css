@@ -2019,3 +2019,7 @@ html[data-mode="light"] .grid-run{background:
   -webkit-mask-image:linear-gradient(90deg,#000 0,#000 40%,transparent 40%,transparent 60%,#000 60%);mask-image:linear-gradient(90deg,#000 0,#000 40%,transparent 40%,transparent 60%,#000 60%)}
 /* dividers: just the gray hairline for now */
 .sec-div::after,.sec-div i{display:none}
+
+/* power: looping animations rest while their section is off screen (class set by a script on the home page) */
+.is-off,.is-off *,.is-off *::before,.is-off *::after{animation-play-state:paused!important}
+.tm-idle *,.tm-idle *::before,.tm-idle *::after{animation-play-state:paused!important}
