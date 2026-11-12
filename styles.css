@@ -2008,3 +2008,9 @@ html[data-mode="light"] .grid-run{background:
 .news-cycle{animation:ncPulse 3.2s ease-in-out infinite}
 .news-cycle:hover,.news-cycle:focus-visible{animation:none}
 @media (prefers-reduced-motion:reduce){.news-cycle{animation:none}}
+
+/* section divider: a hairline across the screen with a small glowing orange node in the middle */
+.sec-div{position:relative;height:1px;margin:0;z-index:2}
+.sec-div::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,var(--line-2) 18%,rgba(232,119,34,.55) 50%,var(--line-2) 82%,transparent)}
+.sec-div i{position:absolute;left:50%;top:50%;width:44px;height:6px;border-radius:999px;transform:translate(-50%,-50%);background:linear-gradient(90deg,#E87722,#FF9B4D);box-shadow:0 0 0 4px rgba(var(--bg-rgb),1),0 0 18px 2px rgba(232,119,34,.45)}
+html[data-mode="light"] .sec-div i{box-shadow:0 0 0 4px rgb(var(--bg-rgb)),0 0 14px rgba(232,119,34,.35)}
