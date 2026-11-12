@@ -204,5 +204,14 @@ button{font:inherit;color:inherit;cursor:pointer}
 <div class="splash" id="splash" aria-hidden="true"><b>Tiger Motors Lab</b><span>Integrated Manufacturing Facility · Auburn University</span></div>
 <div class="loading" id="loading"><div><span id="loadTxt">Loading the lab…</span><i id="loadBar"></i></div></div>
 <script type="module" src="lab3d/app.js?v=0.4.0"></script>
+<script>
+/* back to the home page: return to the exact spot the visitor left (history keeps the scroll); otherwise open the home page */
+(function(){ var a=document.querySelector('.top .brand'); if(!a) return;
+  a.addEventListener('click',function(e){ if(e.metaKey||e.ctrlKey||e.shiftKey||e.button) return;
+    try{ sessionStorage.setItem('tm3dBack','1'); }catch(_){}
+    var same=false; try{ same=document.referrer && new URL(document.referrer).origin===location.origin && !/lab-3d/.test(new URL(document.referrer).pathname); }catch(_){}
+    if(same && history.length>1){ e.preventDefault(); history.back(); } });
+})();
+</script>
 </body>
 </html>

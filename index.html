@@ -781,7 +781,7 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
       <a href="#lab">Explore the Lab</a><a href="#lean-house">Lean House</a><a href="modules">Modules</a><a href="#project">About</a><a href="testimonials">Testimonials</a><a href="#contact">Contact</a><a href="#install" class="fl-inst" data-install><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="12.5" rx="2"/><path d="M12 7.5v6M9.3 10.8L12 13.5l2.7-2.7M8.5 20.5h7"/></svg>Install the app</a><button type="button" class="fl-reset" data-reset-progress hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.6-5.9"/><path d="M4 4.5v4h4"/></svg>Reset my progress</button>
     </div>
   </div>
-  <div class="wrap"><p class="site-rev">Last updated November 12, 2026 · Revision 194</p></div>
+  <div class="wrap"><p class="site-rev">Last updated November 12, 2026 · Revision 195</p></div>
 </footer>
 
 <dialog class="bdlg" id="bioDlg" aria-labelledby="bdlg-h">
@@ -1326,6 +1326,17 @@ document.addEventListener('click', function(e){
 
 
 if(reduce||LITE){var ps=document.querySelector('.plan-svg'); if(ps&&ps.pauseAnimations){ try{ps.setCurrentTime(0);}catch(e){} ps.pauseAnimations(); }}
+/* ---------------- 3D lab: remember where the visitor was, so "back" from /lab-3d lands on the same spot ---------------- */
+(function(){
+  var K='tm3dReturn';
+  document.addEventListener('click',function(e){ var a=e.target.closest&&e.target.closest('a[href^="lab-3d"]'); if(!a) return;
+    try{ sessionStorage.setItem(K,JSON.stringify({y:scrollY,t:Date.now()})); }catch(_){} },true);
+  function restore(){ var v=null; try{ v=JSON.parse(sessionStorage.getItem(K)||'null'); if(!sessionStorage.getItem('tm3dBack')) v=null; sessionStorage.removeItem('tm3dBack'); }catch(_){}
+    if(!v||Date.now()-v.t>6*3600e3) return;
+    var go=function(){ if(Math.abs(scrollY-v.y)>40) window.scrollTo({top:v.y,behavior:'instant'}); };
+    go(); requestAnimationFrame(go); setTimeout(go,250); window.addEventListener('load',function(){ setTimeout(go,60); },{once:true}); }
+  restore(); window.addEventListener('pageshow',function(e){ if(e.persisted) restore(); });
+})();
 /* ---------------- 3D lab tile: swap in the moving preview once the tile is near the screen (still image with reduced motion) ---------------- */
 (function(){
   var im=document.querySelector('.lab3d-tile img'); if(!im||reduce||!('IntersectionObserver' in window)) return;
