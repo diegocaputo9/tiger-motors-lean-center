@@ -832,7 +832,7 @@ html[data-mode="light"] .we-title{fill:#C2560F!important}
 .marquee{display:block;width:100%;border:0;padding:6px 0;background:none;cursor:pointer;overflow:hidden;
   -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 9%,#000 91%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 9%,#000 91%,transparent 100%)}
 .marquee:focus-visible{outline-offset:-2px}
-.mq-track{display:flex;width:max-content;gap:18px;animation:mq 92s linear infinite;will-change:transform}
+.mq-track{display:flex;width:max-content;gap:18px;animation:mq 125s linear infinite;will-change:transform}
 @keyframes mq{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
 .mq-set{display:flex;gap:18px;padding-right:0}
 .mq-item{flex:none;display:grid;place-items:center;height:calc(92px*var(--k));min-width:calc(200px*var(--k));padding:0 calc(30px*var(--k));border-radius:16px;background:rgba(255,255,255,.96);border:1px solid rgba(255,255,255,.18);box-shadow:0 14px 30px -18px rgba(0,0,0,.55);transition:transform .35s var(--ease),box-shadow .35s}
@@ -1891,7 +1891,18 @@ html[data-mode="light"] .sr-spec,html[data-mode="light"] .sr-close{background:rg
 @media (prefers-reduced-motion:reduce){.showroom{display:none}}
 
 /* ---- 3D lab tile in the plan card: a square with a moving preview of the 3D model, links to /lab-3d ---- */
-.lab3d-tile{display:none}
+/* phones and tablets: a slim row, the moving clip on the left and the title to its right */
+@media (max-width:899.98px){
+  .plan.has3d>.lab3d-tile{display:flex;align-items:center;gap:14px;margin:0;padding:8px 14px 8px 8px;border-radius:16px;text-decoration:none;color:var(--text);
+    background:var(--glass);border:1px solid var(--line-2);-webkit-tap-highlight-color:transparent;transition:transform .2s cubic-bezier(.23,1,.32,1),border-color .2s}
+  .plan.has3d>.lab3d-tile:active{transform:scale(.98);border-color:var(--orange-2)}
+  .lab3d-tile img{flex:none;width:76px;height:76px;border-radius:11px;object-fit:cover;background:#0A1828}
+  .lab3d-tile .l3-txt{display:grid;gap:2px;min-width:0}
+  .lab3d-tile .l3-txt small{font:600 12px/1.2 var(--f-label);letter-spacing:.1em;text-transform:uppercase;color:var(--orange-2)}
+  .lab3d-tile .l3-txt b{font:700 17px/1.15 var(--f-display);font-stretch:104%}
+  .lab3d-tile .l3-go{display:inline-flex;align-items:center;gap:6px;margin-top:3px;font:600 13px var(--f-label);color:var(--text-2)}
+  .lab3d-tile .l3-go svg{width:13px;height:13px}
+}
 @media (min-width:900px){
   .plan.has3d{grid-template-columns:minmax(0,1fr) auto}
   .plan.has3d>*{grid-column:1/-1}
