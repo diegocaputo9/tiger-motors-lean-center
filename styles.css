@@ -1976,3 +1976,8 @@ html[data-mode="light"] .grid-run{background:
 /* 3D tile clip: zoom in so the lab fills the tile above the title */
 .lab3d-tile video{transform:scale(1.45)}
 @media (min-width:900px){.plan.has3d>.lab3d-tile video{transform:scale(1.45) translateY(-9%)}.plan.has3d>.lab3d-tile:hover video{transform:scale(1.5) translateY(-9%)}}
+
+/* reading progress line under the menu bar: 2px, accent orange, shows once the bar turns solid */
+.nav-prog{position:absolute;left:0;right:0;bottom:-1px;height:2px;transform:scaleX(0);transform-origin:0 50%;pointer-events:none;
+  background:linear-gradient(90deg,rgba(232,119,34,.55),var(--orange) 60%,#FF9B4D);box-shadow:0 0 10px rgba(232,119,34,.45);border-radius:0 2px 2px 0;opacity:0;transition:opacity .35s}
+.nav.scrolled .nav-prog{opacity:1}
