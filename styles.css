@@ -1981,3 +1981,24 @@ html[data-mode="light"] .grid-run{background:
 .nav-prog{position:absolute;left:0;right:0;bottom:-1px;height:2px;transform:scaleX(0);transform-origin:0 50%;pointer-events:none;
   background:linear-gradient(90deg,rgba(232,119,34,.55),var(--orange) 60%,#FF9B4D);box-shadow:0 0 10px rgba(232,119,34,.45);border-radius:0 2px 2px 0;opacity:0;transition:opacity .35s}
 .nav.scrolled .nav-prog{opacity:1}
+
+/* ---- quieter labels (Nov 12): affiliation line in the hero, "– Training" tag, big step numbers ---- */
+.hero h1{margin-top:54px}
+.hero-aff+.hero-sub{margin-top:24px}
+.hero-aff{margin:18px 0 0;font:400 clamp(15px,1.25vw,18px)/1.4 var(--f-body);color:var(--text-3);letter-spacing:.01em}
+.h2-tag{font-weight:300;font-stretch:100%;color:var(--text-3);font-size:.55em;letter-spacing:0;white-space:nowrap;vertical-align:.18em}
+.lab-step{align-items:center;gap:6px 20px}
+.lab-step .ls-n{grid-row:1/3;align-self:start;font:700 clamp(44px,4.4vw,60px)/.9 var(--f-display);font-stretch:110%;letter-spacing:-.02em;color:var(--orange-2);min-width:.7em;text-align:center}
+.lab-step p{grid-column:2}
+/* the play / pause pill keeps one width whichever label it shows */
+.kb-play{min-width:96px;justify-content:center}
+/* account progress: Show and minimize get the same hover nudge and press as the other buttons */
+.ab-show svg,.ab-min svg{transition:transform .25s var(--ease)}
+.ab-show:hover svg{transform:translateY(2px)}
+.ab-min:hover svg{transform:translateY(-2px)}
+.ab-show:active,.ab-min:active{transform:scale(.95)}
+.ab-show,.ab-min{transition:background .2s,border-color .2s,transform .15s var(--ease)}
+/* project leads: the underline slides and the name lifts a little on hover */
+.leads a{display:inline-block;text-decoration:none;background:linear-gradient(var(--orange),var(--orange)) 0 100%/100% 1px no-repeat;padding-bottom:2px;transition:transform .25s var(--ease),background-size .3s var(--ease),color .2s}
+.leads a:hover{transform:translateY(-2px);color:var(--orange-2);background-size:100% 2px}
+@media (prefers-reduced-motion:reduce){.leads a,.ab-show svg,.ab-min svg{transition:none}}
