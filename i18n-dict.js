@@ -5508,4 +5508,5 @@ window.TM_I18N = {
 "re:^Batches of (\\d+)$": ["Lotes de $1", "Lose zu $1", "Lotti da $1"],
 "re:^All (\\d+) out$": ["Las $1 listas", "Alle $1 fertig", "Tutti i $1 finiti"],
 "re:^(\\d+) min$": ["$1 min", "$1 Min.", "$1 min"],
+"Please understand the structure of the house with this quick tour.": ["Conoce la estructura de la casa con este breve recorrido.", "Lerne mit dieser kurzen Tour den Aufbau des Hauses kennen.", "Scopri la struttura della casa con questo breve tour."],
 };
