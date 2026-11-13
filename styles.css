@@ -2023,3 +2023,23 @@ html[data-mode="light"] .grid-run{background:
 /* power: looping animations rest while their section is off screen (class set by a script on the home page) */
 .is-off,.is-off *,.is-off *::before,.is-off *::after{animation-play-state:paused!important}
 .tm-idle *,.tm-idle *::before,.tm-idle *::after{animation-play-state:paused!important}
+
+/* Lean House lock: the materials box stays covered until the visitor finishes the one-minute tour */
+.panel.locked>:not(.house-lock){filter:blur(7px);opacity:.28;pointer-events:none;user-select:none}
+.panel.locked{overflow:hidden}
+.house-lock{position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px;padding:clamp(24px,3vw,40px);background:linear-gradient(180deg,rgba(7,18,31,.18),rgba(7,18,31,.42));animation:hlIn .5s var(--ease) both}
+html[data-mode="light"] .house-lock{background:linear-gradient(180deg,rgba(255,255,255,.2),rgba(255,255,255,.5))}
+.house-lock h3{font:600 clamp(20px,2vw,24px)/1.2 var(--f-display);color:var(--text);margin:4px 0 0}
+.house-lock p{max-width:36ch;margin:0;font-size:15px;line-height:1.55;color:var(--text-2)}
+.house-lock .btn{margin-top:6px}
+.hl-icon{display:grid;place-items:center;width:56px;height:56px;border-radius:50%;color:var(--orange-2);background:rgba(232,119,34,.12);border:1px solid rgba(232,119,34,.35);box-shadow:inset 0 1px 0 rgba(255,255,255,.12)}
+.hl-icon svg{width:26px;height:26px}
+.panel.unlocking>*{animation:hlReveal .8s var(--ease) both}
+@keyframes hlIn{from{opacity:0}to{opacity:1}}
+@keyframes hlReveal{from{filter:blur(7px);opacity:.3}to{filter:none;opacity:1}}
+.house-refresh{margin:14px 0 0;text-align:center;font-size:14px;line-height:1.5;color:var(--text-2)}
+.house-refresh .linkline{background:none;border:0;padding:0;cursor:pointer;font:inherit;font-weight:600;text-transform:none;letter-spacing:0;color:var(--orange-2);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+.house-refresh .linkline:hover{text-decoration-thickness:2px}
+@media (prefers-reduced-motion:reduce){.house-lock,.panel.unlocking>*{animation:none}}
+/* JIT module: the 3D flow lesson sits where the push/pull game was */
+.jit-flow{margin-bottom:22px}

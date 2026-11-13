@@ -1,0 +1,100 @@
+/* Flow lesson (flow-lesson.js). Every color and font points at the site's own
+   tokens in styles.css, so it follows the palette and the dark / light mode. */
+.fls{
+  /* 3D model colors */
+  --fls-accent:var(--orange);          /* finished parts */
+  --fls-raw:#55677d;                   /* raw parts */
+  --fls-body:#17304b;                  /* machines */
+  --fls-floor:#0d1f33;                 /* floor plates */
+  --fls-edge:#7f93aa;                  /* outlines */
+  --fls-head:#e9eef4;                  /* press heads */
+  --fls-part-edge:#07121f;
+  --fls-light:0;
+  display:block;
+}
+html[data-mode="light"] .fls{
+  --fls-raw:#b9c4d1;
+  --fls-body:#f4f6f9;
+  --fls-floor:#e2e8ef;
+  --fls-edge:#8a99ab;
+  --fls-head:#0c2340;
+  --fls-part-edge:#0c1b2e;
+  --fls-light:1;
+}
+
+/* banner */
+.fls-banner{
+  display:flex;align-items:center;gap:14px;width:100%;padding:10px 18px 10px 10px;
+  background:var(--glass);border:1px solid var(--line);border-radius:var(--r);
+  backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);
+  color:var(--text);font:400 15px/1.3 var(--f-body);text-align:left;cursor:pointer;
+  transition:border-color .25s,background .25s,transform .25s var(--ease);
+}
+.fls-banner:hover{border-color:var(--line-2);background:var(--glass-hi)}
+.fls-banner:active{transform:scale(.995)}
+.fls-mark{display:grid;place-items:center;width:42px;height:42px;flex:none;border-radius:var(--r-sm);
+  color:var(--orange-2);background:rgba(232,119,34,.12);border:1px solid rgba(232,119,34,.3)}
+.fls-words{flex:1;min-width:0;display:flex;flex-wrap:wrap;align-items:baseline;column-gap:14px}
+.fls-title{font:600 16px/1.3 var(--f-display);letter-spacing:-.01em}
+.fls-teaser{color:var(--text-2);font-size:14px;opacity:.85}
+.fls-action{font:600 12px/1 var(--f-label);letter-spacing:.12em;text-transform:uppercase;color:var(--orange-2);white-space:nowrap}
+.fls-plus{position:relative;width:14px;height:14px;flex:none;color:var(--orange-2);transition:transform .35s var(--ease)}
+.fls-plus::before,.fls-plus::after{content:"";position:absolute;left:0;right:0;top:50%;height:2px;margin-top:-1px;background:currentColor;border-radius:1px}
+.fls-plus::after{transform:rotate(90deg)}
+.fls-open .fls-plus{transform:rotate(45deg)}
+@media (max-width:640px){.fls-action{display:none}}
+
+/* opening panel */
+.fls-panel{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .45s var(--ease),opacity .3s}
+.fls-open .fls-panel{grid-template-rows:1fr;opacity:1}
+.fls-inner{overflow:hidden;min-height:0}
+.fls-body{display:grid;gap:32px;align-items:center;padding-top:28px}
+@media (min-width:980px){.fls-body{grid-template-columns:.8fr 1.2fr;gap:56px}}
+.fls-text{color:var(--text-2);font-size:16px;line-height:1.62;max-width:52ch}
+.fls-hint{margin-top:18px;color:var(--text-2);font-size:13px;opacity:.75}
+
+/* model card */
+.fls-card{background:var(--glass);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;
+  backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%)}
+.fls-stage{position:relative;aspect-ratio:16/10;overflow:hidden}
+@media (max-width:640px){.fls-stage{aspect-ratio:5/4}}
+.fls-canvas{position:absolute;inset:0;width:100%;height:100%;cursor:grab}
+.fls-canvas:active{cursor:grabbing}
+.fls-error{position:absolute;inset:0;display:grid;place-items:center;padding:24px;text-align:center;font-size:13px;color:var(--text-2)}
+.fls-legend,.fls-clock{position:absolute;top:12px;margin:0;padding:8px 12px;list-style:none;pointer-events:none;
+  background:rgba(var(--bg-rgb,7,18,31),.7);border:1px solid var(--line);border-radius:var(--r-sm);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font-size:12px;line-height:1.6;color:var(--text)}
+.fls-legend{left:12px}
+.fls-legend b{font-weight:400;opacity:.65}
+.fls-clock{right:12px;text-align:right;display:grid}
+.fls-label{font:500 11px/1.4 var(--f-label);letter-spacing:.14em;text-transform:uppercase;opacity:.7}
+.fls-num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.fls-clock .fls-num{font-size:14px}
+.fls-pin{position:absolute;left:0;top:0;pointer-events:none;white-space:nowrap;will-change:transform;
+  font:500 11px/1 var(--f-label);letter-spacing:.14em;text-transform:uppercase;color:var(--text-2);opacity:.85}
+.fls-pin-count{font-family:var(--f-mono);letter-spacing:0;font-size:12px;color:var(--text);opacity:1}
+
+/* results */
+.fls-table{width:calc(100% - 36px);margin:2px 18px 0;border-collapse:collapse}
+.fls-table th,.fls-table td{padding:10px 0;text-align:right}
+.fls-table thead th{font:500 11px/1.4 var(--f-label);letter-spacing:.14em;text-transform:uppercase;color:var(--text-2);opacity:.75;padding-left:16px}
+.fls-table tbody tr{border-top:1px solid var(--line)}
+.fls-table tbody th{text-align:left;font:500 14px/1.3 var(--f-body);color:var(--text);display:flex;align-items:center;gap:9px}
+.fls-table tbody th i{width:8px;height:8px;border-radius:2px;flex:none}
+.fls-key-flow{background:var(--orange)}
+.fls-key-batch{background:var(--text-2);opacity:.55}
+.fls-table td.fls-num{font-size:14px;color:var(--text-2);opacity:.45;transition:opacity .3s,color .3s}
+.fls-table td.fls-reached{opacity:1;color:var(--text)}
+
+/* toolbar */
+.fls-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px;border-top:1px solid var(--line)}
+.fls-sizes{display:flex;align-items:center;gap:10px}
+.fls-size-label{padding-left:6px;font-size:13px;color:var(--text-2);opacity:.8}
+.fls-seg{display:flex;padding:4px;gap:2px;border-radius:999px;background:rgba(160,185,212,.1)}
+.fls-seg-btn{min-width:40px;padding:6px 12px;border:0;border-radius:999px;background:transparent;color:var(--text-2);font-size:13px;cursor:pointer;transition:background .2s,color .2s}
+.fls-seg-btn:hover{color:var(--text)}
+.fls-seg-btn[aria-checked="true"]{background:var(--orange);color:#fff}
+.fls-again{display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 12px;border:0;border-radius:999px;background:transparent;color:var(--text-2);font:400 13px/1 var(--f-body);cursor:pointer;transition:background .2s,color .2s}
+.fls-again:hover{background:rgba(160,185,212,.12);color:var(--text)}
+
+@media (prefers-reduced-motion:reduce){.fls-panel,.fls-plus,.fls-banner{transition:none}}
