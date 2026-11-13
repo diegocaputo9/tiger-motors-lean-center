@@ -763,7 +763,7 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
       <a href="#lab">Explore the Lab</a><a href="#lean-house">Lean House</a><a href="modules">Modules</a><a href="#project">About</a><a href="testimonials">Testimonials</a><a href="#contact">Contact</a><a href="#install" class="fl-inst" data-install><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="12.5" rx="2"/><path d="M12 7.5v6M9.3 10.8L12 13.5l2.7-2.7M8.5 20.5h7"/></svg>Install the app</a><button type="button" class="fl-reset" data-reset-progress hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.6-5.9"/><path d="M4 4.5v4h4"/></svg>Reset my progress</button>
     </div>
   </div>
-  <div class="wrap"><p class="site-rev">Last updated November 13, 2026 · Revision 217</p></div>
+  <div class="wrap"><p class="site-rev">Last updated November 13, 2026 · Revision 218</p></div>
 </footer>
 
 <dialog class="bdlg" id="bioDlg" aria-labelledby="bdlg-h">
@@ -1299,11 +1299,11 @@ document.addEventListener('click', function(e){
     // labels
     if(!reduce){
       if(t>nextAmber){ amberIdx=Math.floor(Math.random()*stations.length); amberUntil=t+1800; nextAmber=t+6500; }
-      if(heroOn && !document.hidden && !window.TM_IDLE) requestAnimationFrame(draw); else heroRun=false;   // stop drawing while the hero is off screen
+      if(heroOn && !document.hidden) requestAnimationFrame(draw); else heroRun=false;   // stops only when the hero is scrolled away or the tab is hidden/minimized, never just because the mouse is still
     }
   }
   var heroOn=true, heroRun=true;
-  function heroWake(){ if(!reduce && heroOn && !heroRun && !document.hidden && !window.TM_IDLE){ heroRun=true; requestAnimationFrame(draw); } }
+  function heroWake(){ if(!reduce && heroOn && !heroRun && !document.hidden){ heroRun=true; requestAnimationFrame(draw); } }
   if('IntersectionObserver' in window){ new IntersectionObserver(function(es){ heroOn=es[0].isIntersecting; heroWake(); }).observe(cv.parentNode||cv); }
   document.addEventListener('visibilitychange', heroWake); document.addEventListener('tm-wake', heroWake);
   resize(); window.addEventListener('resize', function(){ resize(); if(reduce) draw(0); });
