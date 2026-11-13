@@ -55,7 +55,9 @@ function cardHTML(k, mini){
                : '<button type="button" class="rc-act q-act" data-quiz-open="' + k + '"><span>' + verb + '</span>' + ARROW + '</button>';
   }
   if(mini){
-    return { cls: cls, html: '<span class="ic">' + (s.open ? (s.passed ? CHECK : QICON) : LOCK) + '</span><span><b>' + title + '</b><small>' + line + '</small></span>' + act };
+    // in the house panel the quiz is the module's last step, numbered after its resources
+    var step = s.m.items.reduce(function(mx, it){ return Math.max(mx, it.step || 0); }, 0) + 1;
+    return { cls: cls, html: '<span class="ic">' + (s.open ? (s.passed ? CHECK : QICON) : LOCK) + '</span><span>' + (step ? '<em class="m-step">Step ' + step + '</em>' : '') + '<b>' + title + '</b><small>' + line + '</small></span>' + act };
   }
   var top = '<div class="rc-top"><span class="badge t-quiz">' + (s.open ? QICON : LOCK) + 'Quiz</span>' +
     (s.open ? '' : '<span class="rc-step q-count">' + s.n + '/' + s.of + '</span>') + '</div>';
