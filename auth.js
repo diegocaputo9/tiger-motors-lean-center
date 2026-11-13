@@ -188,8 +188,9 @@ function resetLocal(){
   if(state.user) return;
   var q = 'Reset your progress on this device? Your checkmarks, lecture watch progress and quiz scores will be cleared.';
   if(!confirm(window.TMI18n ? TMI18n.t(q) : q)) return;
-  ['tm-progress-local', 'tm-watch', 'tm-quiz-best'].forEach(function(k){ try { localStorage.removeItem(k); } catch(e){} });
+  ['tm-progress-local', 'tm-watch', 'tm-quiz-best', 'tm-house-toured'].forEach(function(k){ try { localStorage.removeItem(k); } catch(e){} });
   state.done = {}; state.watch = {}; emit();
+  document.dispatchEvent(new Event('tm-progress-reset'));   // the home page brings the Lean House tour prompt back, as on a first visit
   toast('Your progress was reset.');
 }
 

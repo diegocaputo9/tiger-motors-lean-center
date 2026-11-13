@@ -2061,3 +2061,9 @@ html[data-mode="light"] .house-call{background:rgba(255,255,255,.7)}
 @keyframes hcIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
 @media (max-width:900px){.house-call{position:static;max-width:none;margin:0 0 14px;grid-template-columns:1fr auto;align-items:center}.hc-arrow{display:none}}
 @media (prefers-reduced-motion:reduce){.house-call{animation:none}}
+/* legal pages row at the very bottom of the footer (privacy now; terms of use and others get added here) */
+.foot-legal{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 24px;margin-top:28px;padding-top:18px;border-top:1px solid var(--line)}
+.legal{display:flex;flex-wrap:wrap;gap:6px 22px}
+.legal a{font-size:13px;color:var(--text-3);text-decoration:none;transition:color .2s}
+.legal a:hover{color:var(--text)}
+.foot-legal .site-rev{margin-top:0}
