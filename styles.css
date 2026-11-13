@@ -2043,3 +2043,8 @@ html[data-mode="light"] .house-lock{background:linear-gradient(180deg,rgba(255,2
 @media (prefers-reduced-motion:reduce){.house-lock,.panel.unlocking>*{animation:none}}
 /* JIT module: the 3D flow lesson sits where the push/pull game was */
 .jit-flow{margin-bottom:22px}
+/* the refresher under the house types itself in: the line is revealed left to right in steps, with a caret riding the edge */
+.house-refresh.typing>span{display:inline-block;position:relative;clip-path:inset(0 100% 0 0);animation:hrType 2.4s steps(64,end) .35s forwards}
+.house-refresh.typing>span::after{content:"";position:absolute;top:2px;bottom:2px;right:-3px;width:2px;background:var(--orange-2);animation:hrCaret .8s steps(1) 3 2.75s;opacity:0}
+@keyframes hrType{to{clip-path:inset(0 -6px 0 0)}}
+@keyframes hrCaret{0%{opacity:1}50%{opacity:0}}
