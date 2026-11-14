@@ -12,20 +12,36 @@ var ATTRS = ['placeholder', 'aria-label', 'title', 'alt'];
 var lang = 'en';
 try { var saved = localStorage.getItem(KEY); if(IDX[saved] !== undefined) lang = saved; } catch(e){}
 
-var DICT = window.TM_I18N || {}, plain = {}, pats = [];
+// Dictionaries are generated from i18n-dict.js by tools/stamp-assets.py.
+// English needs no download; each other language is fetched once and cached in memory.
+var plain = {}, pats = [], dictionaries = {}, pending = {}, selection = 0;
+var scriptURL = new URL(document.currentScript.src);
+var dictionaryVersion = '4f996e42';
 function norm(s){ return String(s).replace(/\s+/g, ' ').trim(); }
-Object.keys(DICT).forEach(function(k){
-  if(k.indexOf('re:') === 0) pats.push({ re: new RegExp(k.slice(3)), v: DICT[k] });
-  else plain[norm(k)] = DICT[k];
-});
+function useDictionary(dict){
+  plain = {}; pats = [];
+  Object.keys(dict).forEach(function(k){
+    if(k.indexOf('re:') === 0) pats.push({re:new RegExp(k.slice(3)),v:dict[k]});
+    else plain[norm(k)] = dict[k];
+  });
+}
+function loadDictionary(l){
+  if(l === 'en') return Promise.resolve({});
+  if(dictionaries[l]) return Promise.resolve(dictionaries[l]);
+  if(!pending[l]) pending[l] = fetch(new URL('i18n/' + l + '.json?v=' + dictionaryVersion, scriptURL)).then(function(r){
+    if(!r.ok) throw new Error('Translation download failed');
+    return r.json();
+  }).then(function(d){ dictionaries[l]=d; delete pending[l]; return d; },function(e){ delete pending[l]; throw e; });
+  return pending[l];
+}
 function lookup(en){
   if(lang === 'en') return null;
-  var i = IDX[lang], key = norm(en), v = plain[key];
-  if(v && v[i]) return v[i];
+  var key = norm(en), v = plain[key];
+  if(v) return v;
   for(var p = 0; p < pats.length; p++){
     var m = key.match(pats[p].re);
-    if(m && pats[p].v[i]){
-      var out = pats[p].v[i].replace(/\$(\d)/g, function(_, n){ var g = m[+n] || ''; var t = lookup(g); return t || g; });
+    if(m && pats[p].v){
+      var out = pats[p].v.replace(/\$(\d)/g, function(_, n){ var g = m[+n] || ''; var t = lookup(g); return t || g; });
       if(out !== key) return out;   // a pattern that changes nothing gives way to the next one
     }
   }
@@ -105,6 +121,10 @@ function watch(){ mo.observe(document.body, { childList: true, subtree: true, ch
 
 function setLang(l){
   if(LANGS.indexOf(l) < 0) l = 'en';
+  var ticket=++selection;
+  return loadDictionary(l).then(function(dict){
+  if(ticket!==selection) return;
+  useDictionary(dict);
   lang = l; try { localStorage.setItem(KEY, l); } catch(e){}
   document.documentElement.lang = l;
   translate(document.body);
@@ -113,6 +133,11 @@ function setLang(l){
   mo.takeRecords();
   paintSwitch();
   document.dispatchEvent(new CustomEvent('tm-lang', { detail: l }));
+  }).catch(function(e){
+    if(ticket!==selection) return;
+    console.warn('Could not load '+l+' translations; keeping the current language.',e);
+    paintSwitch();
+  });
 }
 
 /* ---------- the language switch (flag + code, opens downward on hover or tap) ---------- */
@@ -186,6 +211,6 @@ function watchNav(){
   fitNav();
 }
 
-function init(){ addCSS(); paintSwitch(); watchNav(); watch(); if(lang !== 'en') setLang(lang); else document.documentElement.lang = 'en'; }
+function init(){ var initial=lang; lang='en'; addCSS(); paintSwitch(); watchNav(); watch(); setLang(initial); }
 if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();

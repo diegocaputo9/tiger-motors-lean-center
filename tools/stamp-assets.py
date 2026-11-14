@@ -10,6 +10,19 @@ rev = int(subprocess.run(['git', 'rev-list', '--count', 'HEAD'], capture_output=
 today = datetime.date.today()
 stamp = 'Last updated %s %d, %d · Revision %d' % (today.strftime('%B'), today.day, today.year, rev)
 
+# Keep the authoring dictionary in one place, but ship only one language per visit.
+import json, pathlib
+source = subprocess.run(['node', '-e', "global.window={};require('./i18n-dict.js');process.stdout.write(JSON.stringify(window.TM_I18N))"], check=True, capture_output=True, text=True)
+dictionary = json.loads(source.stdout)
+pathlib.Path('i18n').mkdir(exist_ok=True)
+version = hashlib.sha1(open('i18n-dict.js', 'rb').read()).hexdigest()[:8]
+for i, language in enumerate(['es', 'de', 'it']):
+    pathlib.Path('i18n/' + language + '.json').write_text(json.dumps({k: v[i] for k, v in dictionary.items() if len(v) > i and v[i]}, ensure_ascii=False, separators=(',', ':')) + '\n')
+js = pathlib.Path('i18n.js')
+code = js.read_text()
+code = re.sub(r"var dictionaryVersion = '[^']*';", "var dictionaryVersion = '" + version + "';", code)
+js.write_text(code)
+
 ASSETS = ['styles.css', 'auth.js', 'i18n.js', 'i18n-dict.js', 'modules-data.js', 'feedback.js', 'viewer.js', 'quiz.js', 'ta-pages.css', 'past-tas-data.js', 'install.js', 'modules-play.js', 'flow-lesson.js', 'flow-lesson.css']
 ver = {a: hashlib.sha1(open(a, 'rb').read()).hexdigest()[:8] for a in ASSETS}
 for page in glob.glob('*.html'):
