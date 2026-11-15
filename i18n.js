@@ -16,7 +16,7 @@ try { var saved = localStorage.getItem(KEY); if(IDX[saved] !== undefined) lang =
 // English needs no download; each other language is fetched once and cached in memory.
 var plain = {}, pats = [], dictionaries = {}, pending = {}, selection = 0;
 var scriptURL = new URL(document.currentScript.src);
-var dictionaryVersion = '4f996e42';
+var dictionaryVersion = '0190efda';
 function norm(s){ return String(s).replace(/\s+/g, ' ').trim(); }
 function useDictionary(dict){
   plain = {}; pats = [];

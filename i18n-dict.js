@@ -5511,4 +5511,9 @@ window.TM_I18N = {
 "Please understand the structure of the house with this quick tour.": ["Conoce la estructura de la casa con este breve recorrido.", "Lerne mit dieser kurzen Tour den Aufbau des Hauses kennen.", "Scopri la struttura della casa con questo breve tour."],
 "Privacy": ["Privacidad", "Datenschutz", "Privacy"],
 "Legal": ["Legal", "Rechtliches", "Note legali"],
+"All news": ["Todas las noticias", "Alle Nachrichten", "Tutte le notizie"],
+"Stories about the Tiger Motors lab, the Lean team and the project, newest first.": ["Noticias sobre el laboratorio Tiger Motors, el equipo Lean y el proyecto, de la más reciente a la más antigua.", "Berichte über das Tiger-Motors-Labor, das Lean-Team und das Projekt, die neuesten zuerst.", "Notizie sul laboratorio Tiger Motors, sul team Lean e sul progetto, dalla più recente."],
+"Honda returns to Auburn for Lean Manufacturing training": ["Honda regresa a Auburn para formación en Lean Manufacturing", "Honda kehrt für Lean-Manufacturing-Training nach Auburn zurück", "Honda torna ad Auburn per la formazione in Lean Manufacturing"],
+"Honda engineers embrace Lean Manufacturing principles in Tiger Motors Lab": ["Ingenieros de Honda adoptan los principios de Lean Manufacturing en el laboratorio Tiger Motors", "Honda-Ingenieure setzen im Tiger-Motors-Labor auf Lean-Manufacturing-Prinzipien", "Gli ingegneri Honda adottano i principi del Lean Manufacturing nel laboratorio Tiger Motors"],
+"Hartzell Engine Tech elevates manufacturing practices through Tiger Motors training": ["Hartzell Engine Tech mejora sus prácticas de manufactura con la formación de Tiger Motors", "Hartzell Engine Tech verbessert seine Fertigung durch das Tiger-Motors-Training", "Hartzell Engine Tech migliora le pratiche produttive con la formazione Tiger Motors"],
 };

@@ -37,9 +37,9 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="styles.css?v=6e5c19c9">
+<link rel="stylesheet" href="styles.css?v=28507991">
 
-<script src="i18n.js?v=dfddc888" defer></script>
+<script src="i18n.js?v=d68e553c" defer></script>
 <script src="feedback.js?v=4b0bf6d6" defer></script>
 <script src="install.js?v=cb9719a8" defer></script>
 <script src="viewer.js?v=3de2fb27" defer></script>
@@ -650,7 +650,7 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
       <button type="button" class="news-more-btn" id="newsMoreBtn" aria-expanded="false" aria-controls="newsMoreBody"><span>More news</span><small id="newsMoreCount"></small><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
       <div class="news-more-body" id="newsMoreBody"><div class="nmb-in">
         <div class="news-grid" id="newsGrid"></div>
-        <button type="button" class="news-all" id="newsAll" hidden></button>
+        <a class="news-quiet" href="news">All news <svg><use href="#i-arrow"/></svg></a>
       </div></div>
     </div>
 
@@ -763,7 +763,7 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
       <a href="#lab">Explore the Lab</a><a href="#lean-house">Lean House</a><a href="modules">Modules</a><a href="#project">About</a><a href="testimonials">Testimonials</a><a href="#contact">Contact</a><a href="#install" class="fl-inst" data-install><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="12.5" rx="2"/><path d="M12 7.5v6M9.3 10.8L12 13.5l2.7-2.7M8.5 20.5h7"/></svg>Install the app</a><button type="button" class="fl-reset" data-reset-progress hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.6-5.9"/><path d="M4 4.5v4h4"/></svg>Reset my progress</button>
     </div>
   </div>
-  <div class="wrap foot-legal"><nav class="legal" aria-label="Legal"><a href="privacy">Privacy</a></nav><p class="site-rev">Last updated November 13, 2026 · Revision 221</p></div>
+  <div class="wrap foot-legal"><nav class="legal" aria-label="Legal"><a href="privacy">Privacy</a></nav><p class="site-rev">Last updated November 14, 2026 · Revision 222</p></div>
 </footer>
 
 <dialog class="bdlg" id="bioDlg" aria-labelledby="bdlg-h">
@@ -777,6 +777,7 @@ else if(location.protocol==='file:')document.addEventListener('click',function(e
 </dialog>
 <div class="toast" id="toast" role="status"><i></i><span>Opening 360° experience</span></div>
 
+<script src="news-data.js?v=0"></script>
 <script src="modules-data.js?v=407d0011"></script>
 <script>
 (function(){
@@ -1899,28 +1900,22 @@ if('IntersectionObserver' in window && !reduce){
 
 /* ---- More news: edit this list to add stories (newest are shown first; the first 6 show, the rest expand) ---- */
 (function(){
-  var NEWS = [
-    {title:'Cub Scouts Earn Modular Design Badges Through ISE Lab', url:'https://eng.auburn.edu/news/2026/03/cub-scouts-earn-modular-design-badges-through-ise-lab', source:'Auburn Engineering', date:'2026-03', tag:'Outreach'},
-    {title:'ISE Grad Student Wins Systems Showdown Competition', url:'https://eng.auburn.edu/news/2026/04/ise-grad-student-wins-systems-showdown-competition', source:'Auburn Engineering', date:'2026-04', tag:'Diego Caputo'},
-    {title:'Auburn Engineering Hosts Continuous Improvement Industry Roundtable', url:'https://eng.auburn.edu/news/2024/06/auburn-engineering-hosts-continuous-improvement-industry-roundtable.html', source:'Auburn Engineering', date:'2024-06', tag:'Industry'},
-    {title:'ISE Graduate Student Presented Lean Engineering Award', url:'https://eng.auburn.edu/news/2023/02/ise-graduate-student-presented-lean-engineering-award', source:'Auburn Engineering', date:'2023-02', tag:'Diego Caputo'}
-  ];
-  var grid=document.getElementById('newsGrid'), btn=document.getElementById('newsAll'); if(!grid) return;
-  var MON=['Jan.','Feb.','Mar.','Apr.','May','June','July','Aug.','Sept.','Oct.','Nov.','Dec.'], SHOW=6, open=false;
+  var NEWS = (window.TM_NEWS||[]).slice();   // the list lives in news-data.js
+  var grid=document.getElementById('newsGrid'); if(!grid) return;
+  var MON=['Jan.','Feb.','Mar.','Apr.','May','June','July','Aug.','Sept.','Oct.','Nov.','Dec.'], SHOW=4;
   function fmt(d){ var p=String(d||'').split('-'); var m=parseInt(p[1],10); return (m?MON[m-1]+' ':'')+p[0]; }
   function esc(t){ return String(t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
   NEWS.sort(function(a,b){ return String(b.date).localeCompare(String(a.date)); });
   function render(){
-    var list=open?NEWS:NEWS.slice(0,SHOW);
+    var list=NEWS.slice(0,SHOW);
     grid.innerHTML=list.map(function(n){
       return '<a class="nw" href="'+esc(n.url)+'" target="_blank" rel="noopener"><div class="nw-meta"><span>'+esc(n.source||'News')+'</span><span>'+esc(fmt(n.date))+'</span>'+(n.tag?'<b>'+esc(n.tag)+'</b>':'')+'</div><h4>'+esc(n.title)+'</h4><span class="nw-go">Read the article <svg><use href="#i-out"/></svg></span></a>';
     }).join('');
-    if(NEWS.length>SHOW){ btn.hidden=false; btn.textContent=open?'Show fewer':'Show all '+NEWS.length+' stories'; } else btn.hidden=true;
+
   }
-  btn.addEventListener('click',function(){ open=!open; render(); });
   // phones: More news is a button that opens and closes the list of smaller stories
   var mb=document.getElementById('newsMoreBtn'), mc=document.getElementById('newsMoreCount'), more=document.getElementById('newsMore');
-  if(mc) mc.textContent=NEWS.length+(NEWS.length===1?' story':' stories');
+  var shown=Math.min(SHOW,NEWS.length); if(mc) mc.textContent=shown+(shown===1?' story':' stories');
   if(mb) mb.addEventListener('click',function(){ var o=!more.classList.contains('open'); more.classList.toggle('open',o); mb.setAttribute('aria-expanded',o?'true':'false'); });
   render();
 })();
@@ -1928,16 +1923,7 @@ if('IntersectionObserver' in window && !reduce){
 /* ---- Featured news: edit this list to add big stories; the circle button cycles through them ---- */
 (function(){
   var host=document.getElementById('newsFeature'); if(!host) return;
-  var FEATURED=[
-    {kicker:'NSF grant', big:'<em>$</em>400K', sub:'Lean Manufacturing education', source:'Auburn Engineering News', date:'September 2024',
-     title:'Professors receive $400K NSF grant for Lean Manufacturing education',
-     text:'Tom Devall, Tiger Motors Lab director, Jorge Valenzuela, Philpott-WestPoint Stevens Professor of Industrial and Systems Engineering, and Chih-hsuan Wang, professor in the Department of Educational Foundations, Leadership and Technology, will lead this project.',
-     url:'https://eng.auburn.edu/news/2024/09/professors-receive-400k-nsf-grant-for-lean-manufacturing-education'},
-    {kicker:'NSF grant', big:'<em>$</em>500K', sub:'AI for assembly line production', source:'Auburn Engineering News', date:'October 2026',
-     title:'Collaborative research using artificial intelligence to optimize assembly line production',
-     text:'Sathya Aakur, associate professor of computer science and software engineering, and Konstantinos Mykoniatis, associate professor of industrial and systems engineering, are developing AI systems that monitor assembly-line tasks, flag potential problems, and predict whether small errors could grow into larger ones. The system will be tested at the Tiger Motors Lab.',
-     url:'https://eng.auburn.edu/news/2026/10/collaborative-research-using-ai-to-optimize-assembly-line-production'}
-  ];
+  var FEATURED=(window.TM_NEWS_FEATURED||[]).slice();   // the list lives in news-data.js
   var sw=document.getElementById('newsSwitch'), cyc=document.getElementById('newsCycle'), cnt=document.getElementById('newsCount'), i=0;
   function esc(t){ return String(t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
   var ICON='<svg><use href="#i-out"/></svg>';

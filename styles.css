@@ -2067,3 +2067,7 @@ html[data-mode="light"] .house-call{background:rgba(255,255,255,.7)}
 .legal a{font-size:13px;color:var(--text-3);text-decoration:none;transition:color .2s}
 .legal a:hover{color:var(--text)}
 .foot-legal .site-rev{margin-top:0}
+/* quiet link from the home page's four stories to the News page with all of them */
+.news-quiet{display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:14px;color:var(--ink-3,#5B6675);text-decoration:none;transition:color .2s,gap .25s var(--ease)}
+.news-quiet svg{width:14px;height:14px}
+.news-quiet:hover{color:#9A460C;gap:9px}
